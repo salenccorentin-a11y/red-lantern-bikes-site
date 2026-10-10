@@ -1,0 +1,41 @@
+/* Colours and type from prototype/booking-prototype.jsx. */
+:root {
+  --paper: #f3ede2;
+  --paper-light: #fbf8f3;
+  --ink: #1b1512;
+  --muted: #6e625a;
+  --line: #ddd3c4;
+  --lantern: #b3261e;
+  --amber: #e8a33d;
+  --ok: #3f6b44;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+}
+
+a {
+  color: inherit;
+}
