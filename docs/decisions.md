@@ -1,0 +1,28 @@
+# Decisions
+
+Choices made while planning the rebuild, with the reason for each. Pricing rules are in `docs/pricing.md`.
+
+## Booking and availability (10 October 2026)
+
+- **Dates, not times.** A booking covers whole days, and both the pick-up and drop-off days count.
+- **Cleaning gap.** A whole number of days, set in staff settings, default 0. Because both days count, a bike returned on the 17th can go out again on the 18th with a gap of 0.
+- **One-way returns.** After a Saigon to Hanoi or Saigon to Da Nang rental, the bike is trucked back to Saigon. It is blocked for a set number of transit days per route, then it's available in Saigon again. *Still needed: the transit days for each route.*
+- **Reverse routes** (Hanoi or Da Nang to Saigon) are enquiry forms, not instant bookings.
+- **Bike assignment.** The system picks a free physical bike of the chosen model when the booking is made. Staff can swap it later.
+- **No double-booking, enforced by the database.** Every booking, maintenance block and transit block is a date range on one bike. PostgreSQL refuses to store two overlapping ranges on the same bike (an exclusion constraint), so two customers submitting at the same moment can't both get the bike. The stored range includes the cleaning gap and transit days, fixed at the moment of booking.
+- **Timezone.** All dates are in Asia/Ho_Chi_Minh.
+
+## Payments (10 October 2026)
+
+- **Online bookings must pay the deposit online,** by Vietcombank transfer or e-wallet QR (Momo, ZaloPay, VNPay).
+- **Unpaid holds.** An unpaid online booking holds the bike for 24 hours, then the hold is released.
+- **Cash** is for walk-in bookings and for the balance at pickup.
+- **References.** Each booking gets a unique reference (`RLB-XXXXXX`). Bank transfers use a VietQR code, so the amount and reference fill in automatically in the customer's banking app.
+- **One payment interface.** All payment methods sit behind a single interface, so a card gateway can be added later without touching the booking code.
+
+## Site (10 October 2026)
+
+- **English only at launch,** built so languages can be added later. Every old language URL (`/vi`, `/fr`, `/nl`, `/ja`, `/ko_KR`, `/zh_CN`) gets a 301 to the matching English page.
+- **Currency.** Prices are charged and stored in VND, with an approximate USD figure shown beside them. Staff set the exchange rate in settings.
+- **Tours.** Each tour gets its own page with an enquiry form. No online tour booking at launch.
+- **Staff login.** Email magic links sent through Resend: no passwords to store, and only listed staff emails can sign in. Two roles: owner (sees costs and profit, edits prices) and staff.

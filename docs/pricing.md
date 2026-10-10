@@ -36,13 +36,14 @@ Total fleet: 26 bikes across 12 models.
 
 A flat online deposit of 1,500,000 per booking, non-refundable. The rest is paid at pickup.
 
-## Open questions (confirm before building pricing)
+## Pricing rules (decided 10 October 2026)
 
-These are not decided yet. Claude Code must ask rather than guess.
+1. **One-way fee within the range.** Set by bike model. Each model has its own fee per route, inside the published range. *Still needed: the fee for each model on each route.*
+2. **Reverse directions and other cities.** Hanoi to Saigon and Da Nang to Saigon are offered, but as enquiries only: staff confirm by hand and create the booking. No other cities at launch.
+3. **Tier thresholds.** The weekly rate applies from 7 days and the monthly rate from 30 days, to every day of the rental. Example: a 10-day XR150 rental is 10 × 350,000.
+4. **Deposit and the total.** The 1,500,000 deposit is part of the rental total. Balance at pickup = total − deposit.
+5. **Deposit on short rentals.** The deposit is capped at the rental total. A 1-day Wave Alpha (240,000) has a 240,000 deposit and nothing due at pickup.
+6. **Add-ons.** Not decided yet. They are editable records in the staff settings, using the prototype's placeholders until the real list and prices arrive. The booking page does not go live before then.
+7. **Day count.** Customers choose dates only, no times. Both the pick-up and drop-off days count: 10 to 17 October is 8 days.
 
-1. **One-way fee within the range.** What sets the exact fee: the bike model, the rental length, the season, or something else?
-2. **Reverse directions and other cities.** Are Hanoi to Saigon, Da Nang to Saigon, or any other drop-off cities offered, and at what fee?
-3. **Tier thresholds.** Assumed: the weekly rate applies from 7 days and the monthly rate from 30 days. Confirm, including whether the rate applies to every day of the rental once the threshold is reached.
-4. **Deposit and the total.** Assumed: the 1,500,000 deposit is part of the rental total, so the balance at pickup is the total minus the deposit. Confirm.
-5. **Deposit on short rentals.** On a 1-day Wave Alpha rental (240,000) the deposit is larger than the price. Should the deposit be capped at the rental total?
-6. **Add-ons.** Which add-ons exist (helmets, phone mount, insurance or damage waiver, luggage rack, delivery) and their prices.
+Other booking and payment decisions are in `docs/decisions.md`.
