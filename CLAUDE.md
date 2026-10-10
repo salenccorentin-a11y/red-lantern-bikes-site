@@ -7,12 +7,16 @@ Motorbike rental and tour business in District 1, Ho Chi Minh City (redlanternbi
 Next.js with TypeScript, PostgreSQL through Prisma, deployed on Railway in the Singapore region from a GitHub repository. Transactional email through Resend. No Odoo.
 
 ## Fleet
-Honda Wave Alpha 110cc, Honda XR150, Honda CB150X, Suzuki EN125, Suzuki GSX-R150, Kawasaki Versys X300, Yamaha NVX125/155. Every physical bike is its own record (plate, model, status, maintenance blocks). Rates, deposits and one-way fees are in the attached tables. The attached React prototype shows the booking flow and layout only; ignore its placeholder bikes and prices.
+26 bikes across 12 models: Honda Wave Alpha 110cc, Suzuki GD110, Suzuki EN125, Honda CB125, Yamaha NVX125, Honda Winner X 150, Suzuki GSX-R150, Honda XR150, Honda CB150X, Honda CRF150, Yamaha WR155R, Kawasaki Versys X300. Every physical bike is its own record (plate, model, status, maintenance blocks).
+
+Units, rates, the deposit and one-way fees are in `docs/pricing.md`. Its "Open questions" list is not decided yet: ask me about those before building the pricing logic, never guess.
+
+`prototype/booking-prototype.jsx` shows the booking flow and layout only. Its add-on prices are placeholders, and its pricing assumptions are the open questions in `docs/pricing.md`.
 
 ## Booking rules
 - A customer chooses pick-up and drop-off dates, pick-up and drop-off city, and a bike model.
 - Availability is checked per physical bike. Two customers must never be able to book the same bike for overlapping dates, even if they submit at the same moment (use a database transaction).
-- Pricing: daily, weekly and monthly tiers per model, a one-way fee per route, add-ons, and a flat online deposit with the balance paid at pickup. Riderly.com is the reference for the flow.
+- Pricing: daily, weekly and monthly tiers per model, a one-way fee per route, add-ons, and a flat non-refundable online deposit (1,500,000 VND) with the balance paid at pickup. Riderly.com is the reference for the flow.
 - Staff can create walk-in bookings and block a bike for maintenance; both must update availability immediately.
 - A configurable gap between rentals for cleaning and checks.
 
