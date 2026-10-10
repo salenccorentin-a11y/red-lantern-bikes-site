@@ -1,0 +1,54 @@
+# Checks every push and pull request. Nothing is deployed from here.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    name: Lint, types, unit tests, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run format:check
+      - run: npm test
+      - run: npm run build
+
+  db-tests:
+    name: Database tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: redlantern
+          POSTGRES_PASSWORD: redlantern
+          POSTGRES_DB: redlantern_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U redlantern"
+          --health-interval 2s
+          --health-timeout 5s
+          --health-retries 15
+    env:
+      # Throwaway CI database, not a secret.
+      DATABASE_URL: postgresql://redlantern:redlantern@localhost:5432/redlantern_test
+      TEST_DATABASE_URL: postgresql://redlantern:redlantern@localhost:5432/redlantern_test
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx prisma migrate deploy
+      - run: npm run test:db
