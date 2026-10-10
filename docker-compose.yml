@@ -1,0 +1,25 @@
+# Local development database only. Production uses Railway's Postgres.
+# Start: npm run db:up   Stop: npm run db:down
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      # Local-only credentials for a database reachable from this computer only.
+      POSTGRES_USER: redlantern
+      POSTGRES_PASSWORD: redlantern
+      POSTGRES_DB: redlantern_dev
+      TZ: Asia/Ho_Chi_Minh
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Creates the separate test database on first start.
+      - ./docker/postgres-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U redlantern -d redlantern_dev"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+
+volumes:
+  pgdata:

@@ -1,0 +1,10 @@
+// Database schema for Red Lantern Bikes. The models arrive in step 3 of the build plan.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
