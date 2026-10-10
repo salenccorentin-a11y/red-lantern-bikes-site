@@ -25,9 +25,10 @@ npm install
 cp .env.example .env
 npm run db:up
 npm run db:migrate
+npm run db:seed
 ```
 
-`npm install` also generates the database client. `.env` holds your local settings and secrets and is never committed; the defaults in `.env.example` already match the local database.
+`npm install` also generates the database client. `db:seed` loads the fleet, routes and settings from `docs/pricing.md`. `.env` holds your local settings and secrets and is never committed; the defaults in `.env.example` already match the local database.
 
 Then start the site:
 
@@ -49,6 +50,7 @@ Open http://localhost:3000.
 | `npm run format` | Tidy code formatting (Markdown files are left alone) |
 | `npm run db:up` / `npm run db:down` | Start / stop the local database |
 | `npm run db:migrate` | Apply database changes to the local database |
+| `npm run db:seed` | Load the starting fleet, routes, add-ons and settings (never overwrites existing rows) |
 | `npm run db:studio` | Browse the local database in your web browser |
 | `npm run build` | Production build, the same one Railway runs |
 

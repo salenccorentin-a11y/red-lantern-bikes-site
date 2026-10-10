@@ -20,6 +20,8 @@ export default defineConfig({
         test: {
           name: "db",
           include: ["src/**/*.db.test.ts"],
+          // Migrates the test database once before the run.
+          globalSetup: ["src/test/global-setup.ts"],
           // Loads TEST_DATABASE_URL from .env.
           setupFiles: ["dotenv/config"],
           // Test files share one database, so run them one after another.

@@ -1,4 +1,11 @@
-// Database schema for Red Lantern Bikes. The models arrive in step 3 of the build plan.
+// Database schema for Red Lantern Bikes.
+//
+// Conventions:
+// - Money is whole VND in Int columns (no decimals).
+// - Calendar days are DATE columns (no time, no timezone). Rentals count both
+//   the pick-up and drop-off days (docs/pricing.md).
+// - Bookings copy prices at the moment of booking, so later price changes
+//   never alter an existing booking.
 
 generator client {
   provider = "prisma-client"
@@ -7,4 +14,381 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+// ─── Fleet ──────────────────────────────────────────────────────────────────
+
+model BikeModel {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  name        String
+  // Short description shown to customers, e.g. "Manual dual-sport".
+  kind        String
+  // Price per day for each tier. Weekly from 7 days, monthly from 30 days.
+  dailyRate   Int
+  weeklyRate  Int
+  monthlyRate Int
+  active      Boolean @default(true)
+  sortOrder   Int     @default(0)
+
+  bikes     Bike[]
+  routeFees RouteFee[]
+  bookings  Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum BikeStatus {
+  // Can be rented (subject to bookings and blocks in BikeOccupancy).
+  ACTIVE
+  // Sold, written off or permanently out of the fleet. Never offered.
+  RETIRED
+}
+
+model Bike {
+  id          String     @id @default(cuid())
+  plate       String     @unique
+  modelId     String
+  model       BikeModel  @relation(fields: [modelId], references: [id])
+  status      BikeStatus @default(ACTIVE)
+  notes       String?
+  // For profit per bike.
+  acquiredOn  DateTime?  @db.Date
+  purchaseVnd Int?
+
+  occupancies BikeOccupancy[]
+  bookings    Booking[]
+  incidents   BikeIncident[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([modelId])
+}
+
+// Every reason a bike is unavailable for a run of days: a booking (including
+// the cleaning gap), a maintenance block, or the truck ride back to Saigon
+// after a one-way rental.
+//
+// The migration adds a PostgreSQL exclusion constraint so that two active rows
+// for the same bike can never overlap. That is what makes double-booking
+// impossible, even when two customers submit at the same moment.
+model BikeOccupancy {
+  id         String        @id @default(cuid())
+  bikeId     String
+  bike       Bike          @relation(fields: [bikeId], references: [id])
+  kind       OccupancyKind
+  // Inclusive on both ends.
+  startDate  DateTime      @db.Date
+  endDate    DateTime      @db.Date
+  bookingId  String?
+  booking    Booking?      @relation(fields: [bookingId], references: [id])
+  note       String?
+  // Set when a booking is cancelled or a block is lifted. Released rows stay
+  // for history but no longer block the bike.
+  releasedAt DateTime?
+
+  createdById String?
+  createdBy   StaffUser? @relation(fields: [createdById], references: [id])
+  createdAt   DateTime   @default(now())
+
+  @@index([bikeId, startDate])
+  @@index([bookingId])
+}
+
+enum OccupancyKind {
+  BOOKING
+  MAINTENANCE
+  TRANSIT
+}
+
+// ─── Routes and pricing ─────────────────────────────────────────────────────
+
+enum City {
+  SAIGON
+  HANOI
+  DA_NANG
+}
+
+// One-way trips. A Saigon round trip has no route.
+model Route {
+  id             String  @id @default(cuid())
+  fromCity       City
+  toCity         City
+  minDays        Int
+  // Days the bike spends on the truck back to Saigon after drop-off.
+  // Null until known; online booking refuses the route while it is null.
+  transitDays    Int?
+  // Reverse routes are enquiry-only at launch.
+  bookableOnline Boolean @default(true)
+  active         Boolean @default(true)
+
+  fees     RouteFee[]
+  bookings Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([fromCity, toCity])
+}
+
+// The one-way fee depends on the bike model (docs/pricing.md, rule 1).
+// A missing row means "no fee set yet": that model can't be booked on the route.
+model RouteFee {
+  id          String    @id @default(cuid())
+  routeId     String
+  route       Route     @relation(fields: [routeId], references: [id])
+  bikeModelId String
+  bikeModel   BikeModel @relation(fields: [bikeModelId], references: [id])
+  fee         Int
+
+  @@unique([routeId, bikeModelId])
+}
+
+enum AddOnPricing {
+  PER_DAY
+  FLAT
+}
+
+model AddOn {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  name        String
+  description String?
+  pricing     AddOnPricing
+  price       Int
+  active      Boolean      @default(true)
+  sortOrder   Int          @default(0)
+
+  bookingAddOns BookingAddOn[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// One row (id = 1) of business settings, edited from the staff settings page.
+model SiteSettings {
+  id              Int @id @default(1)
+  // Non-refundable online deposit, capped at the booking total.
+  depositVnd      Int @default(1500000)
+  // Extra days a bike stays blocked after each rental for cleaning and checks.
+  cleaningGapDays Int @default(0)
+  // How long an unpaid online booking holds the bike.
+  holdHours       Int @default(24)
+  // Approximate rate for showing USD next to VND prices. Display only.
+  usdToVndRate    Int @default(26000)
+
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Bookings and payments ──────────────────────────────────────────────────
+
+enum BookingStatus {
+  // Online booking waiting for its deposit; holds the bike until holdExpiresAt.
+  PENDING_PAYMENT
+  CONFIRMED
+  // Customer has the bike.
+  CHECKED_OUT
+  // Bike is back.
+  COMPLETED
+  CANCELLED
+  // Deposit never arrived; the hold was released.
+  EXPIRED
+}
+
+enum BookingSource {
+  ONLINE
+  WALK_IN
+  // Imported from the old Notion bookings export.
+  IMPORT
+}
+
+enum RateTier {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+model Booking {
+  id        String        @id @default(cuid())
+  // Customer-facing reference, also used on bank transfers, e.g. RLB-482913.
+  reference String        @unique
+  status    BookingStatus
+  source    BookingSource
+
+  bikeModelId String
+  bikeModel   BikeModel @relation(fields: [bikeModelId], references: [id])
+  // The physical bike. Null only for imported bookings that can't be matched.
+  bikeId      String?
+  bike        Bike?     @relation(fields: [bikeId], references: [id])
+
+  pickupCity  City
+  dropoffCity City
+  routeId     String?
+  route       Route?   @relation(fields: [routeId], references: [id])
+  startDate   DateTime @db.Date
+  endDate     DateTime @db.Date
+
+  // Price snapshot at booking time.
+  days         Int
+  rateTier     RateTier
+  dailyRate    Int
+  rentalVnd    Int
+  oneWayFeeVnd Int      @default(0)
+  addOnsVnd    Int      @default(0)
+  totalVnd     Int
+  depositVnd   Int
+  balanceVnd   Int
+
+  customerName  String
+  customerEmail String?
+  // Phone or WhatsApp, with country code.
+  customerPhone String?
+  customerNote  String?
+  staffNote     String?
+
+  holdExpiresAt DateTime?
+  checkedOutAt  DateTime?
+  checkedInAt   DateTime?
+  cancelledAt   DateTime?
+
+  createdById String?
+  createdBy   StaffUser? @relation(fields: [createdById], references: [id])
+
+  addOns      BookingAddOn[]
+  payments    Payment[]
+  occupancies BikeOccupancy[]
+  incidents   BikeIncident[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, holdExpiresAt])
+  @@index([startDate])
+  @@index([bikeId])
+}
+
+model BookingAddOn {
+  id        String       @id @default(cuid())
+  bookingId String
+  booking   Booking      @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  addOnId   String
+  addOn     AddOn        @relation(fields: [addOnId], references: [id])
+  // Snapshot at booking time.
+  name      String
+  pricing   AddOnPricing
+  unitPrice Int
+  quantity  Int
+  totalVnd  Int
+
+  @@index([bookingId])
+}
+
+enum PaymentMethod {
+  BANK_TRANSFER
+  MOMO
+  ZALOPAY
+  VNPAY
+  CASH
+}
+
+enum PaymentPurpose {
+  DEPOSIT
+  BALANCE
+  // Damage charges, extra days, fuel and the like.
+  EXTRA
+  REFUND
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+model Payment {
+  id          String         @id @default(cuid())
+  bookingId   String
+  booking     Booking        @relation(fields: [bookingId], references: [id])
+  method      PaymentMethod
+  purpose     PaymentPurpose
+  // Positive for money received, negative for refunds.
+  amountVnd   Int
+  status      PaymentStatus  @default(PENDING)
+  // Bank or e-wallet transaction ID, when there is one.
+  externalRef String?
+
+  confirmedAt   DateTime?
+  confirmedById String?
+  confirmedBy   StaffUser? @relation(fields: [confirmedById], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([bookingId])
+}
+
+// ─── Incidents and repairs ──────────────────────────────────────────────────
+
+enum IncidentKind {
+  // Routine maintenance: oil change, tyres, chain.
+  SERVICE
+  REPAIR
+  DAMAGE
+  ACCIDENT
+  THEFT
+  OTHER
+}
+
+// Per-bike incident and repair log. The cost fields feed profit per bike:
+// revenue − (parts + labour + other) + recovered.
+model BikeIncident {
+  id          String       @id @default(cuid())
+  bikeId      String
+  bike        Bike         @relation(fields: [bikeId], references: [id])
+  // The rental it happened on, if any.
+  bookingId   String?
+  booking     Booking?     @relation(fields: [bookingId], references: [id])
+  kind        IncidentKind
+  occurredOn  DateTime     @db.Date
+  description String
+  odometerKm  Int?
+
+  partsVnd     Int @default(0)
+  labourVnd    Int @default(0)
+  otherVnd     Int @default(0)
+  // Charged back to the customer or insurer.
+  recoveredVnd Int @default(0)
+
+  createdById String?
+  createdBy   StaffUser? @relation(fields: [createdById], references: [id])
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([bikeId, occurredOn])
+}
+
+// ─── Staff ──────────────────────────────────────────────────────────────────
+
+enum StaffRole {
+  // Sees costs and profit, edits prices and settings.
+  OWNER
+  STAFF
+}
+
+// Staff who may sign in. Login sessions come with the staff area (step 8).
+model StaffUser {
+  id     String    @id @default(cuid())
+  email  String    @unique
+  name   String
+  role   StaffRole @default(STAFF)
+  active Boolean   @default(true)
+
+  occupancies       BikeOccupancy[]
+  bookings          Booking[]
+  confirmedPayments Payment[]
+  incidents         BikeIncident[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
