@@ -27,10 +27,22 @@ Total fleet: 26 bikes across 12 models.
 
 ## One-way routes
 
-| Route | Bikes allowed | One-way fee | Minimum days |
+| Route | Bikes allowed | Minimum days | Days to return the bike by train |
 | --- | --- | ---: | ---: |
-| Saigon to Hanoi | All | 1,200,000 to 1,800,000 | 12 |
-| Saigon to Da Nang | All | 1,000,000 to 1,600,000 | 7 |
+| Saigon to Hanoi | All | 12 | 3 |
+| Saigon to Da Nang | All | 7 | 3 |
+
+### One-way fee by model (decided 11 October 2026)
+
+The same fee applies to both routes. It's set in US dollars and charged in VND at about 26,000 VND per dollar, rounded to the nearest 100,000.
+
+| Models | Fee (USD) | Fee (VND) |
+| --- | ---: | ---: |
+| Honda Wave Alpha 110cc, Suzuki GD110 | $50 | 1,300,000 |
+| Honda CB150X, Kawasaki Versys X300 | $80 | 2,100,000 |
+| All other models | $60 | 1,600,000 |
+
+These replace the earlier ranges (Hanoi 1,200,000 to 1,800,000; Da Nang 1,000,000 to 1,600,000). The $80 fee is above both old ranges.
 
 ## Deposit
 
@@ -38,7 +50,7 @@ A flat online deposit of 1,500,000 per booking, non-refundable. The rest is paid
 
 ## Pricing rules (decided 10 October 2026)
 
-1. **One-way fee within the range.** Set by bike model. Each model has its own fee per route, inside the published range. *Still needed: the fee for each model on each route.*
+1. **One-way fee.** Set by bike model, the same on both routes. See "One-way fee by model" above.
 2. **Reverse directions and other cities.** Hanoi to Saigon and Da Nang to Saigon are offered, but as enquiries only: staff confirm by hand and create the booking. No other cities at launch.
 3. **Tier thresholds.** The weekly rate applies from 7 days and the monthly rate from 30 days, to every day of the rental. Example: a 10-day XR150 rental is 10 × 350,000.
 4. **Deposit and the total.** The 1,500,000 deposit is part of the rental total. Balance at pickup = total − deposit.

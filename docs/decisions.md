@@ -6,7 +6,7 @@ Choices made while planning the rebuild, with the reason for each. Pricing rules
 
 - **Dates, not times.** A booking covers whole days, and both the pick-up and drop-off days count.
 - **Cleaning gap.** A whole number of days, set in staff settings, default 0. Because both days count, a bike returned on the 17th can go out again on the 18th with a gap of 0.
-- **One-way returns.** After a Saigon to Hanoi or Saigon to Da Nang rental, the bike is trucked back to Saigon. It is blocked for a set number of transit days per route, then it's available in Saigon again. *Still needed: the transit days for each route.*
+- **One-way returns.** After a Saigon to Hanoi or Saigon to Da Nang rental, the bike goes back to Saigon by train, which takes 3 days from either city (decided 11 October 2026). It is blocked for those days, then it's available in Saigon again. Transit days are set per route, so this can change.
 - **Reverse routes** (Hanoi or Da Nang to Saigon) are enquiry forms, not instant bookings.
 - **Bike assignment.** The system picks a free physical bike of the chosen model when the booking is made. Staff can swap it later.
 - **No double-booking, enforced by the database.** Every booking, maintenance block and transit block is a date range on one bike. PostgreSQL refuses to store two overlapping ranges on the same bike (an exclusion constraint), so two customers submitting at the same moment can't both get the bike. The stored range includes the cleaning gap and transit days, fixed at the moment of booking.

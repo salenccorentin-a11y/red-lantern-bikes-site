@@ -26,16 +26,53 @@ describe("seed", () => {
     expect(xr150).toMatchObject({ dailyRate: 400_000, weeklyRate: 350_000, monthlyRate: 300_000 });
   });
 
-  it("sets up routes without guessing unknown fees or transit days", async () => {
+  it("sets up the two online routes with 3 days back by train; reverse routes are enquiries", async () => {
     await seed(db);
 
     const routes = await db.route.findMany();
     expect(routes).toHaveLength(4);
-    expect(routes.every((r) => r.transitDays === null)).toBe(true);
-    expect(await db.routeFee.count()).toBe(0);
+    const summary = routes
+      .map((r) => `${r.fromCity}>${r.toCity} online=${r.bookableOnline} transit=${r.transitDays}`)
+      .sort();
+    expect(summary).toEqual([
+      "DA_NANG>SAIGON online=false transit=null",
+      "HANOI>SAIGON online=false transit=null",
+      "SAIGON>DA_NANG online=true transit=3",
+      "SAIGON>HANOI online=true transit=3",
+    ]);
+  });
 
-    const online = routes.filter((r) => r.bookableOnline).map((r) => `${r.fromCity}>${r.toCity}`);
-    expect(online.sort()).toEqual(["SAIGON>DA_NANG", "SAIGON>HANOI"]);
+  it("sets one-way fees by model ($50 / $60 / $80), the same on both online routes", async () => {
+    await seed(db);
+
+    const fees = await db.routeFee.findMany({ include: { bikeModel: true, route: true } });
+    expect(fees).toHaveLength(24); // 12 models × 2 routes
+    expect(fees.every((f) => f.route.bookableOnline)).toBe(true);
+
+    const feeOf = (slug: string) => [
+      ...new Set(fees.filter((f) => f.bikeModel.slug === slug).map((f) => f.fee)),
+    ];
+    expect(feeOf("wave-alpha-110")).toEqual([1_300_000]);
+    expect(feeOf("suzuki-gd110")).toEqual([1_300_000]);
+    expect(feeOf("honda-xr150")).toEqual([1_600_000]);
+    expect(feeOf("yamaha-wr155r")).toEqual([1_600_000]);
+    expect(feeOf("honda-cb150x")).toEqual([2_100_000]);
+    expect(feeOf("kawasaki-versys-x300")).toEqual([2_100_000]);
+  });
+
+  it("fills in empty transit days on an existing route without touching set values", async () => {
+    await db.route.create({
+      data: { fromCity: "SAIGON", toCity: "HANOI", minDays: 12, transitDays: null },
+    });
+    await db.route.create({
+      data: { fromCity: "SAIGON", toCity: "DA_NANG", minDays: 7, transitDays: 5 },
+    });
+
+    await seed(db);
+
+    const routes = await db.route.findMany({ where: { fromCity: "SAIGON" } });
+    expect(routes.find((r) => r.toCity === "HANOI")?.transitDays).toBe(3);
+    expect(routes.find((r) => r.toCity === "DA_NANG")?.transitDays).toBe(5);
   });
 
   it("uses the decided settings: 1,500,000 deposit, 0-day gap, 24-hour hold", async () => {
