@@ -53,6 +53,7 @@ A flat online deposit of 1,500,000 per booking, non-refundable. The rest is paid
 1. **One-way fee.** Set by bike model, the same on both routes. See "One-way fee by model" above.
 2. **Reverse directions and other cities.** Hanoi to Saigon and Da Nang to Saigon are offered, but as enquiries only: staff confirm by hand and create the booking. No other cities at launch.
 3. **Tier thresholds.** The weekly rate applies from 7 days and the monthly rate from 30 days, to every day of the rental. Example: a 10-day XR150 rental is 10 × 350,000.
+   **Price cap (decided 11 October 2026):** a rental never costs more than the next tier's minimum length. A 26-day XR150 would be 26 × 350,000 = 9,100,000, but 30 days at the monthly rate is 9,000,000, so it costs 9,000,000. A 6-day Wave Alpha costs the 7-day price, 1,435,000. A customer never pays more for fewer days.
 4. **Deposit and the total.** The 1,500,000 deposit is part of the rental total. Balance at pickup = total − deposit.
 5. **Deposit on short rentals.** The deposit is capped at the rental total. A 1-day Wave Alpha (240,000) has a 240,000 deposit and nothing due at pickup.
 6. **Add-ons.** Not decided yet. They are editable records in the staff settings, using the prototype's placeholders until the real list and prices arrive. The booking page does not go live before then.

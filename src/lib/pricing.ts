@@ -51,7 +51,13 @@ export type Quote = {
   days: number;
   rateTier: RateTier;
   dailyRate: number;
+  /** days × dailyRate, or less when the price cap applies. */
   rentalVnd: number;
+  /**
+   * Set when the rental is charged at a longer tier's price because that is
+   * cheaper, e.g. a 26-day rental charged as 30 days at the monthly rate.
+   */
+  cappedAt: { tier: RateTier; days: number } | null;
   oneWayFeeVnd: number;
   addOnLines: AddOnLine[];
   addOnsVnd: number;
@@ -88,6 +94,36 @@ function rateFor(rates: RateCard, tier: RateTier): number {
   }
 }
 
+/**
+ * Rental price for the given number of days. Never more than the price of the
+ * next tier's minimum length (decided 11 October 2026), so a customer never
+ * pays more for fewer days.
+ */
+export function rentalPrice(
+  rates: RateCard,
+  days: number,
+): Pick<Quote, "rateTier" | "dailyRate" | "rentalVnd" | "cappedAt"> {
+  const rateTier = rateTierFor(days);
+  const dailyRate = rateFor(rates, rateTier);
+  let rentalVnd = dailyRate * days;
+  let cappedAt: Quote["cappedAt"] = null;
+
+  const longerTiers = [
+    { tier: "WEEKLY", days: WEEKLY_FROM_DAYS },
+    { tier: "MONTHLY", days: MONTHLY_FROM_DAYS },
+  ] as const;
+  for (const longer of longerTiers) {
+    if (days >= longer.days) continue;
+    const price = rateFor(rates, longer.tier) * longer.days;
+    if (price < rentalVnd) {
+      rentalVnd = price;
+      cappedAt = { tier: longer.tier, days: longer.days };
+    }
+  }
+
+  return { rateTier, dailyRate, rentalVnd, cappedAt };
+}
+
 export function quote(input: QuoteInput): QuoteResult {
   const start = parseIsoDate(input.startDate);
   const end = parseIsoDate(input.endDate);
@@ -105,9 +141,7 @@ export function quote(input: QuoteInput): QuoteResult {
     oneWayFeeVnd = input.oneWay.feeVnd;
   }
 
-  const rateTier = rateTierFor(days);
-  const dailyRate = rateFor(input.rates, rateTier);
-  const rentalVnd = dailyRate * days;
+  const rental = rentalPrice(input.rates, days);
 
   const addOnLines: AddOnLine[] = [];
   for (const addOn of input.addOns) {
@@ -119,16 +153,14 @@ export function quote(input: QuoteInput): QuoteResult {
   }
   const addOnsVnd = addOnLines.reduce((sum, line) => sum + line.totalVnd, 0);
 
-  const totalVnd = rentalVnd + oneWayFeeVnd + addOnsVnd;
+  const totalVnd = rental.rentalVnd + oneWayFeeVnd + addOnsVnd;
   const depositVnd = Math.min(input.depositVnd, totalVnd);
 
   return {
     ok: true,
     quote: {
       days,
-      rateTier,
-      dailyRate,
-      rentalVnd,
+      ...rental,
       oneWayFeeVnd,
       addOnLines,
       addOnsVnd,

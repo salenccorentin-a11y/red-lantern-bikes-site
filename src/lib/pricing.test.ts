@@ -4,7 +4,20 @@ import { quote, rateTierFor, type AddOnChoice, type QuoteInput } from "@/lib/pri
 
 const WAVE = { dailyRate: 240_000, weeklyRate: 205_000, monthlyRate: 185_000 };
 const XR150 = { dailyRate: 400_000, weeklyRate: 350_000, monthlyRate: 300_000 };
+const WR155R = { dailyRate: 900_000, weeklyRate: 770_000, monthlyRate: 500_000 };
 const VERSYS = { dailyRate: 1_200_000, weeklyRate: 1_100_000, monthlyRate: 900_000 };
+
+// Every rate card in docs/pricing.md.
+const ALL_MODELS = {
+  "Wave Alpha / GD110": WAVE,
+  "EN125 / CB125 / NVX125": { dailyRate: 300_000, weeklyRate: 280_000, monthlyRate: 250_000 },
+  "Winner X 150": { dailyRate: 360_000, weeklyRate: 330_000, monthlyRate: 280_000 },
+  "GSX-R150": { dailyRate: 360_000, weeklyRate: 310_000, monthlyRate: 280_000 },
+  XR150,
+  "CB150X / CRF150": { dailyRate: 650_000, weeklyRate: 560_000, monthlyRate: 400_000 },
+  WR155R,
+  "Versys X300": VERSYS,
+};
 
 const DEPOSIT = 1_500_000;
 const HANOI = (feeVnd: number | null) => ({ minDays: 12, feeVnd });
@@ -78,10 +91,11 @@ describe("rate tiers (rule 3): weekly from 7 days, monthly from 30, applied to e
     expect(priced({ endDate: endFor(10) }).rentalVnd).toBe(3_500_000);
   });
 
-  it("29-day XR150 is still weekly: 29 × 350,000", () => {
-    expect(priced({ endDate: endFor(29) })).toMatchObject({
+  it("25-day XR150 is weekly and below the cap: 25 × 350,000", () => {
+    expect(priced({ endDate: endFor(25) })).toMatchObject({
       rateTier: "WEEKLY",
-      rentalVnd: 10_150_000,
+      rentalVnd: 8_750_000,
+      cappedAt: null,
     });
   });
 
@@ -90,20 +104,55 @@ describe("rate tiers (rule 3): weekly from 7 days, monthly from 30, applied to e
       rateTier: "MONTHLY",
       dailyRate: 300_000,
       rentalVnd: 9_000_000,
+      cappedAt: null,
+    });
+  });
+});
+
+describe("price cap: never more than the next tier's minimum length (decided 11 Oct 2026)", () => {
+  it("26-day XR150 costs the 30-day price, 9,000,000, not 26 × 350,000 = 9,100,000", () => {
+    expect(priced({ endDate: endFor(26) })).toMatchObject({
+      rateTier: "WEEKLY",
+      dailyRate: 350_000,
+      rentalVnd: 9_000_000,
+      cappedAt: { tier: "MONTHLY", days: 30 },
     });
   });
 
-  // With "every day" tiers, a longer rental can cost less than a shorter one.
-  // This is how rule 3 reads today; these tests record it so it can't change silently.
-  it("a 7-day Wave Alpha costs less than 6 days: 1,435,000 vs 1,440,000", () => {
-    expect(priced({ rates: WAVE, endDate: endFor(6) }).rentalVnd).toBe(1_440_000);
-    expect(priced({ rates: WAVE, endDate: endFor(7) }).rentalVnd).toBe(1_435_000);
+  it("29-day XR150 costs the 30-day price", () => {
+    expect(priced({ endDate: endFor(29) }).rentalVnd).toBe(9_000_000);
   });
 
-  it("a 30-day XR150 costs less than 29 days: 9,000,000 vs 10,150,000", () => {
-    expect(priced({ endDate: endFor(29) }).rentalVnd).toBe(10_150_000);
-    expect(priced({ endDate: endFor(30) }).rentalVnd).toBe(9_000_000);
+  it("6-day Wave Alpha costs the 7-day price, 1,435,000, not 6 × 240,000 = 1,440,000", () => {
+    expect(priced({ rates: WAVE, endDate: endFor(6) })).toMatchObject({
+      rateTier: "DAILY",
+      rentalVnd: 1_435_000,
+      cappedAt: { tier: "WEEKLY", days: 7 },
+    });
   });
+
+  it("20-day WR155R costs the 30-day price, 15,000,000, not 20 × 770,000", () => {
+    expect(priced({ rates: WR155R, endDate: endFor(20) })).toMatchObject({
+      rentalVnd: 15_000_000,
+      cappedAt: { tier: "MONTHLY", days: 30 },
+    });
+  });
+
+  it("6-day XR150 stays at 6 × 400,000, because 7 days costs more", () => {
+    expect(priced({ endDate: endFor(6) })).toMatchObject({ rentalVnd: 2_400_000, cappedAt: null });
+  });
+
+  it.each(Object.entries(ALL_MODELS))(
+    "%s: one more day never costs less, from 1 to 60 days",
+    (_name, rates) => {
+      let previous = 0;
+      for (let days = 1; days <= 60; days++) {
+        const price = priced({ rates, endDate: endFor(days) }).rentalVnd;
+        expect(price, `${days} days`).toBeGreaterThanOrEqual(previous);
+        previous = price;
+      }
+    },
+  );
 });
 
 describe("day count (rule 7): both the pick-up and drop-off days count", () => {
@@ -128,7 +177,8 @@ describe("deposit (rules 4 and 5)", () => {
   });
 
   it("is exactly 1,500,000 when the total is exactly 1,500,000", () => {
-    const q = priced({ rates: { ...WAVE, dailyRate: 300_000 }, endDate: endFor(5) });
+    const flat = { dailyRate: 300_000, weeklyRate: 300_000, monthlyRate: 300_000 };
+    const q = priced({ rates: flat, endDate: endFor(5) });
     expect(q).toMatchObject({ totalVnd: 1_500_000, depositVnd: 1_500_000, balanceVnd: 0 });
   });
 
@@ -240,6 +290,7 @@ describe("full booking", () => {
       rateTier: "WEEKLY",
       dailyRate: 1_100_000,
       rentalVnd: 13_200_000,
+      cappedAt: null,
       oneWayFeeVnd: 2_100_000,
       addOnLines: [{ ...HELMET, totalVnd: 240_000 }],
       addOnsVnd: 240_000,
