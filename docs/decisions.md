@@ -10,6 +10,7 @@ Choices made while planning the rebuild, with the reason for each. Pricing rules
 - **Reverse routes** (Hanoi or Da Nang to Saigon) are enquiry forms, not instant bookings.
 - **Bike assignment.** The system picks a free physical bike of the chosen model when the booking is made. Staff can swap it later.
 - **No double-booking, enforced by the database.** Every booking, maintenance block and transit block is a date range on one bike. PostgreSQL refuses to store two overlapping ranges on the same bike (an exclusion constraint), so two customers submitting at the same moment can't both get the bike. The stored range includes the cleaning gap and transit days, fixed at the moment of booking.
+- **Bookings for the same bike take turns** (11 October 2026). Before saving a booking or maintenance block, the system locks that one bike for a few milliseconds and re-checks it's free. Customers booking different bikes never wait for each other. Without this, two customers booking the same bike at the same instant could stall each other for about a second until the database cancelled one, which then failed with an error instead of getting another bike. The no-overlap rule remains the final guarantee.
 - **Timezone.** All dates are in Asia/Ho_Chi_Minh.
 
 ## Payments (10 October 2026)
