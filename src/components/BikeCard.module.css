@@ -1,0 +1,57 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper-light);
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.card:hover {
+  border-color: var(--lantern);
+}
+
+.kind {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.name {
+  font-family: var(--font-display), sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.summary {
+  font-size: 14px;
+  color: var(--muted);
+  flex: 1;
+}
+
+.price {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.price small {
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.from {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}

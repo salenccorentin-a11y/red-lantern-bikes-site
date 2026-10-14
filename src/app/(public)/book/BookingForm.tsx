@@ -22,11 +22,17 @@ type Availability =
   | { state: "ready"; counts: Record<string, number> }
   | { state: "error" };
 
-export function BookingForm({ catalog, today }: { catalog: Catalog; today: string }) {
-  const [dropoff, setDropoff] = useState<Dropoff>("SAIGON");
+export function BookingForm(props: {
+  catalog: Catalog;
+  today: string;
+  initialModelId?: string | null;
+  initialDropoff?: Dropoff;
+}) {
+  const { catalog, today } = props;
+  const [dropoff, setDropoff] = useState<Dropoff>(props.initialDropoff ?? "SAIGON");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [modelId, setModelId] = useState<string | null>(null);
+  const [modelId, setModelId] = useState<string | null>(props.initialModelId ?? null);
   const [addOnIds, setAddOnIds] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

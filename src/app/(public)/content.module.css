@@ -1,0 +1,207 @@
+/* Shared styles for the public content pages (bikes, one-way, tours, about,
+   FAQ, contact, terms, privacy). */
+
+.page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 16px 16px 24px;
+  line-height: 1.6;
+}
+
+.page h1 {
+  font-size: clamp(28px, 5vw, 40px);
+  line-height: 1.15;
+  margin: 12px 0 12px;
+}
+
+.page h2 {
+  font-size: 22px;
+  margin: 32px 0 10px;
+}
+
+.page h3 {
+  font-size: 18px;
+  margin: 20px 0 6px;
+}
+
+.prose {
+  max-width: 720px;
+}
+
+.lead {
+  max-width: 720px;
+  font-size: 18px;
+  color: #3b302a;
+}
+
+.eyebrow {
+  margin: 16px 0 0;
+  color: var(--lantern);
+  font-family: var(--font-display), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 13px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.twoCol {
+  display: grid;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (min-width: 800px) {
+  .twoCol {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.box {
+  padding: 4px 20px 20px;
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.box h2 {
+  margin-top: 16px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.table td,
+.table th {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table small {
+  color: var(--muted);
+}
+
+.num {
+  text-align: right !important;
+  white-space: nowrap;
+}
+
+.num small {
+  display: block;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.primary,
+.secondary {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 4px;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.primary {
+  background: var(--lantern);
+  color: #fff;
+}
+
+.secondary {
+  border: 1.5px solid var(--ink);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  text-decoration: none;
+}
+
+.card:hover {
+  border-color: var(--lantern);
+}
+
+.card h2,
+.card h3 {
+  margin: 0 0 6px;
+}
+
+.card p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  flex: 1;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+  padding: 0;
+}
+
+.facts div {
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: var(--paper-light);
+  border: 1px solid var(--line);
+}
+
+.facts dt {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.facts dd {
+  margin: 2px 0 0;
+  font-weight: 600;
+}
+
+.faq details {
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.faq details p,
+.faq details ul {
+  margin: 10px 0 0;
+}
+
+.draftNote {
+  padding: 12px 14px;
+  border: 1px dashed var(--lantern);
+  border-radius: 4px;
+  font-size: 14px;
+  color: #3b302a;
+  background: #fff6f4;
+}

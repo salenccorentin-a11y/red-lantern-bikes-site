@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
-import { SiteHeader } from "@/components/SiteHeader";
 import { dropoffLabel } from "@/lib/cities";
 import { formatDisplayDate, formatSaigonDateTime, toIsoDate } from "@/lib/dates";
 import { db } from "@/lib/db";
@@ -23,7 +22,6 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export default function BookingPage(props: PageProps<"/booking/[token]">) {
   return (
     <>
-      <SiteHeader />
       <main className={styles.page}>
         <Suspense fallback={<p className={styles.muted}>Loading your booking…</p>}>
           <BookingDetails params={props.params} />
