@@ -379,7 +379,7 @@ enum StaffRole {
   STAFF
 }
 
-// Staff who may sign in. Login sessions come with the staff area (step 8).
+// Staff who may sign in, by email link. Add one with `npm run staff:add`.
 model StaffUser {
   id     String    @id @default(cuid())
   email  String    @unique
@@ -391,7 +391,36 @@ model StaffUser {
   bookings          Booking[]
   confirmedPayments Payment[]
   incidents         BikeIncident[]
+  loginTokens       StaffLoginToken[]
+  sessions          StaffSession[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// One-time sign-in links. Only a hash of the token is stored, so a leaked
+// database can't be used to sign in.
+model StaffLoginToken {
+  id        String    @id @default(cuid())
+  tokenHash String    @unique
+  staffId   String
+  staff     StaffUser @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([staffId, createdAt])
+}
+
+// A signed-in browser. The cookie holds a random token; only its hash is
+// stored. Deleting the row signs that browser out.
+model StaffSession {
+  id        String    @id @default(cuid())
+  tokenHash String    @unique
+  staffId   String
+  staff     StaffUser @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+
+  @@index([staffId])
 }

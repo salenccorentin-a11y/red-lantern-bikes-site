@@ -1,5 +1,6 @@
 // Transactional email through Resend's HTTP API (https://resend.com/docs/api-reference).
-// Without RESEND_API_KEY (local development), emails are logged instead of sent.
+// Without RESEND_API_KEY (local development), emails are printed in the
+// terminal instead of sent.
 
 export type Email = {
   to: string;
@@ -11,7 +12,10 @@ export type Email = {
 export async function sendEmail(email: Email): Promise<{ sent: boolean }> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.info(`[email not sent: RESEND_API_KEY is not set] to=${email.to} "${email.subject}"`);
+    // Local development: print the email so links (like staff sign-in) can be used.
+    console.info(
+      `[email not sent: RESEND_API_KEY is not set] to=${email.to} "${email.subject}"\n${email.text}`,
+    );
     return { sent: false };
   }
   const from = process.env.EMAIL_FROM;
