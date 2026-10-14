@@ -220,3 +220,24 @@
   font-weight: 600;
   background: var(--paper);
 }
+
+/* ─── Settings ──────────────────────────────────────────────────────────── */
+
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: -6px 0 16px;
+  font-size: 14px;
+}
+
+.cellInput {
+  width: 120px;
+  min-height: 36px;
+  padding: 6px 8px;
+  border: 1.5px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  font: inherit;
+  font-size: 15px;
+}
