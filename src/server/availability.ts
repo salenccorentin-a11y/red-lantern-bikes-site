@@ -5,7 +5,8 @@ import type { City, PrismaClient, Route, SiteSettings } from "@/generated/prisma
 import { parseIsoDate } from "@/lib/dates";
 import { lastBlockedDay, rentalBlocks } from "@/lib/occupancy";
 
-export async function getSettings(db: PrismaClient): Promise<SiteSettings> {
+/** Works with the client or inside a transaction. */
+export async function getSettings(db: Pick<PrismaClient, "siteSettings">): Promise<SiteSettings> {
   const settings = await db.siteSettings.findUnique({ where: { id: 1 } });
   if (!settings) throw new Error("Site settings are missing. Run `npm run db:seed`.");
   return settings;
