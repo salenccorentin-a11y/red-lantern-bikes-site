@@ -1,0 +1,219 @@
+.today {
+  display: grid;
+  gap: 0 16px;
+}
+
+@media (min-width: 760px) {
+  .today {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.movements {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.movements li + li {
+  border-top: 1px solid var(--line);
+}
+
+.movements a {
+  display: block;
+  padding: 8px 0;
+  text-decoration: none;
+}
+
+.movements .badge,
+.movements span {
+  margin-left: 8px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  margin: 8px 0 12px;
+}
+
+.toolbar h1 {
+  margin: 0 !important;
+}
+
+.toolbarLinks {
+  display: flex;
+  gap: 14px;
+  font-size: 14px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch {
+  width: 14px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+/* ─── Grid ──────────────────────────────────────────────────────────────── */
+
+.scroller {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 150px repeat(var(--days), minmax(38px, 1fr));
+  grid-auto-rows: 40px;
+  min-width: calc(150px + var(--days) * 38px);
+  font-size: 12px;
+}
+
+.head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  grid-row: 1;
+}
+
+.corner {
+  left: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.dayHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.1;
+  color: var(--muted);
+}
+
+.dayHead b {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.bikeCell {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 10px;
+  background: #fff;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid #efe8dd;
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.bikeCell span {
+  color: var(--muted);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cell {
+  border-bottom: 1px solid #efe8dd;
+  border-left: 1px solid #f5f0e8;
+}
+
+.weekend {
+  background: #fbf8f3;
+}
+
+.todayCol {
+  background: #fff3e0;
+}
+
+.bar {
+  z-index: 1;
+  align-self: center;
+  height: 28px;
+  margin: 0 2px;
+  padding: 0 6px;
+  border-radius: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 28px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.continuesBefore {
+  margin-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.continuesAfter {
+  margin-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Bar colours, also used by the legend swatches. */
+.pending {
+  background: repeating-linear-gradient(135deg, #f6d48f, #f6d48f 6px, #f2c46a 6px, #f2c46a 12px);
+  color: #5a3d00;
+}
+
+.confirmed {
+  background: var(--lantern);
+  color: #fff;
+}
+
+.out {
+  background: var(--ink);
+  color: #fff;
+}
+
+.done {
+  background: #cfc6ba;
+  color: #3b302a;
+}
+
+.transit {
+  background: #9cc3d5;
+  color: #123447;
+}
+
+.maintenance {
+  background: repeating-linear-gradient(135deg, #ddd6cc, #ddd6cc 6px, #cbc3b8 6px, #cbc3b8 12px);
+  color: #3b302a;
+}
