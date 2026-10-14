@@ -1,0 +1,38 @@
+.header {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 20px 16px 8px;
+}
+
+.brandLink {
+  display: inline-flex;
+  gap: 14px;
+  align-items: center;
+  text-decoration: none;
+}
+
+.lantern {
+  flex: none;
+  width: 22px;
+  height: 30px;
+  border-radius: 10px 10px 8px 8px;
+  background: var(--lantern);
+  box-shadow:
+    0 0 0 3px var(--paper),
+    0 0 0 4px var(--lantern);
+}
+
+.brand {
+  display: block;
+  font-family: var(--font-display), sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.tagline {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}

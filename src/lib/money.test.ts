@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatVnd } from "@/lib/money";
+import { formatUsdApprox, formatVnd } from "@/lib/money";
 
 describe("formatVnd", () => {
   it("groups thousands with dots, Vietnamese style", () => {
@@ -10,5 +10,13 @@ describe("formatVnd", () => {
 
   it("rejects fractional amounts", () => {
     expect(() => formatVnd(1000.5)).toThrow();
+  });
+});
+
+describe("formatUsdApprox", () => {
+  it("rounds to whole dollars at the given rate", () => {
+    expect(formatUsdApprox(1_500_000, 26_000)).toBe("≈ $58");
+    expect(formatUsdApprox(240_000, 26_000)).toBe("≈ $9");
+    expect(formatUsdApprox(27_000_000, 26_000)).toBe("≈ $1,038");
   });
 });

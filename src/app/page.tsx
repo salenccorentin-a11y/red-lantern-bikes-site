@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -6,7 +7,9 @@ export default function Home() {
       <div className={styles.lantern} aria-hidden="true" />
       <h1 className={styles.brand}>Red Lantern Bikes</h1>
       <p className={styles.tagline}>Motorbike rentals and one-way trips from District 1, Saigon.</p>
-      <p className={styles.soon}>Our new website is coming soon.</p>
+      <Link href="/book" className={styles.cta}>
+        Book a bike
+      </Link>
     </main>
   );
 }

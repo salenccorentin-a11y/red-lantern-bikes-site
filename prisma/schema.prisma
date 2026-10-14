@@ -214,6 +214,9 @@ model Booking {
   id        String        @id @default(cuid())
   // Customer-facing reference, also used on bank transfers, e.g. RLB-482913.
   reference String        @unique
+  // Random code in the customer's booking link (/booking/<viewToken>). The
+  // reference alone is too easy to guess to protect a customer's details.
+  viewToken String        @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   status    BookingStatus
   source    BookingSource
 

@@ -36,3 +36,31 @@ export function todayInSaigon(now: Date = new Date()): string {
   // en-CA formats dates as YYYY-MM-DD.
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(now);
 }
+
+/** "2026-11-01" → "Sun 1 Nov 2026", for showing to customers. */
+export function formatDisplayDate(isoDate: string): string {
+  const date = parseIsoDate(isoDate);
+  if (!date) return isoDate;
+  return new Intl.DateTimeFormat("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  })
+    .format(date)
+    .replace(",", "");
+}
+
+/** A moment in Saigon time, e.g. "16 Oct 2026, 10:00". */
+export function formatSaigonDateTime(moment: Date): string {
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+    timeZone: "Asia/Ho_Chi_Minh",
+  }).format(moment);
+}

@@ -9,3 +9,11 @@ export function formatVnd(amount: number): string {
   }
   return `${vndFormat.format(amount)}₫`;
 }
+
+/**
+ * Rough dollar figure shown next to VND prices for tourists, e.g. "≈ $58".
+ * Display only: customers are always charged in VND.
+ */
+export function formatUsdApprox(amountVnd: number, usdToVndRate: number): string {
+  return `≈ $${Math.round(amountVnd / usdToVndRate).toLocaleString("en-US")}`;
+}

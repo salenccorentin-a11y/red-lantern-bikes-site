@@ -229,9 +229,9 @@ export type CancelError = { code: "BOOKING_NOT_FOUND" } | { code: "CANNOT_CANCEL
 export async function cancelBooking(db: PrismaClient, bookingId: string, now: Date = new Date()) {
   return db.$transaction(async (tx) => {
     const booking = await tx.booking.findUnique({ where: { id: bookingId } });
-    if (!booking) return fail<CancelError>({ code: "BOOKING_NOT_FOUND" });
+    if (!booking) return failure<CancelError>({ code: "BOOKING_NOT_FOUND" });
     if (booking.status !== "PENDING_PAYMENT" && booking.status !== "CONFIRMED") {
-      return fail<CancelError>({ code: "CANNOT_CANCEL", status: booking.status });
+      return failure<CancelError>({ code: "CANNOT_CANCEL", status: booking.status });
     }
     await tx.booking.update({
       where: { id: bookingId },
@@ -245,6 +245,10 @@ export async function cancelBooking(db: PrismaClient, bookingId: string, now: Da
   });
 }
 
-function fail<E = ReserveError>(error: E) {
+function fail(error: ReserveError) {
+  return failure(error);
+}
+
+function failure<E>(error: E) {
   return { ok: false as const, error };
 }

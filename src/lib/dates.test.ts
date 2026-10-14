@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { addDays, daysInclusive, parseIsoDate, toIsoDate, todayInSaigon } from "@/lib/dates";
+import {
+  addDays,
+  daysInclusive,
+  formatDisplayDate,
+  formatSaigonDateTime,
+  parseIsoDate,
+  toIsoDate,
+  todayInSaigon,
+} from "@/lib/dates";
 
 const d = (s: string) => parseIsoDate(s)!;
 
@@ -50,5 +58,15 @@ describe("todayInSaigon", () => {
     // 20:00 UTC on 10 Oct is already 03:00 on 11 Oct in Saigon.
     expect(todayInSaigon(new Date("2026-10-10T20:00:00Z"))).toBe("2026-10-11");
     expect(todayInSaigon(new Date("2026-10-10T16:59:00Z"))).toBe("2026-10-10");
+  });
+});
+
+describe("display formats", () => {
+  it("shows a calendar day with its weekday", () => {
+    expect(formatDisplayDate("2026-11-01")).toBe("Sun 1 Nov 2026");
+  });
+
+  it("shows a moment in Saigon time", () => {
+    expect(formatSaigonDateTime(new Date("2026-10-16T03:00:00Z"))).toBe("16 Oct 2026, 10:00");
   });
 });

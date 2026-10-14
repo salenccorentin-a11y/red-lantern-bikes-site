@@ -32,7 +32,14 @@
   color: var(--muted);
 }
 
-.soon {
-  margin: 16px 0 0;
-  font-weight: 500;
+.cta {
+  margin-top: 20px;
+  padding: 14px 22px;
+  border-radius: 4px;
+  background: var(--lantern);
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-display), sans-serif;
+  font-size: 16px;
+  font-weight: 600;
 }
