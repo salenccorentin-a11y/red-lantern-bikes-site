@@ -21,7 +21,7 @@ export default function BikesPage() {
       <h1>Our bikes</h1>
       <p className={styles.lead}>
         From easy semi-automatics for the city to adventure bikes for the length of Vietnam. Every
-        bike is serviced in our own shop before it goes out.
+        bike is serviced in our own shop.
       </p>
       <p>
         Prices are per day. Rent for 7 days or more and the weekly rate applies to every day; from

@@ -183,7 +183,8 @@ export function BookingForm(props: {
             ))}
           </div>
           <p className={styles.hint}>
-            Starting in Hanoi or Da Nang? Contact us and we&apos;ll arrange it.
+            Starting in Hanoi or Da Nang? <a href="/contact?about=reverse">Contact us</a> and
+            we&apos;ll arrange it.
           </p>
         </fieldset>
 

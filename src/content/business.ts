@@ -32,7 +32,7 @@ export const BUSINESS = {
     {
       name: "Phi",
       role: "Founder",
-      bio: "Phi has spent 15 years keeping motorbikes running, and every bike in the fleet goes through his hands before it goes out.",
+      bio: "Phi has spent 15 years keeping motorbikes running, and he looks after every bike in our fleet.",
     },
     {
       name: "Coco",

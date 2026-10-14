@@ -392,6 +392,7 @@ model StaffUser {
   confirmedPayments Payment[]
   incidents         BikeIncident[]
   loginTokens       StaffLoginToken[]
+  handledEnquiries  Enquiry[]
   sessions          StaffSession[]
 
   createdAt DateTime @default(now())
@@ -423,4 +424,36 @@ model StaffSession {
   createdAt DateTime  @default(now())
 
   @@index([staffId])
+}
+
+// ─── Enquiries ──────────────────────────────────────────────────────────────
+
+enum EnquiryKind {
+  TOUR
+  // Trips starting in Hanoi or Da Nang, arranged by hand.
+  REVERSE_ROUTE
+  GENERAL
+}
+
+// Messages from the tour pages and the contact page, answered by staff.
+model Enquiry {
+  id    String      @id @default(cuid())
+  kind  EnquiryKind
+  // Tour slug or route, e.g. "the-coco-loop" or "HANOI>SAIGON".
+  topic String?
+
+  name           String
+  email          String
+  phone          String?
+  message        String
+  preferredStart DateTime? @db.Date
+  riders         Int?
+
+  handledAt   DateTime?
+  handledById String?
+  handledBy   StaffUser? @relation(fields: [handledById], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([handledAt, createdAt])
 }

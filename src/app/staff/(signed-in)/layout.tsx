@@ -31,6 +31,7 @@ async function StaffNav() {
     <nav className={styles.nav} aria-label="Staff">
       <Link href="/staff">Calendar</Link>
       <Link href="/staff/walk-in">Walk-in</Link>
+      <Link href="/staff/enquiries">Enquiries</Link>
       <Link href="/staff/bikes">Bikes</Link>
       {owner && <Link href="/staff/profit">Profit</Link>}
       {owner && <Link href="/staff/settings">Settings</Link>}

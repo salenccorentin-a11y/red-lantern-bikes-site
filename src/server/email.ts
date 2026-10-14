@@ -7,6 +7,8 @@ export type Email = {
   subject: string;
   text: string;
   html: string;
+  /** Where replies go, e.g. the customer who sent an enquiry. */
+  replyTo?: string;
 };
 
 export async function sendEmail(email: Email): Promise<{ sent: boolean }> {
@@ -30,6 +32,7 @@ export async function sendEmail(email: Email): Promise<{ sent: boolean }> {
       subject: email.subject,
       text: email.text,
       html: email.html,
+      ...(email.replyTo && { reply_to: email.replyTo }),
     }),
   });
   if (!response.ok) {

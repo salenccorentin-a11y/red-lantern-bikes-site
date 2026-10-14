@@ -107,7 +107,7 @@ export default function Home() {
                 it up.
               </li>
               <li>
-                <b>Pick up at our shop</b> in District 1. Bring your passport and your licence or
+                <b>Pick up at our shop</b> in District 1. Bring your motorbike licence or
                 International Driving Permit.
               </li>
               <li>
