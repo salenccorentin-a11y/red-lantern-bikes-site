@@ -1,0 +1,117 @@
+/* Shared building blocks for the public pages. */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--content) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Buttons: red is only ever the main action ("Book"). */
+.primary,
+.ghostDark,
+.ghostLight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.primary {
+  background: var(--lantern-red);
+  color: var(--white);
+  border: 0;
+}
+
+.primary:hover {
+  background: var(--lantern-red-deep);
+}
+
+.ghostDark {
+  border: 1.5px solid rgb(255 255 255 / 0.45);
+  color: var(--white);
+  background: transparent;
+}
+
+.ghostDark:hover {
+  border-color: var(--white);
+}
+
+.ghostLight {
+  border: 1.5px solid var(--night);
+  color: var(--night);
+  background: transparent;
+}
+
+.ghostLight:hover {
+  background: var(--night);
+  color: var(--white);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* A text link that reads as a link on light backgrounds. */
+.link {
+  color: var(--lantern-red);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.link:hover {
+  color: var(--lantern-red-deep);
+}
+
+/* Sections */
+.section {
+  padding: 56px 0;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 88px 0;
+  }
+}
+
+.sectionMist {
+  background: var(--mist);
+}
+
+.sectionNight {
+  background: var(--night);
+  color: var(--white);
+}
+
+.sectionTitle {
+  font-size: var(--text-4xl);
+  margin: 0 0 12px;
+  max-width: 18ch;
+}
+
+.sectionIntro {
+  margin: 0 0 32px;
+  max-width: 60ch;
+  font-size: var(--text-lg);
+  color: var(--slate);
+}
+
+.sectionNight .sectionIntro {
+  color: var(--fog);
+}

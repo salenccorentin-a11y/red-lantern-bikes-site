@@ -14,13 +14,15 @@ export function BlogList({ posts }: { posts: BlogPost[] }) {
               src={p.cover}
               alt=""
               width={600}
-              height={315}
-              sizes="(max-width: 600px) 100vw, 340px"
-              style={{ width: "100%", height: "auto", borderRadius: 4, marginBottom: 12 }}
+              height={400}
+              sizes="(max-width: 700px) 100vw, 360px"
+              className={styles.cardPhoto}
             />
           )}
-          <h2 style={{ fontSize: 20 }}>{p.title}</h2>
-          <p>{p.date ? formatDisplayDate(p.date) : ""}</p>
+          <span className={styles.cardBody}>
+            <h2 className={styles.cardTitle}>{p.title}</h2>
+            {p.date && <p className={styles.cardText}>{formatDisplayDate(p.date)}</p>}
+          </span>
         </Link>
       ))}
     </div>

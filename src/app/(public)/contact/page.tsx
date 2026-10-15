@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { LocalBusinessData } from "@/components/LocalBusinessData";
 import { ADDRESS_LINE, BUSINESS, mapsLink, whatsappLink } from "@/content/business";
+import { PageHeader } from "@/components/PageHeader";
 import styles from "../content.module.css";
 
 export const metadata: Metadata = {
@@ -14,46 +15,51 @@ export const metadata: Metadata = {
 export default function ContactPage(props: PageProps<"/contact">) {
   const whatsapp = whatsappLink("Hi Red Lantern Bikes!");
   return (
-    <main className={styles.page}>
-      <LocalBusinessData />
-      <h1>Contact us</h1>
-      <div className={styles.twoCol}>
-        <div>
-          <Suspense fallback={<EnquiryForm kind="GENERAL" />}>
-            <ContactForm searchParams={props.searchParams} />
-          </Suspense>
+    <>
+      <PageHeader
+        title="Contact us"
+        intro="Questions about bikes, routes or a trip you're planning? Send us a message, or come and see us in District 1."
+      />
+      <main className={styles.page}>
+        <LocalBusinessData />
+        <div className={styles.twoCol}>
+          <div>
+            <Suspense fallback={<EnquiryForm kind="GENERAL" />}>
+              <ContactForm searchParams={props.searchParams} />
+            </Suspense>
+          </div>
+          <section className={`${styles.box} ${styles.boxMist}`}>
+            <h2>The shop</h2>
+            <p>
+              {ADDRESS_LINE}
+              <br />
+              {BUSINESS.hours}
+            </p>
+            <p>
+              <a href={mapsLink()} target="_blank" rel="noopener">
+                Open in Google Maps
+              </a>
+            </p>
+            {(whatsapp || BUSINESS.phone || BUSINESS.email) && <h2>Other ways to reach us</h2>}
+            {whatsapp && (
+              <p>
+                <a href={whatsapp}>Message us on WhatsApp</a>
+              </p>
+            )}
+            {BUSINESS.phone && (
+              <p>
+                <a href={`tel:${BUSINESS.phone.replace(/\s/g, "")}`}>{BUSINESS.phone}</a>
+              </p>
+            )}
+            {BUSINESS.email && (
+              <p>
+                <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
+              </p>
+            )}
+          </section>
         </div>
-        <section className={styles.box}>
-          <h2>The shop</h2>
-          <p>
-            {ADDRESS_LINE}
-            <br />
-            {BUSINESS.hours}
-          </p>
-          <p>
-            <a href={mapsLink()} target="_blank" rel="noopener">
-              Open in Google Maps
-            </a>
-          </p>
-          {(whatsapp || BUSINESS.phone || BUSINESS.email) && <h2>Other ways to reach us</h2>}
-          {whatsapp && (
-            <p>
-              <a href={whatsapp}>Message us on WhatsApp</a>
-            </p>
-          )}
-          {BUSINESS.phone && (
-            <p>
-              <a href={`tel:${BUSINESS.phone.replace(/\s/g, "")}`}>{BUSINESS.phone}</a>
-            </p>
-          )}
-          {BUSINESS.email && (
-            <p>
-              <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
-            </p>
-          )}
-        </section>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
 
@@ -81,10 +87,6 @@ async function ContactForm({
   }
   return (
     <>
-      <p>
-        Questions about bikes, routes or anything else? We&apos;ll get back to you as soon as we
-        can.
-      </p>
       <EnquiryForm kind="GENERAL" />
     </>
   );

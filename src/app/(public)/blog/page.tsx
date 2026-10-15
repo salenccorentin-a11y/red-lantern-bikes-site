@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BlogList } from "@/components/BlogList";
 import { POSTS } from "@/content/blog";
+import { PageHeader } from "@/components/PageHeader";
 import styles from "../content.module.css";
 
 // Title kept from the old site.
@@ -13,9 +14,14 @@ export const metadata: Metadata = {
 
 export default function BlogIndex() {
   return (
-    <main className={styles.page}>
-      <h1>Travel guides and tips</h1>
-      <BlogList posts={POSTS} />
-    </main>
+    <>
+      <PageHeader
+        title="Travel guides and tips"
+        intro="Route guides, bike advice and practical tips for riding in Vietnam, from our team in Saigon."
+      />
+      <main className={styles.page}>
+        <BlogList posts={POSTS} />
+      </main>
+    </>
   );
 }

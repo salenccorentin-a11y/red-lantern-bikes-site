@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import { PageHeader } from "@/components/PageHeader";
+import { TOUR_PHOTOS } from "@/components/tourPhotos";
 import { TOURS } from "@/content/tours";
+import mountainSunset from "../../../../public/photos/mountain-sunset.webp";
 import styles from "../content.module.css";
 
 export const metadata: Metadata = {
@@ -12,23 +16,45 @@ export const metadata: Metadata = {
 
 export default function ToursPage() {
   return (
-    <main className={styles.page}>
-      <h1>Motorbike tours</h1>
-      <p className={styles.lead}>
-        Ride with a local guide, or on your own with our route and roadside assistance. Groups of
-        one to six riders, planned around your dates and riding experience.
-      </p>
-      <div className={styles.cards}>
-        {TOURS.map((tour) => (
-          <Link key={tour.slug} href={`/tours/${tour.slug}`} className={styles.card}>
-            <h2>{tour.name}</h2>
-            <p>{tour.summary}</p>
-            <span className={styles.muted}>
-              {[tour.duration, tour.priceFrom].filter(Boolean).join(" · ") || "Ask us for details"}
-            </span>
-          </Link>
-        ))}
-      </div>
-    </main>
+    <>
+      <PageHeader
+        title="Motorbike tours"
+        intro="Ride with a local guide, or on your own with our route and roadside assistance. Groups of one to six riders, planned around your dates and riding experience."
+        photo={{
+          src: mountainSunset,
+          alt: "A rider above a mountain valley at sunset",
+          position: "50% 55%",
+        }}
+      />
+      <main className={styles.page}>
+        <div className={styles.cards}>
+          {TOURS.map((tour) => {
+            const photo = TOUR_PHOTOS[tour.slug];
+            const meta = [tour.duration, tour.priceFrom].filter(Boolean);
+            return (
+              <Link key={tour.slug} href={`/tours/${tour.slug}`} className={styles.card}>
+                {photo && (
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    placeholder="blur"
+                    sizes="(max-width: 700px) 100vw, 360px"
+                    className={styles.cardPhoto}
+                    style={{ objectPosition: photo.position }}
+                  />
+                )}
+                <span className={styles.cardBody}>
+                  <h2 className={styles.cardTitle}>{tour.name}</h2>
+                  <p className={styles.cardText}>{tour.summary}</p>
+                  <p className={styles.cardMeta}>
+                    {meta.length > 0 ? meta.join(", ") : "Ask us about dates and price"}
+                  </p>
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </main>
+    </>
   );
 }

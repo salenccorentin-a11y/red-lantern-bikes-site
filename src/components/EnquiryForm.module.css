@@ -8,8 +8,9 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 13px;
-  color: var(--muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--night);
   min-width: 0;
 }
 
@@ -18,12 +19,24 @@
   width: 100%;
   min-height: 44px;
   padding: 9px 10px;
-  border: 1.5px solid var(--line);
-  border-radius: 4px;
-  background: #fff;
+  border: 1.5px solid #c7d0df;
+  border-radius: var(--radius-input);
+  background: var(--white);
   font: inherit;
   font-size: 16px;
   color: var(--ink);
+}
+
+.form input:hover,
+.form textarea:hover {
+  border-color: var(--slate);
+}
+
+.form input:focus,
+.form textarea:focus {
+  border-color: var(--night);
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(15 27 45 / 0.12);
 }
 
 .form [aria-invalid="true"] {
@@ -38,6 +51,8 @@
 @media (min-width: 640px) {
   .row {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    /* Keep the boxes level when one label wraps onto two lines. */
+    align-items: end;
   }
 }
 
@@ -56,23 +71,29 @@
 
 .sent {
   padding: 16px;
-  border-radius: 6px;
+  border-radius: var(--radius-card);
   background: #eef5ee;
   color: var(--ok);
   font-weight: 600;
 }
 
 .button {
+  justify-self: start;
   min-height: 48px;
-  padding: 12px 20px;
+  padding: 12px 28px;
   border: none;
-  border-radius: 4px;
-  background: var(--lantern);
-  color: #fff;
+  border-radius: 999px;
+  background: var(--lantern-red);
+  color: var(--white);
   font-family: var(--font-display), sans-serif;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.button:hover {
+  background: var(--lantern-red-deep);
 }
 
 .button:disabled {

@@ -1,207 +1,335 @@
-/* Shared styles for the public content pages (bikes, one-way, tours, about,
-   FAQ, contact, terms, privacy). */
+/* Shared styles for the public content pages. They open with <PageHeader>
+   (a night band) and read on white. */
 
 .page {
-  max-width: 1040px;
+  max-width: calc(var(--content) + 2 * var(--gutter));
   margin: 0 auto;
-  padding: 16px 16px 24px;
-  line-height: 1.6;
+  padding: 40px var(--gutter) 72px;
+  line-height: 1.65;
 }
 
-.page h1 {
-  font-size: clamp(28px, 5vw, 40px);
-  line-height: 1.15;
-  margin: 12px 0 12px;
+@media (min-width: 768px) {
+  .page {
+    padding-top: 56px;
+    padding-bottom: 96px;
+  }
 }
 
 .page h2 {
-  font-size: 22px;
-  margin: 32px 0 10px;
+  font-size: var(--text-2xl);
+  margin: 44px 0 12px;
+}
+
+.page h2:first-child {
+  margin-top: 0;
 }
 
 .page h3 {
-  font-size: 18px;
-  margin: 20px 0 6px;
+  font-size: var(--text-xl);
+  margin: 24px 0 6px;
 }
 
 .prose {
-  max-width: 720px;
+  max-width: 68ch;
+  font-size: var(--text-lg);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.2em;
+}
+
+.prose li + li {
+  margin-top: 6px;
 }
 
 .lead {
-  max-width: 720px;
-  font-size: 18px;
-  color: #3b302a;
-}
-
-.eyebrow {
-  margin: 16px 0 0;
-  color: var(--lantern);
-  font-family: var(--font-display), sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 13px;
+  max-width: 62ch;
+  font-size: var(--text-xl);
+  line-height: 1.55;
+  color: var(--night);
 }
 
 .muted {
-  color: var(--muted);
+  color: var(--slate);
 }
+
+.back {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--slate);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--night);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ─── Layout helpers ─────────────────────────────────────────────────── */
 
 .twoCol {
   display: grid;
-  gap: 16px;
+  gap: 24px;
   align-items: start;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 860px) {
   .twoCol {
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 40px;
   }
 }
 
 .box {
-  padding: 4px 20px 20px;
-  border: 1.5px solid var(--line);
-  border-radius: 6px;
-  background: #fff;
+  padding: 24px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-card);
+  background: var(--white);
 }
 
 .box h2 {
-  margin-top: 16px;
+  margin-top: 0;
+  font-size: var(--text-xl);
 }
+
+.boxMist {
+  background: var(--mist);
+  border-color: transparent;
+}
+
+/* ─── Tables (prices, fees) ──────────────────────────────────────────── */
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 15px;
+  font-size: var(--text-base);
 }
 
-.table td,
-.table th {
-  padding: 9px 0;
-  border-bottom: 1px solid var(--line);
+.table th,
+.table td {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
   text-align: left;
   vertical-align: top;
 }
 
+.table th {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--slate);
+}
+
 .table small {
-  color: var(--muted);
+  color: var(--slate);
 }
 
 .num {
   text-align: right !important;
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
 }
 
 .num small {
   display: block;
+  font-weight: 500;
 }
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+/* ─── Actions ────────────────────────────────────────────────────────── */
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 16px;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .primary,
 .secondary {
-  display: inline-block;
-  padding: 12px 18px;
-  border-radius: 4px;
-  font-family: var(--font-display), sans-serif;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 700;
   text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
 }
 
 .primary {
-  background: var(--lantern);
-  color: #fff;
+  background: var(--lantern-red);
+  color: var(--white);
+}
+
+.primary:hover {
+  background: var(--lantern-red-deep);
 }
 
 .secondary {
-  border: 1.5px solid var(--ink);
+  border: 1.5px solid var(--night);
+  color: var(--night);
 }
+
+.secondary:hover {
+  background: var(--night);
+  color: var(--white);
+}
+
+/* ─── Cards (tours, blog) ────────────────────────────────────────────── */
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 20px;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  border: 1.5px solid var(--line);
-  border-radius: 6px;
-  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-card);
+  background: var(--white);
   text-decoration: none;
+  overflow: hidden;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .card:hover {
-  border-color: var(--lantern);
+  border-color: var(--night);
+  box-shadow: 0 10px 28px rgb(15 27 45 / 0.12);
 }
 
-.card h2,
-.card h3 {
-  margin: 0 0 6px;
+.cardPhoto {
+  /* flex: none and min-height: 0 stop the column flexbox using the photo's
+     own (often portrait) height instead of the 3:2 crop. */
+  flex: none;
+  min-height: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
 }
 
-.card p {
-  margin: 0 0 8px;
-  color: var(--muted);
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  padding: 18px 20px 22px;
+}
+
+.cardTitle {
+  margin: 0 !important;
+  font-size: var(--text-xl) !important;
+}
+
+.cardText {
+  margin: 0;
+  color: var(--slate);
   flex: 1;
 }
 
+.cardMeta {
+  margin: 8px 0 0;
+  font-weight: 700;
+}
+
+/* ─── Facts (tour details) ───────────────────────────────────────────── */
+
 .facts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 12px;
-  margin: 16px 0;
+  margin: 24px 0;
   padding: 0;
 }
 
 .facts div {
-  padding: 12px 14px;
-  border-radius: 6px;
-  background: var(--paper-light);
-  border: 1px solid var(--line);
+  padding: 14px 16px;
+  border-radius: var(--radius-card);
+  background: var(--mist);
 }
 
 .facts dt {
-  font-size: 12px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: var(--text-sm);
+  color: var(--slate);
 }
 
 .facts dd {
   margin: 2px 0 0;
-  font-weight: 600;
+  font-weight: 700;
 }
 
+/* ─── FAQ ────────────────────────────────────────────────────────────── */
+
 .faq details {
-  border-bottom: 1px solid var(--line);
-  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
 }
 
 .faq summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 56px;
+  padding: 14px 0;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 17px;
+  font-weight: 700;
+  font-size: var(--text-lg);
 }
 
-.faq details p,
-.faq details ul {
-  margin: 10px 0 0;
+.faq summary::-webkit-details-marker {
+  display: none;
 }
+
+.faq summary::after {
+  content: "";
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-right: 2.5px solid var(--lantern-red);
+  border-bottom: 2.5px solid var(--lantern-red);
+  transform: rotate(45deg) translate(-3px, -3px);
+  transition: transform 150ms ease;
+}
+
+.faq details[open] summary::after {
+  transform: rotate(-135deg) translate(-3px, -3px);
+}
+
+.faq details p {
+  margin: 0 0 18px;
+  max-width: 68ch;
+  color: #2b3850;
+}
+
+/* ─── Notes ──────────────────────────────────────────────────────────── */
 
 .draftNote {
-  padding: 12px 14px;
-  border: 1px dashed var(--lantern);
+  padding: 14px 16px;
+  border-left: 4px solid var(--star);
   border-radius: 4px;
-  font-size: 14px;
-  color: #3b302a;
-  background: #fff6f4;
+  background: #fff8db;
+  font-size: var(--text-base);
+}
+
+/* Big photo inside a page. */
+.photo {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-photo);
 }

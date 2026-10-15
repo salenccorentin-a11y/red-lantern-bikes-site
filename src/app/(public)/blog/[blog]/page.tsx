@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogList } from "@/components/BlogList";
 import { CATEGORIES, POSTS } from "@/content/blog";
+import { PageHeader } from "@/components/PageHeader";
 import styles from "../../content.module.css";
 
 // Category pages from the old site, e.g. /blog/news-2. Built ahead of time;
@@ -27,12 +28,14 @@ export default async function BlogCategory(props: PageProps<"/blog/[blog]">) {
   const category = CATEGORIES.find((c) => c.slug === blog);
   if (!category) notFound();
   return (
-    <main className={styles.page}>
-      <p>
-        <Link href="/blog">← All posts</Link>
-      </p>
-      <h1>{category.name}</h1>
-      <BlogList posts={POSTS.filter((p) => p.blogSlug === blog)} />
-    </main>
+    <>
+      <PageHeader title={category.name} />
+      <main className={styles.page}>
+        <Link href="/blog" className={styles.back}>
+          All posts
+        </Link>
+        <BlogList posts={POSTS.filter((p) => p.blogSlug === blog)} />
+      </main>
+    </>
   );
 }

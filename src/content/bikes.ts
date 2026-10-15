@@ -78,9 +78,9 @@ export const BIKE_CONTENT: Record<string, BikeContent> = {
       "Rent a Honda Winner X 150 in Ho Chi Minh City by the day, week or month. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
   },
   "suzuki-gsx-r150": {
-    summary: "A small sports bike for riders who like to lean.",
+    summary: "A sporty 150cc for riders who like twisty roads.",
     description:
-      "Full fairing, a lively engine and sharp handling. Best on good roads and mountain passes, for riders already comfortable with a manual.",
+      "A sporty 150cc with a lively engine and sharp handling. Best on good roads and mountain passes, for riders already comfortable with a manual.",
     bestFor: ["Mountain passes", "Experienced riders"],
     licence: "IDP_OR_A1",
     seoTitle: "Suzuki GSX-R150 Rental Saigon | Red Lantern Bikes",

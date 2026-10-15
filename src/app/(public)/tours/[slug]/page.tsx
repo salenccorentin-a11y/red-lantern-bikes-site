@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EnquiryForm } from "@/components/EnquiryForm";
+import { PageHeader } from "@/components/PageHeader";
+import { TOUR_PHOTOS } from "@/components/tourPhotos";
+import ui from "@/components/ui.module.css";
 import { TOURS, findTour } from "@/content/tours";
 import styles from "../../content.module.css";
 
@@ -35,49 +38,60 @@ export default async function TourPage(props: PageProps<"/tours/[slug]">) {
     ["Price", tour.priceFrom],
   ];
 
+  const photo = TOUR_PHOTOS[tour.slug];
+
   return (
-    <main className={styles.page}>
-      <p>
-        <Link href="/tours">← All tours</Link>
-      </p>
-      <h1>{tour.name}</h1>
-      <p className={styles.lead}>{tour.summary}</p>
+    <>
+      <PageHeader title={tour.name} intro={tour.summary} photo={photo}>
+        <div className={ui.actions} style={{ marginTop: 24 }}>
+          <a href="#enquire" className={ui.primary}>
+            Ask about this tour
+          </a>
+        </div>
+      </PageHeader>
+      <main className={styles.page}>
+        <Link href="/tours" className={styles.back}>
+          All tours
+        </Link>
 
-      <dl className={styles.facts}>
-        {facts
-          .filter(([, value]) => value)
-          .map(([label, value]) => (
-            <div key={label}>
-              <dt>{label}</dt>
-              <dd>{value}</dd>
-            </div>
+        <dl className={styles.facts}>
+          {facts
+            .filter(([, value]) => value)
+            .map(([label, value]) => (
+              <div key={label}>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+        </dl>
+
+        <div className={styles.prose}>
+          {tour.description.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
           ))}
-      </dl>
+          {tour.highlights.length > 0 && (
+            <>
+              <h2>Highlights</h2>
+              <ul>
+                {tour.highlights.map((h) => (
+                  <li key={h}>{h}</li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
 
-      <div className={styles.prose}>
-        {tour.description.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-        {tour.highlights.length > 0 && (
-          <>
-            <h2>Highlights</h2>
-            <ul>
-              {tour.highlights.map((h) => (
-                <li key={h}>{h}</li>
-              ))}
-            </ul>
-          </>
-        )}
-      </div>
-
-      <h2 id="enquire">Ask about this tour</h2>
-      <p>Tell us your dates, how many riders, and how much riding experience you have.</p>
-      <EnquiryForm
-        kind="TOUR"
-        topic={tour.slug}
-        tripDetails
-        messagePlaceholder="e.g. Two of us, early December, about a week. One has never ridden a manual."
-      />
-    </main>
+        <section className={`${styles.box} ${styles.boxMist}`} style={{ marginTop: 48 }}>
+          <h2 id="enquire">Ask about this tour</h2>
+          <p>Tell us your dates, how many riders, and how much riding experience you have.</p>
+          <EnquiryForm
+            kind="TOUR"
+            topic={tour.slug}
+            tripDetails
+            messagePlaceholder="e.g. Two of us, early December, about a week. One has never ridden a manual."
+          />
+        </section>
+      </main>
+    </>
   );
 }

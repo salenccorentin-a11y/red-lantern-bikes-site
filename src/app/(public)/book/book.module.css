@@ -1,9 +1,10 @@
-/* Booking page. Look and feel from prototype/booking-prototype.jsx; mobile first. */
+/* Booking page, mobile first. Layout from prototype/booking-prototype.jsx,
+   colours and type from docs/design.md. */
 
 .page {
-  max-width: 1040px;
+  max-width: calc(var(--content) + 2 * var(--gutter));
   margin: 0 auto;
-  padding: 8px 16px 96px;
+  padding: 32px var(--gutter) 96px;
 }
 
 .title {
@@ -43,11 +44,12 @@
 .heading {
   display: block;
   width: 100%;
-  font-family: var(--font-display), sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  margin: 0 0 12px;
-  padding: 0 0 8px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-xl);
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+  padding: 0 0 10px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -101,11 +103,12 @@
   align-items: center;
   gap: 4px 10px;
   min-height: 48px;
-  padding: 11px 12px;
+  padding: 12px 14px;
   border: 1.5px solid var(--line);
-  border-radius: 4px;
-  background: var(--paper-light);
-  font-size: 15px;
+  border-radius: var(--radius-card);
+  background: var(--white);
+  font-size: var(--text-base);
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -122,8 +125,8 @@
 }
 
 .optOn {
-  border-color: var(--ink);
-  background: #fff;
+  border-color: var(--night);
+  box-shadow: inset 0 0 0 1px var(--night);
 }
 
 /* ─── Dates and text fields ─────────────────────────────────────────────── */
@@ -149,7 +152,7 @@
   min-height: 44px;
   padding: 9px 10px;
   border: 1.5px solid var(--line);
-  border-radius: 4px;
+  border-radius: var(--radius-input);
   background: var(--paper-light);
   font: inherit;
   font-size: 16px; /* 16px stops iPhones zooming in on focus */
@@ -213,11 +216,19 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 12px;
+  padding: 10px 12px 14px;
   border: 1.5px solid var(--line);
-  border-radius: 4px;
-  background: var(--paper-light);
+  border-radius: var(--radius-card);
+  background: var(--white);
   cursor: pointer;
+}
+
+.bikeImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  margin-bottom: 4px;
 }
 
 .bike:has(input:focus-visible) {
@@ -226,9 +237,8 @@
 }
 
 .bikeOn {
-  border-color: var(--lantern);
-  background: #fff;
-  box-shadow: inset 0 0 0 1px var(--lantern);
+  border-color: var(--lantern-red);
+  box-shadow: inset 0 0 0 1.5px var(--lantern-red);
 }
 
 .bikeOff {
@@ -237,9 +247,10 @@
 }
 
 .bikeName {
-  font-family: var(--font-display), sans-serif;
-  font-weight: 600;
-  font-size: 15px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-base);
+  letter-spacing: -0.01em;
 }
 
 .price {
@@ -290,10 +301,10 @@
 /* ─── Summary ticket ────────────────────────────────────────────────────── */
 
 .ticket {
-  background: var(--ink);
-  color: var(--paper);
-  border-radius: 6px;
-  padding: 20px;
+  background: var(--night);
+  color: var(--white);
+  border-radius: var(--radius-photo);
+  padding: 24px;
   scroll-margin-top: 16px;
 }
 
@@ -305,15 +316,14 @@
 }
 
 .ticketLabel {
-  font-family: var(--font-display), sans-serif;
-  font-size: 12px;
-  color: var(--amber);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--star);
 }
 
 .ticketBike {
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-display);
   font-size: 20px;
   font-weight: 600;
   margin: 6px 0 4px;
@@ -321,12 +331,12 @@
 
 .ticketMeta {
   font-size: 13px;
-  color: #a99c90;
+  color: var(--fog);
   line-height: 1.5;
 }
 
 .perf {
-  border-top: 2px dashed #3b302a;
+  border-top: 2px dashed var(--night-line);
   margin: 16px 0 8px;
 }
 
@@ -336,7 +346,7 @@
   gap: 12px;
   font-size: 14px;
   padding: 6px 0;
-  color: #d8cdbf;
+  color: #d5dceb;
 }
 
 .line > span:last-child {
@@ -344,7 +354,7 @@
 }
 
 .total {
-  border-top: 1px solid #3b302a;
+  border-top: 1px solid var(--night-line);
   margin-top: 6px;
   padding-top: 12px;
   font-weight: 600;
@@ -356,7 +366,7 @@
   display: block;
   font-size: 12px;
   font-weight: 400;
-  color: #a99c90;
+  color: var(--fog);
 }
 
 .accept {
@@ -365,7 +375,7 @@
   align-items: flex-start;
   margin-top: 16px;
   font-size: 13px;
-  color: #d8cdbf;
+  color: #d5dceb;
   cursor: pointer;
 }
 
@@ -375,18 +385,22 @@
   margin-top: 14px;
   padding: 14px;
   border: none;
-  border-radius: 4px;
-  background: var(--lantern);
+  border-radius: 999px;
+  background: var(--lantern-red);
   color: #fff;
-  font-family: var(--font-display), sans-serif;
-  font-size: 16px;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
   cursor: pointer;
 }
 
+.reserve:hover:not(:disabled) {
+  background: var(--lantern-red-deep);
+}
+
 .reserve:disabled {
-  background: #3b302a;
-  color: #8a7d72;
+  background: var(--night-line);
+  color: #8796b0;
   cursor: not-allowed;
 }
 
@@ -399,7 +413,7 @@
 .ticketFine {
   margin: 12px 0 0;
   font-size: 12px;
-  color: #a99c90;
+  color: var(--fog);
 }
 
 /* ─── Phone bar ─────────────────────────────────────────────────────────── */
@@ -423,7 +437,7 @@
 
 .mobileBarCta {
   padding: 10px 14px;
-  border-radius: 4px;
+  border-radius: var(--radius-input);
   background: var(--lantern);
   color: #fff;
   font-weight: 600;

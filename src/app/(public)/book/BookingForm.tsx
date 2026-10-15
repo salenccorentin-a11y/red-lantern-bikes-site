@@ -5,6 +5,7 @@
 // so they update instantly, but the server recalculates them when the customer
 // reserves; nothing price-related is sent from the browser.
 
+import Image from "next/image";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { dropoffLabel } from "@/lib/cities";
 import { formatDisplayDate } from "@/lib/dates";
@@ -258,6 +259,14 @@ export function BookingForm(props: {
                     checked={m.id === model?.id}
                     disabled={disabled}
                     onChange={() => setModelId(m.id)}
+                  />
+                  <Image
+                    src={`/bikes/${m.slug}.webp`}
+                    alt=""
+                    width={1200}
+                    height={800}
+                    sizes="(max-width: 600px) 45vw, 200px"
+                    className={styles.bikeImage}
                   />
                   <span className={styles.bikeName}>{m.name}</span>
                   <span className={styles.small}>{m.kind}</span>

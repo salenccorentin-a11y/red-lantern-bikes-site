@@ -1,0 +1,65 @@
+.band {
+  position: relative;
+  isolation: isolate;
+  background: var(--night);
+  color: var(--white);
+  overflow: hidden;
+}
+
+.withPhoto {
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
+}
+
+@media (min-width: 768px) {
+  .withPhoto {
+    min-height: 420px;
+  }
+}
+
+.photo {
+  z-index: -2;
+  object-fit: cover;
+}
+
+/* Night wash so white text stays readable over any photo. */
+.withPhoto::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to top,
+    rgb(15 27 45 / 0.92) 0%,
+    rgb(15 27 45 / 0.55) 45%,
+    rgb(15 27 45 / 0.15) 100%
+  );
+}
+
+.inner {
+  width: 100%;
+  max-width: calc(var(--content) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 48px var(--gutter) 44px;
+}
+
+@media (min-width: 768px) {
+  .inner {
+    padding-top: 72px;
+    padding-bottom: 56px;
+  }
+}
+
+.title {
+  margin: 0;
+  max-width: 20ch;
+  font-size: var(--text-4xl);
+}
+
+.intro {
+  margin: 14px 0 0;
+  max-width: 58ch;
+  font-size: var(--text-lg);
+  color: #d5dceb;
+}

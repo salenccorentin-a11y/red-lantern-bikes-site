@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "./Logo";
 import styles from "./SiteHeader.module.css";
 
 const NAV = [
@@ -12,11 +13,11 @@ const NAV = [
 export function SiteHeader() {
   return (
     <header className={styles.header}>
+      <a href="#main" className={styles.skip}>
+        Skip to content
+      </a>
       <div className={styles.inner}>
-        <Link href="/" className={styles.brandLink}>
-          <span className={styles.lantern} aria-hidden="true" />
-          <span className={styles.brand}>Red Lantern Bikes</span>
-        </Link>
+        <Logo />
 
         <nav className={styles.desktopNav} aria-label="Main">
           {NAV.map((item) => (
@@ -31,7 +32,10 @@ export function SiteHeader() {
 
         {/* Phones: a menu that opens without JavaScript. */}
         <details className={styles.mobileNav}>
-          <summary>Menu</summary>
+          <summary>
+            <span className={styles.burger} aria-hidden="true" />
+            Menu
+          </summary>
           <nav aria-label="Main">
             {NAV.map((item) => (
               <Link key={item.href} href={item.href}>

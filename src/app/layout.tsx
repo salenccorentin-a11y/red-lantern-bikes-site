@@ -1,17 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Oswald } from "next/font/google";
+import { Be_Vietnam_Pro } from "next/font/google";
 import { siteUrl } from "@/seo/site";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-body",
+// One family for everything (docs/design.md): designed for Vietnamese, so
+// place names keep their accents properly.
+const beVietnam = Be_Vietnam_Pro({
+  variable: "--font-sans",
   subsets: ["latin", "vietnamese"],
-});
-
-const oswald = Oswald({
-  variable: "--font-display",
-  subsets: ["latin", "vietnamese"],
-  weight: ["500", "600"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 // Defaults for every page; pages set their own title, description and
@@ -20,16 +18,21 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: "Red Lantern Bikes",
   description: "Motorbike rentals and one-way trips from District 1, Saigon.",
-  openGraph: { siteName: "Red Lantern Bikes", locale: "en_US", type: "website" },
+  openGraph: {
+    siteName: "Red Lantern Bikes",
+    locale: "en_US",
+    type: "website",
+    images: [{ url: "/photos/karst-road.webp", width: 2000, height: 1500 }],
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#B3261E",
+  themeColor: "#0F1B2D",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${oswald.variable}`}>
+    <html lang="en" className={beVietnam.variable}>
       <body>{children}</body>
     </html>
   );

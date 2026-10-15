@@ -8,6 +8,11 @@ const eslintConfig = defineConfig([
   ...nextTs,
   // Turns off lint rules that clash with Prettier formatting.
   prettier,
+  // Plain Node scripts (CommonJS) use require().
+  {
+    files: ["**/*.cjs"],
+    rules: { "@typescript-eslint/no-require-imports": "off" },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

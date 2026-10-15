@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { todayInSaigon } from "@/lib/dates";
 import { loadCatalog } from "@/server/catalog";
 import { BookingForm } from "./BookingForm";
+import { PageHeader } from "@/components/PageHeader";
 import styles from "./book.module.css";
 
 export const metadata: Metadata = {
@@ -16,12 +17,17 @@ export const metadata: Metadata = {
 
 export default function BookPage(props: PageProps<"/book">) {
   return (
-    <main className={styles.page}>
-      <h1 className={styles.title}>Book your bike</h1>
-      <Suspense fallback={<p className={styles.loading}>Loading bikes and prices…</p>}>
-        <BookingLoader searchParams={props.searchParams} />
-      </Suspense>
-    </main>
+    <>
+      <PageHeader
+        title="Book your bike"
+        intro="Choose your trip, dates and bike. You see the full price before you pay, and hold the bike with a small deposit."
+      />
+      <main className={styles.page}>
+        <Suspense fallback={<p className={styles.loading}>Loading bikes and prices…</p>}>
+          <BookingLoader searchParams={props.searchParams} />
+        </Suspense>
+      </main>
+    </>
   );
 }
 

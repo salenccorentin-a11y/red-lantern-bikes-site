@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FAQ } from "@/content/faq";
+import { PageHeader } from "@/components/PageHeader";
+import ui from "@/components/ui.module.css";
 import styles from "../content.module.css";
 
 export const metadata: Metadata = {
@@ -12,36 +14,45 @@ export const metadata: Metadata = {
 
 export default function FaqPage() {
   return (
-    <main className={styles.page}>
-      <h1>Questions and answers</h1>
-      <div className={`${styles.prose} ${styles.faq}`}>
-        {FAQ.map((item) => (
-          <details key={item.id} id={item.id}>
-            <summary>{item.question}</summary>
-            {item.answer.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </details>
-        ))}
-      </div>
-      <p>
-        Something else? <Link href="/contact">Send us a message</Link>.
-      </p>
-      <script
-        type="application/ld+json"
-        // Lets search engines show these answers directly in results.
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: FAQ.map((item) => ({
-              "@type": "Question",
-              name: item.question,
-              acceptedAnswer: { "@type": "Answer", text: item.answer.join(" ") },
-            })),
-          }).replace(/</g, "\\u003c"),
-        }}
+    <>
+      <PageHeader
+        title="Questions and answers"
+        intro="Licences, the deposit, one-way trips and what happens if something goes wrong on the road."
       />
-    </main>
+      <main className={styles.page}>
+        <div className={`${styles.prose} ${styles.faq}`}>
+          {FAQ.map((item) => (
+            <details key={item.id} id={item.id}>
+              <summary>{item.question}</summary>
+              {item.answer.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </details>
+          ))}
+        </div>
+        <p className={styles.prose} style={{ marginTop: 32 }}>
+          Something else?{" "}
+          <Link href="/contact" className={ui.link}>
+            Send us a message
+          </Link>
+          .
+        </p>
+        <script
+          type="application/ld+json"
+          // Lets search engines show these answers directly in results.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: FAQ.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: { "@type": "Answer", text: item.answer.join(" ") },
+              })),
+            }).replace(/</g, "\\u003c"),
+          }}
+        />
+      </main>
+    </>
   );
 }

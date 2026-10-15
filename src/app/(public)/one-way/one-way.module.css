@@ -1,0 +1,103 @@
+.routeSection {
+  padding: 56px 0 64px;
+}
+
+@media (min-width: 768px) {
+  .routeSection {
+    padding: 72px 0 80px;
+  }
+}
+
+.routeTitle {
+  margin: 0 0 32px;
+  font-size: var(--text-3xl);
+}
+
+.h2 {
+  margin: 0 0 20px;
+  font-size: var(--text-3xl);
+}
+
+.how,
+.planning {
+  display: grid;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (min-width: 860px) {
+  .how {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+  }
+  .planning {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+  }
+}
+
+/* A real sequence, so numbered. */
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  font-size: var(--text-lg);
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0 0 22px 52px;
+  line-height: 1.55;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--night);
+  color: var(--star);
+  font-weight: 800;
+  font-size: var(--text-base);
+}
+
+.photo {
+  width: 100%;
+  height: auto;
+  max-height: 560px;
+  object-fit: cover;
+  border-radius: var(--radius-photo);
+}
+
+.feesIntro {
+  margin: -8px 0 20px;
+  color: var(--slate);
+  font-size: var(--text-lg);
+}
+
+.bikeLink {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bikeLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.included {
+  margin: 0;
+  padding-left: 1.1em;
+  line-height: 1.6;
+}
+
+.included li + li {
+  margin-top: 6px;
+}

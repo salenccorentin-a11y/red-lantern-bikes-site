@@ -37,7 +37,9 @@ export default async function BlogPostPage(props: PageProps<"/blog/[blog]/[post]
     <main className={styles.page}>
       <article className={blogStyles.article}>
         <p>
-          <Link href="/blog">← All posts</Link>
+          <Link href="/blog" className={styles.back}>
+            All posts
+          </Link>
           {found.category && (
             <>
               {" · "}

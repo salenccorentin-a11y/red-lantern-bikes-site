@@ -1,14 +1,23 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { BikeCard } from "@/components/BikeCard";
 import cardStyles from "@/components/BikeCard.module.css";
 import { LocalBusinessData } from "@/components/LocalBusinessData";
+import { RiderWall } from "@/components/RiderWall";
+import { RouteLine } from "@/components/RouteLine";
+import ui from "@/components/ui.module.css";
 import { ADDRESS_LINE, BUSINESS, mapsLink } from "@/content/business";
+import { ONE_WAY_ROUTE } from "@/content/route";
 import { db } from "@/lib/db";
 import { getSettings } from "@/server/availability";
 import { listModels } from "@/server/fleet";
+import karstRoad from "../../../public/photos/karst-road.webp";
+import mountainSunset from "../../../public/photos/mountain-sunset.webp";
+import riverCrossing from "../../../public/photos/river-crossing.webp";
+import saigonOpera from "../../../public/photos/saigon-opera.webp";
 import styles from "./page.module.css";
 
 // Title kept from the old site, which ranks for it.
@@ -22,77 +31,140 @@ export const metadata: Metadata = {
 
 const FEATURED = ["wave-alpha-110", "honda-xr150", "honda-cb150x", "kawasaki-versys-x300"];
 
+const WAYS = [
+  {
+    href: "/bikes",
+    title: "Rent in Saigon",
+    text: "By the day, week or month. The longer you ride, the less each day costs.",
+    photo: saigonOpera,
+    alt: "A rider on a scooter in front of Saigon's Opera House",
+  },
+  {
+    href: "/one-way",
+    title: "One-way to Hanoi or Da Nang",
+    text: "Ride north at your own pace and leave the bike at the end. We bring it home.",
+    photo: riverCrossing,
+    alt: "A rider and bike crossing a river on a small boat in northern Vietnam",
+  },
+  {
+    href: "/tours",
+    title: "Tours",
+    text: "Guided or self-guided, from the Mekong Delta to the length of the country.",
+    photo: mountainSunset,
+    alt: "A rider on an adventure bike above a mountain valley at sunset",
+  },
+];
+
 export default function Home() {
   return (
     <main>
       <LocalBusinessData />
+
       <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <p className={styles.eyebrow}>District 1, Saigon</p>
-          <h1>Motorbike rental in Saigon, and one-way to Hanoi or Da Nang</h1>
+        <div className={styles.heroMedia}>
+          <Image
+            src={karstRoad}
+            alt="A Red Lantern bike on an empty road through the karst mountains"
+            fill
+            priority
+            placeholder="blur"
+            sizes="(max-width: 900px) 100vw, 55vw"
+            className={styles.heroPhoto}
+          />
+        </div>
+        <div className={styles.heroText}>
+          <h1 className={styles.heroTitle}>
+            Motorbike rental in Saigon, and one-way to Hanoi or Da Nang
+          </h1>
           <p className={styles.lead}>
-            Well-kept bikes, fair prices, and a team that answers WhatsApp wherever you are in
-            Vietnam. Book online in a few minutes and pick up at our shop in District 1.
+            Well-kept bikes, fair prices and a team that answers WhatsApp wherever you are in
+            Vietnam. Book online in a few minutes and pick up in District 1.
           </p>
-          <div className={styles.actions}>
-            <Link href="/book" className={styles.primary}>
+          <div className={ui.actions}>
+            <Link href="/book" className={ui.primary}>
               Book a bike
             </Link>
-            <Link href="/one-way" className={styles.secondary}>
-              One-way trips
+            <Link href="/one-way" className={ui.ghostDark}>
+              See one-way trips
             </Link>
           </div>
           <ul className={styles.trust}>
-            <li>{BUSINESS.googleRating}★ on Google</li>
+            <li>
+              <Star /> {BUSINESS.googleRating} on Google
+            </li>
             <li>Helmet and gear included</li>
-            <li>Roadside assistance anywhere in Vietnam</li>
+            <li>Help on the road, anywhere in Vietnam</li>
           </ul>
         </div>
       </section>
 
-      <div className={styles.page}>
-        <section className={styles.section}>
-          <h2>Three ways to ride</h2>
-          <div className={styles.ways}>
-            <Link href="/bikes" className={styles.way}>
-              <h3>Rent in Saigon</h3>
-              <p>
-                By the day, week or month. Weekly and monthly rates make longer trips much cheaper
-                per day.
-              </p>
-              <span>See the bikes →</span>
+      <section className={`${ui.sectionNight} ${styles.routeBand}`}>
+        <div className={ui.container}>
+          <h2 className={styles.routeTitle}>Ride the length of Vietnam, one way</h2>
+          <RouteLine stops={ONE_WAY_ROUTE} />
+          <p className={styles.routeMore}>
+            <Link href="/one-way" className={styles.routeLink}>
+              How one-way rentals work
             </Link>
-            <Link href="/one-way" className={styles.way}>
-              <h3>One-way to Hanoi or Da Nang</h3>
-              <p>
-                Pick up in Saigon, ride north at your own pace and leave the bike at the end. We
-                bring it home.
-              </p>
-              <span>How one-way works →</span>
-            </Link>
-            <Link href="/tours" className={styles.way}>
-              <h3>Tours</h3>
-              <p>
-                Guided or self-guided routes, from the Mekong Delta to the length of the country.
-              </p>
-              <span>See the tours →</span>
-            </Link>
-          </div>
-        </section>
+          </p>
+        </div>
+      </section>
 
-        <section className={styles.section}>
-          <h2>Popular bikes</h2>
-          <Suspense fallback={<p className={styles.muted}>Loading prices…</p>}>
+      <section className={ui.section}>
+        <div className={ui.container}>
+          <h2 className={ui.sectionTitle}>Three ways to ride</h2>
+          <div className={styles.ways}>
+            {WAYS.map((way) => (
+              <Link key={way.href} href={way.href} className={styles.way}>
+                <Image
+                  src={way.photo}
+                  alt={way.alt}
+                  fill
+                  placeholder="blur"
+                  sizes="(max-width: 760px) 100vw, 33vw"
+                  className={styles.wayPhoto}
+                />
+                <span className={styles.wayText}>
+                  <span className={styles.wayTitle}>{way.title}</span>
+                  <span>{way.text}</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={`${ui.section} ${ui.sectionMist}`}>
+        <div className={ui.container}>
+          <h2 className={ui.sectionTitle}>Popular bikes</h2>
+          <p className={ui.sectionIntro}>
+            From an easy semi-automatic for the city to an adventure bike for the whole country.
+          </p>
+          <Suspense fallback={<div className={styles.bikesPlaceholder} />}>
             <FeaturedBikes />
           </Suspense>
-          <p>
-            <Link href="/bikes">See all bikes →</Link>
+          <p className={styles.after}>
+            <Link href="/bikes" className={ui.ghostLight}>
+              See all bikes
+            </Link>
           </p>
-        </section>
+        </div>
+      </section>
 
-        <section className={`${styles.section} ${styles.split}`}>
+      <section className={`${ui.section} ${ui.sectionNight}`}>
+        <div className={ui.container}>
+          <h2 className={ui.sectionTitle}>Riders who set off from our shop</h2>
+          <p className={ui.sectionIntro}>
+            Rated {BUSINESS.googleRating} on Google by the travellers who rode with us.
+          </p>
+          <RiderWall />
+        </div>
+      </section>
+
+      <section className={ui.section}>
+        <div className={`${ui.container} ${styles.split}`}>
           <div>
-            <h2>Included with every bike</h2>
+            <h2 className={styles.splitTitle}>Included with every bike</h2>
             <ul className={styles.ticks}>
               {BUSINESS.included.map((item) => (
                 <li key={item}>{item}</li>
@@ -100,58 +172,70 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <h2>How it works</h2>
+            <h2 className={styles.splitTitle}>How booking works</h2>
             <ol className={styles.steps}>
               <li>
-                <b>Choose your dates and bike</b> on the booking page. You see the full price
-                straight away.
+                <b>Choose your dates and bike.</b> You see the full price straight away.
               </li>
               <li>
-                <b>Pay a small deposit online</b> to hold the bike. The rest is paid when you pick
-                it up.
+                <b>Pay a small deposit online</b> to hold the bike. The rest is paid at pick-up.
               </li>
               <li>
-                <b>Pick up at our shop</b> in District 1. Bring your motorbike licence or
+                <b>Pick up at our shop</b> in District 1 with your motorbike licence or
                 International Driving Permit.
               </li>
               <li>
-                <b>Ride.</b> Bring the bike back to us, or leave it in Hanoi or Da Nang on a one-way
-                trip.
+                <b>Ride.</b> Bring the bike back to us, or leave it in Hanoi or Da Nang.
               </li>
             </ol>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className={`${styles.section} ${styles.people}`}>
-          <h2>Run by riders</h2>
-          <p>
-            {BUSINESS.founders.map((f) => f.name).join(" and ")} started Red Lantern to share the
-            roads they love. {BUSINESS.founders[0].bio}
-          </p>
-          <p>
-            <Link href="/about">About us →</Link>
-          </p>
-        </section>
-
-        <section className={`${styles.section} ${styles.visit}`}>
-          <h2>Visit the shop</h2>
-          <p>
-            {ADDRESS_LINE}
-            <br />
-            {BUSINESS.hours}
-          </p>
-          <p>
-            <a href={mapsLink()} target="_blank" rel="noopener">
-              Open in Google Maps
-            </a>{" "}
-            · <Link href="/contact">Contact us</Link>
-          </p>
-          <Link href="/book" className={styles.primary}>
-            Book a bike
-          </Link>
-        </section>
-      </div>
+      <section className={`${ui.section} ${ui.sectionMist}`}>
+        <div className={`${ui.container} ${styles.visit}`}>
+          <div>
+            <h2 className={styles.splitTitle}>Run by riders, in District 1</h2>
+            <p>
+              {BUSINESS.founders.map((f) => f.name).join(" and ")} started Red Lantern to share the
+              roads they love. {BUSINESS.founders[0].bio}
+            </p>
+            <p>
+              <Link href="/about" className={ui.link}>
+                Meet the team
+              </Link>
+            </p>
+          </div>
+          <div className={styles.shopCard}>
+            <h3>Visit the shop</h3>
+            <p>
+              {ADDRESS_LINE}
+              <br />
+              {BUSINESS.hours}
+            </p>
+            <div className={ui.actions}>
+              <Link href="/book" className={ui.primary}>
+                Book a bike
+              </Link>
+              <a href={mapsLink()} target="_blank" rel="noopener" className={ui.ghostLight}>
+                Open in Google Maps
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+  );
+}
+
+function Star() {
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" className={styles.star}>
+      <path
+        fill="currentColor"
+        d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"
+      />
+    </svg>
   );
 }
 

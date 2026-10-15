@@ -1,105 +1,127 @@
 /* Home page. */
 
+/* ─── Hero: the photo shown in full, the headline beside it ──────────── */
+
 .hero {
-  background: var(--ink);
-  color: var(--paper);
+  display: grid;
+  background: var(--night);
+  color: var(--white);
 }
 
-.heroInner {
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 48px 16px 40px;
+.heroMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--night-raised);
 }
 
-.eyebrow {
-  margin: 0 0 8px;
-  color: var(--amber);
-  font-family: var(--font-display), sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 14px;
+.heroPhoto {
+  object-fit: cover;
+  object-position: 45% 70%;
 }
 
-.hero h1 {
+.heroText {
+  padding: 32px var(--gutter) 48px;
+}
+
+/* Wide screens: text on the left in the page column, photo filling the right. */
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    min-height: min(82svh, 720px);
+  }
+
+  .heroMedia {
+    order: 2;
+    aspect-ratio: auto;
+  }
+
+  /* A soft edge where the photo meets the night panel. */
+  .heroMedia::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 18%;
+    background: linear-gradient(to right, var(--night), rgb(15 27 45 / 0));
+  }
+
+  .heroText {
+    align-self: center;
+    padding: 64px 48px 64px max(var(--gutter), calc((100vw - var(--content)) / 2));
+  }
+}
+
+.heroTitle {
   margin: 0;
-  max-width: 720px;
-  font-size: clamp(30px, 6vw, 48px);
-  line-height: 1.1;
+  max-width: 16ch;
+  font-size: var(--text-hero);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
 }
 
 .lead {
-  max-width: 600px;
-  margin: 16px 0 24px;
-  font-size: 17px;
-  line-height: 1.5;
-  color: #d8cdbf;
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.primary,
-.secondary {
-  display: inline-block;
-  padding: 13px 20px;
-  border-radius: 4px;
-  font-family: var(--font-display), sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.primary {
-  background: var(--lantern);
-  color: #fff;
-}
-
-.secondary {
-  border: 1.5px solid #6e625a;
-  color: var(--paper);
+  margin: 18px 0 28px;
+  max-width: 46ch;
+  font-size: var(--text-lg);
+  color: #dbe2ee;
 }
 
 .trust {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 20px;
+  gap: 8px 24px;
   margin: 28px 0 0;
   padding: 0;
   list-style: none;
-  font-size: 14px;
-  color: #a99c90;
+  font-size: 0.9375rem;
+  color: #dbe2ee;
 }
 
-.trust li::before {
-  content: "✓ ";
-  color: var(--amber);
+.trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.page {
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 0 16px;
+.star {
+  color: var(--star);
 }
 
-.section {
-  margin: 44px 0;
+/* ─── Route band: the signature ──────────────────────────────────────── */
+
+.routeBand {
+  padding: 56px 0;
 }
 
-.section h2 {
-  font-size: 26px;
-  margin: 0 0 16px;
+@media (min-width: 768px) {
+  .routeBand {
+    padding: 72px 0 64px;
+  }
 }
 
-.muted {
-  color: var(--muted);
+.routeTitle {
+  margin: 0 0 36px;
+  font-size: var(--text-3xl);
+  max-width: 22ch;
 }
+
+.routeMore {
+  margin: 36px 0 0;
+}
+
+.routeLink {
+  color: var(--white);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--lantern-red);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+/* ─── Three ways to ride: photo tiles ────────────────────────────────── */
 
 .ways {
   display: grid;
-  gap: 12px;
+  gap: 16px;
 }
 
 @media (min-width: 760px) {
@@ -109,87 +131,194 @@
 }
 
 .way {
+  position: relative;
+  isolation: isolate;
   display: flex;
-  flex-direction: column;
-  padding: 20px;
-  border-radius: 6px;
-  background: #fff;
-  border: 1.5px solid var(--line);
+  align-items: flex-end;
+  min-height: 300px;
+  border-radius: var(--radius-photo);
+  overflow: hidden;
+  color: var(--white);
   text-decoration: none;
 }
 
-.way:hover {
-  border-color: var(--lantern);
+@media (min-width: 760px) {
+  .way {
+    min-height: 420px;
+  }
 }
 
-.way h3 {
-  margin: 0 0 8px;
-  font-size: 20px;
+.wayPhoto {
+  z-index: -2;
+  object-fit: cover;
+  transition: transform 400ms ease;
 }
 
-.way p {
-  margin: 0 0 12px;
-  flex: 1;
-  color: var(--muted);
+.way:hover .wayPhoto {
+  transform: scale(1.03);
+}
+
+.way::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to top,
+    rgb(15 27 45 / 0.92) 0%,
+    rgb(15 27 45 / 0.35) 55%,
+    rgb(15 27 45 / 0) 80%
+  );
+}
+
+.wayText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px;
+  color: #dbe2ee;
   line-height: 1.5;
 }
 
-.way span {
-  color: var(--lantern);
-  font-weight: 600;
+.wayTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.01em;
 }
+
+/* ─── Bikes ──────────────────────────────────────────────────────────── */
+
+.bikesPlaceholder {
+  min-height: 420px;
+}
+
+.after {
+  margin: 32px 0 0;
+}
+
+/* ─── Included and how booking works ─────────────────────────────────── */
 
 .split {
   display: grid;
-  gap: 32px;
+  gap: 48px;
 }
 
-@media (min-width: 760px) {
+@media (min-width: 860px) {
   .split {
     grid-template-columns: 1fr 1fr;
+    gap: 64px;
   }
+}
+
+.splitTitle {
+  margin: 0 0 20px;
+  font-size: var(--text-3xl);
 }
 
 .ticks {
   margin: 0;
   padding: 0;
   list-style: none;
-  line-height: 1.5;
+  font-size: var(--text-lg);
 }
 
 .ticks li {
-  padding: 8px 0 8px 28px;
-  border-bottom: 1px solid var(--line);
   position: relative;
+  padding: 12px 0 12px 36px;
+  border-bottom: 1px solid var(--rule);
 }
 
 .ticks li::before {
-  content: "✓";
+  content: "";
   position: absolute;
-  left: 4px;
-  color: var(--ok);
-  font-weight: 700;
+  left: 2px;
+  top: 17px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / 12px no-repeat,
+    var(--lantern-red);
 }
 
+/* A real sequence, so numbered. */
 .steps {
   margin: 0;
-  padding-left: 22px;
-  line-height: 1.55;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  font-size: var(--text-lg);
 }
 
 .steps li {
-  margin-bottom: 10px;
+  counter-increment: step;
+  position: relative;
+  padding: 0 0 22px 52px;
+  line-height: 1.55;
 }
 
-.people p,
-.visit p {
-  max-width: 640px;
-  line-height: 1.6;
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--night);
+  color: var(--star);
+  font-weight: 800;
+  font-size: var(--text-base);
 }
+
+.steps li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 36px;
+  bottom: 4px;
+  width: 2px;
+  background: var(--rule);
+}
+
+/* ─── The team and the shop ──────────────────────────────────────────── */
 
 .visit {
-  padding: 24px;
-  border-radius: 6px;
-  background: var(--paper-light);
-  border: 1.5px solid var(--line);
+  display: grid;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (min-width: 860px) {
+  .visit {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 64px;
+  }
+}
+
+.visit p {
+  max-width: 60ch;
+  font-size: var(--text-lg);
+}
+
+.shopCard {
+  padding: 28px;
+  border-radius: var(--radius-card);
+  background: var(--white);
+  border: 1px solid var(--rule);
+}
+
+.shopCard h3 {
+  margin: 0 0 8px;
+  font-size: var(--text-xl);
+}
+
+.shopCard p {
+  margin: 0 0 20px;
+  color: var(--slate);
 }

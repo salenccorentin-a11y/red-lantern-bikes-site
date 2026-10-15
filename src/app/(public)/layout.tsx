@@ -6,7 +6,9 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
   return (
     <>
       <SiteHeader />
-      <div className={styles.content}>{children}</div>
+      <div id="main" className={styles.content}>
+        {children}
+      </div>
       <SiteFooter />
     </>
   );

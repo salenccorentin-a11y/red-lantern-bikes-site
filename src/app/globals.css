@@ -1,13 +1,53 @@
-/* Colours and type from prototype/booking-prototype.jsx. */
+/* Design tokens: "Lantern Night" (docs/design.md). */
 :root {
-  --paper: #f3ede2;
-  --paper-light: #fbf8f3;
-  --ink: #1b1512;
-  --muted: #6e625a;
-  --line: #ddd3c4;
-  --lantern: #b3261e;
-  --amber: #e8a33d;
-  --ok: #3f6b44;
+  /* Palette */
+  --night: #0f1b2d;
+  --night-raised: #1a2c4a;
+  --night-line: #2c3f61;
+  --lantern-red: #d62a1e;
+  --lantern-red-deep: #ad1f15;
+  --star: #ffcc00;
+  --white: #ffffff;
+  --mist: #eef2f7;
+  --slate: #4a5872;
+  --fog: #aab6cb;
+  --rule: #d8dfea;
+  --success: #2e7d4f;
+
+  /* Older names still used by the booking and staff pages, mapped to the palette. */
+  --paper: var(--mist);
+  --paper-light: var(--white);
+  --ink: var(--night);
+  --muted: var(--slate);
+  --line: var(--rule);
+  --lantern: var(--lantern-red);
+  --amber: var(--star);
+  --ok: var(--success);
+
+  /* Type */
+  --font-body: var(--font-sans), system-ui, sans-serif;
+  --font-display: var(--font-sans), system-ui, sans-serif;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: clamp(2.25rem, 6vw, 3.25rem);
+  --text-hero: clamp(2.375rem, 7vw, 4rem);
+
+  /* Shape and space */
+  --radius-photo: 14px;
+  --radius-card: 12px;
+  --radius-input: 8px;
+  --gutter: 16px;
+  --content: 1120px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+  }
 }
 
 *,
@@ -22,20 +62,63 @@ body {
   padding: 0;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  font-family: var(--font-body), system-ui, sans-serif;
-  background: var(--paper);
-  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  background: var(--white);
+  color: var(--night);
   -webkit-font-smoothing: antialiased;
 }
 
 h1,
 h2,
-h3 {
-  font-family: var(--font-display), sans-serif;
-  font-weight: 600;
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 a {
   color: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Keyboard focus is always visible, in the action colour. */
+:focus-visible {
+  outline: 3px solid var(--lantern-red);
+  outline-offset: 2px;
+}
+
+button,
+a,
+summary,
+label:has(input[type="radio"]),
+label:has(input[type="checkbox"]) {
+  touch-action: manipulation;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
