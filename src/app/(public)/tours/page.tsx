@@ -4,6 +4,7 @@ import { TOURS } from "@/content/tours";
 import styles from "../content.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/tours" },
   title: "Motorbike tours in Vietnam | Red Lantern Bikes",
   description:
     "Guided and self-guided motorbike tours from Saigon: The Coco Loop, the Mekong Delta, a Saigon loop and the full ride to Hanoi. Small groups of 1 to 6 riders.",

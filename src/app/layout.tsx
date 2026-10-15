@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Oswald } from "next/font/google";
+import { siteUrl } from "@/seo/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,10 +14,13 @@ const oswald = Oswald({
   weight: ["500", "600"],
 });
 
-// Placeholder until the old site's titles and descriptions are migrated (step 10).
+// Defaults for every page; pages set their own title, description and
+// canonical address. metadataBase makes those addresses absolute.
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl()),
   title: "Red Lantern Bikes",
   description: "Motorbike rentals and one-way trips from District 1, Saigon.",
+  openGraph: { siteName: "Red Lantern Bikes", locale: "en_US", type: "website" },
 };
 
 export const viewport: Viewport = {

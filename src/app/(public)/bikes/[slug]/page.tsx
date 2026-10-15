@@ -11,38 +11,43 @@ import { getSettings } from "@/server/availability";
 import { listModels } from "@/server/fleet";
 import styles from "../../content.module.css";
 
+// Bike pages are built ahead of time from src/content/bikes.ts, so their title
+// and description are in the page head straight away (search engines need
+// that), and unknown bikes are a real 404. Prices load live inside the page.
+export const instant = false;
+
+export function generateStaticParams() {
+  return Object.keys(BIKE_CONTENT).map((slug) => ({ slug }));
+}
+
 export async function generateMetadata(props: PageProps<"/bikes/[slug]">): Promise<Metadata> {
   const { slug } = await props.params;
-  const model = await db.bikeModel.findUnique({ where: { slug } });
-  // Checked here, before the page starts streaming, so unknown bikes get a real 404.
-  if (!model || !model.active) notFound();
   const content = BIKE_CONTENT[slug];
-  if (!content) return { title: `${model.name} Rental Saigon | Red Lantern Bikes` };
-  // Same wording as the old product pages, with today's price.
-  const { usdToVndRate } = await getSettings(db);
-  const price = "$" + Math.round(model.dailyRate / usdToVndRate);
-  // A function replacement, so the "$" isn't read as a replace() pattern.
+  if (!content) return {};
+  // Wording from the old site's product pages.
   return {
-    title: { absolute: content.seoTitle.replace("{price}", () => price) },
-    description: content.seoDescription.replace("{price}", () => price),
+    title: { absolute: content.seoTitle },
+    description: content.seoDescription,
+    alternates: { canonical: `/bikes/${slug}` },
   };
 }
 
-export default function BikePage(props: PageProps<"/bikes/[slug]">) {
+export default async function BikePage(props: PageProps<"/bikes/[slug]">) {
+  const { slug } = await props.params;
+  if (!BIKE_CONTENT[slug]) notFound();
   return (
     <main className={styles.page}>
       <p>
         <Link href="/bikes">← All bikes</Link>
       </p>
       <Suspense fallback={<p className={styles.muted}>Loading…</p>}>
-        <Bike params={props.params} />
+        <Bike slug={slug} />
       </Suspense>
     </main>
   );
 }
 
-async function Bike({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+async function Bike({ slug }: { slug: string }) {
   await connection();
   const [models, settings] = await Promise.all([listModels(db), getSettings(db)]);
   const model = models.find((m) => m.slug === slug);

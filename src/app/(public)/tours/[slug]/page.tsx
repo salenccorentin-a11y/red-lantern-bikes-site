@@ -20,6 +20,7 @@ export async function generateMetadata(props: PageProps<"/tours/[slug]">): Promi
   return {
     title: `${tour.name} motorbike tour | Red Lantern Bikes`,
     description: tour.summary,
+    alternates: { canonical: `/tours/${tour.slug}` },
   };
 }
 

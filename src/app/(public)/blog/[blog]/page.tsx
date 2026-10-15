@@ -17,7 +17,9 @@ export async function generateMetadata(props: PageProps<"/blog/[blog]">): Promis
   const { blog } = await props.params;
   const category = CATEGORIES.find((c) => c.slug === blog);
   // "News | Red Lantern Bikes", as on the old site.
-  return category ? { title: `${category.name} | Red Lantern Bikes` } : {};
+  return category
+    ? { title: `${category.name} | Red Lantern Bikes`, alternates: { canonical: `/blog/${blog}` } }
+    : {};
 }
 
 export default async function BlogCategory(props: PageProps<"/blog/[blog]">) {

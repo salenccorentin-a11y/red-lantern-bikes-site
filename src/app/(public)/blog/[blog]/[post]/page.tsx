@@ -23,6 +23,7 @@ export async function generateMetadata(props: PageProps<"/blog/[blog]/[post]">):
     // Kept from the old site.
     title: { absolute: fullTitle(found.metaTitle) },
     description: found.metaDescription ?? undefined,
+    alternates: { canonical: found.path },
     openGraph: found.cover ? { images: [found.cover] } : undefined,
   };
 }

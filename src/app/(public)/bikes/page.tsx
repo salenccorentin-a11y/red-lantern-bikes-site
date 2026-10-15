@@ -11,6 +11,7 @@ import styles from "../content.module.css";
 
 // Title kept from the old /shop page, which now redirects here.
 export const metadata: Metadata = {
+  alternates: { canonical: "/bikes" },
   title: "Rent a Motorbike in Saigon | Full Fleet | Red Lantern Bikes",
   description:
     "Twelve models to rent in Saigon, from the Honda Wave to the Kawasaki Versys X300. Daily, weekly and monthly prices, one-way to Hanoi or Da Nang.",

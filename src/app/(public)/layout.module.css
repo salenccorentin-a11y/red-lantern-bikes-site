@@ -1,0 +1,5 @@
+/* At least a screen tall, so the footer starts below the first screen and
+   doesn't jump while live prices and availability stream in. */
+.content {
+  min-height: 100vh;
+}

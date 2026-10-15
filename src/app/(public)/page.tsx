@@ -4,6 +4,7 @@ import { connection } from "next/server";
 import { Suspense } from "react";
 import { BikeCard } from "@/components/BikeCard";
 import cardStyles from "@/components/BikeCard.module.css";
+import { LocalBusinessData } from "@/components/LocalBusinessData";
 import { ADDRESS_LINE, BUSINESS, mapsLink } from "@/content/business";
 import { db } from "@/lib/db";
 import { getSettings } from "@/server/availability";
@@ -12,6 +13,7 @@ import styles from "./page.module.css";
 
 // Title kept from the old site, which ranks for it.
 export const metadata: Metadata = {
+  alternates: { canonical: "/" },
   title: "Motorbike Rental Saigon | Red Lantern Bikes – From $9/Day",
   // Kept from the old site, except "Book on WhatsApp" (booking is online now).
   description:
@@ -23,6 +25,7 @@ const FEATURED = ["wave-alpha-110", "honda-xr150", "honda-cb150x", "kawasaki-ver
 export default function Home() {
   return (
     <main>
+      <LocalBusinessData />
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <p className={styles.eyebrow}>District 1, Saigon</p>

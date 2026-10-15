@@ -4,6 +4,7 @@ import { FAQ } from "@/content/faq";
 import styles from "../content.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/faq" },
   title: "FAQ: licence, deposit, one-way rentals | Red Lantern Bikes",
   description:
     "Which licence you need to ride in Vietnam, how the deposit works, what's included, one-way rentals to Hanoi and Da Nang, breakdowns and cancellations.",

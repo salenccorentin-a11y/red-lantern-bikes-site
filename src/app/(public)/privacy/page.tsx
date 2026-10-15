@@ -4,6 +4,7 @@ import { ADDRESS_LINE, BUSINESS } from "@/content/business";
 import styles from "../content.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy" },
   title: "Privacy | Red Lantern Bikes",
   description:
     "What personal data Red Lantern Bikes collects, why, and how to contact us about it.",

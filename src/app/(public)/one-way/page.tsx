@@ -11,6 +11,7 @@ import { listModels } from "@/server/fleet";
 import styles from "../content.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/one-way" },
   title: "One-way motorbike rental Saigon to Hanoi or Da Nang | Red Lantern Bikes",
   description:
     "Pick up a motorbike in Saigon and leave it in Hanoi or Da Nang. Fixed one-way fee per bike, roadside assistance the whole way, and we bring the bike home.",

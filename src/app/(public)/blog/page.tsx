@@ -5,6 +5,7 @@ import styles from "../content.module.css";
 
 // Title kept from the old site.
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog" },
   title: "Vietnam Motorbike Travel Guides & Tips | Red Lantern Bikes Blog",
   description:
     "Route guides, bike advice and practical tips for riding a motorbike in Vietnam, from the Red Lantern Bikes team in Saigon.",

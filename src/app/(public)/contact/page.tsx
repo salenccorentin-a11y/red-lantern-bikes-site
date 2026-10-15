@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { EnquiryForm } from "@/components/EnquiryForm";
+import { LocalBusinessData } from "@/components/LocalBusinessData";
 import { ADDRESS_LINE, BUSINESS, mapsLink, whatsappLink } from "@/content/business";
 import styles from "../content.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact | Red Lantern Bikes",
   description: `Find Red Lantern Bikes at ${ADDRESS_LINE}. Send us a message about rentals, one-way trips or tours.`,
 };
@@ -13,6 +15,7 @@ export default function ContactPage(props: PageProps<"/contact">) {
   const whatsapp = whatsappLink("Hi Red Lantern Bikes!");
   return (
     <main className={styles.page}>
+      <LocalBusinessData />
       <h1>Contact us</h1>
       <div className={styles.twoCol}>
         <div>

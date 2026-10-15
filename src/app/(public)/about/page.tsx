@@ -5,6 +5,7 @@ import styles from "../content.module.css";
 
 // Title kept from the old site.
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About Us | Red Lantern Bikes",
   description:
     "Red Lantern Bikes is run by riders Phi and Coco in District 1, Saigon: well-kept bikes, local knowledge and help on the road wherever you are in Vietnam.",

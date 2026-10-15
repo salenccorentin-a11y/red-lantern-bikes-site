@@ -8,6 +8,7 @@ import { BookingForm } from "./BookingForm";
 import styles from "./book.module.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/book" },
   title: "Book a motorbike | Red Lantern Bikes",
   description:
     "Rent a motorbike in Saigon or ride one-way to Hanoi or Da Nang. Live availability, clear prices, and a small online deposit.",
