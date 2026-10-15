@@ -55,3 +55,10 @@
   color: #a99c90;
   font-size: 13px;
 }
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 10px !important;
+}

@@ -1,0 +1,3620 @@
+{
+  "crawledAt": "2026-10-15T03:26:20.559Z",
+  "origin": "https://www.redlanternbikes.com",
+  "pages": [
+    {
+      "url": "https://www.redlanternbikes.com/",
+      "status": 200,
+      "title": "Motorbike Rental Saigon | Red Lantern Bikes – From $9/Day",
+      "description": "Rent a motorbike in Ho Chi Minh City from $9/day. Honda, Kawasaki & Suzuki fleet. One-way rental to Hanoi & Da Nang. Rated 4.9★ by 245+ riders. Book on WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/",
+      "h1": "Travel in Vietnam like nobody else",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/about-us",
+      "status": 200,
+      "title": "About Us | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/about-us",
+      "h1": "About us",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/appointment",
+      "status": 200,
+      "title": "Appointment Types | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/appointment",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/blog",
+      "status": 200,
+      "title": "Vietnam Motorbike Travel Guides & Tips | Red Lantern Bikes Blog",
+      "canonical": "https://www.redlanternbikes.com/blog",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/blog/news-2",
+      "status": 200,
+      "title": "News | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/blog/news-2",
+      "h1": "News",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "status": 200,
+      "title": "Best Motorbikes to Rent in Vietnam 2026 – Beginner Guide | Red Lantern",
+      "description": "Not sure which motorbike to rent in Vietnam? This 2026 guide compares the best options for beginners and experienced riders — by riding style, budget, and route.",
+      "canonical": "https://www.redlanternbikes.com/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "h1": "Best Motorbikes to Rent in Vietnam (2026)",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "status": 200,
+      "title": "Saigon to Hanoi by Motorbike 2026 – Full Route Guide | Red Lantern Bik",
+      "description": "The complete Saigon to Hanoi motorbike route: 2,500–3,500km, 21–30 days, coast, mountains, national parks. Every stop explained with distances, tips, and which bike to rent.",
+      "canonical": "https://www.redlanternbikes.com/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "h1": "Ho Chi Minh City to Hanoi by Motorbike: The Complete Route Guide (2026)",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/blog/our-blog-1",
+      "status": 200,
+      "title": "Our blog | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/blog/our-blog-1",
+      "h1": "Our blog",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/blog/our-blog-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "status": 200,
+      "title": "Motorbike Rental Saigon 2026 – Complete Guide | Red Lantern Bikes",
+      "description": "Everything you need to know about renting a motorbike in Ho Chi Minh City: prices, which bike to choose, license rules, and where to pick up. Updated for 2026.",
+      "canonical": "https://www.redlanternbikes.com/blog/our-blog-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "h1": "Motorbike Rental in Saigon: Everything You Need to Know",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/blog/success-stories-3",
+      "status": 200,
+      "title": "Success Stories | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/blog/success-stories-3",
+      "h1": "Success Stories",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/calendar",
+      "status": 301,
+      "location": "/appointment"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/contactus",
+      "status": 200,
+      "title": "Contact Us | Red Lantern Bikes",
+      "description": "This is the contact us page of the website",
+      "canonical": "https://www.redlanternbikes.com/contactus",
+      "h1": "Contact us",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr",
+      "status": 200,
+      "title": "Motorbike Rental Saigon | Red Lantern Bikes – From $9/Day",
+      "description": "Rent a motorbike in Ho Chi Minh City from $9/day. Honda, Kawasaki & Suzuki fleet. One-way rental to Hanoi & Da Nang. Rated 4.9★ by 245+ riders. Book on WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/fr",
+      "h1": "Travel in Vietnam like nobody else",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/about-us",
+      "status": 200,
+      "title": "About Us | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/about-us",
+      "h1": "About us",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/appointment",
+      "status": 200,
+      "title": "Appointment Types | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/appointment",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/blog",
+      "status": 200,
+      "title": "Vietnam Motorbike Travel Guides & Tips | Red Lantern Bikes Blog",
+      "canonical": "https://www.redlanternbikes.com/fr/blog",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/blog/news-2",
+      "status": 200,
+      "title": "News | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/blog/news-2",
+      "h1": "News",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "status": 200,
+      "title": "Best Motorbikes to Rent in Vietnam 2026 – Beginner Guide | Red Lantern",
+      "description": "Not sure which motorbike to rent in Vietnam? This 2026 guide compares the best options for beginners and experienced riders — by riding style, budget, and route.",
+      "canonical": "https://www.redlanternbikes.com/fr/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "h1": "Best Motorbikes to Rent in Vietnam (2026)",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "status": 200,
+      "title": "Saigon to Hanoi by Motorbike 2026 – Full Route Guide | Red Lantern Bik",
+      "description": "The complete Saigon to Hanoi motorbike route: 2,500–3,500km, 21–30 days, coast, mountains, national parks. Every stop explained with distances, tips, and which bike to rent.",
+      "canonical": "https://www.redlanternbikes.com/fr/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "h1": "Ho Chi Minh City to Hanoi by Motorbike: The Complete Route Guide (2026)",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/blog/success-stories-3",
+      "status": 200,
+      "title": "Success Stories | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/blog/success-stories-3",
+      "h1": "Success Stories",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/blog/voyager-1",
+      "status": 200,
+      "title": "Voyager | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/blog/voyager-1",
+      "h1": "Voyager",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/blog/voyager-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "status": 200,
+      "title": "Motorbike Rental Saigon 2026 – Complete Guide | Red Lantern Bikes",
+      "description": "Everything you need to know about renting a motorbike in Ho Chi Minh City: prices, which bike to choose, license rules, and where to pick up. Updated for 2026.",
+      "canonical": "https://www.redlanternbikes.com/fr/blog/voyager-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "h1": "Motorbike Rental in Saigon: Everything You Need to Know",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/contactus",
+      "status": 200,
+      "title": "Contact Us | Red Lantern Bikes",
+      "description": "Voici la page contact du site web",
+      "canonical": "https://www.redlanternbikes.com/fr/contactus",
+      "h1": "Contactez-nous",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/helpdesk",
+      "status": 302,
+      "location": "/helpdesk/service-clientele-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/helpdesk/service-clientele-1",
+      "status": 200,
+      "title": "Soumettre un ticket | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/helpdesk/service-clientele-1",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop",
+      "status": 200,
+      "title": "Rent a Motorbike in Saigon | Full Fleet | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop",
+      "h1": "Tous les produits",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/adventure-3/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/adventure-3/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/cart",
+      "status": 200,
+      "title": "Shopping Cart | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/cart",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/1",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/category/1",
+      "h1": "Erreur 404",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/3",
+      "status": 301,
+      "location": "/fr/shop/category/adventure-3"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/4",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/category/4",
+      "h1": "Erreur 404",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/6",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/category/6",
+      "h1": "Erreur 404",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/7",
+      "status": 301,
+      "location": "/fr/shop/category/dirt-bikes-7"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/8",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/category/8",
+      "h1": "Erreur 404",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/adventure-3",
+      "status": 200,
+      "title": "Adventure | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/category/adventure-3",
+      "h1": "Adventure",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/dirt-bikes-7",
+      "status": 200,
+      "title": "Dirt Bikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/category/dirt-bikes-7",
+      "h1": "Dirt Bikes",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/motorcycle-12",
+      "status": 200,
+      "title": "Motorcycle | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/category/motorcycle-12",
+      "h1": "Motorcycle",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/naked-bike-11",
+      "status": 200,
+      "title": "Naked Bike | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/category/naked-bike-11",
+      "h1": "Naked Bike",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/scooters-5",
+      "status": 200,
+      "title": "Scooters | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/category/scooters-5",
+      "h1": "Scooters",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/category/sportbikes-2",
+      "status": 200,
+      "title": "Sportbikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/category/sportbikes-2",
+      "h1": "Sportbikes",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/change_pricelist/1",
+      "status": 301,
+      "location": "/fr/shop/change_pricelist/default-usd-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/change_pricelist/default-usd-1",
+      "status": 303,
+      "location": "/shop"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/dirt-bikes-7/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/motorcycle-12/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/motorcycle-12/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/motorcycle-12/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/motorcycle-12/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/motorcycle-12/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/motorcycle-12/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/motorcycle-12/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/motorcycle-12/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/naked-bike-11/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/naked-bike-11/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/scooters-5/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/scooters-5/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/sportbikes-2/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/wishlist",
+      "status": 200,
+      "title": "Liste de souhaits | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/wishlist",
+      "h1": "Ma liste de souhaits",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/shop/yamaha-wr155r-40",
+      "status": 200,
+      "title": "Yamaha WR155R | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/shop/yamaha-wr155r-40",
+      "h1": "Yamaha WR155R",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/terms",
+      "status": 200,
+      "title": "Terms & Conditions | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/terms",
+      "h1": "CONDITIONS GENERALES DE VENTE",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/website/social/facebook",
+      "status": 303,
+      "location": "https://www.facebook.com/profile.php?id=61569697091099"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/website/social/instagram",
+      "status": 303,
+      "location": "https://www.instagram.com/redlanternbikes/"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/website/social/linkedin",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/website/social/linkedin",
+      "h1": "Erreur 404",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/website/social/tiktok",
+      "status": 303,
+      "location": "https://www.tiktok.com/@redlanternbikes?lang=en"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/website/social/twitter",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/fr/website/social/twitter",
+      "h1": "Erreur 404",
+      "lang": "fr-FR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/fr/website/social/youtube",
+      "status": 303,
+      "location": "https://www.youtube.com/@redlanternbikes"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/helpdesk",
+      "status": 302,
+      "location": "/helpdesk/customer-care-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/helpdesk/%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%83%BC%E3%82%B1%E3%82%A2-1",
+      "status": 301,
+      "location": "/helpdesk/customer-care-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/helpdesk/%E5%AE%A2%E6%88%B7%E5%85%B3%E6%80%80-1",
+      "status": 301,
+      "location": "/helpdesk/customer-care-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/helpdesk/%EA%B3%A0%EA%B0%9D-%EA%B4%80%EB%A6%AC-1",
+      "status": 301,
+      "location": "/helpdesk/customer-care-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/helpdesk/cham-soc-khach-hang-1",
+      "status": 301,
+      "location": "/helpdesk/customer-care-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/helpdesk/customer-care-1",
+      "status": 200,
+      "title": "Submit a Ticket | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/helpdesk/customer-care-1",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/helpdesk/customer-care-1/knowledgebase",
+      "status": 302,
+      "location": "/helpdesk/customer-care-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/helpdesk/klantenservice-1",
+      "status": 301,
+      "location": "/helpdesk/customer-care-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/helpdesk/service-clientele-1",
+      "status": 301,
+      "location": "/helpdesk/customer-care-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja",
+      "status": 200,
+      "title": "Motorbike Rental Saigon | Red Lantern Bikes – From $9/Day",
+      "description": "Rent a motorbike in Ho Chi Minh City from $9/day. Honda, Kawasaki & Suzuki fleet. One-way rental to Hanoi & Da Nang. Rated 4.9★ by 245+ riders. Book on WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ja",
+      "h1": "Travel in Vietnam like nobody else",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/about-us",
+      "status": 200,
+      "title": "About Us | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/about-us",
+      "h1": "About us",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/appointment",
+      "status": 200,
+      "title": "Appointment Types | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/appointment",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/blog",
+      "status": 200,
+      "title": "Vietnam Motorbike Travel Guides & Tips | Red Lantern Bikes Blog",
+      "canonical": "https://www.redlanternbikes.com/ja/blog",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/blog/%E6%97%85%E8%A1%8C-1",
+      "status": 200,
+      "title": "旅行 | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/blog/旅行-1",
+      "h1": "旅行",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/blog/%E6%97%85%E8%A1%8C-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "status": 200,
+      "title": "Motorbike Rental Saigon 2026 – Complete Guide | Red Lantern Bikes",
+      "description": "Everything you need to know about renting a motorbike in Ho Chi Minh City: prices, which bike to choose, license rules, and where to pick up. Updated for 2026.",
+      "canonical": "https://www.redlanternbikes.com/ja/blog/旅行-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "h1": "Motorbike Rental in Saigon: Everything You Need to Know",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/blog/news-2",
+      "status": 200,
+      "title": "News | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/blog/news-2",
+      "h1": "News",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "status": 200,
+      "title": "Best Motorbikes to Rent in Vietnam 2026 – Beginner Guide | Red Lantern",
+      "description": "Not sure which motorbike to rent in Vietnam? This 2026 guide compares the best options for beginners and experienced riders — by riding style, budget, and route.",
+      "canonical": "https://www.redlanternbikes.com/ja/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "h1": "Best Motorbikes to Rent in Vietnam (2026)",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "status": 200,
+      "title": "Saigon to Hanoi by Motorbike 2026 – Full Route Guide | Red Lantern Bik",
+      "description": "The complete Saigon to Hanoi motorbike route: 2,500–3,500km, 21–30 days, coast, mountains, national parks. Every stop explained with distances, tips, and which bike to rent.",
+      "canonical": "https://www.redlanternbikes.com/ja/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "h1": "Ho Chi Minh City to Hanoi by Motorbike: The Complete Route Guide (2026)",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/blog/success-stories-3",
+      "status": 200,
+      "title": "Success Stories | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/blog/success-stories-3",
+      "h1": "Success Stories",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/contactus",
+      "status": 200,
+      "title": "Contact Us | Red Lantern Bikes",
+      "description": "これはウェブサイトのお問い合わせページです。",
+      "canonical": "https://www.redlanternbikes.com/ja/contactus",
+      "h1": "お問い合わせ",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/helpdesk",
+      "status": 302,
+      "location": "/helpdesk/%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%83%BC%E3%82%B1%E3%82%A2-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/helpdesk/%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%83%BC%E3%82%B1%E3%82%A2-1",
+      "status": 200,
+      "title": "チケット提出 | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/helpdesk/カスタマーケア-1",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop",
+      "status": 200,
+      "title": "Rent a Motorbike in Saigon | Full Fleet | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop",
+      "h1": "すべての商品",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/adventure-3/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/adventure-3/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/cart",
+      "status": 200,
+      "title": "Shopping Cart | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/cart",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/1",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/category/1",
+      "h1": "エラー 404",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/3",
+      "status": 301,
+      "location": "/ja/shop/category/adventure-3"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/4",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/category/4",
+      "h1": "エラー 404",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/6",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/category/6",
+      "h1": "エラー 404",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/7",
+      "status": 301,
+      "location": "/ja/shop/category/dirt-bikes-7"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/8",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/category/8",
+      "h1": "エラー 404",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/adventure-3",
+      "status": 200,
+      "title": "Adventure | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/category/adventure-3",
+      "h1": "Adventure",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/dirt-bikes-7",
+      "status": 200,
+      "title": "Dirt Bikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/category/dirt-bikes-7",
+      "h1": "Dirt Bikes",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/motorcycle-12",
+      "status": 200,
+      "title": "Motorcycle | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/category/motorcycle-12",
+      "h1": "Motorcycle",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/naked-bike-11",
+      "status": 200,
+      "title": "Naked Bike | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/category/naked-bike-11",
+      "h1": "Naked Bike",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/scooters-5",
+      "status": 200,
+      "title": "Scooters | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/category/scooters-5",
+      "h1": "Scooters",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/category/sportbikes-2",
+      "status": 200,
+      "title": "Sportbikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/category/sportbikes-2",
+      "h1": "Sportbikes",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/change_pricelist/1",
+      "status": 301,
+      "location": "/ja/shop/change_pricelist/default-usd-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/change_pricelist/default-usd-1",
+      "status": 303,
+      "location": "/shop"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/dirt-bikes-7/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/motorcycle-12/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/motorcycle-12/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/motorcycle-12/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/motorcycle-12/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/motorcycle-12/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/motorcycle-12/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/motorcycle-12/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/motorcycle-12/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/naked-bike-11/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/naked-bike-11/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/scooters-5/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/scooters-5/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/sportbikes-2/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/wishlist",
+      "status": 200,
+      "title": "ショップウィッシュリスト | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/wishlist",
+      "h1": "自分のウィッシュリスト",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/shop/yamaha-wr155r-40",
+      "status": 200,
+      "title": "Yamaha WR155R | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/shop/yamaha-wr155r-40",
+      "h1": "Yamaha WR155R",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/terms",
+      "status": 200,
+      "title": "Terms & Conditions | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/terms",
+      "h1": "標準的な販売条件",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/website/social/facebook",
+      "status": 303,
+      "location": "https://www.facebook.com/profile.php?id=61569697091099"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/website/social/instagram",
+      "status": 303,
+      "location": "https://www.instagram.com/redlanternbikes/"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/website/social/linkedin",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/website/social/linkedin",
+      "h1": "エラー 404",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/website/social/tiktok",
+      "status": 303,
+      "location": "https://www.tiktok.com/@redlanternbikes?lang=en"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/website/social/twitter",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ja/website/social/twitter",
+      "h1": "エラー 404",
+      "lang": "ja-JP"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ja/website/social/youtube",
+      "status": 303,
+      "location": "https://www.youtube.com/@redlanternbikes"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR",
+      "status": 200,
+      "title": "Motorbike Rental Saigon | Red Lantern Bikes – From $9/Day",
+      "description": "Rent a motorbike in Ho Chi Minh City from $9/day. Honda, Kawasaki & Suzuki fleet. One-way rental to Hanoi & Da Nang. Rated 4.9★ by 245+ riders. Book on WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR",
+      "h1": "Travel in Vietnam like nobody else",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/about-us",
+      "status": 200,
+      "title": "About Us | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/about-us",
+      "h1": "About us",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/appointment",
+      "status": 200,
+      "title": "Appointment Types | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/appointment",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/blog",
+      "status": 200,
+      "title": "Vietnam Motorbike Travel Guides & Tips | Red Lantern Bikes Blog",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/blog",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/blog/%EC%97%AC%ED%96%89-1",
+      "status": 200,
+      "title": "여행 | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/blog/여행-1",
+      "h1": "여행",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/blog/%EC%97%AC%ED%96%89-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "status": 200,
+      "title": "Motorbike Rental Saigon 2026 – Complete Guide | Red Lantern Bikes",
+      "description": "Everything you need to know about renting a motorbike in Ho Chi Minh City: prices, which bike to choose, license rules, and where to pick up. Updated for 2026.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/blog/여행-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "h1": "Motorbike Rental in Saigon: Everything You Need to Know",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/blog/news-2",
+      "status": 200,
+      "title": "News | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/blog/news-2",
+      "h1": "News",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "status": 200,
+      "title": "Best Motorbikes to Rent in Vietnam 2026 – Beginner Guide | Red Lantern",
+      "description": "Not sure which motorbike to rent in Vietnam? This 2026 guide compares the best options for beginners and experienced riders — by riding style, budget, and route.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "h1": "Best Motorbikes to Rent in Vietnam (2026)",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "status": 200,
+      "title": "Saigon to Hanoi by Motorbike 2026 – Full Route Guide | Red Lantern Bik",
+      "description": "The complete Saigon to Hanoi motorbike route: 2,500–3,500km, 21–30 days, coast, mountains, national parks. Every stop explained with distances, tips, and which bike to rent.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "h1": "Ho Chi Minh City to Hanoi by Motorbike: The Complete Route Guide (2026)",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/blog/success-stories-3",
+      "status": 200,
+      "title": "Success Stories | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/blog/success-stories-3",
+      "h1": "Success Stories",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/contactus",
+      "status": 200,
+      "title": "Contact Us | Red Lantern Bikes",
+      "description": "This is the contact us page of the website",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/contactus",
+      "h1": "문의하기",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/helpdesk",
+      "status": 302,
+      "location": "/helpdesk/%EA%B3%A0%EA%B0%9D-%EA%B4%80%EB%A6%AC-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/helpdesk/%EA%B3%A0%EA%B0%9D-%EA%B4%80%EB%A6%AC-1",
+      "status": 200,
+      "title": "상담 요청 | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/helpdesk/고객-관리-1",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop",
+      "status": 200,
+      "title": "Rent a Motorbike in Saigon | Full Fleet | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop",
+      "h1": "All products",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/adventure-3/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/adventure-3/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/cart",
+      "status": 200,
+      "title": "Shopping Cart | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/cart",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/1",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/category/1",
+      "h1": "Error 404",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/3",
+      "status": 301,
+      "location": "/ko_KR/shop/category/adventure-3"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/4",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/category/4",
+      "h1": "Error 404",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/6",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/category/6",
+      "h1": "Error 404",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/7",
+      "status": 301,
+      "location": "/ko_KR/shop/category/dirt-bikes-7"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/8",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/category/8",
+      "h1": "Error 404",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/adventure-3",
+      "status": 200,
+      "title": "Adventure | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/category/adventure-3",
+      "h1": "Adventure",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/dirt-bikes-7",
+      "status": 200,
+      "title": "Dirt Bikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/category/dirt-bikes-7",
+      "h1": "Dirt Bikes",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/motorcycle-12",
+      "status": 200,
+      "title": "Motorcycle | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/category/motorcycle-12",
+      "h1": "Motorcycle",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/naked-bike-11",
+      "status": 200,
+      "title": "Naked Bike | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/category/naked-bike-11",
+      "h1": "Naked Bike",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/scooters-5",
+      "status": 200,
+      "title": "Scooters | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/category/scooters-5",
+      "h1": "Scooters",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/category/sportbikes-2",
+      "status": 200,
+      "title": "Sportbikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/category/sportbikes-2",
+      "h1": "Sportbikes",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/change_pricelist/1",
+      "status": 301,
+      "location": "/ko_KR/shop/change_pricelist/default-usd-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/change_pricelist/default-usd-1",
+      "status": 303,
+      "location": "/shop"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/dirt-bikes-7/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/motorcycle-12/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/motorcycle-12/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/motorcycle-12/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/motorcycle-12/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/motorcycle-12/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/motorcycle-12/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/motorcycle-12/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/motorcycle-12/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/naked-bike-11/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/naked-bike-11/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/scooters-5/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/scooters-5/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/sportbikes-2/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/wishlist",
+      "status": 200,
+      "title": "찜한 상점 | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/wishlist",
+      "h1": "나의 관심 목록",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/shop/yamaha-wr155r-40",
+      "status": 200,
+      "title": "Yamaha WR155R | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/shop/yamaha-wr155r-40",
+      "h1": "Yamaha WR155R",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/terms",
+      "status": 200,
+      "title": "Terms & Conditions | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/terms",
+      "h1": "표준 판매 조건",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/website/social/facebook",
+      "status": 303,
+      "location": "https://www.facebook.com/profile.php?id=61569697091099"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/website/social/instagram",
+      "status": 303,
+      "location": "https://www.instagram.com/redlanternbikes/"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/website/social/linkedin",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/website/social/linkedin",
+      "h1": "Error 404",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/website/social/tiktok",
+      "status": 303,
+      "location": "https://www.tiktok.com/@redlanternbikes?lang=en"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/website/social/twitter",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/ko_KR/website/social/twitter",
+      "h1": "Error 404",
+      "lang": "ko-KR"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/ko_KR/website/social/youtube",
+      "status": 303,
+      "location": "https://www.youtube.com/@redlanternbikes"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl",
+      "status": 200,
+      "title": "Motorbike Rental Saigon | Red Lantern Bikes – From $9/Day",
+      "description": "Rent a motorbike in Ho Chi Minh City from $9/day. Honda, Kawasaki & Suzuki fleet. One-way rental to Hanoi & Da Nang. Rated 4.9★ by 245+ riders. Book on WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/nl",
+      "h1": "Travel in Vietnam like nobody else",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/about-us",
+      "status": 200,
+      "title": "About Us | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/about-us",
+      "h1": "About us",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/appointment",
+      "status": 200,
+      "title": "Appointment Types | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/appointment",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/blog",
+      "status": 200,
+      "title": "Vietnam Motorbike Travel Guides & Tips | Red Lantern Bikes Blog",
+      "canonical": "https://www.redlanternbikes.com/nl/blog",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/blog/news-2",
+      "status": 200,
+      "title": "News | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/blog/news-2",
+      "h1": "News",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "status": 200,
+      "title": "Best Motorbikes to Rent in Vietnam 2026 – Beginner Guide | Red Lantern",
+      "description": "Not sure which motorbike to rent in Vietnam? This 2026 guide compares the best options for beginners and experienced riders — by riding style, budget, and route.",
+      "canonical": "https://www.redlanternbikes.com/nl/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "h1": "Best Motorbikes to Rent in Vietnam (2026)",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "status": 200,
+      "title": "Saigon to Hanoi by Motorbike 2026 – Full Route Guide | Red Lantern Bik",
+      "description": "The complete Saigon to Hanoi motorbike route: 2,500–3,500km, 21–30 days, coast, mountains, national parks. Every stop explained with distances, tips, and which bike to rent.",
+      "canonical": "https://www.redlanternbikes.com/nl/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "h1": "Ho Chi Minh City to Hanoi by Motorbike: The Complete Route Guide (2026)",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/blog/reis-1",
+      "status": 200,
+      "title": "Reis | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/blog/reis-1",
+      "h1": "Reis",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/blog/reis-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "status": 200,
+      "title": "Motorbike Rental Saigon 2026 – Complete Guide | Red Lantern Bikes",
+      "description": "Everything you need to know about renting a motorbike in Ho Chi Minh City: prices, which bike to choose, license rules, and where to pick up. Updated for 2026.",
+      "canonical": "https://www.redlanternbikes.com/nl/blog/reis-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "h1": "Motorbike Rental in Saigon: Everything You Need to Know",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/blog/success-stories-3",
+      "status": 200,
+      "title": "Success Stories | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/blog/success-stories-3",
+      "h1": "Success Stories",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/contactus",
+      "status": 200,
+      "title": "Contact Us | Red Lantern Bikes",
+      "description": "Dit is de contactpagina van de website",
+      "canonical": "https://www.redlanternbikes.com/nl/contactus",
+      "h1": "Contact",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/helpdesk",
+      "status": 302,
+      "location": "/helpdesk/klantenservice-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/helpdesk/klantenservice-1",
+      "status": 200,
+      "title": "Ticket indienen | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/helpdesk/klantenservice-1",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop",
+      "status": 200,
+      "title": "Rent a Motorbike in Saigon | Full Fleet | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop",
+      "h1": "Alle producten",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/adventure-3/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/adventure-3/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/cart",
+      "status": 200,
+      "title": "Shopping Cart | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/cart",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/1",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/category/1",
+      "h1": "Fout 404",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/3",
+      "status": 301,
+      "location": "/nl/shop/category/adventure-3"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/4",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/category/4",
+      "h1": "Fout 404",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/6",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/category/6",
+      "h1": "Fout 404",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/7",
+      "status": 301,
+      "location": "/nl/shop/category/dirt-bikes-7"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/8",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/category/8",
+      "h1": "Fout 404",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/adventure-3",
+      "status": 200,
+      "title": "Adventure | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/category/adventure-3",
+      "h1": "Adventure",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/dirt-bikes-7",
+      "status": 200,
+      "title": "Dirt Bikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/category/dirt-bikes-7",
+      "h1": "Dirt Bikes",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/motorcycle-12",
+      "status": 200,
+      "title": "Motorcycle | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/category/motorcycle-12",
+      "h1": "Motorcycle",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/naked-bike-11",
+      "status": 200,
+      "title": "Naked Bike | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/category/naked-bike-11",
+      "h1": "Naked Bike",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/scooters-5",
+      "status": 200,
+      "title": "Scooters | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/category/scooters-5",
+      "h1": "Scooters",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/category/sportbikes-2",
+      "status": 200,
+      "title": "Sportbikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/category/sportbikes-2",
+      "h1": "Sportbikes",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/change_pricelist/1",
+      "status": 301,
+      "location": "/nl/shop/change_pricelist/default-usd-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/change_pricelist/default-usd-1",
+      "status": 303,
+      "location": "/shop"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/dirt-bikes-7/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/motorcycle-12/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/motorcycle-12/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/motorcycle-12/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/motorcycle-12/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/motorcycle-12/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/motorcycle-12/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/motorcycle-12/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/motorcycle-12/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/naked-bike-11/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/naked-bike-11/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/scooters-5/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/scooters-5/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/sportbikes-2/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/wishlist",
+      "status": 200,
+      "title": "Shop verlanglijst | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/wishlist",
+      "h1": "Mijn verlanglijst",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/shop/yamaha-wr155r-40",
+      "status": 200,
+      "title": "Yamaha WR155R | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/shop/yamaha-wr155r-40",
+      "h1": "Yamaha WR155R",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/terms",
+      "status": 200,
+      "title": "Terms & Conditions | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/terms",
+      "h1": "ALGEMENE VOORWAARDEN",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/website/social/facebook",
+      "status": 303,
+      "location": "https://www.facebook.com/profile.php?id=61569697091099"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/website/social/instagram",
+      "status": 303,
+      "location": "https://www.instagram.com/redlanternbikes/"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/website/social/linkedin",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/website/social/linkedin",
+      "h1": "Fout 404",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/website/social/tiktok",
+      "status": 303,
+      "location": "https://www.tiktok.com/@redlanternbikes?lang=en"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/website/social/twitter",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/nl/website/social/twitter",
+      "h1": "Fout 404",
+      "lang": "nl-NL"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/nl/website/social/youtube",
+      "status": 303,
+      "location": "https://www.youtube.com/@redlanternbikes"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop",
+      "status": 200,
+      "title": "Rent a Motorbike in Saigon | Full Fleet | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop",
+      "h1": "All products",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/adventure-3/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/adventure-3/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/cart",
+      "status": 200,
+      "title": "Shopping Cart | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/cart",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/1",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/category/1",
+      "h1": "Error 404",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/3",
+      "status": 301,
+      "location": "/shop/category/adventure-3"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/4",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/category/4",
+      "h1": "Error 404",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/6",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/category/6",
+      "h1": "Error 404",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/7",
+      "status": 301,
+      "location": "/shop/category/dirt-bikes-7"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/8",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/category/8",
+      "h1": "Error 404",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/adventure-3",
+      "status": 200,
+      "title": "Adventure | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/category/adventure-3",
+      "h1": "Adventure",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/dirt-bikes-7",
+      "status": 200,
+      "title": "Dirt Bikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/category/dirt-bikes-7",
+      "h1": "Dirt Bikes",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/motorcycle-12",
+      "status": 200,
+      "title": "Motorcycle | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/category/motorcycle-12",
+      "h1": "Motorcycle",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/naked-bike-11",
+      "status": 200,
+      "title": "Naked Bike | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/category/naked-bike-11",
+      "h1": "Naked Bike",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/scooters-5",
+      "status": 200,
+      "title": "Scooters | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/category/scooters-5",
+      "h1": "Scooters",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/category/sportbikes-2",
+      "status": 200,
+      "title": "Sportbikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/category/sportbikes-2",
+      "h1": "Sportbikes",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/dirt-bikes-7/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/motorcycle-12/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/motorcycle-12/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/motorcycle-12/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/motorcycle-12/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/motorcycle-12/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/motorcycle-12/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/motorcycle-12/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/motorcycle-12/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/naked-bike-11/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/naked-bike-11/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/scooters-5/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/scooters-5/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/sportbikes-2/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/wishlist",
+      "status": 200,
+      "title": "Shop Wishlist | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/wishlist",
+      "h1": "My Wishlist",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/shop/yamaha-wr155r-40",
+      "status": 200,
+      "title": "Yamaha WR155R | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/shop/yamaha-wr155r-40",
+      "h1": "Yamaha WR155R",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/terms",
+      "status": 200,
+      "title": "Terms & Conditions | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/terms",
+      "h1": "STANDARD TERMS AND CONDITIONS OF SALE",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi",
+      "status": 200,
+      "title": "Motorbike Rental Saigon | Red Lantern Bikes – From $9/Day",
+      "description": "Rent a motorbike in Ho Chi Minh City from $9/day. Honda, Kawasaki & Suzuki fleet. One-way rental to Hanoi & Da Nang. Rated 4.9★ by 245+ riders. Book on WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/vi",
+      "h1": "Travel in Vietnam like nobody else",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/about-us",
+      "status": 200,
+      "title": "About Us | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/about-us",
+      "h1": "About us",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/appointment",
+      "status": 200,
+      "title": "Appointment Types | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/appointment",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/blog",
+      "status": 200,
+      "title": "Vietnam Motorbike Travel Guides & Tips | Red Lantern Bikes Blog",
+      "canonical": "https://www.redlanternbikes.com/vi/blog",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/blog/du-lich-1",
+      "status": 200,
+      "title": "Du lịch | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/blog/du-lich-1",
+      "h1": "Du lịch",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/blog/du-lich-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "status": 200,
+      "title": "Motorbike Rental Saigon 2026 – Complete Guide | Red Lantern Bikes",
+      "description": "Everything you need to know about renting a motorbike in Ho Chi Minh City: prices, which bike to choose, license rules, and where to pick up. Updated for 2026.",
+      "canonical": "https://www.redlanternbikes.com/vi/blog/du-lich-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "h1": "Motorbike Rental in Saigon: Everything You Need to Know",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/blog/news-2",
+      "status": 200,
+      "title": "News | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/blog/news-2",
+      "h1": "News",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "status": 200,
+      "title": "Best Motorbikes to Rent in Vietnam 2026 – Beginner Guide | Red Lantern",
+      "description": "Not sure which motorbike to rent in Vietnam? This 2026 guide compares the best options for beginners and experienced riders — by riding style, budget, and route.",
+      "canonical": "https://www.redlanternbikes.com/vi/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "h1": "Best Motorbikes to Rent in Vietnam (2026)",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "status": 200,
+      "title": "Saigon to Hanoi by Motorbike 2026 – Full Route Guide | Red Lantern Bik",
+      "description": "The complete Saigon to Hanoi motorbike route: 2,500–3,500km, 21–30 days, coast, mountains, national parks. Every stop explained with distances, tips, and which bike to rent.",
+      "canonical": "https://www.redlanternbikes.com/vi/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "h1": "Ho Chi Minh City to Hanoi by Motorbike: The Complete Route Guide (2026)",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/blog/success-stories-3",
+      "status": 200,
+      "title": "Success Stories | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/blog/success-stories-3",
+      "h1": "Success Stories",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/contactus",
+      "status": 200,
+      "title": "Contact Us | Red Lantern Bikes",
+      "description": "Đây là trang liên hệ với chúng tôi trên trang web",
+      "canonical": "https://www.redlanternbikes.com/vi/contactus",
+      "h1": "Liên hệ",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/helpdesk",
+      "status": 302,
+      "location": "/helpdesk/cham-soc-khach-hang-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/helpdesk/cham-soc-khach-hang-1",
+      "status": 200,
+      "title": "Gửi phiếu hỗ trợ | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/helpdesk/cham-soc-khach-hang-1",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop",
+      "status": 200,
+      "title": "Rent a Motorbike in Saigon | Full Fleet | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop",
+      "h1": "All products",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/adventure-3/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/adventure-3/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/cart",
+      "status": 200,
+      "title": "Shopping Cart | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/cart",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/1",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/category/1",
+      "h1": "Lỗi 404",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/3",
+      "status": 301,
+      "location": "/vi/shop/category/adventure-3"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/4",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/category/4",
+      "h1": "Lỗi 404",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/6",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/category/6",
+      "h1": "Lỗi 404",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/7",
+      "status": 301,
+      "location": "/vi/shop/category/dirt-bikes-7"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/8",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/category/8",
+      "h1": "Lỗi 404",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/adventure-3",
+      "status": 200,
+      "title": "Adventure | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/category/adventure-3",
+      "h1": "Adventure",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/dirt-bikes-7",
+      "status": 200,
+      "title": "Dirt Bikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/category/dirt-bikes-7",
+      "h1": "Dirt Bikes",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/motorcycle-12",
+      "status": 200,
+      "title": "Motorcycle | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/category/motorcycle-12",
+      "h1": "Motorcycle",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/naked-bike-11",
+      "status": 200,
+      "title": "Naked Bike | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/category/naked-bike-11",
+      "h1": "Naked Bike",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/scooters-5",
+      "status": 200,
+      "title": "Scooters | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/category/scooters-5",
+      "h1": "Scooters",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/category/sportbikes-2",
+      "status": 200,
+      "title": "Sportbikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/category/sportbikes-2",
+      "h1": "Sportbikes",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/change_pricelist/1",
+      "status": 301,
+      "location": "/vi/shop/change_pricelist/default-usd-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/change_pricelist/default-usd-1",
+      "status": 303,
+      "location": "/shop"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/dirt-bikes-7/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/motorcycle-12/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/motorcycle-12/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/motorcycle-12/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/motorcycle-12/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/motorcycle-12/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/motorcycle-12/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/motorcycle-12/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/motorcycle-12/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/naked-bike-11/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/naked-bike-11/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/scooters-5/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/scooters-5/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/sportbikes-2/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/wishlist",
+      "status": 200,
+      "title": "Cửa hàng yêu thích | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/wishlist",
+      "h1": "Yêu thích của tôi",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/shop/yamaha-wr155r-40",
+      "status": 200,
+      "title": "Yamaha WR155R | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/shop/yamaha-wr155r-40",
+      "h1": "Yamaha WR155R",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/terms",
+      "status": 200,
+      "title": "Terms & Conditions | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/terms",
+      "h1": "ĐIỀU KHOẢN VÀ ĐIỀU KIỆN CỦA BÁN HÀNG TIÊU CHUẨN",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/website/social/facebook",
+      "status": 303,
+      "location": "https://www.facebook.com/profile.php?id=61569697091099"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/website/social/instagram",
+      "status": 303,
+      "location": "https://www.instagram.com/redlanternbikes/"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/website/social/linkedin",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/website/social/linkedin",
+      "h1": "Lỗi 404",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/website/social/tiktok",
+      "status": 303,
+      "location": "https://www.tiktok.com/@redlanternbikes?lang=en"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/website/social/twitter",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/vi/website/social/twitter",
+      "h1": "Lỗi 404",
+      "lang": "vi-VN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/vi/website/social/youtube",
+      "status": 303,
+      "location": "https://www.youtube.com/@redlanternbikes"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/website/social/facebook",
+      "status": 303,
+      "location": "https://www.facebook.com/profile.php?id=61569697091099"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/website/social/instagram",
+      "status": 303,
+      "location": "https://www.instagram.com/redlanternbikes/"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/website/social/linkedin",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/website/social/linkedin",
+      "h1": "Error 404",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/website/social/tiktok",
+      "status": 303,
+      "location": "https://www.tiktok.com/@redlanternbikes?lang=en"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/website/social/twitter",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/website/social/twitter",
+      "h1": "Error 404",
+      "lang": "en-US"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/website/social/youtube",
+      "status": 303,
+      "location": "https://www.youtube.com/@redlanternbikes"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN",
+      "status": 200,
+      "title": "Motorbike Rental Saigon | Red Lantern Bikes – From $9/Day",
+      "description": "Rent a motorbike in Ho Chi Minh City from $9/day. Honda, Kawasaki & Suzuki fleet. One-way rental to Hanoi & Da Nang. Rated 4.9★ by 245+ riders. Book on WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN",
+      "h1": "Travel in Vietnam like nobody else",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/about-us",
+      "status": 200,
+      "title": "About Us | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/about-us",
+      "h1": "About us",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/appointment",
+      "status": 200,
+      "title": "Appointment Types | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/appointment",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/blog",
+      "status": 200,
+      "title": "Vietnam Motorbike Travel Guides & Tips | Red Lantern Bikes Blog",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/blog",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/blog/%E6%97%85%E8%A1%8C-1",
+      "status": 200,
+      "title": "旅行 | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/blog/旅行-1",
+      "h1": "旅行",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/blog/%E6%97%85%E8%A1%8C-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "status": 200,
+      "title": "Motorbike Rental Saigon 2026 – Complete Guide | Red Lantern Bikes",
+      "description": "Everything you need to know about renting a motorbike in Ho Chi Minh City: prices, which bike to choose, license rules, and where to pick up. Updated for 2026.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/blog/旅行-1/motorbike-rental-in-saigon-everything-you-need-to-know-2",
+      "h1": "Motorbike Rental in Saigon: Everything You Need to Know",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/blog/news-2",
+      "status": 200,
+      "title": "News | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/blog/news-2",
+      "h1": "News",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "status": 200,
+      "title": "Best Motorbikes to Rent in Vietnam 2026 – Beginner Guide | Red Lantern",
+      "description": "Not sure which motorbike to rent in Vietnam? This 2026 guide compares the best options for beginners and experienced riders — by riding style, budget, and route.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4",
+      "h1": "Best Motorbikes to Rent in Vietnam (2026)",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "status": 200,
+      "title": "Saigon to Hanoi by Motorbike 2026 – Full Route Guide | Red Lantern Bik",
+      "description": "The complete Saigon to Hanoi motorbike route: 2,500–3,500km, 21–30 days, coast, mountains, national parks. Every stop explained with distances, tips, and which bike to rent.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3",
+      "h1": "Ho Chi Minh City to Hanoi by Motorbike: The Complete Route Guide (2026)",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/blog/success-stories-3",
+      "status": 200,
+      "title": "Success Stories | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/blog/success-stories-3",
+      "h1": "Success Stories",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/contactus",
+      "status": 200,
+      "title": "Contact Us | Red Lantern Bikes",
+      "description": "This is the contact us page of the website",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/contactus",
+      "h1": "联系我们",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/helpdesk",
+      "status": 302,
+      "location": "/helpdesk/%E5%AE%A2%E6%88%B7%E5%85%B3%E6%80%80-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/helpdesk/%E5%AE%A2%E6%88%B7%E5%85%B3%E6%80%80-1",
+      "status": 200,
+      "title": "提交一个工单 | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/helpdesk/客户关怀-1",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop",
+      "status": 200,
+      "title": "Rent a Motorbike in Saigon | Full Fleet | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop",
+      "h1": "All products",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/adventure-3/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/adventure-3/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/cart",
+      "status": 200,
+      "title": "Shopping Cart | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/cart",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/1",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/category/1",
+      "h1": "错误 404",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/3",
+      "status": 301,
+      "location": "/zh_CN/shop/category/adventure-3"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/4",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/category/4",
+      "h1": "错误 404",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/6",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/category/6",
+      "h1": "错误 404",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/7",
+      "status": 301,
+      "location": "/zh_CN/shop/category/dirt-bikes-7"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/8",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/category/8",
+      "h1": "错误 404",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/adventure-3",
+      "status": 200,
+      "title": "Adventure | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/category/adventure-3",
+      "h1": "Adventure",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/dirt-bikes-7",
+      "status": 200,
+      "title": "Dirt Bikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/category/dirt-bikes-7",
+      "h1": "Dirt Bikes",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/motorcycle-12",
+      "status": 200,
+      "title": "Motorcycle | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/category/motorcycle-12",
+      "h1": "Motorcycle",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/naked-bike-11",
+      "status": 200,
+      "title": "Naked Bike | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/category/naked-bike-11",
+      "h1": "Naked Bike",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/scooters-5",
+      "status": 200,
+      "title": "Scooters | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/category/scooters-5",
+      "h1": "Scooters",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/category/sportbikes-2",
+      "status": 200,
+      "title": "Sportbikes | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/category/sportbikes-2",
+      "h1": "Sportbikes",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/change_pricelist/1",
+      "status": 301,
+      "location": "/zh_CN/shop/change_pricelist/default-usd-1"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/change_pricelist/default-usd-1",
+      "status": 303,
+      "location": "/shop"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/dirt-bikes-7/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/motorcycle-12/honda-cb150x-17",
+      "status": 200,
+      "title": "Honda CB150X Rental Saigon | $25/Day | Red Lantern Bikes",
+      "description": "Rent a Honda CB150X adventure bike in Ho Chi Minh City from $25/day. Versatile, upright riding position, perfect for city and touring in Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/honda-cb150x-17",
+      "h1": "Honda CB150X",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/motorcycle-12/honda-winner-x-150cc-20",
+      "status": 200,
+      "title": "Honda WinnerX150 Rental Ho Chi Minh City | $13/Day | Red Lantern Bikes",
+      "description": "Rent a Honda Winner X 150 in Ho Chi Minh City from $13/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/honda-winner-x-150cc-20",
+      "h1": "Honda Winner X 150cc",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/motorcycle-12/honda-xr150-36",
+      "status": 200,
+      "title": "Honda XR150 Rental Ho Chi Minh City | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Honda XR150 in Saigon from $15/day. Ideal for city riding and off-road adventures. 150cc trail bike. One-way to Hanoi available. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/honda-xr150-36",
+      "h1": "Honda XR150",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/motorcycle-12/kawasaki-versys-x-300-37",
+      "status": 200,
+      "title": "Kawasaki Versys X300 Rental Saigon | $38/Day | Red Lantern Bikes",
+      "description": "Rent a Kawasaki Versys X300 in Ho Chi Minh City from $38/day. Perfect for one-way trips to Hanoi or Da Nang. 300cc adventure tourer. Helmet & rack included.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/kawasaki-versys-x-300-37",
+      "h1": "Kawasaki Versys X 300",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/motorcycle-12/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/motorcycle-12/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/motorcycle-12/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/motorcycle-12/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/naked-bike-11/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/naked-bike-11/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/scooters-5/honda-wave-alpha-110cc-35",
+      "status": 200,
+      "title": "Honda Wave Rental Saigon | $9/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Honda Wave 110cc from Ho Chi Minh City to Ha Noi from just $9/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/honda-wave-alpha-110cc-35",
+      "h1": "Honda Wave Alpha 110cc",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/scooters-5/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/sportbikes-2/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/suzuki-en-125-13",
+      "status": 200,
+      "title": "Suzuki EN125 Rental Ho Chi Minh City | $13/Day | Red Lantern",
+      "description": "Rent a Suzuki EN125 classic street bike in Saigon from $13/day. Comfortable, reliable, and easy to ride. Great for city touring and day trips outside HCMC.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/suzuki-en-125-13",
+      "h1": "Suzuki En 125",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/suzuki-gd110-38",
+      "status": 200,
+      "title": "Suzuki GD110 Rental Saigon | $11/Day Motorcycle | Red Lantern Bikes",
+      "description": "Rent a Suzuki GD110cc from Ho Chi Minh City to Ha Noi from just $11/day. Easy to ride, fuel-efficient and reliable. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/suzuki-gd110-38",
+      "h1": "Suzuki GD110",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/suzuki-gsxr-r-150-22",
+      "status": 200,
+      "title": "Suzuki GSX-R150 Rental Saigon | $15/Day | Red Lantern Bikes",
+      "description": "Rent a Suzuki GSX-R150 sport bike in Ho Chi Minh City from $15/day. 150cc, lightweight and thrilling. Ideal for experienced riders exploring Vietnam.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/suzuki-gsxr-r-150-22",
+      "h1": "Suzuki GSXR-R 150",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/wishlist",
+      "status": 200,
+      "title": "店铺收藏清单 | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/wishlist",
+      "h1": "我的收藏",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/yamaha-nvx-125-155-12",
+      "status": 200,
+      "title": "Yamaha NVX Rental Saigon | $12/Day Scooter | Red Lantern Bikes",
+      "description": "Rent a Yamaha NVX125/NVX155 in Ho Chi Minh City from just $12/day. Easy to ride, fuel-efficient and reliable. Perfect for touring Vietnam. Helmet included.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/yamaha-nvx-125-155-12",
+      "h1": "Yamaha NVX 125/155",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/yamaha-r15v3-19",
+      "status": 200,
+      "title": "Yamaha R15v3, Rental Ho Chi Minh City | $22/Day | Red Lantern Bikes",
+      "description": "Rent a Yamaha R15v3 in Saigon from $22/day. Ideal for city riding. 150cc racing bike. Book via WhatsApp.",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/yamaha-r15v3-19",
+      "h1": "Yamaha R15v3",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/shop/yamaha-wr155r-40",
+      "status": 200,
+      "title": "Yamaha WR155R | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/shop/yamaha-wr155r-40",
+      "h1": "Yamaha WR155R",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/terms",
+      "status": 200,
+      "title": "Terms & Conditions | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/terms",
+      "h1": "标准销售期限和条件",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/website/social/facebook",
+      "status": 303,
+      "location": "https://www.facebook.com/profile.php?id=61569697091099"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/website/social/instagram",
+      "status": 303,
+      "location": "https://www.instagram.com/redlanternbikes/"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/website/social/linkedin",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/website/social/linkedin",
+      "h1": "错误 404",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/website/social/tiktok",
+      "status": 303,
+      "location": "https://www.tiktok.com/@redlanternbikes?lang=en"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/website/social/twitter",
+      "status": 404,
+      "title": "Page Not Found | Red Lantern Bikes",
+      "canonical": "https://www.redlanternbikes.com/zh_CN/website/social/twitter",
+      "h1": "错误 404",
+      "lang": "zh-CN"
+    },
+    {
+      "url": "https://www.redlanternbikes.com/zh_CN/website/social/youtube",
+      "status": 303,
+      "location": "https://www.youtube.com/@redlanternbikes"
+    }
+  ]
+}

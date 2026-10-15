@@ -38,6 +38,15 @@ export function SiteFooter() {
           <p>
             <Link href="/contact">Send us a message</Link>
           </p>
+          <p className={styles.social}>
+            {Object.entries(BUSINESS.social).map(([name, url]) =>
+              url ? (
+                <a key={name} href={url} target="_blank" rel="noopener">
+                  {name[0].toUpperCase() + name.slice(1)}
+                </a>
+              ) : null,
+            )}
+          </p>
         </div>
 
         <div>
@@ -56,6 +65,9 @@ export function SiteFooter() {
           </p>
           <p>
             <Link href="/faq">FAQ</Link>
+          </p>
+          <p>
+            <Link href="/blog">Travel guides</Link>
           </p>
         </div>
       </div>

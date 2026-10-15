@@ -17,11 +17,14 @@ export async function generateMetadata(props: PageProps<"/bikes/[slug]">): Promi
   // Checked here, before the page starts streaming, so unknown bikes get a real 404.
   if (!model || !model.active) notFound();
   const content = BIKE_CONTENT[slug];
+  if (!content) return { title: `${model.name} Rental Saigon | Red Lantern Bikes` };
+  // Same wording as the old product pages, with today's price.
+  const { usdToVndRate } = await getSettings(db);
+  const price = "$" + Math.round(model.dailyRate / usdToVndRate);
+  // A function replacement, so the "$" isn't read as a replace() pattern.
   return {
-    title: `${model.name} rental in Saigon | Red Lantern Bikes`,
-    description: content
-      ? `${content.summary} Rent the ${model.name} in District 1, by the day, week or month, or one-way to Hanoi or Da Nang.`
-      : undefined,
+    title: { absolute: content.seoTitle.replace("{price}", () => price) },
+    description: content.seoDescription.replace("{price}", () => price),
   };
 }
 

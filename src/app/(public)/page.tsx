@@ -13,8 +13,9 @@ import styles from "./page.module.css";
 // Title kept from the old site, which ranks for it.
 export const metadata: Metadata = {
   title: "Motorbike Rental Saigon | Red Lantern Bikes – From $9/Day",
+  // Kept from the old site, except "Book on WhatsApp" (booking is online now).
   description:
-    "Rent a motorbike in District 1, Saigon, or ride one-way to Hanoi or Da Nang. Helmet and gear included, roadside assistance anywhere in Vietnam, 4.9★ on Google.",
+    "Rent a motorbike in Ho Chi Minh City from $9/day. Honda, Kawasaki & Suzuki fleet. One-way rental to Hanoi & Da Nang. Rated 4.9★ by 245+ riders. Book online.",
 };
 
 const FEATURED = ["wave-alpha-110", "honda-xr150", "honda-cb150x", "kawasaki-versys-x300"];

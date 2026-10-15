@@ -23,10 +23,11 @@ export const BUSINESS = {
   email: null as string | null,
   googleRating: "4.9",
   social: {
-    facebook: null as string | null,
-    instagram: null as string | null,
-    youtube: null as string | null,
-    tiktok: null as string | null,
+    // Found through the old site's social links.
+    facebook: "https://www.facebook.com/profile.php?id=61569697091099" as string | null,
+    instagram: "https://www.instagram.com/redlanternbikes/" as string | null,
+    youtube: "https://www.youtube.com/@redlanternbikes" as string | null,
+    tiktok: "https://www.tiktok.com/@redlanternbikes" as string | null,
   },
   founders: [
     {

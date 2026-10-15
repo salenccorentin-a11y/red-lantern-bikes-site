@@ -4,7 +4,8 @@ import { ADDRESS_LINE, BUSINESS } from "@/content/business";
 import styles from "../content.module.css";
 
 export const metadata: Metadata = {
-  title: "Rental terms | Red Lantern Bikes",
+  // Title kept from the old /terms page.
+  title: "Terms & Conditions | Red Lantern Bikes",
   description: "The terms for renting a motorbike from Red Lantern Bikes in Saigon.",
 };
 

@@ -1,0 +1,51 @@
+.article {
+  max-width: 720px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.cover {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 8px 0 16px;
+}
+
+.body {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.body h2 {
+  font-size: 24px;
+  margin: 36px 0 10px;
+}
+
+.body h3 {
+  font-size: 19px;
+  margin: 24px 0 8px;
+}
+
+.body a {
+  color: var(--lantern);
+}
+
+.body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  display: block;
+  overflow-x: auto;
+}
+
+.body th,
+.body td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
