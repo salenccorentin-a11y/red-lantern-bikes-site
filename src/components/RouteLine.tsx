@@ -3,7 +3,7 @@ import styles from "./RouteLine.module.css";
 
 export type RouteStop = {
   city: string;
-  /** Short line under the city, e.g. "7 days or more". */
+  /** Short line under the city, e.g. "10 to 14 days". */
   note: string;
   /** Longer text for the detailed version. */
   detail?: string;

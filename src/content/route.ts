@@ -1,7 +1,8 @@
 import type { RouteStop } from "@/components/RouteLine";
 
-// The one-way route shown on the home and one-way pages. Minimum days match
-// the routes in the database (staff settings); update both together.
+// The one-way route shown on the home and one-way pages. Each note is how long
+// the trip usually takes, not the minimum rental (7 days to Da Nang, 12 to
+// Hanoi), which is set per route in the staff settings.
 export const ONE_WAY_ROUTE: RouteStop[] = [
   {
     city: "Saigon",
@@ -10,14 +11,14 @@ export const ONE_WAY_ROUTE: RouteStop[] = [
   },
   {
     city: "Da Nang",
-    note: "7 days or more",
+    note: "10 to 14 days",
     detail:
       "Highlands, Nha Trang's beaches and the coast road. Leave the bike at our drop-off point and fly home or carry on by train.",
     href: "/book?dropoff=DA_NANG",
   },
   {
     city: "Hanoi",
-    note: "12 days or more",
+    note: "21 to 30 days",
     detail:
       "The whole country: the Hai Van Pass, Hue, Phong Nha and the karst of the north. Most riders take three to four weeks.",
     href: "/book?dropoff=HANOI",
