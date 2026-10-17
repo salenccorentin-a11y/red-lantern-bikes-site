@@ -17,9 +17,9 @@ export const BUSINESS = {
   /** Opening hours text. Unknown: the old site only says "open every day". */
   hours: "Open every day",
   /** International format, e.g. "+84 90 123 4567". */
-  phone: null as string | null,
+  phone: "+84 382 681 859" as string | null,
   /** International format without spaces or "+", e.g. "84901234567", for wa.me links. */
-  whatsapp: null as string | null,
+  whatsapp: "84382681859" as string | null,
   email: null as string | null,
   googleRating: "4.9",
   social: {

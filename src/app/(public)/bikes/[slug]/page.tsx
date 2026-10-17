@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { bikeImage } from "@/components/BikeCard";
+import { BikeGallery } from "@/components/BikeGallery";
 import ui from "@/components/ui.module.css";
 import { BIKE_CONTENT, LICENCE_TEXT } from "@/content/bikes";
 import { BUSINESS } from "@/content/business";
@@ -134,6 +135,8 @@ async function Bike({ slug }: { slug: string }) {
           </p>
         </div>
       </div>
+
+      <BikeGallery slug={model.slug} name={model.name} />
 
       <div className={bike.details}>
         {content && content.bestFor.length > 0 && (

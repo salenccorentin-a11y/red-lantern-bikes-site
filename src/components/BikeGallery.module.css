@@ -1,0 +1,55 @@
+.gallery {
+  margin-top: 48px;
+}
+
+.gallery h2 {
+  margin: 0 0 16px !important;
+  font-size: var(--text-xl) !important;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Three photos on a phone: the first one full width, two below. */
+.grid[data-count="3"] li:first-child {
+  grid-column: 1 / -1;
+}
+
+.grid[data-count="3"] li:first-child .photo {
+  aspect-ratio: 3 / 2;
+}
+
+@media (min-width: 760px) {
+  /* One row: as many columns as photos (set inline, up to four). */
+  .grid {
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .grid[data-count="2"] {
+    max-width: 66%;
+  }
+
+  .grid[data-count="3"] li:first-child {
+    grid-column: auto;
+  }
+
+  .grid[data-count="3"] li:first-child .photo {
+    aspect-ratio: 1;
+  }
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-photo);
+}

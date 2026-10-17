@@ -3,8 +3,9 @@
 //
 //   node scripts/brand/prepare-photos.cjs ["path to the Bikes folder"]
 //
-// Bikes: trimmed and centred on white, 1200×800. Scenery: up to 2000px wide.
-// Riders: square crops for the "rode with us" wall.
+// Bikes: trimmed and centred on white, 1200×800. Galleries: square crops of
+// your own photos of each model. Scenery: up to 2000px wide. Riders: square
+// crops for the "rode with us" wall.
 
 const fs = require("fs");
 const path = require("path");
@@ -28,7 +29,89 @@ const BIKES = {
   "kawasaki-versys-x300": "Without background/Kawasaki Versys_X300.jpg",
 };
 
-// Your own riding photos for big backgrounds. crop = [top, bottom] fractions to keep.
+// Your own photos of each model, shown under the studio shot on its page.
+// Chosen to avoid faces of people who haven't agreed to appear.
+const GALLERY = {
+  "wave-alpha-110": [
+    ["Wave Alpha Shoot/IMG_2097.JPG", "A black Wave Alpha parked on a Saigon street"],
+    ["Wave Alpha Shoot/IMG_2274.JPG", "A black Wave Alpha among yellow flowers"],
+    ["Wave Alpha Shoot/IMG_2226.JPG", "Riding a Wave Alpha down a Saigon lane, headlight on"],
+    ["Honda Wave Alpha/IMG-20250830-WA0002.jpg", "A blue Wave Alpha, side view"],
+  ],
+  "suzuki-gd110": [
+    ["Suzuki GD110/Motorcycle front page.png", "A black GD110 parked on a city street"],
+    ["Suzuki GD110/6 2.jpg", "A GD110 with leather saddlebags outside the shop"],
+    ["Suzuki GD110/6 6.jpg", "A GD110 with saddlebags and a rear rack"],
+  ],
+  "suzuki-en125": [
+    ["Suzuki EN125cc/IMG-20250623-WA0012.jpg", "A loaded EN125 above rice terraces in the north"],
+    ["Suzuki EN125cc/IMG-20250419-WA0005.jpg", "An EN125 at a mountain viewpoint"],
+    ["Suzuki EN125cc/IMG-20250623-WA0001.jpg", "An EN125 on a bridge in the mountains"],
+    ["Suzuki EN125cc/IMG-20250623-WA0011.jpg", "An EN125 with luggage on a mountain road"],
+  ],
+  "yamaha-nvx125": [
+    ["Yamaha NVX125/IMG-20250815-WA0009.jpg", "A red NVX125, front three-quarter view"],
+    ["Yamaha NVX125/IMG-20250815-WA0010.jpg", "A red NVX125 parked by a garden"],
+    ["Yamaha NVX125/IMG-20250813-WA0001.jpg", "A black and gold NVX125, side view"],
+  ],
+  "honda-winner-x-150": [
+    [
+      "Honda Winner X/WhatsApp Image 2025-12-19 at 4.54.52 PM.jpeg",
+      "A loaded Winner X by the beach",
+    ],
+    [
+      "Honda Winner X/WhatsApp Image 2025-12-18 at 8.55.50 AM.jpeg",
+      "A blue Winner X with a top box against a white wall",
+    ],
+    [
+      "Honda Winner X/WhatsApp Image 2025-12-18 at 8.55.40 AM.jpeg",
+      "A Winner X with luggage on a country road",
+    ],
+  ],
+  "suzuki-gsx-r150": [
+    [
+      "Suzuki GSX RR/518199034_1457498092164482_8653781470905826138_n.jpg",
+      "A white and black GSX-R150 outside the shop",
+    ],
+    [
+      "Suzuki GSX RR/518346930_1457498255497799_3799175047607141511_n.jpg",
+      "A GSX-R150 on a Saigon street at night",
+    ],
+  ],
+  "honda-xr150": [
+    ["Honda XR150 125/3.png", "A rider kicking up dust on an XR150"],
+    ["Honda XR150 125/Black XR tr.jpeg", "A loaded XR150 in misty hills"],
+    ["Honda XR150 125/XR tailored.jpg", "An XR150 fitted for the long ride"],
+    ["Wave Alpha Shoot/IMG_2085.JPG", "A rider on a red XR150 in Saigon"],
+  ],
+  "honda-cb150x": [
+    ["CB150X/Scenery.jpeg", "A CB150X at a viewpoint above the sea"],
+    ["CB150X/IMG-20250814-WA0004.jpg", "A black CB150X with side cases"],
+    ["CB150X/IMG-20250815-WA0016.jpg", "A CB150X ready to go outside the shop"],
+  ],
+  "yamaha-wr155r": [
+    ["Yamaha WR155/WhatsApp Image 2026-08-15 at 2.19.29 PM.jpeg", "A WR155R outside the shop"],
+    ["Yamaha WR155/WhatsApp Image 2026-08-15 at 2.19.32 PM.jpeg", "A WR155R with a rear rack"],
+    ["Yamaha WR155/WhatsApp Image 2026-08-15 at 2.19.39 PM.jpeg", "A WR155R with panniers"],
+  ],
+  "kawasaki-versys-x300": [
+    [
+      "Kawasaki Versys X 300/WhatsApp Image 2025-11-30 at 2.15.52 PM.jpeg",
+      "A loaded Versys-X 300 above the mountains",
+    ],
+    [
+      "Kawasaki Versys X 300/WhatsApp Image 2025-11-30 at 2.15.52 PM (1).jpeg",
+      "A Versys-X 300 on a dirt track",
+    ],
+    [
+      "Kawasaki Versys X 300/WhatsApp Image 2025-07-07 at 15.37.56_2e7435b1.jpg",
+      "A Versys-X 300 with side cases",
+    ],
+  ],
+};
+
+// Your own riding photos for big backgrounds. crop = [top, bottom, left, right]
+// fractions to keep (left and right are optional).
 const SCENERY = {
   "karst-road": { src: "AA posting/IMG-20250623-WA0006.jpg" },
   "river-crossing": { src: "AA posting/boat.jpeg" },
@@ -39,6 +122,12 @@ const SCENERY = {
   beach: { src: "AA posting/Suzuki at the beach.jpg", crop: [0.22, 1] },
   "saigon-city": { src: "AA posting/IMG_2153.JPG" },
   "saigon-opera": { src: "AA posting/IMG_2266.JPG" },
+  // From the tour folder next to Bikes. Cropped to lose the boat's roof and a
+  // blurred shoulder on the left.
+  "mekong-canal": {
+    src: "../TOURS/Mekong Delta/MEKONG DELTA TOUR 001/post/IMG_20241110_093251.jpg",
+    crop: [0.17, 1, 0.07, 1],
+  },
 };
 
 // Riders (they agreed to appear on the site).
@@ -114,11 +203,12 @@ async function scenery(name, { src, crop }) {
   let img = sharp(path.join(ROOT, src)).rotate();
   if (crop) {
     const { width, height } = await sharp(await img.toBuffer()).metadata();
+    const [top, bottom, left = 0, right = 1] = crop;
     img = sharp(await img.toBuffer()).extract({
-      left: 0,
-      top: Math.round(height * crop[0]),
-      width,
-      height: Math.round(height * (crop[1] - crop[0])),
+      left: Math.round(width * left),
+      top: Math.round(height * top),
+      width: Math.round(width * (right - left)),
+      height: Math.round(height * (bottom - top)),
     });
   }
   const out = await img
@@ -130,6 +220,25 @@ async function scenery(name, { src, crop }) {
   return { name, width, height };
 }
 
+async function gallery(slug, photos) {
+  const out = [];
+  for (const [i, [rel, alt]] of photos.entries()) {
+    const file = `${slug}-${i + 1}.webp`;
+    const img = sharp(path.join(ROOT, rel))
+      .rotate()
+      .resize(960, 960, { fit: "cover", position: "attention" });
+    await img.clone().webp({ quality: 76 }).toFile(`public/bikes/gallery/${file}`);
+    // A tiny version shown blurred while the photo loads.
+    const tiny = await img.clone().resize(12, 12).webp({ quality: 40 }).toBuffer();
+    out.push({
+      src: `/bikes/gallery/${file}`,
+      alt,
+      blur: `data:image/webp;base64,${tiny.toString("base64")}`,
+    });
+  }
+  return out;
+}
+
 async function rider(rel, i) {
   await sharp(path.join(ROOT, rel))
     .rotate()
@@ -139,10 +248,19 @@ async function rider(rel, i) {
 }
 
 (async () => {
-  for (const dir of ["public/bikes", "public/photos", "public/photos/riders"]) {
+  for (const dir of [
+    "public/bikes",
+    "public/bikes/gallery",
+    "public/photos",
+    "public/photos/riders",
+  ]) {
     fs.mkdirSync(dir, { recursive: true });
   }
   for (const [slug, rel] of Object.entries(BIKES)) await bike(slug, rel);
+  const galleries = {};
+  for (const [slug, photos] of Object.entries(GALLERY))
+    galleries[slug] = await gallery(slug, photos);
+  fs.writeFileSync("src/content/bike-gallery.json", JSON.stringify(galleries, null, 2) + "\n");
   const sizes = [];
   for (const [name, spec] of Object.entries(SCENERY)) sizes.push(await scenery(name, spec));
   for (const [i, rel] of RIDERS.entries()) await rider(rel, i);
@@ -156,6 +274,6 @@ async function rider(rel, i) {
     ) + "\n",
   );
   console.log(
-    `${Object.keys(BIKES).length} bikes, ${sizes.length} scenery, ${RIDERS.length} riders`,
+    `${Object.keys(BIKES).length} bikes, ${Object.values(galleries).flat().length} gallery photos, ${sizes.length} scenery, ${RIDERS.length} riders`,
   );
 })();
