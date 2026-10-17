@@ -1,5 +1,5 @@
 import type { PrismaClient } from "@/generated/prisma/client";
-import { ADD_ONS, BIKE_MODELS, ROUTES, placeholderPlate } from "@/db/seed-data";
+import { ADD_ONS, BIKE_MODELS, RETIRED_ADD_ONS, ROUTES, placeholderPlate } from "@/db/seed-data";
 
 /**
  * Fills a database with the fleet, routes, one-way fees, add-ons and settings.
@@ -45,11 +45,22 @@ export async function seed(db: PrismaClient) {
     }
   }
 
-  for (const [i, addOn] of ADD_ONS.entries()) {
-    await db.addOn.upsert({
+  const models = await db.bikeModel.findMany({ select: { id: true, slug: true } });
+  for (const [i, { modelPrices = {}, ...addOn }] of ADD_ONS.entries()) {
+    const saved = await db.addOn.upsert({
       where: { slug: addOn.slug },
       create: { ...addOn, sortOrder: i },
       update: {},
     });
+    for (const model of models) {
+      const price = modelPrices[model.slug];
+      if (price === undefined) continue;
+      await db.addOnModelPrice.upsert({
+        where: { addOnId_bikeModelId: { addOnId: saved.id, bikeModelId: model.id } },
+        create: { addOnId: saved.id, bikeModelId: model.id, price },
+        update: {},
+      });
+    }
   }
+  await db.addOn.updateMany({ where: { slug: { in: RETIRED_ADD_ONS } }, data: { active: false } });
 }

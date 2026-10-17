@@ -17,6 +17,8 @@ afterAll(() => db.$disconnect());
 
 const HOUR_MS = 3_600_000;
 
+const addOn = (slug: string) => db.addOn.findUniqueOrThrow({ where: { slug } });
+
 async function blocksOf(bookingId: string) {
   const rows = await db.bikeOccupancy.findMany({
     where: { bookingId },
@@ -63,17 +65,71 @@ describe("reserveBike: online round trip", () => {
   });
 
   it("stores add-ons with their prices at booking time", async () => {
-    const helmet = await db.addOn.findUniqueOrThrow({ where: { slug: "second-helmet" } });
+    const insurance = await addOn("insurance");
+    const helmet = await addOn("premium-helmet");
     const result = await reserveBike(
       db,
-      onlineBooking(fleet.xr150.id, { addOns: [{ addOnId: helmet.id, quantity: 1 }] }),
+      onlineBooking(fleet.xr150.id, {
+        addOns: [
+          { addOnId: insurance.id, quantity: 1 },
+          { addOnId: helmet.id, quantity: 2 },
+        ],
+      }),
     );
     const { booking } = expectOk(result);
-    expect(booking.addOnsVnd).toBe(160_000); // 8 days × 20,000
-    expect(booking.totalVnd).toBe(2_960_000);
+    // Insurance 8 days × 130,000 (a 150cc), plus two helmets at 500,000 each.
+    expect(booking.addOnsVnd).toBe(1_040_000 + 1_000_000);
+    expect(booking.totalVnd).toBe(2_800_000 + 2_040_000);
     expect(booking.addOns).toMatchObject([
-      { name: "Second helmet", unitPrice: 20_000, totalVnd: 160_000 },
+      { name: "Full coverage insurance", unitPrice: 130_000, quantity: 1, totalVnd: 1_040_000 },
+      { name: "Premium helmet", unitPrice: 500_000, quantity: 2, totalVnd: 1_000_000 },
     ]);
+  });
+});
+
+describe("reserveBike: add-ons", () => {
+  it("prices insurance by bike: 80,000 a day on a Wave, 260,000 on the Versys", async () => {
+    const insurance = await addOn("insurance");
+    const addOns = [{ addOnId: insurance.id, quantity: 1 }];
+    const wave = expectOk(await reserveBike(db, onlineBooking(fleet.wave.id, { addOns })));
+    const versys = expectOk(await reserveBike(db, onlineBooking(fleet.versys.id, { addOns })));
+    expect(wave.booking.addOns[0]).toMatchObject({ unitPrice: 80_000, totalVnd: 640_000 });
+    expect(versys.booking.addOns[0]).toMatchObject({ unitPrice: 260_000, totalVnd: 2_080_000 });
+  });
+
+  it("uses the add-on's usual price for a model without its own", async () => {
+    const insurance = await addOn("insurance");
+    await db.addOnModelPrice.deleteMany({ where: { addOnId: insurance.id } });
+    const { booking } = expectOk(
+      await reserveBike(
+        db,
+        onlineBooking(fleet.versys.id, { addOns: [{ addOnId: insurance.id, quantity: 1 }] }),
+      ),
+    );
+    expect(booking.addOns[0].unitPrice).toBe(80_000);
+  });
+
+  it("refuses more than the add-on's maximum", async () => {
+    const gloves = await addOn("gloves");
+    const result = await reserveBike(
+      db,
+      onlineBooking(fleet.xr150.id, { addOns: [{ addOnId: gloves.id, quantity: 3 }] }),
+    );
+    expect(result).toEqual({ ok: false, error: { code: "TOO_MANY_ADD_ON", addOnId: gloves.id } });
+  });
+
+  it("refuses the same add-on listed twice (which would get round the maximum)", async () => {
+    const gloves = await addOn("gloves");
+    const result = await reserveBike(
+      db,
+      onlineBooking(fleet.xr150.id, {
+        addOns: [
+          { addOnId: gloves.id, quantity: 2 },
+          { addOnId: gloves.id, quantity: 2 },
+        ],
+      }),
+    );
+    expect(result).toEqual({ ok: false, error: { code: "TOO_MANY_ADD_ON", addOnId: gloves.id } });
   });
 });
 

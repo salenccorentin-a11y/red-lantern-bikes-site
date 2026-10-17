@@ -1,6 +1,12 @@
 // Every rule in docs/pricing.md, with real rates and fees.
 import { describe, expect, it } from "vitest";
-import { quote, rateTierFor, type AddOnChoice, type QuoteInput } from "@/lib/pricing";
+import {
+  addOnUnitPrice,
+  quote,
+  rateTierFor,
+  type AddOnChoice,
+  type QuoteInput,
+} from "@/lib/pricing";
 
 const WAVE = { dailyRate: 240_000, weeklyRate: 205_000, monthlyRate: 185_000 };
 const XR150 = { dailyRate: 400_000, weeklyRate: 350_000, monthlyRate: 300_000 };
@@ -322,5 +328,17 @@ describe("bad dates", () => {
         error: { code: "INVALID_DATE" },
       });
     }
+  });
+});
+
+describe("addOnUnitPrice", () => {
+  const insurance = { price: 80_000, modelPrices: { versys: 260_000 } };
+
+  it("uses the model's own price when it has one", () => {
+    expect(addOnUnitPrice(insurance, "versys")).toBe(260_000);
+  });
+
+  it("falls back to the usual price", () => {
+    expect(addOnUnitPrice(insurance, "wave")).toBe(80_000);
   });
 });

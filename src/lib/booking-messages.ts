@@ -26,5 +26,7 @@ export function bookingErrorMessage(error: ReserveError): string {
     case "ADD_ON_NOT_FOUND":
     case "INVALID_ADD_ON":
       return "One of the extras is no longer available. Please check your extras and try again.";
+    case "TOO_MANY_ADD_ON":
+      return "You've chosen more of one extra than we can offer. Please check your extras and try again.";
   }
 }

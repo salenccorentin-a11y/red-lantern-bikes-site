@@ -56,7 +56,11 @@ A flat online deposit of 1,500,000 per booking, non-refundable. The rest is paid
    **Price cap (decided 11 October 2026):** a rental never costs more than the next tier's minimum length. A 26-day XR150 would be 26 × 350,000 = 9,100,000, but 30 days at the monthly rate is 9,000,000, so it costs 9,000,000. A 6-day Wave Alpha costs the 7-day price, 1,435,000. A customer never pays more for fewer days.
 4. **Deposit and the total.** The 1,500,000 deposit is part of the rental total. Balance at pickup = total − deposit.
 5. **Deposit on short rentals.** The deposit is capped at the rental total. A 1-day Wave Alpha (240,000) has a 240,000 deposit and nothing due at pickup.
-6. **Add-ons.** Not decided yet. They are editable records in the staff settings, using the prototype's placeholders until the real list and prices arrive. The booking page does not go live before then.
+6. **Add-ons** (decided 17 Oct 2026). Editable in staff settings; the seed sets:
+   - **Full coverage insurance**, optional, per day, priced by bike size: 80,000 VND (110–125cc: Wave Alpha, GD110, EN125, CB125, NVX125), 130,000 (150cc: Winner X, GSX-R150, XR150), 180,000 (CB150X, CRF150, WR155R), 260,000 (Versys X300). That's the owner's $3 / $5 / $7 / $10, rounded at 26,000 VND per USD. Stored as a price per model (`AddOnModelPrice`). **Still to confirm:** the excess and what it doesn't cover.
+   - **Premium helmet**, 500,000 VND one-off each, rented and returned, up to 2 per booking.
+   - **Motorcycle gloves**, 500,000 VND one-off per pair, rented and returned, up to 2 per booking.
+   - Phone mount, luggage rack and straps are included free, so they are not add-ons. The prototype's placeholder add-ons are switched off.
 7. **Day count.** Customers choose dates only, no times. Both the pick-up and drop-off days count: 10 to 17 October is 8 days.
 
 Other booking and payment decisions are in `docs/decisions.md`.

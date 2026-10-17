@@ -4,6 +4,7 @@ import {
   addBike,
   addStaff,
   saveAddOn,
+  saveAddOnModelPrices,
   setBikeRetired,
   updateBike,
   updateModelPricing,
@@ -116,6 +117,51 @@ describe("add-ons", () => {
       price: 70_000,
       active: false,
     });
+  });
+
+  it("saves the note for customers and the maximum per booking", async () => {
+    const gloves = await db.addOn.findUniqueOrThrow({ where: { slug: "gloves" } });
+    expect(
+      await saveAddOn(db, {
+        id: gloves.id,
+        name: "Gloves",
+        pricing: "FLAT",
+        price: "500000",
+        description: "  Returned with the bike.  ",
+        maxQuantity: "3",
+        active: "on",
+      }),
+    ).toEqual({ ok: true });
+    expect(await db.addOn.findUniqueOrThrow({ where: { id: gloves.id } })).toMatchObject({
+      description: "Returned with the bike.",
+      maxQuantity: 3,
+    });
+  });
+
+  it("sets, changes and clears a price for one bike", async () => {
+    const insurance = await db.addOn.findUniqueOrThrow({ where: { slug: "insurance" } });
+    const priceFor = async (bikeModelId: string) =>
+      (
+        await db.addOnModelPrice.findUnique({
+          where: { addOnId_bikeModelId: { addOnId: insurance.id, bikeModelId } },
+        })
+      )?.price;
+
+    expect(
+      await saveAddOnModelPrices(db, insurance.id, {
+        [fleet.versys.id]: "300000",
+        [fleet.cb150x.id]: "",
+      }),
+    ).toEqual({ ok: true });
+    expect(await priceFor(fleet.versys.id)).toBe(300_000);
+    expect(await priceFor(fleet.cb150x.id)).toBeUndefined();
+    expect(await priceFor(fleet.xr150.id)).toBe(130_000); // not in the form: unchanged
+  });
+
+  it("refuses a price that isn't a whole number", async () => {
+    const insurance = await db.addOn.findUniqueOrThrow({ where: { slug: "insurance" } });
+    const result = await saveAddOnModelPrices(db, insurance.id, { [fleet.versys.id]: "12.5" });
+    expect(result.ok).toBe(false);
   });
 });
 

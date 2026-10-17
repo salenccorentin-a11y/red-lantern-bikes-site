@@ -19,11 +19,23 @@ export type CatalogModel = {
   oneWayFees: Partial<Record<OneWayCity, number>>;
 };
 
+export type CatalogAddOn = {
+  id: string;
+  name: string;
+  description: string | null;
+  pricing: "PER_DAY" | "FLAT";
+  /** For models without their own price. */
+  price: number;
+  /** Price per model id, where it differs from `price`. */
+  modelPrices: Record<string, number>;
+  maxQuantity: number;
+};
+
 export type Catalog = {
   models: CatalogModel[];
   /** One-way routes open for online booking. */
   routes: { toCity: OneWayCity; minDays: number }[];
-  addOns: { id: string; name: string; pricing: "PER_DAY" | "FLAT"; price: number }[];
+  addOns: CatalogAddOn[];
   depositVnd: number;
   usdToVndRate: number;
 };
@@ -38,7 +50,11 @@ export async function loadCatalog(db: PrismaClient): Promise<Catalog> {
     db.route.findMany({
       where: { fromCity: "SAIGON", active: true, bookableOnline: true, transitDays: { not: null } },
     }),
-    db.addOn.findMany({ where: { active: true }, orderBy: { sortOrder: "asc" } }),
+    db.addOn.findMany({
+      where: { active: true },
+      orderBy: { sortOrder: "asc" },
+      include: { modelPrices: true },
+    }),
     getSettings(db),
   ]);
 
@@ -66,7 +82,15 @@ export async function loadCatalog(db: PrismaClient): Promise<Catalog> {
     routes: routes.flatMap((r) =>
       r.toCity === "SAIGON" ? [] : [{ toCity: r.toCity, minDays: r.minDays }],
     ),
-    addOns: addOns.map((a) => ({ id: a.id, name: a.name, pricing: a.pricing, price: a.price })),
+    addOns: addOns.map((a) => ({
+      id: a.id,
+      name: a.name,
+      description: a.description,
+      pricing: a.pricing,
+      price: a.price,
+      modelPrices: Object.fromEntries(a.modelPrices.map((p) => [p.bikeModelId, p.price])),
+      maxQuantity: a.maxQuantity,
+    })),
     depositVnd: settings.depositVnd,
     usdToVndRate: settings.usdToVndRate,
   };

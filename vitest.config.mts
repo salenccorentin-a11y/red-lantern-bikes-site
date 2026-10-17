@@ -26,6 +26,10 @@ export default defineConfig({
           setupFiles: ["dotenv/config"],
           // Test files share one database, so run them one after another.
           fileParallelism: false,
+          // Each test re-seeds the database (about 5 seconds on Windows with
+          // Docker), so allow more than the 5-second default.
+          testTimeout: 20_000,
+          hookTimeout: 30_000,
         },
       },
     ],

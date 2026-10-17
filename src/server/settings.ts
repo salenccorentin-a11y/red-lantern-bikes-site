@@ -102,6 +102,19 @@ const addOn = z.object({
   name: z.string().trim().min(2, "Add-on name: at least 2 characters.").max(80),
   pricing: z.enum(["PER_DAY", "FLAT"]),
   price: vnd("Add-on price", 0, 10_000_000),
+  description: z
+    .string()
+    .trim()
+    .max(200, "Note for customers: at most 200 characters.")
+    .optional()
+    // Left out: unchanged. Empty: no note.
+    .transform((v) => (v === undefined ? undefined : v || null)),
+  maxQuantity: z.coerce
+    .number()
+    .int()
+    .min(1, "Max per booking: at least 1.")
+    .max(5, "Max per booking: at most 5.")
+    .optional(),
   active: checkbox,
 });
 
@@ -110,7 +123,7 @@ export async function saveAddOn(db: PrismaClient, raw: unknown): Promise<Result>
   if (!parsed.success) return fail(firstIssue(parsed.error));
   const { id, ...data } = parsed.data;
   if (id) {
-    await db.addOn.update({ where: { id }, data: { ...data, description: null } });
+    await db.addOn.update({ where: { id }, data });
     return ok;
   }
   const base =
@@ -126,6 +139,42 @@ export async function saveAddOn(db: PrismaClient, raw: unknown): Promise<Result>
       return fail("An add-on with a similar name exists. Try another name.");
     throw error;
   }
+  return ok;
+}
+
+/**
+ * Prices of one add-on for particular models (e.g. insurance by bike size).
+ * `prices` maps model id to the form value; blank means "use the add-on's
+ * usual price".
+ */
+export async function saveAddOnModelPrices(
+  db: PrismaClient,
+  addOnId: string,
+  prices: Record<string, string>,
+): Promise<Result> {
+  const updates: { bikeModelId: string; price: number | null }[] = [];
+  for (const [bikeModelId, value] of Object.entries(prices)) {
+    if (value.trim() === "") {
+      updates.push({ bikeModelId, price: null });
+      continue;
+    }
+    const price = vnd("Price", 0, 10_000_000).safeParse(value);
+    if (!price.success) return fail(firstIssue(price.error));
+    updates.push({ bikeModelId, price: price.data });
+  }
+  await db.$transaction(async (tx) => {
+    for (const { bikeModelId, price } of updates) {
+      if (price === null) {
+        await tx.addOnModelPrice.deleteMany({ where: { addOnId, bikeModelId } });
+      } else {
+        await tx.addOnModelPrice.upsert({
+          where: { addOnId_bikeModelId: { addOnId, bikeModelId } },
+          create: { addOnId, bikeModelId, price },
+          update: { price },
+        });
+      }
+    }
+  });
   return ok;
 }
 

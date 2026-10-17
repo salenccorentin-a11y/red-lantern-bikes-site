@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { formatVnd } from "@/lib/money";
-import { quote } from "@/lib/pricing";
+import { addOnUnitPrice, quote } from "@/lib/pricing";
 import type { Catalog } from "@/server/catalog";
 import { createWalkIn, type WalkInState } from "./actions";
 import styles from "../../staff.module.css";
@@ -19,7 +19,7 @@ export function WalkInForm({ catalog, bikes, today }: Props) {
   const [dropoff, setDropoff] = useState<"SAIGON" | "HANOI" | "DA_NANG">("SAIGON");
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState("");
-  const [addOnIds, setAddOnIds] = useState<string[]>([]);
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
 
   const model = catalog.models.find((m) => m.id === modelId);
   const route = dropoff === "SAIGON" ? null : catalog.routes.find((r) => r.toCity === dropoff);
@@ -34,13 +34,13 @@ export function WalkInForm({ catalog, bikes, today }: Props) {
               ? null
               : { minDays: route?.minDays ?? 1, feeVnd: model.oneWayFees[dropoff] ?? null },
           addOns: catalog.addOns
-            .filter((a) => addOnIds.includes(a.id))
+            .filter((a) => (quantities[a.id] ?? 0) > 0)
             .map((a) => ({
               addOnId: a.id,
               name: a.name,
               pricing: a.pricing,
-              unitPrice: a.price,
-              quantity: 1,
+              unitPrice: addOnUnitPrice(a, model.id),
+              quantity: quantities[a.id],
             })),
           depositVnd: catalog.depositVnd,
         })
@@ -124,19 +124,20 @@ export function WalkInForm({ catalog, bikes, today }: Props) {
         <fieldset className={styles.row} style={{ border: 0, padding: 0, margin: 0 }}>
           {catalog.addOns.map((a) => (
             <label key={a.id}>
-              <input
-                type="checkbox"
-                name="addOnIds"
-                value={a.id}
-                checked={addOnIds.includes(a.id)}
-                onChange={() =>
-                  setAddOnIds((ids) =>
-                    ids.includes(a.id) ? ids.filter((x) => x !== a.id) : [...ids, a.id],
-                  )
-                }
-              />{" "}
-              {a.name} ({formatVnd(a.price)}
-              {a.pricing === "PER_DAY" ? "/day" : ""})
+              <select
+                name={`addOn:${a.id}`}
+                value={quantities[a.id] ?? 0}
+                onChange={(e) => setQuantities((q) => ({ ...q, [a.id]: Number(e.target.value) }))}
+              >
+                {Array.from({ length: a.maxQuantity + 1 }, (_, n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
+                ))}
+              </select>{" "}
+              {a.name} ({formatVnd(model ? addOnUnitPrice(a, model.id) : a.price)}
+              {a.pricing === "PER_DAY" ? "/day" : " each"}
+              {!model && Object.keys(a.modelPrices).length > 0 ? ", depends on bike" : ""})
             </label>
           ))}
         </fieldset>

@@ -44,11 +44,11 @@ export const FAQ: Faq[] = [
     ],
   },
   {
-    // Confirm: the old site says insurance is "an optional extra at a small additional cost".
+    // To confirm: the excess and what isn't covered, then say it here too.
     id: "insurance",
     question: "Is insurance included?",
     answer: [
-      "Insurance is available as an optional extra at a small cost. Ask us about it when you book or pick up.",
+      "Full coverage insurance for damage and accidents is an optional extra, priced per day by bike size: 80,000₫ for 110 to 125cc bikes, 130,000₫ for 150cc, 180,000₫ for the CB150X, CRF150 and WR155R, and 260,000₫ for the Kawasaki Versys X300. Add it when you book.",
     ],
   },
   {

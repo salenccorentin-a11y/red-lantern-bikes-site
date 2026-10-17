@@ -47,6 +47,7 @@ export type ReserveError =
   | TripError
   | { code: "MODEL_NOT_FOUND" }
   | { code: "ADD_ON_NOT_FOUND"; addOnId: string }
+  | { code: "TOO_MANY_ADD_ON"; addOnId: string }
   | { code: "START_IN_PAST" }
   | { code: "NO_BIKE_AVAILABLE" };
 
@@ -77,16 +78,23 @@ export async function reserveBike(db: PrismaClient, input: ReserveInput) {
 
   const addOnRows = await db.addOn.findMany({
     where: { id: { in: input.addOns.map((a) => a.addOnId) }, active: true },
+    include: { modelPrices: { where: { bikeModelId: model.id } } },
   });
   const addOns: AddOnChoice[] = [];
   for (const choice of input.addOns) {
     const row = addOnRows.find((a) => a.id === choice.addOnId);
     if (!row) return fail({ code: "ADD_ON_NOT_FOUND", addOnId: choice.addOnId });
+    // Each extra once, up to its limit (listing it twice would get round that).
+    const repeated = addOns.some((a) => a.addOnId === row.id);
+    if (repeated || choice.quantity > row.maxQuantity) {
+      return fail({ code: "TOO_MANY_ADD_ON", addOnId: row.id });
+    }
     addOns.push({
       addOnId: row.id,
       name: row.name,
       pricing: row.pricing,
-      unitPrice: row.price,
+      // This model's own price if it has one, e.g. insurance on a bigger bike.
+      unitPrice: row.modelPrices[0]?.price ?? row.price,
       quantity: choice.quantity,
     });
   }

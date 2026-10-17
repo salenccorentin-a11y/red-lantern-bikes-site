@@ -31,9 +31,10 @@ model BikeModel {
   active      Boolean @default(true)
   sortOrder   Int     @default(0)
 
-  bikes     Bike[]
-  routeFees RouteFee[]
-  bookings  Booking[]
+  bikes       Bike[]
+  routeFees   RouteFee[]
+  addOnPrices AddOnModelPrice[]
+  bookings    Booking[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -155,12 +156,17 @@ model AddOn {
   id          String       @id @default(cuid())
   slug        String       @unique
   name        String
+  // Short note shown to customers under the name, e.g. what insurance covers.
   description String?
   pricing     AddOnPricing
+  // Price for any model without its own row in AddOnModelPrice.
   price       Int
+  // How many one booking can take, e.g. 2 helmets (rider and passenger).
+  maxQuantity Int          @default(1)
   active      Boolean      @default(true)
   sortOrder   Int          @default(0)
 
+  modelPrices   AddOnModelPrice[]
   bookingAddOns BookingAddOn[]
 
   createdAt DateTime @default(now())
@@ -270,6 +276,19 @@ model Booking {
   @@index([status, holdExpiresAt])
   @@index([startDate])
   @@index([bikeId])
+}
+
+// A different price for one bike model, e.g. insurance costs more on bigger
+// bikes. Models without a row pay AddOn.price.
+model AddOnModelPrice {
+  id          String    @id @default(cuid())
+  addOnId     String
+  addOn       AddOn     @relation(fields: [addOnId], references: [id], onDelete: Cascade)
+  bikeModelId String
+  bikeModel   BikeModel @relation(fields: [bikeModelId], references: [id])
+  price       Int
+
+  @@unique([addOnId, bikeModelId])
 }
 
 model BookingAddOn {

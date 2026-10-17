@@ -81,8 +81,15 @@ export default function TermsPage() {
               arranging repairs.
             </li>
             <li>
-              To confirm: who pays for damage, theft, traffic fines and repairs during the rental,
-              and what optional insurance covers.
+              Optional full coverage insurance, added when you book, covers damage to the bike and
+              accidents. It is charged per day, by bike size.
+            </li>
+            <li>
+              To confirm: the insurance excess and what it does not cover, and who pays for damage,
+              theft, traffic fines and repairs without insurance.
+            </li>
+            <li>
+              Rented premium helmets and gloves are returned with the bike at the end of the rental.
             </li>
           </ul>
 

@@ -13,7 +13,10 @@ const walkIn = z.object({
   dropoffCity: z.enum(["SAIGON", "HANOI", "DA_NANG"]),
   startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Choose a pick-up date."),
   endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Choose a drop-off date."),
-  addOnIds: z.array(z.string()).max(20),
+  // From the "addOn:<id>" selects: how many of each extra.
+  addOns: z
+    .array(z.object({ addOnId: z.string().min(1), quantity: z.number().int().min(1).max(5) }))
+    .max(20),
   name: z.string().trim().min(2, "Enter the customer's name.").max(100),
   phone: z.string().trim().max(40).optional(),
   email: z.union([z.email("Check the email address."), z.literal("")]).optional(),
@@ -30,7 +33,11 @@ export async function createWalkIn(_previous: WalkInState, form: FormData): Prom
     dropoffCity: form.get("dropoffCity"),
     startDate: form.get("startDate"),
     endDate: form.get("endDate"),
-    addOnIds: form.getAll("addOnIds"),
+    addOns: [...form.entries()].flatMap(([key, value]) =>
+      key.startsWith("addOn:") && Number(value) > 0
+        ? [{ addOnId: key.slice("addOn:".length), quantity: Number(value) }]
+        : [],
+    ),
     name: form.get("name"),
     phone: form.get("phone") || undefined,
     email: form.get("email") || undefined,
@@ -47,7 +54,7 @@ export async function createWalkIn(_previous: WalkInState, form: FormData): Prom
     dropoffCity: input.dropoffCity,
     startDate: input.startDate,
     endDate: input.endDate,
-    addOns: input.addOnIds.map((addOnId) => ({ addOnId, quantity: 1 })),
+    addOns: input.addOns,
     customer: {
       name: input.name,
       phone: input.phone,

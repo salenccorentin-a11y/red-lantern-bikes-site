@@ -145,36 +145,64 @@ export const ROUTES: {
   { fromCity: "DA_NANG", toCity: "SAIGON", minDays: 7, transitDays: null, bookableOnline: false },
 ];
 
-// Placeholders from the prototype until the real list arrives.
+// Extras, from the owner (17 Oct 2026). The helmet and gloves are rented for
+// the trip and handed back. Phone mount, luggage rack and straps are free
+// (BUSINESS.included), so they are not extras.
 export const ADD_ONS: {
   slug: string;
   name: string;
   description: string;
   pricing: AddOnPricing;
+  /** For models not listed in modelPrices. */
   price: number;
+  maxQuantity: number;
+  /** Price per model slug, where it differs from `price`. */
+  modelPrices?: Record<string, number>;
 }[] = [
   {
-    slug: "second-helmet",
-    name: "Second helmet",
-    description: "Placeholder price",
+    slug: "insurance",
+    name: "Full coverage insurance",
+    // To confirm: the excess and what isn't covered (see the rental terms).
+    description: "Covers damage to the bike and accidents. Priced by bike size.",
     pricing: "PER_DAY",
-    price: 20_000,
+    // About $3, $5, $7 and $10 a day, rounded (26,000 VND per USD).
+    price: 80_000,
+    maxQuantity: 1,
+    modelPrices: {
+      "wave-alpha-110": 80_000,
+      "suzuki-gd110": 80_000,
+      "suzuki-en125": 80_000,
+      "honda-cb125": 80_000,
+      "yamaha-nvx125": 80_000,
+      "honda-winner-x-150": 130_000,
+      "suzuki-gsx-r150": 130_000,
+      "honda-xr150": 130_000,
+      "honda-cb150x": 180_000,
+      "honda-crf150": 180_000,
+      "yamaha-wr155r": 180_000,
+      "kawasaki-versys-x300": 260_000,
+    },
   },
   {
-    slug: "phone-mount",
-    name: "Phone mount",
-    description: "Placeholder price",
+    slug: "premium-helmet",
+    name: "Premium helmet",
+    description: "Rented for your trip, returned with the bike. One each for rider and passenger.",
     pricing: "FLAT",
-    price: 50_000,
+    price: 500_000,
+    maxQuantity: 2,
   },
   {
-    slug: "luggage-rack",
-    name: "Luggage rack and straps",
-    description: "Placeholder price",
+    slug: "gloves",
+    name: "Motorcycle gloves",
+    description: "Rented for your trip, returned with the bike. Price per pair.",
     pricing: "FLAT",
-    price: 150_000,
+    price: 500_000,
+    maxQuantity: 2,
   },
 ];
+
+/** The prototype's placeholder extras. Hidden from new bookings if present. */
+export const RETIRED_ADD_ONS = ["second-helmet", "phone-mount", "luggage-rack"];
 
 /** Placeholder plate until the real plates are entered, e.g. "TEMP-HONDA-XR150-03". */
 export function placeholderPlate(modelSlug: string, n: number) {

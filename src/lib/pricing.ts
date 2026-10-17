@@ -170,3 +170,14 @@ export function quote(input: QuoteInput): QuoteResult {
     },
   };
 }
+
+/**
+ * What an extra costs on a given bike: the model's own price if it has one
+ * (insurance costs more on bigger bikes), otherwise the extra's usual price.
+ */
+export function addOnUnitPrice(
+  addOn: { price: number; modelPrices: Record<string, number> },
+  modelId: string,
+): number {
+  return addOn.modelPrices[modelId] ?? addOn.price;
+}

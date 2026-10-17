@@ -10,8 +10,8 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 import { dropoffLabel } from "@/lib/cities";
 import { formatDisplayDate } from "@/lib/dates";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
-import { quote, type AddOnChoice } from "@/lib/pricing";
-import type { Catalog, CatalogModel, OneWayCity } from "@/server/catalog";
+import { addOnUnitPrice, quote, type AddOnChoice } from "@/lib/pricing";
+import type { Catalog, CatalogAddOn, CatalogModel, OneWayCity } from "@/server/catalog";
 import { createOnlineBooking, type BookingFormState } from "./actions";
 import styles from "./book.module.css";
 
@@ -34,7 +34,8 @@ export function BookingForm(props: {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [modelId, setModelId] = useState<string | null>(props.initialModelId ?? null);
-  const [addOnIds, setAddOnIds] = useState<string[]>([]);
+  // How many of each extra, by id. Extras not chosen are left out.
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -101,15 +102,29 @@ export function BookingForm(props: {
   const model = picked && freeCount(picked) !== 0 ? picked : null;
 
   // ── Prices ───────────────────────────────────────────────────────────────
-  const chosenAddOns: AddOnChoice[] = catalog.addOns
-    .filter((a) => addOnIds.includes(a.id))
-    .map((a) => ({
-      addOnId: a.id,
-      name: a.name,
-      pricing: a.pricing,
-      unitPrice: a.price,
-      quantity: 1,
-    }));
+  const chosenAddOns: AddOnChoice[] = model
+    ? catalog.addOns
+        .filter((a) => (quantities[a.id] ?? 0) > 0)
+        .map((a) => ({
+          addOnId: a.id,
+          name: a.name,
+          pricing: a.pricing,
+          unitPrice: addOnUnitPrice(a, model.id),
+          quantity: quantities[a.id],
+        }))
+    : [];
+
+  function setQuantity(addOnId: string, quantity: number) {
+    setQuantities((q) => ({ ...q, [addOnId]: quantity }));
+  }
+
+  // The price next to an extra: for the chosen bike, or "from" the cheapest.
+  function extraPrice(a: CatalogAddOn): string {
+    if (model) return formatVnd(addOnUnitPrice(a, model.id));
+    const prices = catalog.models.map((m) => addOnUnitPrice(a, m.id));
+    const low = Math.min(...prices);
+    return low === Math.max(...prices) ? formatVnd(low) : `from ${formatVnd(low)}`;
+  }
 
   const priceFor = (m: CatalogModel, addOns: AddOnChoice[] = []) =>
     datesReady
@@ -142,7 +157,7 @@ export function BookingForm(props: {
         startDate,
         endDate,
         modelId: model.id,
-        addOns: addOnIds.map((addOnId) => ({ addOnId, quantity: 1 })),
+        addOns: chosenAddOns.map((a) => ({ addOnId: a.addOnId, quantity: a.quantity })),
         name,
         email,
         phone: phone || undefined,
@@ -309,24 +324,53 @@ export function BookingForm(props: {
         {catalog.addOns.length > 0 && (
           <fieldset className={styles.section}>
             <legend className={styles.heading}>4. Extras</legend>
-            {catalog.addOns.map((a) => (
-              <label key={a.id} className={styles.addon}>
-                <input
-                  type="checkbox"
-                  checked={addOnIds.includes(a.id)}
-                  onChange={() =>
-                    setAddOnIds((ids) =>
-                      ids.includes(a.id) ? ids.filter((x) => x !== a.id) : [...ids, a.id],
-                    )
-                  }
-                />
-                <span className={styles.grow}>{a.name}</span>
-                <span className={styles.small}>
-                  {a.pricing === "PER_DAY" ? "per day" : "one-off"}
+            {catalog.addOns.map((a) => {
+              const quantity = quantities[a.id] ?? 0;
+              const label = (
+                <span className={styles.grow}>
+                  {a.name}
+                  {a.description && <small className={styles.addonNote}>{a.description}</small>}
                 </span>
-                <b>{formatVnd(a.price)}</b>
-              </label>
-            ))}
+              );
+              const price = (
+                <span className={styles.addonPrice}>
+                  <b>{extraPrice(a)}</b>
+                  <small>{a.pricing === "PER_DAY" ? "per day" : "one-off, each"}</small>
+                </span>
+              );
+              // One allowed: a tick box. More (helmets, gloves): how many.
+              return a.maxQuantity === 1 ? (
+                <label key={a.id} className={styles.addon}>
+                  <input
+                    type="checkbox"
+                    checked={quantity > 0}
+                    onChange={(e) => setQuantity(a.id, e.target.checked ? 1 : 0)}
+                  />
+                  {label}
+                  {price}
+                </label>
+              ) : (
+                <div key={a.id} className={styles.addon}>
+                  <select
+                    aria-label={`How many: ${a.name}`}
+                    value={quantity}
+                    onChange={(e) => setQuantity(a.id, Number(e.target.value))}
+                    className={styles.qty}
+                  >
+                    {Array.from({ length: a.maxQuantity + 1 }, (_, n) => (
+                      <option key={n} value={n}>
+                        {n}
+                      </option>
+                    ))}
+                  </select>
+                  {label}
+                  {price}
+                </div>
+              );
+            })}
+            {!model && catalog.addOns.some((a) => Object.keys(a.modelPrices).length > 0) && (
+              <p className={styles.small}>Choose a bike to see its insurance price.</p>
+            )}
           </fieldset>
         )}
 
@@ -407,7 +451,11 @@ export function BookingForm(props: {
               <Line label="One-way fee" value={formatVnd(priced.quote.oneWayFeeVnd)} />
             )}
             {priced.quote.addOnLines.map((l) => (
-              <Line key={l.addOnId} label={l.name} value={formatVnd(l.totalVnd)} />
+              <Line
+                key={l.addOnId}
+                label={l.quantity > 1 ? `${l.name} × ${l.quantity}` : l.name}
+                value={formatVnd(l.totalVnd)}
+              />
             ))}
             <div className={`${styles.line} ${styles.total}`}>
               <span>Total</span>

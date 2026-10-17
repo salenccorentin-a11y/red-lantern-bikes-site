@@ -6,6 +6,7 @@ import {
   addBike,
   addStaff,
   saveAddOn,
+  saveAddOnModelPrices,
   setBikeRetired,
   updateBike,
   updateModelPricing,
@@ -41,6 +42,16 @@ export async function saveModelAction(form: FormData) {
 export async function saveAddOnAction(form: FormData) {
   await requireOwner();
   back("/staff/settings/add-ons", await saveAddOn(db, fields(form)), "Add-on saved.");
+}
+
+export async function saveAddOnPricesAction(form: FormData) {
+  await requireOwner();
+  const prices: Record<string, string> = {};
+  for (const [key, value] of form.entries()) {
+    if (key.startsWith("price:")) prices[key.slice(6)] = String(value);
+  }
+  const result = await saveAddOnModelPrices(db, String(form.get("addOnId")), prices);
+  back("/staff/settings/add-ons", result, `${form.get("addOnName")} prices saved.`);
 }
 
 export async function saveBikeAction(form: FormData) {
