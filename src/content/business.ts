@@ -14,8 +14,11 @@ export const BUSINESS = {
   postalCode: null as string | null,
   /** For the "Open in Google Maps" link. */
   mapsQuery: "235B/A11/9 Nguyen Van Cu, District 1, Ho Chi Minh City",
-  /** Opening hours text. Unknown: the old site only says "open every day". */
-  hours: "Open every day",
+  /** Opening hours, shown on the site. */
+  hours: "Open every day, 8am to 7pm",
+  /** The same hours for search engines (24-hour clock, every day). */
+  opens: "08:00",
+  closes: "19:00",
   /** International format, e.g. "+84 90 123 4567". */
   phone: "+84 382 681 859" as string | null,
   /** International format without spaces or "+", e.g. "84901234567", for wa.me links. */
@@ -48,6 +51,7 @@ export const BUSINESS = {
     "Luggage rack and bungee cords",
     "Printed map of our favourite roads",
     "Roadside assistance anywhere in Vietnam, by WhatsApp",
+    "Free delivery to your hotel in or near District 1",
   ],
 } as const;
 

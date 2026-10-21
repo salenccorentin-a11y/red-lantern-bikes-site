@@ -12,7 +12,7 @@ export type Tour = {
   route: string | null;
   duration: string | null;
   groupSize: string | null;
-  /** e.g. "From $500 per person" */
+  /** e.g. "From $500" or "$100 a day" */
   priceFrom: string | null;
   highlights: string[];
 };
@@ -46,9 +46,9 @@ export const TOURS: Tour[] = [
       "A gentle introduction to riding in Vietnam, with plenty of stops to eat.",
     ],
     route: null,
-    duration: null,
+    duration: "3 to 7 days",
     groupSize: "1 to 6 riders",
-    priceFrom: null,
+    priceFrom: "$100 a day",
     highlights: ["Floating markets", "River ferries", "Village back roads"],
   },
   {
@@ -73,9 +73,9 @@ export const TOURS: Tour[] = [
       "Ride it guided, or self-guided on a one-way rental with our route notes and roadside assistance the whole way.",
     ],
     route: "Saigon – Da Lat – Nha Trang – Hoi An – Hue – Phong Nha – Ninh Binh – Hanoi",
-    duration: "About 3 to 4 weeks",
+    duration: "21 to 30 days",
     groupSize: "1 to 6 riders",
-    priceFrom: null,
+    priceFrom: "$120 a day",
     highlights: ["Da Lat", "Hai Van Pass", "Hoi An and Hue", "Phong Nha caves", "Ninh Binh"],
   },
 ];

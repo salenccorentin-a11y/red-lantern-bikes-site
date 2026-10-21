@@ -57,7 +57,7 @@ A flat online deposit of 1,500,000 per booking, non-refundable. The rest is paid
 4. **Deposit and the total.** The 1,500,000 deposit is part of the rental total. Balance at pickup = total − deposit.
 5. **Deposit on short rentals.** The deposit is capped at the rental total. A 1-day Wave Alpha (240,000) has a 240,000 deposit and nothing due at pickup.
 6. **Add-ons** (decided 17 Oct 2026). Editable in staff settings; the seed sets:
-   - **Full coverage insurance**, optional, per day, priced by bike size: 80,000 VND (110–125cc: Wave Alpha, GD110, EN125, CB125, NVX125), 130,000 (150cc: Winner X, GSX-R150, XR150), 180,000 (CB150X, CRF150, WR155R), 260,000 (Versys X300). That's the owner's $3 / $5 / $7 / $10, rounded at 26,000 VND per USD. Stored as a price per model (`AddOnModelPrice`). **Still to confirm:** the excess and what it doesn't cover.
+   - **Full coverage insurance**, optional, per day, priced by bike size: 80,000 VND (110–125cc: Wave Alpha, GD110, EN125, CB125, NVX125), 130,000 (150cc: Winner X, GSX-R150, XR150), 180,000 (CB150X, CRF150, WR155R), 260,000 (Versys X300). That's the owner's $3 / $5 / $7 / $10, rounded at 26,000 VND per USD. Stored as a price per model (`AddOnModelPrice`). Covers accidents, mechanical problems and flat tyres; not theft or loss of the bike, police problems or breaking the law (owner, 21 Oct 2026). Without insurance the shop covers engine failures only.
    - **Premium helmet**, 500,000 VND one-off each, rented and returned, up to 2 per booking.
    - **Motorcycle gloves**, 500,000 VND one-off per pair, rented and returned, up to 2 per booking.
    - Phone mount, luggage rack and straps are included free, so they are not add-ons. The prototype's placeholder add-ons are switched off.

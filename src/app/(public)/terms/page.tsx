@@ -11,9 +11,8 @@ export const metadata: Metadata = {
   description: "The terms for renting a motorbike from Red Lantern Bikes in Saigon.",
 };
 
-// DRAFT. Written from the booking rules decided for the new site. Have it
-// reviewed (ideally by a Vietnamese lawyer) before launch, and fill in the
-// points marked "To confirm".
+// DRAFT. Written from the booking rules and the owner's answers (21 Oct 2026).
+// Have it reviewed, ideally by a Vietnamese lawyer, before launch.
 
 export default function TermsPage() {
   return (
@@ -24,10 +23,7 @@ export default function TermsPage() {
       />
       <main className={styles.page}>
         <div className={styles.prose}>
-          <p className={styles.draftNote}>
-            Draft: to be reviewed before the site goes live. Items marked &quot;To confirm&quot; are
-            not decided yet.
-          </p>
+          <p className={styles.draftNote}>Draft: to be reviewed before the site goes live.</p>
 
           <h2>1. Who we are</h2>
           <p>
@@ -60,9 +56,10 @@ export default function TermsPage() {
               <Link href="/faq#licence">which licence do I need</Link>. You are responsible for
               riding legally.
             </li>
+            <li>You must be 18 or older.</li>
             <li>
-              To confirm: minimum age, documents to show at pick-up, and whether a security deposit
-              or document is held during the rental.
+              At pick-up you leave a security deposit: your passport, or cash of US$300 for a
+              scooter or US$500 for a motorcycle. It is returned when you bring the bike back.
             </li>
           </ul>
 
@@ -81,12 +78,13 @@ export default function TermsPage() {
               arranging repairs.
             </li>
             <li>
-              Optional full coverage insurance, added when you book, covers damage to the bike and
-              accidents. It is charged per day, by bike size.
+              Optional full coverage insurance, added when you book, is charged per day by bike
+              size. It covers accidents, mechanical problems and flat tyres. It does not cover theft
+              or loss of the bike, or any problem with the police or from breaking the law.
             </li>
             <li>
-              To confirm: the insurance excess and what it does not cover, and who pays for damage,
-              theft, traffic fines and repairs without insurance.
+              Without insurance, we cover engine failures only. Theft, accidents and all other
+              repairs are paid by the rider.
             </li>
             <li>
               Rented premium helmets and gloves are returned with the bike at the end of the rental.
@@ -96,7 +94,11 @@ export default function TermsPage() {
           <h2>6. Returning the bike</h2>
           <ul>
             <li>Return the bike on the agreed day, at our shop or the agreed drop-off point.</li>
-            <li>To confirm: late returns, fuel level on return, and cleaning.</li>
+            <li>
+              Late returns are charged for each extra day at the daily rate in your rental contract,
+              added at the end of the rental.
+            </li>
+            <li>We don&apos;t check the fuel level or ask you to clean the bike.</li>
           </ul>
 
           <h2>7. Contact</h2>

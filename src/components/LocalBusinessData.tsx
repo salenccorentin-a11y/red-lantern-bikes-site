@@ -1,7 +1,6 @@
 // Structured data that tells search engines (Google Maps and local results)
-// who we are and where to find us. Only facts we know go in; unknown phone,
-// email and opening hours are left out until they're filled in
-// src/content/business.ts. No star rating: search engines ignore ratings a
+// who we are, where to find us and when we're open. Only facts we know go in;
+// anything null in src/content/business.ts (postcode, public email) is left out. No star rating: search engines ignore ratings a
 // business publishes about itself.
 
 import { BUSINESS, mapsLink } from "@/content/business";
@@ -29,6 +28,12 @@ export function LocalBusinessData() {
     priceRange: "₫₫",
     ...(BUSINESS.phone && { telephone: BUSINESS.phone }),
     ...(BUSINESS.email && { email: BUSINESS.email }),
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: BUSINESS.opens,
+      closes: BUSINESS.closes,
+    },
     sameAs: Object.values(BUSINESS.social).filter(Boolean),
   };
   return (

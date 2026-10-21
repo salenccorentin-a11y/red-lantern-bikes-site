@@ -44,11 +44,20 @@ export const FAQ: Faq[] = [
     ],
   },
   {
-    // To confirm: the excess and what isn't covered, then say it here too.
     id: "insurance",
     question: "Is insurance included?",
     answer: [
-      "Full coverage insurance for damage and accidents is an optional extra, priced per day by bike size: 80,000₫ for 110 to 125cc bikes, 130,000₫ for 150cc, 180,000₫ for the CB150X, CRF150 and WR155R, and 260,000₫ for the Kawasaki Versys X300. Add it when you book.",
+      "Full coverage insurance is an optional extra, priced per day by bike size: 80,000₫ for 110 to 125cc bikes, 130,000₫ for 150cc, 180,000₫ for the CB150X, CRF150 and WR155R, and 260,000₫ for the Kawasaki Versys X300. Add it when you book.",
+      "It covers accidents, mechanical problems and flat tyres. It doesn't cover theft or loss of the bike, or anything to do with the police or breaking the law.",
+      "Without insurance, we cover engine failures only. Accidents, other repairs and theft are paid by the rider.",
+    ],
+  },
+  {
+    id: "security-deposit",
+    question: "Is there a security deposit?",
+    answer: [
+      "Yes, at pick-up: leave your passport with us, or a cash deposit of US$300 for a scooter or US$500 for a motorcycle. You get it back when you return the bike.",
+      "You need to be 18 or older to rent a bike.",
     ],
   },
   {
@@ -85,11 +94,10 @@ export const FAQ: Faq[] = [
     ],
   },
   {
-    // Confirm: the old site mentions hotel delivery in District 1 "for a small fee".
     id: "delivery",
     question: "Can you deliver the bike to my hotel?",
     answer: [
-      "In District 1, yes, for a small fee. Mention it in the note when you book, or message us.",
+      "Yes, for free, in District 1 or close to it. Mention it in the note when you book, or message us.",
     ],
   },
 ];

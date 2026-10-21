@@ -162,8 +162,8 @@ export const ADD_ONS: {
   {
     slug: "insurance",
     name: "Full coverage insurance",
-    // To confirm: the excess and what isn't covered (see the rental terms).
-    description: "Covers damage to the bike and accidents. Priced by bike size.",
+    description:
+      "Covers accidents, mechanical problems and flat tyres. Not covered: theft or loss of the bike, or trouble with the police or breaking the law.",
     pricing: "PER_DAY",
     // About $3, $5, $7 and $10 a day, rounded (26,000 VND per USD).
     price: 80_000,
