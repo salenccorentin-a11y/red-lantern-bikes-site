@@ -7,7 +7,8 @@ import { BikeCard } from "@/components/BikeCard";
 import cardStyles from "@/components/BikeCard.module.css";
 import { LocalBusinessData } from "@/components/LocalBusinessData";
 import { RiderWall } from "@/components/RiderWall";
-import { RouteLine } from "@/components/RouteLine";
+import { ShopMap } from "@/components/ShopMap";
+import { VietnamRoute } from "@/components/VietnamRoute";
 import ui from "@/components/ui.module.css";
 import { ADDRESS_LINE, BUSINESS, mapsLink } from "@/content/business";
 import { ONE_WAY_ROUTE } from "@/content/route";
@@ -71,6 +72,10 @@ export default function Home() {
             sizes="(max-width: 900px) 100vw, 55vw"
             className={styles.heroPhoto}
           />
+          <figure className={styles.heroQuote}>
+            <blockquote>“A journey of a thousand miles begins with a single step.”</blockquote>
+            <figcaption>Lao Tzu</figcaption>
+          </figure>
         </div>
         <div className={styles.heroText}>
           <h1 className={styles.heroTitle}>
@@ -99,14 +104,39 @@ export default function Home() {
       </section>
 
       <section className={`${ui.sectionNight} ${styles.routeBand}`}>
-        <div className={ui.container}>
-          <h2 className={styles.routeTitle}>Ride the length of Vietnam, one way</h2>
-          <RouteLine stops={ONE_WAY_ROUTE} />
-          <p className={styles.routeMore}>
-            <Link href="/one-way" className={styles.routeLink}>
-              How one-way rentals work
-            </Link>
-          </p>
+        <div className={`${ui.container} ${styles.route}`}>
+          <div className={styles.routeIntro}>
+            <h2 className={styles.routeTitle}>Ride the length of Vietnam, one way</h2>
+            <p className={styles.routeLead}>
+              About 2,500 km from Saigon to Hanoi: the highlands of Da Lat, the central coast, the
+              Hai Van Pass and the karst of the north. Leave the bike in Da Nang or Hanoi and we
+              bring it home.
+            </p>
+          </div>
+          <div className={styles.routeMap}>
+            <VietnamRoute />
+          </div>
+          <div className={styles.routeStops}>
+            <ol className={styles.stops}>
+              {ONE_WAY_ROUTE.map((stop, i) => (
+                <li key={stop.city} className={i === 0 ? styles.stopStart : undefined}>
+                  {stop.href ? (
+                    <Link href={stop.href} className={styles.stopCity}>
+                      {stop.city}
+                    </Link>
+                  ) : (
+                    <span className={styles.stopCity}>{stop.city}</span>
+                  )}
+                  <span className={styles.stopNote}>{stop.note}</span>
+                </li>
+              ))}
+            </ol>
+            <p className={styles.routeMore}>
+              <Link href="/one-way" className={styles.routeLink}>
+                How one-way rentals work
+              </Link>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -207,6 +237,7 @@ export default function Home() {
             </p>
           </div>
           <div className={styles.shopCard}>
+            <ShopMap />
             <h3>Visit the shop</h3>
             <p>
               {ADDRESS_LINE}

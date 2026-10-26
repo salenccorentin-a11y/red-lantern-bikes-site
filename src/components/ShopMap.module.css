@@ -1,0 +1,8 @@
+.map {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 0;
+  border-radius: var(--radius-input);
+  background: var(--mist);
+}

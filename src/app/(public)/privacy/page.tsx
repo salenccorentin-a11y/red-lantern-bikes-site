@@ -61,6 +61,10 @@ export default function PrivacyPage() {
           <ul>
             <li>Railway, which hosts our website and database in Singapore.</li>
             <li>Resend, which sends our booking emails.</li>
+            <li>
+              Google, whose map of our shop is shown on the home page. When the map loads, Google
+              receives your request and may set its own cookies, under Google&apos;s privacy policy.
+            </li>
             <li>Your bank or e-wallet provider, when you pay a deposit.</li>
           </ul>
 

@@ -50,6 +50,42 @@
   }
 }
 
+/* A quote over the sky in the photo, on a soft night wash. */
+.heroQuote {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  margin: 0;
+  padding: 20px var(--gutter) 72px;
+  background: linear-gradient(to bottom, rgb(15 27 45 / 0.72), rgb(15 27 45 / 0));
+  color: var(--white);
+}
+
+.heroQuote blockquote {
+  margin: 0;
+  max-width: 24ch;
+  font-size: clamp(1.125rem, 2.1vw, 1.625rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  text-shadow: 0 1px 12px rgb(15 27 45 / 0.45);
+}
+
+.heroQuote figcaption {
+  margin-top: 8px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--star);
+}
+
+@media (min-width: 900px) {
+  .heroQuote {
+    /* Clear of the soft edge on the left of the photo. */
+    padding: 40px 48px 96px 22%;
+  }
+}
+
 .heroTitle {
   margin: 0;
   max-width: 16ch;
@@ -98,14 +134,120 @@
   }
 }
 
+/* Phones: title, map, then the stops. Wide: text on the left, map on the right. */
+.route {
+  display: grid;
+  gap: 32px;
+}
+
+.routeMap {
+  justify-self: center;
+  width: min(100%, 340px);
+}
+
+@media (min-width: 860px) {
+  .route {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+    grid-template-areas:
+      "intro map"
+      "stops map";
+    grid-template-rows: auto 1fr;
+    column-gap: 64px;
+    row-gap: 40px;
+    align-items: start;
+  }
+
+  .routeIntro {
+    grid-area: intro;
+    align-self: end;
+  }
+
+  .routeMap {
+    grid-area: map;
+    width: 100%;
+  }
+
+  .routeStops {
+    grid-area: stops;
+  }
+}
+
 .routeTitle {
-  margin: 0 0 36px;
+  margin: 0 0 16px;
   font-size: var(--text-3xl);
-  max-width: 22ch;
+  max-width: 18ch;
+}
+
+.routeLead {
+  margin: 0;
+  max-width: 46ch;
+  font-size: var(--text-lg);
+  color: #d5dceb;
+}
+
+/* The three stops, joined by a red line like the road on the map. */
+.stops {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stops li {
+  position: relative;
+  display: grid;
+  gap: 2px;
+  padding: 0 0 26px 30px;
+}
+
+.stops li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--star);
+  box-shadow: 0 0 0 3px var(--night);
+}
+
+.stops li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 20px;
+  bottom: 2px;
+  width: 2px;
+  background: var(--lantern-red);
+}
+
+.stops li.stopStart::before {
+  background: var(--lantern-red);
+  box-shadow:
+    0 0 0 2px var(--white),
+    0 0 0 4px var(--night);
+}
+
+.stopCity {
+  color: var(--white);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+a.stopCity:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--lantern-red);
+  text-underline-offset: 4px;
+}
+
+.stopNote {
+  color: var(--star);
+  font-weight: 600;
 }
 
 .routeMore {
-  margin: 36px 0 0;
+  margin: 8px 0 0;
 }
 
 .routeLink {
@@ -314,7 +456,7 @@
 }
 
 .shopCard h3 {
-  margin: 0 0 8px;
+  margin: 20px 0 8px;
   font-size: var(--text-xl);
 }
 
