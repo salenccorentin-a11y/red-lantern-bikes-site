@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { dropoffLabel } from "@/lib/cities";
 import { formatDisplayDate } from "@/lib/dates";
+import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
 import { addOnUnitPrice, quote, type AddOnChoice } from "@/lib/pricing";
 import type { Catalog, CatalogAddOn, CatalogModel, OneWayCity } from "@/server/catalog";
@@ -460,7 +461,8 @@ export function BookingForm(props: {
             <div className={`${styles.line} ${styles.total}`}>
               <span>Total</span>
               <span>
-                {formatVnd(priced.quote.totalVnd)}
+                {/* Counts to the new total when extras or dates change. */}
+                <AnimatedNumber value={priced.quote.totalVnd} format={formatVnd} />
                 <small className={styles.usd}>{usd(priced.quote.totalVnd)}</small>
               </span>
             </div>
@@ -505,7 +507,10 @@ export function BookingForm(props: {
       {priced?.ok && (
         <a href="#summary" className={styles.mobileBar}>
           <span>
-            Total <b>{formatVnd(priced.quote.totalVnd)}</b>
+            Total{" "}
+            <b>
+              <AnimatedNumber value={priced.quote.totalVnd} format={formatVnd} />
+            </b>
           </span>
           <span className={styles.mobileBarCta}>Review &amp; reserve</span>
         </a>

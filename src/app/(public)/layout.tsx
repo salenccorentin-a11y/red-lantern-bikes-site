@@ -1,5 +1,6 @@
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 import styles from "./layout.module.css";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
@@ -7,7 +8,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
     <>
       <SiteHeader />
       <div id="main" className={styles.content}>
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </div>
       <SiteFooter />
     </>

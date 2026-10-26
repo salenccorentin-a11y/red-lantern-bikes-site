@@ -112,7 +112,19 @@ label:has(input[type="checkbox"]) {
   touch-action: manipulation;
 }
 
+/* Shared photos between pages (components/motion/SharedElement.tsx). */
+::view-transition-group(.morph) {
+  animation-duration: 380ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
   *,
   *::before,
   *::after {

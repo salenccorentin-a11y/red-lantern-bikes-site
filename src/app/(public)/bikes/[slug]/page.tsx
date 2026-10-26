@@ -3,12 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
-import { Suspense } from "react";
+import { cache, Suspense } from "react";
 import { bikeImage } from "@/components/BikeCard";
 import { BikeGallery } from "@/components/BikeGallery";
+import { SharedElement } from "@/components/motion/SharedElement";
 import ui from "@/components/ui.module.css";
 import { BIKE_CONTENT, LICENCE_TEXT } from "@/content/bikes";
 import { BUSINESS } from "@/content/business";
+import { BIKE_MODELS } from "@/db/seed-data";
 import { CITY_NAME } from "@/lib/cities";
 import { db } from "@/lib/db";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
@@ -48,94 +50,122 @@ export default async function BikePage(props: PageProps<"/bikes/[slug]">) {
         <Link href="/bikes" className={styles.back}>
           All bikes
         </Link>
-        <Suspense fallback={<div style={{ minHeight: 640 }} />}>
-          <Bike slug={slug} />
-        </Suspense>
+        <article>
+          <div className={bike.top}>
+            {/* Outside the loading step, so the photo is there the moment the
+                page opens and the card's photo can grow into it. */}
+            <div className={bike.imagePanel}>
+              <SharedElement name={`bike-${slug}`}>
+                <Image
+                  src={bikeImage(slug)}
+                  alt={PHOTO_ALT[slug] ?? ""}
+                  width={1200}
+                  height={800}
+                  priority
+                  sizes="(max-width: 900px) 100vw, 55vw"
+                  className={bike.image}
+                />
+              </SharedElement>
+            </div>
+            <Suspense fallback={<div style={{ minHeight: 420 }} />}>
+              <BikeInfo slug={slug} />
+            </Suspense>
+          </div>
+          <Suspense fallback={null}>
+            <BikeMore slug={slug} />
+          </Suspense>
+        </article>
       </div>
     </main>
   );
 }
 
-async function Bike({ slug }: { slug: string }) {
+// The photo's description, from the fleet list (a staff rename in settings
+// won't change it, which is fine for a photo description).
+const PHOTO_ALT: Record<string, string> = Object.fromEntries(
+  BIKE_MODELS.map((m) => [m.slug, `Studio photo of the ${m.name}`]),
+);
+
+// Prices and fleet numbers are edited by staff, so they're read on each
+// visit. cache() lets the two parts below share one database read.
+const loadBike = cache(async (slug: string) => {
   await connection();
   const [models, settings] = await Promise.all([listModels(db), getSettings(db)]);
   const model = models.find((m) => m.slug === slug);
   if (!model) notFound();
+  return { model, settings };
+});
+
+async function BikeInfo({ slug }: { slug: string }) {
+  const { model, settings } = await loadBike(slug);
   const content = BIKE_CONTENT[slug];
   const usd = (vnd: number) => formatUsdApprox(vnd, settings.usdToVndRate);
 
   return (
-    <article>
-      <div className={bike.top}>
-        <div className={bike.imagePanel}>
-          <Image
-            src={bikeImage(slug)}
-            alt={model.name}
-            width={1200}
-            height={800}
-            priority
-            sizes="(max-width: 900px) 100vw, 55vw"
-            className={bike.image}
-          />
-        </div>
+    <div>
+      <p className={bike.kind}>{model.kind}</p>
+      <h1 className={bike.name}>{model.name}</h1>
+      {content && <p className={bike.description}>{content.description}</p>}
 
-        <div>
-          <p className={bike.kind}>{model.kind}</p>
-          <h1 className={bike.name}>{model.name}</h1>
-          {content && <p className={bike.description}>{content.description}</p>}
+      <table className={styles.table}>
+        <caption className={bike.caption}>Price per day</caption>
+        <tbody>
+          <tr>
+            <td>1 to 6 days</td>
+            <td className={styles.num}>
+              {formatVnd(model.dailyRate)} <small>{usd(model.dailyRate)}</small>
+            </td>
+          </tr>
+          <tr>
+            <td>7 to 29 days</td>
+            <td className={styles.num}>
+              {formatVnd(model.weeklyRate)} <small>{usd(model.weeklyRate)}</small>
+            </td>
+          </tr>
+          <tr>
+            <td>30 days or more</td>
+            <td className={styles.num}>
+              {formatVnd(model.monthlyRate)} <small>{usd(model.monthlyRate)}</small>
+            </td>
+          </tr>
+          {model.oneWayFees.map((f) => (
+            <tr key={f.toCity}>
+              <td>
+                One-way fee to {CITY_NAME[f.toCity]}
+                <br />
+                <small>for trips of {f.minDays} days or more</small>
+              </td>
+              <td className={styles.num}>
+                {formatVnd(f.fee)} <small>{usd(f.fee)}</small>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-          <table className={styles.table}>
-            <caption className={bike.caption}>Price per day</caption>
-            <tbody>
-              <tr>
-                <td>1 to 6 days</td>
-                <td className={styles.num}>
-                  {formatVnd(model.dailyRate)} <small>{usd(model.dailyRate)}</small>
-                </td>
-              </tr>
-              <tr>
-                <td>7 to 29 days</td>
-                <td className={styles.num}>
-                  {formatVnd(model.weeklyRate)} <small>{usd(model.weeklyRate)}</small>
-                </td>
-              </tr>
-              <tr>
-                <td>30 days or more</td>
-                <td className={styles.num}>
-                  {formatVnd(model.monthlyRate)} <small>{usd(model.monthlyRate)}</small>
-                </td>
-              </tr>
-              {model.oneWayFees.map((f) => (
-                <tr key={f.toCity}>
-                  <td>
-                    One-way fee to {CITY_NAME[f.toCity]}
-                    <br />
-                    <small>for trips of {f.minDays} days or more</small>
-                  </td>
-                  <td className={styles.num}>
-                    {formatVnd(f.fee)} <small>{usd(f.fee)}</small>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <div className={ui.actions} style={{ marginTop: 24 }}>
-            <Link href={`/book?model=${model.slug}`} className={ui.primary}>
-              Book this bike
-            </Link>
-            {model.oneWayFees.length > 0 && (
-              <Link href={`/book?model=${model.slug}&dropoff=HANOI`} className={ui.ghostLight}>
-                Ride it one-way to Hanoi
-              </Link>
-            )}
-          </div>
-          <p className={bike.small}>
-            Pay {formatVnd(settings.depositVnd)} online to hold the bike; the rest at pick-up.
-          </p>
-        </div>
+      <div className={ui.actions} style={{ marginTop: 24 }}>
+        <Link href={`/book?model=${model.slug}`} className={ui.primary}>
+          Book this bike
+        </Link>
+        {model.oneWayFees.length > 0 && (
+          <Link href={`/book?model=${model.slug}&dropoff=HANOI`} className={ui.ghostLight}>
+            Ride it one-way to Hanoi
+          </Link>
+        )}
       </div>
+      <p className={bike.small}>
+        Pay {formatVnd(settings.depositVnd)} online to hold the bike; the rest at pick-up.
+      </p>
+    </div>
+  );
+}
 
+async function BikeMore({ slug }: { slug: string }) {
+  const { model } = await loadBike(slug);
+  const content = BIKE_CONTENT[slug];
+
+  return (
+    <>
       <BikeGallery slug={model.slug} name={model.name} />
 
       <div className={bike.details}>
@@ -167,6 +197,6 @@ async function Bike({ slug }: { slug: string }) {
           </ul>
         </section>
       </div>
-    </article>
+    </>
   );
 }

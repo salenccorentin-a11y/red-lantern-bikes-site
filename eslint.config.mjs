@@ -24,6 +24,8 @@ const eslintConfig = defineConfig([
     "prototype/**",
     // Prisma client generated in step 3.
     "src/generated/**",
+    // Separate copies of the project made by other Claude sessions.
+    ".claude/**",
   ]),
 ]);
 
