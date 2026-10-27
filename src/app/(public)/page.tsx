@@ -62,11 +62,13 @@ export default function Home() {
 
       <section className={styles.hero}>
         <div className={styles.heroMedia}>
+          {/* The first thing phones download after the page: preloaded, high priority. */}
           <Image
             src={karstRoad}
             alt="A Red Lantern bike on an empty road through the karst mountains"
             fill
-            priority
+            preload
+            fetchPriority="high"
             placeholder="blur"
             sizes="(max-width: 900px) 100vw, 55vw"
             className={styles.heroPhoto}
