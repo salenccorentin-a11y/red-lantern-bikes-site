@@ -3,11 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
+import { OneWayTrips } from "@/components/oneway/OneWayTrips";
 import { PageHeader } from "@/components/PageHeader";
-import { RouteLine } from "@/components/RouteLine";
 import ui from "@/components/ui.module.css";
 import { BUSINESS } from "@/content/business";
-import { ONE_WAY_ROUTE } from "@/content/route";
 import { CITY_NAME } from "@/lib/cities";
 import { db } from "@/lib/db";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
@@ -48,12 +47,11 @@ export default function OneWayPage() {
       </PageHeader>
 
       <main>
-        <section className={`${ui.sectionNight} ${oneWay.routeSection}`}>
-          <div className={ui.container}>
-            <h2 className={oneWay.routeTitle}>The route</h2>
-            <RouteLine stops={ONE_WAY_ROUTE} detailed />
-          </div>
-        </section>
+        <OneWayTrips
+          title="The route"
+          intro="Pick up in Saigon, ride north at your own pace, and leave the bike in Da Nang or Hanoi."
+          detailed
+        />
 
         <section className={ui.section}>
           <div className={`${ui.container} ${oneWay.how}`}>

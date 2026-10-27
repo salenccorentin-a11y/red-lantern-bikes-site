@@ -1,18 +1,3 @@
-.routeSection {
-  padding: 56px 0 64px;
-}
-
-@media (min-width: 768px) {
-  .routeSection {
-    padding: 72px 0 80px;
-  }
-}
-
-.routeTitle {
-  margin: 0 0 32px;
-  font-size: var(--text-3xl);
-}
-
 .h2 {
   margin: 0 0 20px;
   font-size: var(--text-3xl);
