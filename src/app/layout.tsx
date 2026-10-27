@@ -4,10 +4,11 @@ import { siteUrl } from "@/seo/site";
 import "./globals.css";
 
 // One family for everything (docs/design.md): designed for Vietnamese, so
-// place names keep their accents properly.
+// place names keep their accents properly. Only the basic Latin files are
+// downloaded up front; the Vietnamese letters still load when a page uses them.
 const beVietnam = Be_Vietnam_Pro({
   variable: "--font-sans",
-  subsets: ["latin", "vietnamese"],
+  subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
