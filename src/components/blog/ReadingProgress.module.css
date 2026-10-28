@@ -1,0 +1,271 @@
+/* Reading progress on blog posts (ReadingProgress.tsx). */
+
+/* The post and its strip. Its scroll position through the screen is the
+   "--post" timeline that drives everything below. */
+.scope {
+  view-timeline: --post block;
+}
+
+/* A thin night strip under the header that stays at the top while reading. */
+.strip {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: 30px;
+  background: var(--night);
+  box-shadow: 0 6px 16px -10px rgb(15 27 45 / 0.5);
+}
+
+.container {
+  position: relative;
+  max-width: calc(var(--content) + 2 * var(--gutter));
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.track {
+  position: relative;
+  height: 100%;
+}
+
+/* The road, faint, the whole way to the lantern. */
+.track::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 24px;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  background: rgb(255 255 255 / 0.14);
+  border-radius: 2px;
+}
+
+/* The part already read. Ends under the bike's middle. */
+.fill {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: calc(100% - 35px);
+  height: 2px;
+  margin-top: -1px;
+  background: var(--lantern-red);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* Moves from fully left (bike at the start) to 0 (bike next to the lantern).
+   The bike sits on its right edge. */
+.rider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 46px);
+  transform: translateX(-100%);
+}
+
+.bike {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -9px;
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tank {
+  fill: var(--lantern-red);
+  stroke: none;
+}
+
+.engine {
+  fill: var(--white);
+  stroke: none;
+}
+
+.headlight {
+  fill: var(--star);
+  stroke: none;
+}
+
+.lantern {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  translate: 0 -50%;
+}
+
+.lanternIcon {
+  display: block;
+  overflow: visible;
+}
+
+.body {
+  fill: #2a3d5c;
+  stroke: #6b7fa3;
+  stroke-width: 1;
+}
+
+.cap {
+  fill: #6b7fa3;
+}
+
+.string {
+  stroke: #6b7fa3;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+
+/* The lit lantern: glow, red body and gold caps, faded in on arrival. */
+.glow {
+  fill: rgb(232 85 43 / 0.45);
+}
+
+.litLayer,
+.glow {
+  opacity: 0;
+}
+
+.litLayer .body {
+  fill: var(--lantern-red);
+  stroke: #ff8a5c;
+}
+
+.litLayer .cap {
+  fill: var(--star);
+}
+
+/* Appears under the end of the strip once the bike has arrived. */
+.cta {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: var(--gutter);
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--lantern-red);
+  color: var(--white);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 24px -10px rgb(214 42 30 / 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+}
+
+.cta:hover {
+  background: var(--lantern-red-deep);
+}
+
+/* ─── Scroll-driven, in CSS ───────────────────────────────────────────── */
+/* "contain": from the post's top reaching the top of the screen to its end
+   reaching the bottom of the screen. */
+
+@supports (animation-timeline: view()) {
+  .fill,
+  .rider,
+  .litLayer,
+  .glow,
+  .cta {
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: --post;
+  }
+
+  .fill {
+    animation-name: rp-fill;
+    animation-range: contain 0% contain 100%;
+  }
+
+  .rider {
+    animation-name: rp-ride;
+    animation-range: contain 0% contain 100%;
+  }
+
+  .litLayer,
+  .glow {
+    animation-name: rp-light;
+    animation-range: contain 95% contain 100%;
+  }
+
+  .cta {
+    animation-name: rp-cta;
+    animation-range: contain 96% contain 100%;
+  }
+}
+
+@keyframes rp-fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes rp-ride {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rp-light {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rp-cta {
+  to {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
+
+/* ─── Fallback (Motion) ───────────────────────────────────────────────── */
+/* MotionFallback sets the fill and rider directly, and these classes on
+   arrival. */
+
+.scripted .litLayer,
+.scripted .glow,
+.scripted .cta {
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease,
+    visibility 300ms;
+}
+
+.lit .litLayer,
+.lit .glow {
+  opacity: 1;
+}
+
+.cta.shown {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* ─── Reduced motion: just the line (and the button at the end) ───────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .rider,
+  .lantern {
+    display: none;
+  }
+
+  .track::before {
+    right: 0;
+  }
+
+  .fill {
+    width: 100%;
+  }
+}

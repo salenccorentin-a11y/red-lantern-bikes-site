@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { POSTS, findPost, fullTitle } from "@/content/blog";
+import { ReadingProgress } from "@/components/blog/ReadingProgress";
+import { POSTS, findPost, fullTitle, type BlogPost } from "@/content/blog";
 import { formatDisplayDate } from "@/lib/dates";
 import styles from "../../../content.module.css";
 import blogStyles from "./post.module.css";
@@ -34,47 +35,58 @@ export default async function BlogPostPage(props: PageProps<"/blog/[blog]/[post]
   if (!found) notFound();
 
   return (
-    <main className={styles.page}>
-      <article className={blogStyles.article}>
-        <p>
-          <Link href="/blog" className={styles.back}>
-            All posts
-          </Link>
-          {found.category && (
-            <>
-              {" · "}
-              <Link href={`/blog/${found.blogSlug}`}>{found.category}</Link>
-            </>
+    <ReadingProgress ctaHref={rentHref(found)}>
+      <main className={styles.page}>
+        <article className={blogStyles.article}>
+          <p>
+            <Link href="/blog" className={styles.back}>
+              All posts
+            </Link>
+            {found.category && (
+              <>
+                {" · "}
+                <Link href={`/blog/${found.blogSlug}`}>{found.category}</Link>
+              </>
+            )}
+          </p>
+          <h1>
+            {found.title}
+            {found.subtitle && <span className={blogStyles.subtitle}> {found.subtitle}</span>}
+          </h1>
+          {found.date && <p className={styles.muted}>{formatDisplayDate(found.date)}</p>}
+          {found.cover && (
+            <Image
+              src={found.cover}
+              alt=""
+              width={1200}
+              height={630}
+              priority
+              sizes="(max-width: 760px) 100vw, 720px"
+              className={blogStyles.cover}
+            />
           )}
-        </p>
-        <h1>
-          {found.title}
-          {found.subtitle && <span className={blogStyles.subtitle}> {found.subtitle}</span>}
-        </h1>
-        {found.date && <p className={styles.muted}>{formatDisplayDate(found.date)}</p>}
-        {found.cover && (
-          <Image
-            src={found.cover}
-            alt=""
-            width={1200}
-            height={630}
-            priority
-            sizes="(max-width: 760px) 100vw, 720px"
-            className={blogStyles.cover}
-          />
-        )}
-        {/* Content imported from our own old site and cleaned to plain tags
+          {/* Content imported from our own old site and cleaned to plain tags
             (scripts/seo/import-blog.ts), so it's safe to render as HTML. */}
-        <div className={blogStyles.body} dangerouslySetInnerHTML={{ __html: found.html }} />
-        <div className={styles.actions}>
-          <Link href="/book" className={styles.primary}>
-            Book a bike
-          </Link>
-          <Link href="/one-way" className={styles.secondary}>
-            One-way trips
-          </Link>
-        </div>
-      </article>
-    </main>
+          <div className={blogStyles.body} dangerouslySetInnerHTML={{ __html: found.html }} />
+          <div className={styles.actions}>
+            <Link href="/book" className={styles.primary}>
+              Book a bike
+            </Link>
+            <Link href="/one-way" className={styles.secondary}>
+              One-way trips
+            </Link>
+          </div>
+        </article>
+      </main>
+    </ReadingProgress>
   );
+}
+
+// "Rent a bike for this trip": a route guide books that one-way trip, other
+// posts open the booking page.
+function rentHref(post: BlogPost): string {
+  const text = `${post.postSlug} ${post.title}`.toLowerCase();
+  if (text.includes("hanoi")) return "/book?dropoff=HANOI";
+  if (text.includes("da nang") || text.includes("da-nang")) return "/book?dropoff=DA_NANG";
+  return "/book";
 }
