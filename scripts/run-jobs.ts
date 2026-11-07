@@ -11,6 +11,7 @@ import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { runScheduledJobs } from "../src/server/reminders";
+import { reportError } from "../src/server/report-error";
 
 const db = new PrismaClient({
   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
@@ -18,8 +19,8 @@ const db = new PrismaClient({
 
 runScheduledJobs(db)
   .then((result) => console.log(`Jobs done: ${JSON.stringify(result)}`))
-  .catch((error) => {
-    console.error("Jobs failed", error);
+  .catch(async (error) => {
+    await reportError("Hourly jobs failed", error);
     process.exitCode = 1;
   })
   .finally(() => db.$disconnect());

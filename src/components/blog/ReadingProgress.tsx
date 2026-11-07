@@ -46,7 +46,12 @@ export function ReadingProgress({
               <Lantern />
             </div>
           </div>
-          <Link href={ctaHref} className={styles.cta} data-part="cta">
+          <Link
+            href={ctaHref}
+            className={styles.cta}
+            data-part="cta"
+            data-umami-event="Blog: rent a bike"
+          >
             Rent a bike for this trip
           </Link>
         </div>

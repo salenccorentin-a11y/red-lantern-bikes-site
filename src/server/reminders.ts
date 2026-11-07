@@ -21,6 +21,7 @@ import { ADDRESS_LINE, BUSINESS, mapsLink, whatsappLink } from "@/content/busine
 import { getSettings } from "@/server/availability";
 import { releaseExpiredHolds } from "@/server/bookings";
 import { sendEmail, type Email } from "@/server/email";
+import { reportError } from "@/server/report-error";
 import { holdReminderEmail } from "@/server/emails/hold-reminder";
 import { pickupReminderEmail } from "@/server/emails/pickup-reminder";
 
@@ -43,7 +44,7 @@ async function sendClaimed(release: () => Promise<unknown>, send: () => Promise<
     return true;
   } catch (error) {
     await release();
-    console.error("Reminder email failed; it will be retried on the next run.", error);
+    await reportError("Reminder email failed; it will be retried on the next run.", error);
     return false;
   }
 }

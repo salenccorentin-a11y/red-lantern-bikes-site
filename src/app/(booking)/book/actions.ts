@@ -9,6 +9,7 @@ import { formatSaigonDateTime, toIsoDate } from "@/lib/dates";
 import { reserveBike } from "@/server/bookings";
 import { sendEmail } from "@/server/email";
 import { bookingReceivedEmail } from "@/server/emails/booking-received";
+import { reportError } from "@/server/report-error";
 
 export type BookingFormState = {
   /** Shown above the Reserve button. */
@@ -72,7 +73,7 @@ export async function createOnlineBooking(input: unknown): Promise<BookingFormSt
       }),
     );
   } catch (error) {
-    console.error(`Booking ${booking.reference}: confirmation email failed`, error);
+    await reportError(`Booking ${booking.reference}: confirmation email failed`, error);
   }
 
   redirect(`/booking/${booking.viewToken}`);

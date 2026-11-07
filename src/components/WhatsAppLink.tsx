@@ -26,6 +26,7 @@ export function WhatsAppLink({
       target="_blank"
       rel="noopener"
       className={variant === "button" ? `${ui.ghostLight} ${styles.button}` : styles.link}
+      data-umami-event="WhatsApp"
     >
       <ChatIcon />
       {label}

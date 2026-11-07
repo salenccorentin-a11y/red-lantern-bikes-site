@@ -499,7 +499,12 @@ export function BookingForm(props: {
           <p className={styles.ticketWarn}>{fieldError("acceptDeposit")}</p>
         )}
 
-        <button className={styles.reserve} type="submit" disabled={!canReserve || submitting}>
+        <button
+          className={styles.reserve}
+          type="submit"
+          disabled={!canReserve || submitting}
+          data-umami-event="Reserve"
+        >
           {submitting ? "Reserving…" : "Reserve this bike"}
         </button>
         <div aria-live="assertive">

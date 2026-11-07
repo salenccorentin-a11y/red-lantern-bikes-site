@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { sendEmail } from "@/server/email";
 import { enquiryReceivedEmail } from "@/server/emails/enquiry-received";
 import { createEnquiry } from "@/server/enquiries";
+import { reportError } from "@/server/report-error";
 
 export type EnquiryState = { sent?: boolean; error?: string; field?: string };
 
@@ -40,7 +41,7 @@ export async function sendEnquiry(_previous: EnquiryState, form: FormData): Prom
       );
     } catch (error) {
       // The enquiry is saved and visible in the staff area either way.
-      console.error("Enquiry notification email failed", error);
+      await reportError("Enquiry notification email failed", error);
     }
   }
   return { sent: true };

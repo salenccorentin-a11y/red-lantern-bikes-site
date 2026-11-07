@@ -62,6 +62,15 @@ export default function PrivacyPage() {
             <li>Railway, which hosts our website and database in Singapore.</li>
             <li>Resend, which sends our booking emails.</li>
             <li>
+              Umami, which counts visits to our pages without cookies and without collecting
+              personal data. Booking page addresses are shortened before they are counted, so your
+              private booking link is never sent.
+            </li>
+            <li>
+              Sentry, which tells us when something breaks on the site. Error reports contain
+              technical details (such as the page and browser), not your name or booking details.
+            </li>
+            <li>
               Google, whose map of our shop is shown on the home page. When the map loads, Google
               receives your request and may set its own cookies, under Google&apos;s privacy policy.
             </li>

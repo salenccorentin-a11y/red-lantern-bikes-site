@@ -7,6 +7,7 @@ import { consumeLoginToken, createLoginToken } from "@/server/auth";
 import { sendEmail } from "@/server/email";
 import { staffLoginEmail } from "@/server/emails/staff-login";
 import { setSessionCookie } from "@/server/staff-session";
+import { reportError } from "@/server/report-error";
 
 export type LoginRequestState = { sent?: boolean; error?: string };
 
@@ -28,7 +29,7 @@ export async function requestLoginLink(
     try {
       await sendEmail(staffLoginEmail(link.staff.email, link.staff.name, url));
     } catch (error) {
-      console.error("Staff sign-in email failed", error);
+      await reportError("Staff sign-in email failed", error);
     }
   }
   // Same answer whether or not the email is staff, so the form can't be used
