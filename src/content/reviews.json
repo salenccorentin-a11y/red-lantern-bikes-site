@@ -1,0 +1,7 @@
+{
+  "_help": "Used only when the Google Places API isn't set up (GOOGLE_PLACES_API_KEY). Paste real reviews from the shop's Google Maps page, exactly as written, with the reviewer's name. Example review: { \"author\": \"Anna\", \"authorUrl\": null, \"rating\": 5, \"text\": \"...\", \"when\": \"March 2026\" }",
+  "rating": 4.9,
+  "count": 251,
+  "url": null,
+  "reviews": []
+}

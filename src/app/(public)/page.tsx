@@ -5,6 +5,7 @@ import { connection } from "next/server";
 import { Suspense } from "react";
 import { BikeCard } from "@/components/BikeCard";
 import cardStyles from "@/components/BikeCard.module.css";
+import { GoogleReviews } from "@/components/GoogleReviews";
 import { LocalBusinessData } from "@/components/LocalBusinessData";
 import { RiderWall } from "@/components/RiderWall";
 import { OneWayTrips } from "@/components/oneway/OneWayTrips";
@@ -157,6 +158,7 @@ export default function Home() {
             Rated {BUSINESS.googleRating} on Google by the travellers who rode with us.
           </p>
           <RiderWall />
+          <GoogleReviews tone="night" />
         </div>
       </section>
 

@@ -1,0 +1,118 @@
+.wrap {
+  margin-top: 40px;
+}
+
+.title {
+  margin: 0 0 12px;
+  font-size: var(--text-xl);
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px;
+  font-size: var(--text-lg);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-radius: var(--radius-card);
+}
+
+.text {
+  margin: 0;
+  flex: 1;
+  line-height: 1.6;
+}
+
+.author {
+  margin: 0;
+  font-weight: 700;
+}
+
+.author a {
+  color: inherit;
+}
+
+.when {
+  font-weight: 400;
+}
+
+.more,
+.attribution a {
+  font-weight: 600;
+}
+
+.attribution {
+  margin: 14px 0 0;
+  font-size: var(--text-sm);
+}
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.starOn {
+  fill: var(--star);
+}
+
+/* ─── On night sections ──────────────────────────────────────────────── */
+
+.night .card {
+  background: var(--night-raised);
+  border: 1px solid var(--night-line);
+}
+
+.night .text {
+  color: #e3e8f1;
+}
+
+.night .when,
+.night .attribution {
+  color: var(--fog);
+}
+
+.night .more,
+.night .attribution a {
+  color: var(--white);
+}
+
+.night .starOff {
+  fill: var(--night-line);
+}
+
+/* ─── On light sections ──────────────────────────────────────────────── */
+
+.light .card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+}
+
+.light .when,
+.light .attribution {
+  color: var(--slate);
+}
+
+.light .more,
+.light .attribution a {
+  color: var(--lantern-red);
+}
+
+.light .starOff {
+  fill: var(--rule);
+}

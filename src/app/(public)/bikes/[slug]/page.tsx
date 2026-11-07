@@ -6,6 +6,7 @@ import { connection } from "next/server";
 import { cache, Suspense } from "react";
 import { bikeImage } from "@/components/BikeCard";
 import { BikeGallery } from "@/components/BikeGallery";
+import { GoogleReviews } from "@/components/GoogleReviews";
 import { SharedElement } from "@/components/motion/SharedElement";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import ui from "@/components/ui.module.css";
@@ -179,6 +180,7 @@ async function BikeMore({ slug }: { slug: string }) {
   return (
     <>
       <BikeGallery slug={model.slug} name={model.name} />
+      <GoogleReviews title="What riders say" />
 
       <div className={bike.details}>
         {content && content.bestFor.length > 0 && (
