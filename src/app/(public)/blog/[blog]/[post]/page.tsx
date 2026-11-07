@@ -35,7 +35,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[blog]/[post]
   if (!found) notFound();
 
   return (
-    <ReadingProgress ctaHref={rentHref(found)}>
+    <ReadingProgress trip={tripFor(found)}>
       <main className={styles.page}>
         <article className={blogStyles.article}>
           <p>
@@ -82,11 +82,16 @@ export default async function BlogPostPage(props: PageProps<"/blog/[blog]/[post]
   );
 }
 
-// "Rent a bike for this trip": a route guide books that one-way trip, other
-// posts open the booking page.
-function rentHref(post: BlogPost): string {
+// The button at the end of the reading-progress line. Guides set their own
+// (e.g. Ha Giang asks for a message instead); for the imported posts, a route
+// guide books that one-way trip and other posts open the booking page.
+function tripFor(post: BlogPost): { href: string; label: string } {
+  if (post.trip) return post.trip;
+  const label = "Rent a bike for this trip";
   const text = `${post.postSlug} ${post.title}`.toLowerCase();
-  if (text.includes("hanoi")) return "/book?dropoff=HANOI";
-  if (text.includes("da nang") || text.includes("da-nang")) return "/book?dropoff=DA_NANG";
-  return "/book";
+  if (text.includes("hanoi")) return { href: "/book?dropoff=HANOI", label };
+  if (text.includes("da nang") || text.includes("da-nang")) {
+    return { href: "/book?dropoff=DA_NANG", label };
+  }
+  return { href: "/book", label };
 }

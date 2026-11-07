@@ -1,9 +1,16 @@
 // Blog posts moved from the old site (scripts/seo/import-blog.ts), served at
-// their original addresses, e.g. /blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4.
+// their original addresses, e.g. /blog/news-2/best-motorbikes-to-rent-in-vietnam-2026-4,
+// plus route guides written for the new site (guides.ts).
 
-import posts from "./posts.json";
+import { GUIDES, type Trip } from "./guides";
+import imported from "./posts.json";
 
-export type BlogPost = (typeof posts)[number];
+export type BlogPost = (typeof imported)[number] & {
+  /** Where the reading-progress button goes (guides only). */
+  trip?: Trip;
+};
+
+const posts: BlogPost[] = [...imported, ...GUIDES];
 
 /** Newest first. */
 export const POSTS: BlogPost[] = [...posts].sort((a, b) =>

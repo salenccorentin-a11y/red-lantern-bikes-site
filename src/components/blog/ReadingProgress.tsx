@@ -17,11 +17,11 @@ import styles from "./ReadingProgress.module.css";
 //   the button still appears at the end (CSS).
 
 export function ReadingProgress({
-  ctaHref,
+  trip,
   children,
 }: {
-  /** Where "Rent a bike for this trip" goes. */
-  ctaHref: string;
+  /** The button at the end: where it goes and what it says. */
+  trip: { href: string; label: string };
   /** The post itself. Progress runs from its top to its end. */
   children: React.ReactNode;
 }) {
@@ -47,12 +47,12 @@ export function ReadingProgress({
             </div>
           </div>
           <Link
-            href={ctaHref}
+            href={trip.href}
             className={styles.cta}
             data-part="cta"
             data-umami-event="Blog: rent a bike"
           >
-            Rent a bike for this trip
+            {trip.label}
           </Link>
         </div>
       </div>
