@@ -112,3 +112,14 @@
 .included li + li {
   margin-top: 4px;
 }
+
+/* "Longer is cheaper", under the price table. */
+.saving {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-left: 3px solid var(--star);
+  border-radius: 4px;
+  background: var(--mist);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}

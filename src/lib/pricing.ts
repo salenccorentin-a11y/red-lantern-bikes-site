@@ -124,6 +124,15 @@ export function rentalPrice(
   return { rateTier, dailyRate, rentalVnd, cappedAt };
 }
 
+/**
+ * How much less a rental costs than the same days at the daily rate, e.g.
+ * 8 days of an XR150: 8 × 400,000 = 3,200,000 at the daily rate, 2,800,000
+ * at the weekly rate, so 400,000 saved. 0 when the daily rate applies.
+ */
+export function savingVsDaily(rates: RateCard, days: number): number {
+  return Math.max(0, rates.dailyRate * days - rentalPrice(rates, days).rentalVnd);
+}
+
 export function quote(input: QuoteInput): QuoteResult {
   const start = parseIsoDate(input.startDate);
   const end = parseIsoDate(input.endDate);

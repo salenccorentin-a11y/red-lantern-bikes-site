@@ -1,0 +1,26 @@
+/* WhatsApp's green on the icon only, so it's recognisable without breaking
+   the site's colours. */
+.icon {
+  flex: none;
+  fill: #25d366;
+}
+
+.phone {
+  fill: var(--white);
+}
+
+.button:hover .icon {
+  fill: #25d366;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--white);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: rgb(37 211 102 / 0.7);
+  text-underline-offset: 4px;
+}

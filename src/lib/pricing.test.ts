@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   addOnUnitPrice,
   quote,
+  savingVsDaily,
   rateTierFor,
   type AddOnChoice,
   type QuoteInput,
@@ -340,5 +341,28 @@ describe("addOnUnitPrice", () => {
 
   it("falls back to the usual price", () => {
     expect(addOnUnitPrice(insurance, "wave")).toBe(80_000);
+  });
+});
+
+describe("savingVsDaily", () => {
+  // Honda XR150 rates from docs/pricing.md.
+  const xr150 = { dailyRate: 400_000, weeklyRate: 350_000, monthlyRate: 300_000 };
+
+  it("8 days at the weekly rate: saves 400,000", () => {
+    expect(savingVsDaily(xr150, 8)).toBe(400_000);
+  });
+
+  it("30 days at the monthly rate: saves 3,000,000", () => {
+    expect(savingVsDaily(xr150, 30)).toBe(3_000_000);
+  });
+
+  it("no saving at the daily rate", () => {
+    expect(savingVsDaily(xr150, 1)).toBe(0);
+    expect(savingVsDaily(xr150, 6)).toBe(0);
+  });
+
+  it("counts the price cap: 26 days charged as 30 at the monthly rate", () => {
+    // 26 × 350,000 = 9,100,000 at the weekly rate; 30 × 300,000 = 9,000,000.
+    expect(savingVsDaily(xr150, 26)).toBe(26 * 400_000 - 9_000_000);
   });
 });

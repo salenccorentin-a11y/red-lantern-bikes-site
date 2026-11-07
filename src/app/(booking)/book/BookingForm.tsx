@@ -11,7 +11,14 @@ import { dropoffLabel } from "@/lib/cities";
 import { formatDisplayDate } from "@/lib/dates";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
-import { addOnUnitPrice, quote, type AddOnChoice } from "@/lib/pricing";
+import { WhatsAppLink } from "@/components/WhatsAppLink";
+import {
+  WEEKLY_FROM_DAYS,
+  addOnUnitPrice,
+  quote,
+  savingVsDaily,
+  type AddOnChoice,
+} from "@/lib/pricing";
 import type { Catalog, CatalogAddOn, CatalogModel, OneWayCity } from "@/server/catalog";
 import { createOnlineBooking, type BookingFormState } from "./actions";
 import styles from "./book.module.css";
@@ -448,6 +455,7 @@ export function BookingForm(props: {
               label={`Rental, ${priced.quote.days} day${priced.quote.days === 1 ? "" : "s"}`}
               value={formatVnd(priced.quote.rentalVnd)}
             />
+            {model && <Saving model={model} days={priced.quote.days} />}
             {priced.quote.oneWayFeeVnd > 0 && (
               <Line label="One-way fee" value={formatVnd(priced.quote.oneWayFeeVnd)} />
             )}
@@ -501,6 +509,17 @@ export function BookingForm(props: {
           You&apos;ll pay the deposit by bank transfer or e-wallet QR on the next page. We hold the
           bike for 24 hours while it arrives.
         </p>
+        <div className={styles.ticketHelp}>
+          <WhatsAppLink
+            variant="link"
+            label="Questions? Ask us on WhatsApp"
+            message={
+              model && startDate && endDate
+                ? `Hi Red Lantern Bikes! I have a question about booking the ${model.name} from ${formatDisplayDate(startDate)} to ${formatDisplayDate(endDate)}.`
+                : "Hi Red Lantern Bikes! I have a question about booking a bike."
+            }
+          />
+        </div>
       </aside>
 
       {/* Phones: keep the total and the way to the summary in view. */}
@@ -562,6 +581,23 @@ function TextField(props: {
         props.hint && <small className={styles.fieldHint}>{props.hint}</small>
       )}
     </label>
+  );
+}
+
+// Under the rental price: the saving on a long rental, or how to get one.
+function Saving({ model, days }: { model: CatalogModel; days: number }) {
+  const saving = savingVsDaily(model, days);
+  if (saving > 0) {
+    return (
+      <p className={styles.saving}>You save {formatVnd(saving)} compared with the daily price.</p>
+    );
+  }
+  if (model.weeklyRate >= model.dailyRate) return null;
+  return (
+    <p className={styles.saving}>
+      Ride {WEEKLY_FROM_DAYS} days or more and pay {formatVnd(model.weeklyRate)} a day instead of{" "}
+      {formatVnd(model.dailyRate)}.
+    </p>
   );
 }
 

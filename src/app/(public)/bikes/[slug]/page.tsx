@@ -7,6 +7,7 @@ import { cache, Suspense } from "react";
 import { bikeImage } from "@/components/BikeCard";
 import { BikeGallery } from "@/components/BikeGallery";
 import { SharedElement } from "@/components/motion/SharedElement";
+import { WhatsAppLink } from "@/components/WhatsAppLink";
 import ui from "@/components/ui.module.css";
 import { BIKE_CONTENT, LICENCE_TEXT } from "@/content/bikes";
 import { BUSINESS } from "@/content/business";
@@ -14,6 +15,7 @@ import { BIKE_MODELS } from "@/db/seed-data";
 import { CITY_NAME } from "@/lib/cities";
 import { db } from "@/lib/db";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
+import { MONTHLY_FROM_DAYS, WEEKLY_FROM_DAYS, savingVsDaily } from "@/lib/pricing";
 import { getSettings } from "@/server/availability";
 import { listModels } from "@/server/fleet";
 import styles from "../../content.module.css";
@@ -143,6 +145,13 @@ async function BikeInfo({ slug }: { slug: string }) {
         </tbody>
       </table>
 
+      <p className={bike.saving}>
+        Longer is cheaper: ride {WEEKLY_FROM_DAYS} days and save{" "}
+        <b>{formatVnd(savingVsDaily(model, WEEKLY_FROM_DAYS))}</b>, or {MONTHLY_FROM_DAYS} days and
+        save <b>{formatVnd(savingVsDaily(model, MONTHLY_FROM_DAYS))}</b>, compared with the daily
+        price.
+      </p>
+
       <div className={ui.actions} style={{ marginTop: 24 }}>
         <Link href={`/book?model=${model.slug}`} className={ui.primary}>
           Book this bike
@@ -152,6 +161,9 @@ async function BikeInfo({ slug }: { slug: string }) {
             Ride it one-way to Hanoi
           </Link>
         )}
+        <WhatsAppLink
+          message={`Hi Red Lantern Bikes! I have a question about the ${model.name}.`}
+        />
       </div>
       <p className={bike.small}>
         Pay {formatVnd(settings.depositVnd)} online to hold the bike; the rest at pick-up.

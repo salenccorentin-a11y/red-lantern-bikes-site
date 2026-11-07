@@ -480,3 +480,18 @@
     display: none;
   }
 }
+
+/* Saving on a long rental, under the rental line in the summary. */
+.saving {
+  margin: -2px 0 8px;
+  color: var(--star);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.ticketHelp {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--night-line);
+}
