@@ -257,10 +257,14 @@ model Booking {
   customerNote  String?
   staffNote     String?
 
-  holdExpiresAt DateTime?
-  checkedOutAt  DateTime?
-  checkedInAt   DateTime?
-  cancelledAt   DateTime?
+  holdExpiresAt        DateTime?
+  // Reminder emails (src/server/reminders.ts): when each was sent, so it's
+  // never sent twice.
+  holdReminderSentAt   DateTime?
+  pickupReminderSentAt DateTime?
+  checkedOutAt         DateTime?
+  checkedInAt          DateTime?
+  cancelledAt          DateTime?
 
   createdById String?
   createdBy   StaffUser? @relation(fields: [createdById], references: [id])
