@@ -154,6 +154,14 @@ async function Request(props: Pick<Props, "params" | "searchParams">) {
         </p>
       )}
 
+      {/* The answer first: on a phone, the details below are a long scroll. */}
+      {(waiting || lapsed) && (
+        <div className={styles.row}>
+          {declineFirst ? declineForm : acceptForm}
+          {declineFirst ? acceptForm : declineForm}
+        </div>
+      )}
+
       <div className={styles.row}>
         <section className={styles.panel}>
           <h2>Customer</h2>
@@ -245,13 +253,6 @@ async function Request(props: Pick<Props, "params" | "searchParams">) {
           </table>
         </section>
       </div>
-
-      {(waiting || lapsed) && (
-        <div className={styles.row}>
-          {declineFirst ? declineForm : acceptForm}
-          {declineFirst ? acceptForm : declineForm}
-        </div>
-      )}
 
       <p className={styles.muted}>
         <Link href={`/staff/bookings/${booking.id}`}>Open this booking in the staff area</Link>{" "}

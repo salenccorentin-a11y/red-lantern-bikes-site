@@ -4,6 +4,9 @@ import { BookView, bookMetadata } from "@/views/BookView";
 // In its own group, like the English booking pages, so the booking steps get
 // no page transitions.
 
+// The language is read from the address first (see the [lang] layout).
+export const instant = false;
+
 export async function generateMetadata(props: PageProps<"/[lang]/book">) {
   return bookMetadata(await langFrom(props.params));
 }

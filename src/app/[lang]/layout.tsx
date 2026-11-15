@@ -9,6 +9,9 @@ import styles from "../(public)/layout.module.css";
 // steps. Same layout as the English site; the lang attribute tells browsers,
 // screen readers and search engines which language the page is in.
 
+// The language is read from the address before anything is drawn, so that an
+// unknown one (/xx/...) is a real "page not found". Only /fr and /ko are built.
+export const instant = false;
 export const generateStaticParams = langParams;
 
 export default async function LanguageLayout({ children, params }: LayoutProps<"/[lang]">) {
