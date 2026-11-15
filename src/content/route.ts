@@ -36,12 +36,14 @@ export const ONE_WAY_ROUTE: RouteStop[] = [
 /** The two routes in words, for screen readers and search engines (the map is a picture). */
 export const ONE_WAY_TRIPS = [
   {
+    to: "DA_NANG" as const,
     name: "Saigon to Da Nang",
     days: "10 to 14 days",
     via: ["Da Lat", "Nha Trang", "Hoi An"],
     href: "/book?dropoff=DA_NANG",
   },
   {
+    to: "HANOI" as const,
     name: "Saigon to Hanoi",
     days: "21 to 30 days",
     via: ["Da Lat", "Nha Trang", "Hoi An", "Da Nang", "Hue", "Phong Nha", "Ninh Binh"],

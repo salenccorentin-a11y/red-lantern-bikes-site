@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Suspense } from "react";
 import { findTour } from "@/content/tours";
 import { formatSaigonDateTime, toIsoDate } from "@/lib/dates";
@@ -42,9 +43,9 @@ async function Enquiries({
     <>
       <p>
         {showAll ? (
-          <a href="/staff/enquiries">Show open only</a>
+          <Link href="/staff/enquiries">Show open only</Link>
         ) : (
-          <a href="/staff/enquiries?show=all">Show handled ones too</a>
+          <Link href="/staff/enquiries?show=all">Show handled ones too</Link>
         )}
       </p>
       {enquiries.length === 0 && <p className={styles.muted}>Nothing waiting. 🎉</p>}

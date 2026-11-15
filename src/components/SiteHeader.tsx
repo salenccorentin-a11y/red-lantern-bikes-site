@@ -1,52 +1,66 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import type { Locale } from "@/i18n/config";
+import { getMessages } from "@/i18n";
+import { localize } from "@/i18n/paths";
+import { LanguageSwitcher, LanguageSwitcherFallback } from "./LanguageSwitcher";
 import { Logo } from "./Logo";
 import styles from "./SiteHeader.module.css";
 
-const NAV = [
-  { href: "/bikes", label: "Bikes" },
-  { href: "/one-way", label: "One-way trips" },
-  { href: "/tours", label: "Tours" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" },
-];
+export function SiteHeader({ lang = "en" }: { lang?: Locale }) {
+  const t = getMessages(lang).nav;
+  const nav = [
+    { href: "/bikes", label: t.bikes },
+    { href: "/one-way", label: t.oneWay },
+    { href: "/tours", label: t.tours },
+    { href: "/faq", label: t.faq },
+    { href: "/contact", label: t.contact },
+  ].map((item) => ({ ...item, href: localize(lang, item.href) }));
+  const book = localize(lang, "/book");
 
-export function SiteHeader() {
   return (
     <header className={styles.header}>
       <a href="#main" className={styles.skip}>
-        Skip to content
+        {t.skip}
       </a>
       <div className={styles.inner}>
-        <Logo />
+        <Logo href={localize(lang, "/")} />
 
-        <nav className={styles.desktopNav} aria-label="Main">
-          {NAV.map((item) => (
-            <Link key={item.href} href={item.href}>
-              {item.label}
-            </Link>
-          ))}
-          <Link href="/book" className={styles.book}>
-            Book a bike
-          </Link>
-        </nav>
-
-        {/* Phones: a menu that opens without JavaScript. */}
-        <details className={styles.mobileNav}>
-          <summary>
-            <span className={styles.burger} aria-hidden="true" />
-            Menu
-          </summary>
-          <nav aria-label="Main">
-            {NAV.map((item) => (
+        <div className={styles.right}>
+          <nav className={styles.desktopNav} aria-label={t.main}>
+            {nav.map((item) => (
               <Link key={item.href} href={item.href}>
                 {item.label}
               </Link>
             ))}
-            <Link href="/book" className={styles.book}>
-              Book a bike
+            <Link href={book} className={styles.book}>
+              {t.book}
             </Link>
           </nav>
-        </details>
+
+          {/* Reads the current page's address, so it waits for it. */}
+          <Suspense fallback={<LanguageSwitcherFallback lang={lang} label={t.language} />}>
+            <LanguageSwitcher lang={lang} label={t.language} />
+          </Suspense>
+
+          {/* Phones: a menu that opens without JavaScript. */}
+          <details className={styles.mobileNav}>
+            <summary>
+              <span className={styles.burger} aria-hidden="true" />
+              {t.menu}
+            </summary>
+            <nav aria-label={t.main}>
+              {nav.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  {item.label}
+                </Link>
+              ))}
+              <Link href={book} className={styles.book}>
+                {t.book}
+              </Link>
+            </nav>
+          </details>
+        </div>
       </div>
     </header>
   );

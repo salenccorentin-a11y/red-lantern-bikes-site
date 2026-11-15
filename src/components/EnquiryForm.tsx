@@ -2,9 +2,12 @@
 
 import { useActionState } from "react";
 import { sendEnquiry, type EnquiryState } from "@/app/(public)/enquiry-actions";
+import type { Messages } from "@/i18n/messages/en";
 import styles from "./EnquiryForm.module.css";
 
 type Props = {
+  /** Wording in the page's language (passed in, so browsers get one language). */
+  t: Messages["enquiry"];
   kind: "TOUR" | "REVERSE_ROUTE" | "GENERAL";
   topic?: string;
   /** Ask for a start date and number of riders (tours and trips). */
@@ -12,18 +15,21 @@ type Props = {
   messagePlaceholder?: string;
 };
 
-export function EnquiryForm({ kind, topic, tripDetails, messagePlaceholder }: Props) {
+export function EnquiryForm({ t, kind, topic, tripDetails, messagePlaceholder }: Props) {
   const [state, action, pending] = useActionState<EnquiryState, FormData>(sendEnquiry, {});
 
   if (state.sent) {
     return (
       <p className={styles.sent} role="status">
-        Thanks! Your message is with us, and we&apos;ll get back to you as soon as we can.
+        {t.sent}
       </p>
     );
   }
 
   const invalid = (field: string) => (state.field === field ? true : undefined);
+  // The server's message is in English; show the one for the field in this language.
+  const errors = t.errors as Record<string, string>;
+  const error = state.error ? (errors[state.field ?? "form"] ?? errors.form) : null;
 
   return (
     <form action={action} className={styles.form}>
@@ -31,11 +37,11 @@ export function EnquiryForm({ kind, topic, tripDetails, messagePlaceholder }: Pr
       {topic && <input type="hidden" name="topic" value={topic} />}
       <div className={styles.row}>
         <label>
-          <span>Your name</span>
+          <span>{t.name}</span>
           <input name="name" autoComplete="name" required aria-invalid={invalid("name")} />
         </label>
         <label>
-          <span>Email</span>
+          <span>{t.email}</span>
           <input
             name="email"
             type="email"
@@ -45,24 +51,24 @@ export function EnquiryForm({ kind, topic, tripDetails, messagePlaceholder }: Pr
           />
         </label>
         <label>
-          <span>Phone or WhatsApp (optional)</span>
+          <span>{t.phone}</span>
           <input name="phone" type="tel" autoComplete="tel" />
         </label>
       </div>
       {tripDetails && (
         <div className={styles.row}>
           <label>
-            <span>Preferred start date (optional)</span>
+            <span>{t.start}</span>
             <input name="preferredStart" type="date" aria-invalid={invalid("preferredStart")} />
           </label>
           <label>
-            <span>Number of riders (optional)</span>
+            <span>{t.riders}</span>
             <input name="riders" type="number" min={1} max={30} inputMode="numeric" />
           </label>
         </div>
       )}
       <label>
-        <span>Your message</span>
+        <span>{t.message}</span>
         <textarea
           name="message"
           rows={5}
@@ -77,10 +83,10 @@ export function EnquiryForm({ kind, topic, tripDetails, messagePlaceholder }: Pr
         Website
         <input name="website" tabIndex={-1} autoComplete="off" />
       </label>
-      {state.error && <p className={styles.error}>{state.error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
       <div>
         <button className={styles.button} disabled={pending}>
-          {pending ? "Sending…" : "Send message"}
+          {pending ? t.sending : t.send}
         </button>
       </div>
     </form>

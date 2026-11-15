@@ -10,6 +10,9 @@ import { reserveBike } from "@/server/bookings";
 import { sendEmail } from "@/server/email";
 import { bookingReceivedEmail } from "@/server/emails/booking-received";
 import { reportError } from "@/server/report-error";
+import { getMessages } from "@/i18n";
+import { isLocale } from "@/i18n/config";
+import { localize } from "@/i18n/paths";
 
 export type BookingFormState = {
   /** Shown above the Reserve button. */
@@ -26,14 +29,16 @@ export type BookingFormState = {
 export async function createOnlineBooking(input: unknown): Promise<BookingFormState> {
   const parsed = bookingInput.safeParse(input);
   if (!parsed.success) {
+    const raw = (input ?? {}) as { lang?: unknown };
+    const t = getMessages(isLocale(raw.lang) ? raw.lang : "en");
     const fieldErrors: Record<string, string> = {};
     for (const issue of parsed.error.issues) {
       const field = String(issue.path[0] ?? "form");
       fieldErrors[field] ??= issue.message;
     }
     // A filled-in hidden field means a bot; give it nothing useful.
-    if (fieldErrors.website) return { error: "Something went wrong. Please try again." };
-    return { error: "Please check the highlighted fields.", fieldErrors };
+    if (fieldErrors.website) return { error: t.bookingErrors.GENERIC };
+    return { error: t.book.checkFields, fieldErrors };
   }
   const form = parsed.data;
 
@@ -47,7 +52,7 @@ export async function createOnlineBooking(input: unknown): Promise<BookingFormSt
     addOns: form.addOns,
     customer: { name: form.name, email: form.email, phone: form.phone, note: form.note },
   });
-  if (!result.ok) return { error: bookingErrorMessage(result.error) };
+  if (!result.ok) return { error: bookingErrorMessage(result.error, form.lang) };
 
   const { booking } = result;
   const model = await db.bikeModel.findUniqueOrThrow({ where: { id: booking.bikeModelId } });
@@ -76,5 +81,5 @@ export async function createOnlineBooking(input: unknown): Promise<BookingFormSt
     await reportError(`Booking ${booking.reference}: confirmation email failed`, error);
   }
 
-  redirect(`/booking/${booking.viewToken}`);
+  redirect(localize(form.lang, `/booking/${booking.viewToken}`));
 }

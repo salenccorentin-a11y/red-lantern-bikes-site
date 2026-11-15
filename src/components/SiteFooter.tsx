@@ -1,51 +1,56 @@
 import Link from "next/link";
 import { ADDRESS_LINE, BUSINESS, mapsLink, whatsappLink } from "@/content/business";
+import { getMessages, hoursFor } from "@/i18n";
+import type { Locale } from "@/i18n/config";
+import { localize } from "@/i18n/paths";
 import { Logo } from "./Logo";
 import styles from "./SiteFooter.module.css";
 
-export function SiteFooter() {
+export function SiteFooter({ lang = "en" }: { lang?: Locale }) {
+  const t = getMessages(lang).footer;
+  const to = (href: string) => localize(lang, href);
   const whatsapp = whatsappLink();
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.shop}>
-          <Logo size="lg" />
+          <Logo size="lg" href={to("/")} />
           <p className={styles.address}>
             {ADDRESS_LINE}
             <br />
-            {BUSINESS.hours}
+            {hoursFor(lang)}
           </p>
           <a href={mapsLink()} target="_blank" rel="noopener" className={styles.mapLink}>
-            Open in Google Maps
+            {t.openMaps}
           </a>
         </div>
 
-        <nav aria-label="Ride with us">
-          <p className={styles.heading}>Ride with us</p>
+        <nav aria-label={t.rideWithUs}>
+          <p className={styles.heading}>{t.rideWithUs}</p>
           <ul>
             <li>
-              <Link href="/bikes">Our bikes</Link>
+              <Link href={to("/bikes")}>{t.ourBikes}</Link>
             </li>
             <li>
-              <Link href="/one-way">One-way to Hanoi and Da Nang</Link>
+              <Link href={to("/one-way")}>{t.oneWay}</Link>
             </li>
             <li>
-              <Link href="/tours">Tours</Link>
+              <Link href={to("/tours")}>{t.tours}</Link>
             </li>
             <li>
-              <Link href="/blog">Travel guides</Link>
+              <Link href="/blog">{t.guides}</Link>
             </li>
             <li>
-              <Link href="/faq">FAQ</Link>
+              <Link href={to("/faq")}>{t.faq}</Link>
             </li>
             <li>
-              <Link href="/about">About us</Link>
+              <Link href="/about">{t.about}</Link>
             </li>
           </ul>
         </nav>
 
         <div>
-          <p className={styles.heading}>Get in touch</p>
+          <p className={styles.heading}>{t.getInTouch}</p>
           <ul>
             {whatsapp && (
               <li>
@@ -63,10 +68,10 @@ export function SiteFooter() {
               </li>
             )}
             <li>
-              <Link href="/contact">Send us a message</Link>
+              <Link href={to("/contact")}>{t.sendMessage}</Link>
             </li>
           </ul>
-          <ul className={styles.social} aria-label="Social media">
+          <ul className={styles.social} aria-label={t.social}>
             {Object.entries(BUSINESS.social).map(([name, url]) =>
               url ? (
                 <li key={name}>
@@ -81,8 +86,8 @@ export function SiteFooter() {
       </div>
       <div className={styles.legal}>
         <span>© {BUSINESS.name}</span>
-        <Link href="/terms">Rental terms</Link>
-        <Link href="/privacy">Privacy</Link>
+        <Link href="/terms">{t.terms}</Link>
+        <Link href="/privacy">{t.privacy}</Link>
       </div>
     </footer>
   );

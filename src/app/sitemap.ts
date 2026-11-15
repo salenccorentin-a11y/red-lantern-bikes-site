@@ -2,10 +2,13 @@ import type { MetadataRoute } from "next";
 import { BIKE_CONTENT } from "@/content/bikes";
 import { POSTS, CATEGORIES } from "@/content/blog";
 import { TOURS } from "@/content/tours";
+import { LOCALES } from "@/i18n/config";
+import { isTranslatedPath, localize } from "@/i18n/paths";
 import { siteUrl } from "@/seo/site";
 
 // Built from the content files, so it needs no database. Private pages
-// (staff, customers' booking pages) are left out.
+// (staff, customers' booking pages) are left out. Pages that exist in French
+// and Korean are listed once per language, each naming the others.
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteUrl();
   const pages: { path: string; priority: number; lastModified?: string }[] = [
@@ -25,9 +28,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...CATEGORIES.map((c) => ({ path: `/blog/${c.slug}`, priority: 0.4 })),
     ...POSTS.map((p) => ({ path: p.path, priority: 0.6, lastModified: p.date ?? undefined })),
   ];
-  return pages.map((p) => ({
-    url: base + p.path,
-    priority: p.priority,
-    lastModified: p.lastModified,
-  }));
+  return pages.flatMap((p) => {
+    if (!isTranslatedPath(p.path)) {
+      return [{ url: base + p.path, priority: p.priority, lastModified: p.lastModified }];
+    }
+    const languages = Object.fromEntries(LOCALES.map((l) => [l, base + localize(l, p.path)]));
+    return LOCALES.map((lang) => ({
+      url: base + localize(lang, p.path),
+      priority: p.priority,
+      lastModified: p.lastModified,
+      alternates: { languages },
+    }));
+  });
 }

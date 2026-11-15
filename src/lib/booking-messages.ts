@@ -1,32 +1,35 @@
 // What the customer sees when a booking can't go ahead. Codes come from
-// reserveBike() and quote(); the wording lives here, in one place.
+// reserveBike() and quote(); the wording is in src/i18n/messages.
 
+import { getMessages } from "@/i18n";
+import { fill, type Locale } from "@/i18n/config";
 import type { ReserveError } from "@/server/bookings";
 
-export function bookingErrorMessage(error: ReserveError): string {
+export function bookingErrorMessage(error: ReserveError, lang: Locale = "en"): string {
+  const t = getMessages(lang).bookingErrors;
   switch (error.code) {
     case "INVALID_DATE":
-      return "Please choose valid pick-up and drop-off dates.";
+      return t.INVALID_DATE;
     case "END_BEFORE_START":
-      return "Drop-off must be on or after the pick-up day.";
+      return t.END_BEFORE_START;
     case "START_IN_PAST":
-      return "Pick-up can't be in the past. Please choose today or a later date.";
+      return t.START_IN_PAST;
     case "BELOW_MIN_DAYS":
-      return `This trip needs at least ${error.minDays} days.`;
+      return fill(t.BELOW_MIN_DAYS, { days: error.minDays });
     case "NO_BIKE_AVAILABLE":
-      return "Sorry, that bike has just been booked for these dates. Please pick another bike or change your dates.";
+      return t.NO_BIKE_AVAILABLE;
     case "ROUTE_NOT_BOOKABLE_ONLINE":
-      return "This route can't be booked online yet. Send us a message and we'll arrange it.";
+      return t.ROUTE_NOT_BOOKABLE_ONLINE;
     case "ROUTE_NOT_FOUND":
     case "ROUTE_NOT_READY":
     case "NO_ONE_WAY_FEE":
-      return "This trip isn't available online right now. Send us a message and we'll arrange it.";
+      return t.ROUTE_UNAVAILABLE;
     case "MODEL_NOT_FOUND":
-      return "That bike is no longer available. Please choose another.";
+      return t.MODEL_NOT_FOUND;
     case "ADD_ON_NOT_FOUND":
     case "INVALID_ADD_ON":
-      return "One of the extras is no longer available. Please check your extras and try again.";
+      return t.ADD_ON_UNAVAILABLE;
     case "TOO_MANY_ADD_ON":
-      return "You've chosen more of one extra than we can offer. Please check your extras and try again.";
+      return t.TOO_MANY_ADD_ON;
   }
 }

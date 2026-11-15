@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BIKE_CONTENT } from "@/content/bikes";
+import { bikeContent, getMessages, kindLabel } from "@/i18n";
+import type { Locale } from "@/i18n/config";
+import { localize } from "@/i18n/paths";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
 import type { PublicModel } from "@/server/fleet";
 import { HoverLift } from "./motion/HoverLift";
@@ -10,11 +12,20 @@ import styles from "./BikeCard.module.css";
 /** Studio photo for a model (public/bikes/<slug>.webp, made by scripts/brand/prepare-photos.cjs). */
 export const bikeImage = (slug: string) => `/bikes/${slug}.webp`;
 
-export function BikeCard({ model, usdRate }: { model: PublicModel; usdRate: number }) {
-  const content = BIKE_CONTENT[model.slug];
+export function BikeCard({
+  model,
+  usdRate,
+  lang = "en",
+}: {
+  model: PublicModel;
+  usdRate: number;
+  lang?: Locale;
+}) {
+  const content = bikeContent(lang, model.slug);
+  const t = getMessages(lang).common;
   return (
     <HoverLift className={styles.lift}>
-      <Link href={`/bikes/${model.slug}`} className={styles.card}>
+      <Link href={localize(lang, `/bikes/${model.slug}`)} className={styles.card}>
         {/* Grows into the photo on the bike's page (same name there). */}
         <SharedElement name={`bike-${model.slug}`}>
           <Image
@@ -27,12 +38,12 @@ export function BikeCard({ model, usdRate }: { model: PublicModel; usdRate: numb
           />
         </SharedElement>
         <span className={styles.body}>
-          <span className={styles.kind}>{model.kind}</span>
+          <span className={styles.kind}>{kindLabel(lang, model.kind)}</span>
           <span className={styles.name}>{model.name}</span>
           {content && <span className={styles.summary}>{content.summary}</span>}
           <span className={styles.price}>
             {formatVnd(model.dailyRate)}
-            <small> a day</small>
+            <small> {t.aDay}</small>
             <span className={styles.usd}>{formatUsdApprox(model.dailyRate, usdRate)}</span>
           </span>
         </span>

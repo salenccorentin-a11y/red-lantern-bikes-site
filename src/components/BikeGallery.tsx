@@ -6,12 +6,21 @@ type Photo = { src: string; alt: string; blur: string };
 
 // Our own photos of a model, made by scripts/brand/prepare-photos.cjs.
 // Models without any (yet) show nothing.
-export function BikeGallery({ slug, name }: { slug: string; name: string }) {
+export function BikeGallery({
+  slug,
+  name,
+  title = `Photos of our ${name}`,
+}: {
+  slug: string;
+  name: string;
+  /** The heading, in the page's language. */
+  title?: string;
+}) {
   const photos: Photo[] = (galleries as Record<string, Photo[]>)[slug] ?? [];
   if (photos.length === 0) return null;
   return (
     <section className={styles.gallery} aria-labelledby="gallery-title">
-      <h2 id="gallery-title">Photos of our {name}</h2>
+      <h2 id="gallery-title">{title}</h2>
       <ul
         className={styles.grid}
         data-count={photos.length}

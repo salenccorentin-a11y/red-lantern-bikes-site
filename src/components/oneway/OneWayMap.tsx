@@ -1,4 +1,6 @@
 import map from "@/content/vietnam-map.json";
+import { getMessages } from "@/i18n";
+import type { Locale } from "@/i18n/config";
 import styles from "./OneWayTrips.module.css";
 
 // Vietnam with the road from Saigon to Hanoi, from src/content/vietnam-map.json
@@ -9,7 +11,8 @@ import styles from "./OneWayTrips.module.css";
 //
 // Hidden from screen readers: the routes list in OneWayTrips says the same.
 
-export function OneWayMap() {
+export function OneWayMap({ lang = "en" }: { lang?: Locale }) {
+  const countries = getMessages(lang).oneWay.countries as Record<string, string>;
   return (
     <svg
       viewBox={`0 0 ${map.width} ${map.height}`}
@@ -28,7 +31,7 @@ export function OneWayMap() {
       <path d={map.vietnam} className={styles.vietnam} />
       {map.labels.map((l) => (
         <text key={l.name} x={l.at[0]} y={l.at[1]} className={styles.country}>
-          {l.name}
+          {countries[l.name] ?? l.name}
         </text>
       ))}
       {/* The whole route, faint, so you can see where the line is heading. */}

@@ -24,6 +24,7 @@ Choices made while planning the rebuild, with the reason for each. Pricing rules
 ## Site (10 October 2026)
 
 - **English only at launch,** built so languages can be added later. Every old language URL (`/vi`, `/fr`, `/nl`, `/ja`, `/ko_KR`, `/zh_CN`) gets a 301 to the matching English page.
+- **French and Korean added (November 2026).** The key pages (home, bikes, one-way, tours, FAQ, contact) and the booking steps exist in French under `/fr` and Korean under `/ko`; English keeps its original addresses. About, blog, terms, privacy, emails and the staff area stay in English. Old `/fr` and `/ko_KR` addresses now go to the French and Korean page where one exists. The Korean wording is a draft that needs a native speaker's check.
 - **Currency.** Prices are charged and stored in VND, with an approximate USD figure shown beside them. Staff set the exchange rate in settings.
 - **Tours.** Each tour gets its own page with an enquiry form. No online tour booking at launch.
 - **Staff login.** Email magic links sent through Resend: no passwords to store, and only listed staff emails can sign in. Two roles: owner (sees costs and profit, edits prices) and staff.

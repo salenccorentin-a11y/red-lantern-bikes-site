@@ -14,14 +14,18 @@ import styles from "./RiderWall.module.css";
 // Nine photos: on wide screens the big first one plus eight fill three full rows.
 const RIDERS = [r6, r1, r2, r3, r4, r5, r7, r8, r9];
 
-export function RiderWall() {
+export function RiderWall({
+  alt = "Riders with their Red Lantern bikes outside the shop in District 1",
+}: {
+  alt?: string;
+}) {
   return (
     <ul className={styles.wall}>
       {RIDERS.map((photo, i) => (
         <li key={i} className={styles.tile}>
           <Image
             src={photo}
-            alt="Riders with their Red Lantern bikes outside the shop in District 1"
+            alt={alt}
             placeholder="blur"
             sizes={i === 0 ? "(max-width: 760px) 100vw, 50vw" : "(max-width: 760px) 50vw, 25vw"}
             className={styles.photo}

@@ -7,11 +7,11 @@ import styles from "./layout.module.css";
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader lang="en" />
       <div id="main" className={styles.content}>
         <MotionProvider>{children}</MotionProvider>
       </div>
-      <SiteFooter />
+      <SiteFooter lang="en" />
       <Monitoring />
     </>
   );

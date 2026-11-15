@@ -3,14 +3,24 @@
 // scripts/seo/check-redirects.ts.
 //
 // Addresses that stay the same (/, /terms, /blog and its posts) need no rule.
-// Every rule is repeated under the old language prefixes (/vi, /fr, …), which
-// all go to the English page in one hop.
+// Every rule is repeated under the old language prefixes. Old French (/fr) and
+// Korean (/ko_KR) addresses go to the new French (/fr) and Korean (/ko) page
+// where one exists; the other languages go to the English page. Always one hop.
 
 import { BUSINESS } from "../content/business";
+import type { Locale } from "../i18n/config";
+import { localize } from "../i18n/paths";
 
 type Redirect = { source: string; destination: string; statusCode: 301 };
 
-const LANGS = "vi|fr|nl|ja|ko_KR|zh_CN";
+/** Old languages with no version on the new site: everything goes to English. */
+const LANGS = "vi|nl|ja|zh_CN";
+/** Old language prefix → the new site's language. */
+const KEPT_LANGS: [string, Locale][] = [
+  ["fr", "fr"],
+  ["ko_KR", "ko"],
+];
+const OLD_PREFIXES = `${LANGS}|${KEPT_LANGS.map(([prefix]) => prefix).join("|")}`;
 
 /** Old shop product slug → new bike page (or the bike list if not in the fleet). */
 export const PRODUCT_TO_BIKE: Record<string, string> = {
@@ -68,17 +78,39 @@ export function oldSiteRedirects(): Redirect[] {
     ["2", "/blog/news-2"],
     ["3", "/blog"],
   ].flatMap(([id, category]): [string, string][] => [
-    [`/:lang(${LANGS})/blog/:category([^/]+-${id})`, category],
+    [`/:lang(${OLD_PREFIXES})/blog/:category([^/]+-${id})`, category],
     [
-      `/:lang(${LANGS})/blog/:category([^/]+-${id})/:post`,
+      `/:lang(${OLD_PREFIXES})/blog/:category([^/]+-${id})/:post`,
       id === "3" ? "/blog" : `${category}/:post`,
     ],
+  ]);
+
+  // French and Korean: the same rules, landing on the page in that language
+  // (pages without a translation, like the blog, stay English).
+  const keptLangs = KEPT_LANGS.flatMap(([prefix, lang]): [string, string][] => [
+    ...rules.map(([source, destination]): [string, string] => [
+      `/${prefix}${source}`,
+      localize(lang, destination),
+    ]),
+    // The old site's other pages. /fr itself is now the French home page, so
+    // there is no catch-all for it: only the old addresses are listed.
+    ...(prefix === lang
+      ? ([
+          [`/${prefix}/blog`, "/blog"],
+          [`/${prefix}/blog/:path*`, "/blog/:path*"],
+          [`/${prefix}/terms`, "/terms"],
+        ] as [string, string][])
+      : ([
+          [`/${prefix}`, `/${lang}`],
+          [`/${prefix}/:path*`, "/:path*"],
+        ] as [string, string][])),
   ]);
 
   return [
     ...rules,
     ...withLang,
     ...blogCategories,
+    ...keptLangs,
     // Anything else under a language prefix: the same page in English.
     [`/:lang(${LANGS})`, "/"],
     [`/:lang(${LANGS})/:path*`, "/:path*"],

@@ -21,6 +21,8 @@ export type CatalogModel = {
 
 export type CatalogAddOn = {
   id: string;
+  /** Stable name, e.g. "insurance" (for translations). */
+  slug: string;
   name: string;
   description: string | null;
   pricing: "PER_DAY" | "FLAT";
@@ -84,6 +86,7 @@ export async function loadCatalog(db: PrismaClient): Promise<Catalog> {
     ),
     addOns: addOns.map((a) => ({
       id: a.id,
+      slug: a.slug,
       name: a.name,
       description: a.description,
       pricing: a.pricing,

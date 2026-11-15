@@ -1,3 +1,5 @@
+import { getMessages } from "@/i18n";
+import { fill, type Locale } from "@/i18n/config";
 import { loadReviews, type Review } from "@/server/google-reviews";
 import styles from "./GoogleReviews.module.css";
 
@@ -7,17 +9,20 @@ import styles from "./GoogleReviews.module.css";
 const MAX_CHARS = 280;
 
 export async function GoogleReviews({
+  lang = "en",
   title,
   limit = 3,
   tone = "light",
 }: {
+  lang?: Locale;
   /** A heading above the reviews, if the page needs one. */
   title?: string;
   limit?: number;
   /** "night" on dark sections, "light" on white or mist. */
   tone?: "light" | "night";
 }) {
-  const data = await loadReviews();
+  const t = getMessages(lang).reviews;
+  const data = await loadReviews(lang);
   if (!data || data.reviews.length === 0) return null;
   const reviews = data.reviews.slice(0, limit);
 
@@ -26,15 +31,15 @@ export async function GoogleReviews({
       {title && <h2 className={styles.title}>{title}</h2>}
       {data.rating !== null && (
         <p className={styles.summary}>
-          <Stars rating={data.rating} />
+          <Stars rating={data.rating} label={fill(t.stars, { rating: data.rating })} />
           <b>{data.rating.toFixed(1)}</b>
-          {data.count !== null && <span> from {data.count} reviews on Google</span>}
+          {data.count !== null && <span> {fill(t.from, { count: data.count })}</span>}
         </p>
       )}
       <ul className={styles.list}>
         {reviews.map((r, i) => (
           <li key={i} className={styles.card}>
-            <Stars rating={r.rating} />
+            <Stars rating={r.rating} label={fill(t.stars, { rating: r.rating })} />
             <p className={styles.text}>{trim(r.text)}</p>
             <p className={styles.author}>
               {r.authorUrl ? (
@@ -48,19 +53,19 @@ export async function GoogleReviews({
             </p>
             {r.text.length > MAX_CHARS && data.url && (
               <a href={data.url} target="_blank" rel="noopener" className={styles.more}>
-                Read on Google
+                {t.readOn}
               </a>
             )}
           </li>
         ))}
       </ul>
       <p className={styles.attribution}>
-        Reviews from Google
+        {t.attribution}
         {data.url && (
           <>
             {". "}
             <a href={data.url} target="_blank" rel="noopener">
-              See all reviews
+              {t.seeAll}
             </a>
           </>
         )}
@@ -75,10 +80,10 @@ function trim(text: string): string {
   return `${text.slice(0, MAX_CHARS).replace(/\s+\S*$/, "")}…`;
 }
 
-function Stars({ rating }: { rating: Review["rating"] }) {
+function Stars({ rating, label }: { rating: Review["rating"]; label: string }) {
   const full = Math.round(rating);
   return (
-    <span className={styles.stars} role="img" aria-label={`${rating} out of 5 stars`}>
+    <span className={styles.stars} role="img" aria-label={label}>
       {Array.from({ length: 5 }, (_, i) => (
         <svg key={i} viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
           <path

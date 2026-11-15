@@ -7,7 +7,8 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState, useTransition } from "react";
-import { dropoffLabel } from "@/lib/cities";
+import { fill, type Locale } from "@/i18n/config";
+import type { Messages } from "@/i18n/messages/en";
 import { formatDisplayDate } from "@/lib/dates";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
@@ -36,8 +37,20 @@ export function BookingForm(props: {
   today: string;
   initialModelId?: string | null;
   initialDropoff?: Dropoff;
+  /** The page's language, and its wording (passed in so browsers get one language). */
+  lang: Locale;
+  t: Messages["book"];
+  common: Messages["common"];
 }) {
-  const { catalog, today } = props;
+  const { catalog, today, lang, t, common } = props;
+  const cityLabel = (city: OneWayCity) => common.city[city];
+  const dropoffLabel = (city: Dropoff) =>
+    city === "SAIGON"
+      ? common.dropoffReturn
+      : fill(common.dropoffOneWay, { city: cityLabel(city) });
+  const daysLabel = (n: number) => fill(n === 1 ? common.day : common.days, { n });
+  const date = (iso: string) => formatDisplayDate(iso, lang);
+  const contactHref = lang === "en" ? "/contact?about=reverse" : `/${lang}/contact?about=reverse`;
   const [dropoff, setDropoff] = useState<Dropoff>(props.initialDropoff ?? "SAIGON");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -63,10 +76,10 @@ export function BookingForm(props: {
   // ── Dates ────────────────────────────────────────────────────────────────
   const dateProblem = useMemo(() => {
     if (!startDate || !endDate) return null;
-    if (startDate < today) return "Pick-up can't be in the past.";
-    if (endDate < startDate) return "Drop-off must be on or after the pick-up day.";
+    if (startDate < today) return t.pastDate;
+    if (endDate < startDate) return t.endBeforeStart;
     return null;
-  }, [startDate, endDate, today]);
+  }, [startDate, endDate, today, t]);
   const datesReady = Boolean(startDate && endDate) && !dateProblem;
 
   // Live availability for the chosen trip. While the answer for the current
@@ -131,7 +144,7 @@ export function BookingForm(props: {
     if (model) return formatVnd(addOnUnitPrice(a, model.id));
     const prices = catalog.models.map((m) => addOnUnitPrice(a, m.id));
     const low = Math.min(...prices);
-    return low === Math.max(...prices) ? formatVnd(low) : `from ${formatVnd(low)}`;
+    return low === Math.max(...prices) ? formatVnd(low) : fill(t.from, { price: formatVnd(low) });
   }
 
   const priceFor = (m: CatalogModel, addOns: AddOnChoice[] = []) =>
@@ -172,6 +185,7 @@ export function BookingForm(props: {
         note: note || undefined,
         acceptDeposit,
         website,
+        lang,
       });
       setResult(state ?? {});
       // The bike may have just gone: refresh the list.
@@ -179,21 +193,24 @@ export function BookingForm(props: {
     });
   }
 
-  const fieldError = (field: string) => result.fieldErrors?.[field];
+  // The server's messages are in English; show the one for the field in this language.
+  const fieldErrors = t.fieldErrors as Record<string, string>;
+  const fieldError = (field: string) =>
+    result.fieldErrors?.[field] ? (fieldErrors[field] ?? result.fieldErrors[field]) : undefined;
 
   return (
     <form className={styles.layout} onSubmit={reserve} noValidate>
       <div>
         {/* 1. Where */}
         <fieldset className={styles.section}>
-          <legend className={styles.heading}>1. Where are you going?</legend>
+          <legend className={styles.heading}>{t.whereTitle}</legend>
           <div className={styles.options}>
             <Option
               checked={dropoff === "SAIGON"}
               onChange={() => setDropoff("SAIGON")}
               name="dropoff"
-              label="Ride around and return to Saigon"
-              note="No one-way fee"
+              label={t.returnLabel}
+              note={t.returnNote}
             />
             {catalog.routes.map((r) => (
               <Option
@@ -201,23 +218,22 @@ export function BookingForm(props: {
                 checked={dropoff === r.toCity}
                 onChange={() => setDropoff(r.toCity)}
                 name="dropoff"
-                label={`One-way to ${dropoffLabel(r.toCity).replace(" (one-way)", "")}`}
-                note={`From ${r.minDays} days · one-way fee by bike`}
+                label={fill(t.oneWayLabel, { city: cityLabel(r.toCity) })}
+                note={fill(t.oneWayNote, { days: r.minDays })}
               />
             ))}
           </div>
           <p className={styles.hint}>
-            Starting in Hanoi or Da Nang? <a href="/contact?about=reverse">Contact us</a> and
-            we&apos;ll arrange it.
+            {t.startNorth} <a href={contactHref}>{t.contactUs}</a> {t.startNorthEnd}
           </p>
         </fieldset>
 
         {/* 2. Dates */}
         <fieldset className={styles.section}>
-          <legend className={styles.heading}>2. Dates</legend>
+          <legend className={styles.heading}>{t.datesTitle}</legend>
           <div className={styles.dates}>
             <label className={styles.field}>
-              <span>Pick up in Saigon</span>
+              <span>{t.pickUp}</span>
               <input
                 type="date"
                 value={startDate}
@@ -228,7 +244,7 @@ export function BookingForm(props: {
             </label>
             <label className={styles.field}>
               <span>
-                Drop off{route ? ` in ${dropoffLabel(route.toCity).replace(" (one-way)", "")}` : ""}
+                {route ? fill(t.dropOffIn, { city: cityLabel(route.toCity) }) : t.dropOff}
               </span>
               <input
                 type="date"
@@ -242,12 +258,11 @@ export function BookingForm(props: {
           <div aria-live="polite">
             {dateProblem && <p className={styles.warn}>{dateProblem}</p>}
             {tooShort && route && (
-              <p className={styles.warn}>This trip needs at least {route.minDays} days.</p>
+              <p className={styles.warn}>{fill(t.tooShort, { days: route.minDays })}</p>
             )}
             {datesReady && priced?.ok && (
               <p className={styles.ok}>
-                {priced.quote.days} day{priced.quote.days === 1 ? "" : "s"}, both pick-up and
-                drop-off days included
+                {fill(t.daysIncluded, { days: daysLabel(priced.quote.days) })}
               </p>
             )}
           </div>
@@ -255,12 +270,11 @@ export function BookingForm(props: {
 
         {/* 3. Bike */}
         <fieldset className={styles.section}>
-          <legend className={styles.heading}>3. Choose your bike</legend>
+          <legend className={styles.heading}>{t.bikeTitle}</legend>
           <div aria-live="polite" className={styles.hint}>
-            {!datesReady && "Choose your dates to see which bikes are free."}
-            {availability.state === "loading" && "Checking which bikes are free…"}
-            {availability.state === "error" &&
-              "We couldn't check availability just now. You can still choose a bike; we'll confirm when you reserve."}
+            {!datesReady && t.chooseDates}
+            {availability.state === "loading" && t.checking}
+            {availability.state === "error" && t.checkFailed}
           </div>
           <div className={styles.bikes}>
             {catalog.models.map((m) => {
@@ -296,30 +310,28 @@ export function BookingForm(props: {
                   {price?.ok ? (
                     <span className={styles.price}>
                       {formatVnd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}
-                      <span> for {price.quote.days} days</span>
+                      <span> {fill(t.forDays, { days: daysLabel(price.quote.days) })}</span>
                     </span>
                   ) : (
                     <span className={styles.price}>
                       {formatVnd(m.dailyRate)}
-                      <span> / day</span>
+                      <span> {t.perDay}</span>
                     </span>
                   )}
                   {route && m.oneWayFees[route.toCity] !== undefined && (
                     <span className={styles.small}>
-                      incl. one-way fee {formatVnd(m.oneWayFees[route.toCity]!)}
+                      {fill(t.inclFee, { fee: formatVnd(m.oneWayFees[route.toCity]!) })}
                     </span>
                   )}
                   {!price?.ok && !route && (
                     <span className={styles.small}>
-                      from {formatVnd(m.monthlyRate)} / day monthly
+                      {fill(t.fromMonthly, { price: formatVnd(m.monthlyRate) })}
                     </span>
                   )}
-                  {noRoute && <span className={styles.status}>Not available for this trip</span>}
-                  {!noRoute && soldOut && (
-                    <span className={styles.status}>Booked for these dates</span>
-                  )}
+                  {noRoute && <span className={styles.status}>{t.notForTrip}</span>}
+                  {!noRoute && soldOut && <span className={styles.status}>{t.bookedOut}</span>}
                   {!noRoute && free !== null && free > 0 && free <= 2 && (
-                    <span className={styles.statusLow}>Only {free} left</span>
+                    <span className={styles.statusLow}>{fill(t.onlyLeft, { n: free })}</span>
                   )}
                 </label>
               );
@@ -331,7 +343,7 @@ export function BookingForm(props: {
         {/* 4. Extras */}
         {catalog.addOns.length > 0 && (
           <fieldset className={styles.section}>
-            <legend className={styles.heading}>4. Extras</legend>
+            <legend className={styles.heading}>{t.extrasTitle}</legend>
             {catalog.addOns.map((a) => {
               const quantity = quantities[a.id] ?? 0;
               const label = (
@@ -343,7 +355,7 @@ export function BookingForm(props: {
               const price = (
                 <span className={styles.addonPrice}>
                   <b>{extraPrice(a)}</b>
-                  <small>{a.pricing === "PER_DAY" ? "per day" : "one-off, each"}</small>
+                  <small>{a.pricing === "PER_DAY" ? t.perDayExtra : t.oneOffEach}</small>
                 </span>
               );
               // One allowed: a tick box. More (helmets, gloves): how many.
@@ -360,7 +372,7 @@ export function BookingForm(props: {
               ) : (
                 <div key={a.id} className={styles.addon}>
                   <select
-                    aria-label={`How many: ${a.name}`}
+                    aria-label={fill(t.howMany, { name: a.name })}
                     value={quantity}
                     onChange={(e) => setQuantity(a.id, Number(e.target.value))}
                     className={styles.qty}
@@ -377,7 +389,7 @@ export function BookingForm(props: {
               );
             })}
             {!model && catalog.addOns.some((a) => Object.keys(a.modelPrices).length > 0) && (
-              <p className={styles.small}>Choose a bike to see its insurance price.</p>
+              <p className={styles.small}>{t.chooseBikeInsurance}</p>
             )}
           </fieldset>
         )}
@@ -385,11 +397,11 @@ export function BookingForm(props: {
         {/* 5. Details */}
         <fieldset className={styles.section}>
           <legend className={styles.heading}>
-            {catalog.addOns.length > 0 ? "5" : "4"}. Your details
+            {fill(t.detailsTitle, { n: catalog.addOns.length > 0 ? 5 : 4 })}
           </legend>
           <div className={styles.details}>
             <TextField
-              label="Full name"
+              label={t.fullName}
               value={name}
               onChange={setName}
               error={fieldError("name")}
@@ -397,26 +409,26 @@ export function BookingForm(props: {
               required
             />
             <TextField
-              label="Email"
+              label={t.email}
               type="email"
               value={email}
               onChange={setEmail}
               error={fieldError("email")}
               autoComplete="email"
-              hint="We send your booking and payment details here."
+              hint={t.emailHint}
               required
             />
             <TextField
-              label="Phone or WhatsApp (optional)"
+              label={t.phone}
               type="tel"
               value={phone}
               onChange={setPhone}
               error={fieldError("phone")}
               autoComplete="tel"
-              hint="With country code, e.g. +44 7700 900123"
+              hint={t.phoneHint}
             />
             <label className={`${styles.field} ${styles.wide}`}>
-              <span>Anything we should know? (optional)</span>
+              <span>{t.note}</span>
               <textarea
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
@@ -439,12 +451,14 @@ export function BookingForm(props: {
       </div>
 
       {/* Summary */}
-      <aside className={styles.ticket} id="summary" aria-label="Your booking">
-        <div className={styles.ticketLabel}>Your booking</div>
-        <div className={styles.ticketBike}>{model?.name ?? "Choose a bike"}</div>
+      <aside className={styles.ticket} id="summary" aria-label={t.summary}>
+        <div className={styles.ticketLabel}>{t.summary}</div>
+        <div className={styles.ticketBike}>{model?.name ?? t.chooseBike}</div>
         <div className={styles.ticketMeta}>
-          {startDate ? formatDisplayDate(startDate) : "—"} to{" "}
-          {endDate ? formatDisplayDate(endDate) : "—"}
+          {fill(t.dateRange, {
+            start: startDate ? date(startDate) : "—",
+            end: endDate ? date(endDate) : "—",
+          })}
           <br />
           {dropoffLabel(dropoff)}
         </div>
@@ -452,12 +466,12 @@ export function BookingForm(props: {
         {priced?.ok ? (
           <div aria-live="polite">
             <Line
-              label={`Rental, ${priced.quote.days} day${priced.quote.days === 1 ? "" : "s"}`}
+              label={fill(t.rental, { days: daysLabel(priced.quote.days) })}
               value={formatVnd(priced.quote.rentalVnd)}
             />
-            {model && <Saving model={model} days={priced.quote.days} />}
+            {model && <Saving model={model} days={priced.quote.days} t={t} />}
             {priced.quote.oneWayFeeVnd > 0 && (
-              <Line label="One-way fee" value={formatVnd(priced.quote.oneWayFeeVnd)} />
+              <Line label={t.oneWayFee} value={formatVnd(priced.quote.oneWayFeeVnd)} />
             )}
             {priced.quote.addOnLines.map((l) => (
               <Line
@@ -467,7 +481,7 @@ export function BookingForm(props: {
               />
             ))}
             <div className={`${styles.line} ${styles.total}`}>
-              <span>Total</span>
+              <span>{t.total}</span>
               <span>
                 {/* Counts to the new total when extras or dates change. */}
                 <AnimatedNumber value={priced.quote.totalVnd} format={formatVnd} />
@@ -475,14 +489,14 @@ export function BookingForm(props: {
               </span>
             </div>
             <Line
-              label="Deposit now, non-refundable"
+              label={t.depositNow}
               value={formatVnd(priced.quote.depositVnd)}
               sub={usd(priced.quote.depositVnd)}
             />
-            <Line label="Balance at pick-up" value={formatVnd(priced.quote.balanceVnd)} />
+            <Line label={t.balance} value={formatVnd(priced.quote.balanceVnd)} />
           </div>
         ) : (
-          <p className={styles.ticketMeta}>Choose your trip, dates and bike to see the price.</p>
+          <p className={styles.ticketMeta}>{t.choosePrompt}</p>
         )}
 
         <label className={styles.accept}>
@@ -491,9 +505,7 @@ export function BookingForm(props: {
             checked={acceptDeposit}
             onChange={(e) => setAcceptDeposit(e.target.checked)}
           />
-          <span>
-            I understand the online deposit is non-refundable. The balance is paid at pick-up.
-          </span>
+          <span>{t.accept}</span>
         </label>
         {fieldError("acceptDeposit") && (
           <p className={styles.ticketWarn}>{fieldError("acceptDeposit")}</p>
@@ -505,23 +517,24 @@ export function BookingForm(props: {
           disabled={!canReserve || submitting}
           data-umami-event="Reserve"
         >
-          {submitting ? "Reserving…" : "Reserve this bike"}
+          {submitting ? t.reserving : t.reserve}
         </button>
         <div aria-live="assertive">
           {result.error && <p className={styles.ticketWarn}>{result.error}</p>}
         </div>
-        <p className={styles.ticketFine}>
-          You&apos;ll pay the deposit by bank transfer or e-wallet QR on the next page. We hold the
-          bike for 24 hours while it arrives.
-        </p>
+        <p className={styles.ticketFine}>{t.fine}</p>
         <div className={styles.ticketHelp}>
           <WhatsAppLink
             variant="link"
-            label="Questions? Ask us on WhatsApp"
+            label={t.help}
             message={
               model && startDate && endDate
-                ? `Hi Red Lantern Bikes! I have a question about booking the ${model.name} from ${formatDisplayDate(startDate)} to ${formatDisplayDate(endDate)}.`
-                : "Hi Red Lantern Bikes! I have a question about booking a bike."
+                ? fill(t.helpMessageTrip, {
+                    bike: model.name,
+                    start: date(startDate),
+                    end: date(endDate),
+                  })
+                : t.helpMessage
             }
           />
         </div>
@@ -531,12 +544,12 @@ export function BookingForm(props: {
       {priced?.ok && (
         <a href="#summary" className={styles.mobileBar}>
           <span>
-            Total{" "}
+            {t.mobileTotal}{" "}
             <b>
               <AnimatedNumber value={priced.quote.totalVnd} format={formatVnd} />
             </b>
           </span>
-          <span className={styles.mobileBarCta}>Review &amp; reserve</span>
+          <span className={styles.mobileBarCta}>{t.review}</span>
         </a>
       )}
     </form>
@@ -590,18 +603,19 @@ function TextField(props: {
 }
 
 // Under the rental price: the saving on a long rental, or how to get one.
-function Saving({ model, days }: { model: CatalogModel; days: number }) {
+function Saving({ model, days, t }: { model: CatalogModel; days: number; t: Messages["book"] }) {
   const saving = savingVsDaily(model, days);
   if (saving > 0) {
-    return (
-      <p className={styles.saving}>You save {formatVnd(saving)} compared with the daily price.</p>
-    );
+    return <p className={styles.saving}>{fill(t.savingYes, { saving: formatVnd(saving) })}</p>;
   }
   if (model.weeklyRate >= model.dailyRate) return null;
   return (
     <p className={styles.saving}>
-      Ride {WEEKLY_FROM_DAYS} days or more and pay {formatVnd(model.weeklyRate)} a day instead of{" "}
-      {formatVnd(model.dailyRate)}.
+      {fill(t.savingHint, {
+        days: WEEKLY_FROM_DAYS,
+        weekly: formatVnd(model.weeklyRate),
+        daily: formatVnd(model.dailyRate),
+      })}
     </p>
   );
 }

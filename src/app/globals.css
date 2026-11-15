@@ -44,6 +44,15 @@
   --content: 1120px;
 }
 
+/* Korean pages: Be Vietnam Pro has no Hangul, so Korean text uses the
+   phone's or computer's own Korean font (Latin letters keep Be Vietnam Pro). */
+:lang(ko) {
+  --font-body:
+    var(--font-sans), "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+  --font-display:
+    var(--font-sans), "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+}
+
 @media (min-width: 768px) {
   :root {
     --gutter: 32px;

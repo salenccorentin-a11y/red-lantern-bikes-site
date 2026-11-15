@@ -22,6 +22,8 @@ export const bookingInput = z.object({
   acceptDeposit: z.literal(true, {
     error: "Please confirm you understand the deposit is non-refundable.",
   }),
+  // The page's language, for messages and where to go next.
+  lang: z.enum(["en", "fr", "ko"]).default("en"),
   // Left empty by people; filled in by spam bots that complete every field.
   website: z.string().max(0).optional(),
 });

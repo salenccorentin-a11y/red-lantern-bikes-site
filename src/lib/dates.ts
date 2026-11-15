@@ -37,11 +37,15 @@ export function todayInSaigon(now: Date = new Date()): string {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(now);
 }
 
-/** "2026-11-01" → "Sun 1 Nov 2026", for showing to customers. */
-export function formatDisplayDate(isoDate: string): string {
+/** Date formats for the site's languages (see src/i18n/config.ts). */
+const DATE_LOCALES = { en: "en-GB", fr: "fr-FR", ko: "ko-KR" } as const;
+type DateLanguage = keyof typeof DATE_LOCALES;
+
+/** "2026-11-01" → "Sun 1 Nov 2026" (or the same in French or Korean), for customers. */
+export function formatDisplayDate(isoDate: string, lang: DateLanguage = "en"): string {
   const date = parseIsoDate(isoDate);
   if (!date) return isoDate;
-  return new Intl.DateTimeFormat("en-GB", {
+  return new Intl.DateTimeFormat(DATE_LOCALES[lang], {
     weekday: "short",
     day: "numeric",
     month: "short",
@@ -53,8 +57,8 @@ export function formatDisplayDate(isoDate: string): string {
 }
 
 /** A moment in Saigon time, e.g. "16 Oct 2026, 10:00". */
-export function formatSaigonDateTime(moment: Date): string {
-  return new Intl.DateTimeFormat("en-GB", {
+export function formatSaigonDateTime(moment: Date, lang: DateLanguage = "en"): string {
+  return new Intl.DateTimeFormat(DATE_LOCALES[lang], {
     day: "numeric",
     month: "short",
     year: "numeric",
