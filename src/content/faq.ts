@@ -17,15 +17,15 @@ export const FAQ: Faq[] = [
     id: "booking",
     question: "How does booking and the deposit work?",
     answer: [
-      "Choose your dates and bike on the booking page and you'll see the full price. To hold the bike, you pay a 1,500,000₫ deposit online (or the whole price, if it's less). The deposit is part of the price, not extra, and the balance is paid when you pick up.",
-      "We hold the bike for 24 hours while your deposit arrives. The deposit is non-refundable.",
+      "Choose your dates and bike on the booking page and you'll see the full price. Then send your booking request: it costs nothing. We hold the bike while we check it, and answer by email, usually within a few hours and within 24 hours at the latest.",
+      "Once we confirm, we contact you to arrange a 1,500,000₫ deposit (or the whole price, if it's less). The deposit is part of the price, not extra, and it's non-refundable. The balance is paid when you pick up.",
     ],
   },
   {
     id: "payment",
     question: "How can I pay?",
     answer: [
-      "The online deposit can be paid by bank transfer to Vietcombank or by e-wallet QR code (Momo, ZaloPay or VNPay). The balance can be paid in cash at pick-up. We don't take cards yet.",
+      "There's nothing to pay on the website. Once your booking is confirmed, we contact you to arrange the deposit directly. The balance can be paid in cash at pick-up. We don't take cards yet.",
     ],
   },
   {
@@ -90,7 +90,7 @@ export const FAQ: Faq[] = [
     id: "cancel",
     question: "Can I cancel?",
     answer: [
-      "Yes. The online deposit is non-refundable; you don't owe anything beyond it. If your plans change, message us and we'll try to move your dates instead.",
+      "Yes. Until we've confirmed your booking and you've paid the deposit, you owe nothing. Once paid, the deposit is non-refundable, and you don't owe anything beyond it. If your plans change, message us and we'll try to move your dates instead.",
     ],
   },
   {

@@ -32,12 +32,7 @@ async function BusinessSettings() {
         <h2>Business settings</h2>
         <form action={saveSiteSettingsAction} className={styles.form}>
           <div className={styles.row}>
-            <Num
-              name="depositVnd"
-              label="Online deposit (VND)"
-              value={settings.depositVnd}
-              step={10000}
-            />
+            <Num name="depositVnd" label="Deposit (VND)" value={settings.depositVnd} step={10000} />
             <Num
               name="cleaningGapDays"
               label="Days between rentals for cleaning"
@@ -45,7 +40,7 @@ async function BusinessSettings() {
             />
             <Num
               name="holdHours"
-              label="Hours to hold an unpaid booking"
+              label="Hours you have to answer a booking request"
               value={settings.holdHours}
             />
             <Num

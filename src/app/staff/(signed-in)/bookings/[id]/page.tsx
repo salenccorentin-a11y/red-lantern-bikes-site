@@ -6,16 +6,23 @@ import { formatDisplayDate, formatSaigonDateTime, toIsoDate } from "@/lib/dates"
 import { db } from "@/lib/db";
 import { formatVnd } from "@/lib/money";
 import { requireStaff } from "@/server/staff-session";
-import { cancelAction, checkInAction, checkOutAction, saveNoteAction } from "./actions";
+import {
+  acceptRequestAction,
+  cancelAction,
+  checkInAction,
+  checkOutAction,
+  declineRequestAction,
+  saveNoteAction,
+} from "./actions";
 import styles from "../../../staff.module.css";
 
 const STATUS: Record<string, string> = {
-  PENDING_PAYMENT: "Waiting for deposit",
+  PENDING_PAYMENT: "Request waiting for your answer",
   CONFIRMED: "Confirmed",
   CHECKED_OUT: "Out with customer",
   COMPLETED: "Returned",
   CANCELLED: "Cancelled",
-  EXPIRED: "Expired (deposit never arrived)",
+  EXPIRED: "Request ran out unanswered",
 };
 
 export default function StaffBookingPage(props: PageProps<"/staff/bookings/[id]">) {
@@ -41,6 +48,11 @@ async function BookingAdmin(props: {
   const canCheckOut = booking.status === "CONFIRMED" || booking.status === "PENDING_PAYMENT";
   const canCheckIn = booking.status === "CHECKED_OUT";
   const canCancel = canCheckOut;
+  // Online bookings are requests until the shop answers. One that ran out
+  // unanswered can still be accepted while its bike is free.
+  const canAnswer =
+    booking.source === "ONLINE" &&
+    (booking.status === "PENDING_PAYMENT" || booking.status === "EXPIRED");
 
   return (
     <>
@@ -87,7 +99,7 @@ async function BookingAdmin(props: {
             <dd>{dropoffLabel(booking.dropoffCity)}</dd>
             {booking.status === "PENDING_PAYMENT" && booking.holdExpiresAt && (
               <>
-                <dt className={styles.muted}>Hold expires</dt>
+                <dt className={styles.muted}>Answer by</dt>
                 <dd>{formatSaigonDateTime(booking.holdExpiresAt)}</dd>
               </>
             )}
@@ -164,7 +176,7 @@ async function BookingAdmin(props: {
                 <th className={styles.num}>{formatVnd(booking.totalVnd)}</th>
               </tr>
               <tr>
-                <td>Deposit (online, non-refundable)</td>
+                <td>Deposit (non-refundable)</td>
                 <td className={styles.num}>{formatVnd(booking.depositVnd)}</td>
               </tr>
               <tr>
@@ -173,14 +185,41 @@ async function BookingAdmin(props: {
               </tr>
             </tbody>
           </table>
-          {booking.status === "PENDING_PAYMENT" && (
+          {booking.source === "ONLINE" && (
             <p className={styles.muted}>
-              Deposit not received online yet. If the customer pays it at the counter, collect the
-              full total at pick-up.
+              There is no online payment: after accepting, arrange the deposit with the customer
+              directly. Use the staff note below to record when it&apos;s paid.
             </p>
           )}
         </section>
       </div>
+
+      {canAnswer && (
+        <section className={styles.panel}>
+          <h2>Answer this request</h2>
+          <p className={styles.muted}>
+            {booking.status === "EXPIRED"
+              ? "It ran out unanswered and the bike was released. You can still accept it while the bike is free."
+              : "The customer is waiting. Either way, they get an email with your answer."}
+          </p>
+          <div className={styles.row}>
+            <form action={acceptRequestAction}>
+              <input type="hidden" name="id" value={booking.id} />
+              <button className={styles.primary}>Accept this booking</button>
+            </form>
+            <form action={declineRequestAction} className={styles.form}>
+              <input type="hidden" name="id" value={booking.id} />
+              <label className={styles.field}>
+                <span>Message to the customer (optional)</span>
+                <textarea name="reason" rows={2} maxLength={1000} />
+              </label>
+              <div>
+                <button className={styles.secondary}>Decline this request</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      )}
 
       <section className={styles.panel}>
         <h2>Actions</h2>

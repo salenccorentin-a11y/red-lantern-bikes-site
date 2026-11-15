@@ -13,7 +13,22 @@ Choices made while planning the rebuild, with the reason for each. Pricing rules
 - **Bookings for the same bike take turns** (11 October 2026). Before saving a booking or maintenance block, the system locks that one bike for a few milliseconds and re-checks it's free. Customers booking different bikes never wait for each other. Without this, two customers booking the same bike at the same instant could stall each other for about a second until the database cancelled one, which then failed with an error instead of getting another bike. The no-overlap rule remains the final guarantee.
 - **Timezone.** All dates are in Asia/Ho_Chi_Minh.
 
+## Booking requests instead of online payment (15 November 2026)
+
+Online payment isn't possible yet, so this replaces the "Payments" rules below until it is.
+
+- **Online bookings are requests.** The customer chooses dates and a bike, sees the full price and sends a request. Nothing is paid on the website.
+- **The request holds the bike** while it waits, so two customers can't both be promised the same bike. The no-double-booking rules are unchanged.
+- **The shop answers by email.** Each request is emailed to the shop (`BOOKINGS_EMAIL`, or `ENQUIRIES_EMAIL` if that isn't set) with every detail and two buttons, Accept and Decline. They open a page that shows the request and asks for one more click, so email scanners that open links automatically can't answer by accident. The page needs no sign-in: the link holds a random code that is only ever sent to that inbox, so keep that inbox private. The same buttons are on the booking in the staff area.
+- **Accept:** the booking is confirmed, the bike stays reserved, and the customer gets an email saying the shop will contact them about the deposit. The page then shows WhatsApp and email links to the customer with a message started. The shop collects the deposit directly; there is no payment record in the system yet, so use the staff note.
+- **Decline:** the request is cancelled, the bike is free again, and the customer gets an email with the shop's message, if it wrote one.
+- **No answer:** the shop has 24 hours (the "hours you have to answer" setting). It gets one reminder 3 hours before the end. After that the request runs out, the bike is released and the customer is told. A request that ran out can still be accepted afterwards, as long as its bike is still free and the pick-up day hasn't passed.
+- **Emails to customers are in English** for now, like the other emails.
+- **When online payment arrives,** accepting can lead straight to a payment page; the accept and decline steps stay the same.
+
 ## Payments (10 October 2026)
+
+Not in use yet: see "Booking requests" above.
 
 - **Online bookings must pay the deposit online,** by Vietcombank transfer or e-wallet QR (Momo, ZaloPay, VNPay).
 - **Unpaid holds.** An unpaid online booking holds the bike for 24 hours, then the hold is released.
@@ -33,6 +48,6 @@ Choices made while planning the rebuild, with the reason for each. Pricing rules
 
 - **Sign-in by email link.** Staff enter their email and get a one-time link, valid for 15 minutes. Opening it shows a "Sign in" button, so email scanners that open links automatically can't use it up. A sign-in lasts 30 days. Links and sessions are stored only as hashes. Switching a staff member off signs them out everywhere at once. Staff are added with `npm run staff:add` or from Settings, never in the code.
 - **Two roles.** Owners see profit and can change prices and settings; staff handle bookings, bikes, maintenance and the incident log. There is always at least one active owner, and nobody can remove their own owner access.
-- **Unpaid bookings can be checked out** until online payments exist: the customer pays the deposit and balance at the counter. An unpaid online hold still lapses after 24 hours, so until payments are built, staff need to check such bookings out before then.
+- **Requests can be checked out** without being accepted first (handing over the bike is the answer): the customer pays at the counter.
 - **Early returns.** Checking in a Saigon round trip before its end date frees the remaining days (after the cleaning gap) so the bike can be rented again. The price doesn't change. One-way trips keep their train-back days.
 - **Profit per bike** = revenue from rentals where the bike actually went out (counted in the period the rental started) minus the incident and repair log's parts, labour and other costs, plus anything recovered from the customer or insurer. Kept deposits from cancellations will be added once payments are recorded.

@@ -34,14 +34,19 @@ export default function TermsPage() {
           <h2>2. Booking and deposit</h2>
           <ul>
             <li>
-              A booking is held once you pay the online deposit of 1,500,000₫, or the full price if
-              it is lower. We hold the bike for 24 hours while the deposit arrives; if it
-              doesn&apos;t arrive in time, the booking is released.
+              You send a booking request on this website, which costs nothing. We hold the bike
+              while we check your request and answer by email within 24 hours. The booking is
+              confirmed once we accept it; if we can&apos;t answer in time, the request lapses and
+              the bike is released.
             </li>
-            <li>The deposit is part of the rental price. The balance is paid when you pick up.</li>
             <li>
-              <b>The deposit is non-refundable</b>, including if you cancel. Nothing beyond the
-              deposit is owed for a cancellation.
+              Once your booking is confirmed, we contact you to arrange a deposit of 1,500,000₫, or
+              the full price if it is lower. The deposit is part of the rental price. The balance is
+              paid when you pick up.
+            </li>
+            <li>
+              <b>The deposit is non-refundable</b> once paid, including if you cancel. Nothing
+              beyond the deposit is owed for a cancellation.
             </li>
             <li>
               Rental days include both the pick-up day and the drop-off day. Returning early does

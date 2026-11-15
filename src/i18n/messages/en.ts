@@ -91,8 +91,8 @@ export const en = {
     steps: [
       { strong: "Choose your dates and bike.", rest: "You see the full price straight away." },
       {
-        strong: "Pay a small deposit online",
-        rest: "to hold the bike. The rest is paid at pick-up.",
+        strong: "Send your booking request.",
+        rest: "It costs nothing. We confirm by email, then arrange the deposit with you. The rest is paid at pick-up.",
       },
       {
         strong: "Pick up at our shop",
@@ -141,7 +141,8 @@ export const en = {
     bookThis: "Book this bike",
     rideOneWay: "Ride it one-way to Hanoi",
     whatsappMessage: "Hi Red Lantern Bikes! I have a question about the {name}.",
-    depositNote: "Pay {deposit} online to hold the bike; the rest at pick-up.",
+    depositNote:
+      "Sending a request costs nothing. Once we confirm, a {deposit} deposit secures the bike; the rest is paid at pick-up.",
     photosOf: "Photos of our {name}",
     reviewsTitle: "What riders say",
     goodFor: "Good for",
@@ -273,10 +274,10 @@ export const en = {
   book: {
     metaTitle: "Book a motorbike | Red Lantern Bikes",
     metaDescription:
-      "Rent a motorbike in Saigon or ride one-way to Hanoi or Da Nang. Live availability, clear prices, and a small online deposit.",
+      "Rent a motorbike in Saigon or ride one-way to Hanoi or Da Nang. Live availability, clear prices, and nothing to pay until we confirm.",
     title: "Book your bike",
     intro:
-      "Choose your trip, dates and bike. You see the full price before you pay, and hold the bike with a small deposit.",
+      "Choose your trip, dates and bike, and see the full price up front. Send your request and we confirm by email. Nothing to pay until then.",
     loading: "Loading bikes and prices…",
     whereTitle: "1. Where are you going?",
     returnLabel: "Ride around and return to Saigon",
@@ -298,7 +299,7 @@ export const en = {
     chooseDates: "Choose your dates to see which bikes are free.",
     checking: "Checking which bikes are free…",
     checkFailed:
-      "We couldn't check availability just now. You can still choose a bike; we'll confirm when you reserve.",
+      "We couldn't check availability just now. You can still choose a bike; we'll check it when we answer your request.",
     forDays: "for {days}",
     perDay: "/ day",
     inclFee: "incl. one-way fee {fee}",
@@ -315,7 +316,7 @@ export const en = {
     detailsTitle: "{n}. Your details",
     fullName: "Full name",
     email: "Email",
-    emailHint: "We send your booking and payment details here.",
+    emailHint: "We send your booking details and our answer here.",
     phone: "Phone or WhatsApp (optional)",
     phoneHint: "With country code, e.g. +44 7700 900123",
     note: "Anything we should know? (optional)",
@@ -327,19 +328,19 @@ export const en = {
     savingHint: "Ride {days} days or more and pay {weekly} a day instead of {daily}.",
     oneWayFee: "One-way fee",
     total: "Total",
-    depositNow: "Deposit now, non-refundable",
+    depositNow: "Deposit once we confirm, non-refundable",
     balance: "Balance at pick-up",
     choosePrompt: "Choose your trip, dates and bike to see the price.",
-    accept: "I understand the online deposit is non-refundable. The balance is paid at pick-up.",
-    reserve: "Reserve this bike",
-    reserving: "Reserving…",
-    fine: "You'll pay the deposit by bank transfer or e-wallet QR on the next page. We hold the bike for 24 hours while it arrives.",
+    accept: "I understand the deposit is non-refundable once paid. The balance is paid at pick-up.",
+    reserve: "Send booking request",
+    reserving: "Sending…",
+    fine: "Nothing to pay now. We hold the bike while we check your request, and answer by email, usually within a few hours. Once we confirm, we contact you to arrange the deposit.",
     help: "Questions? Ask us on WhatsApp",
     helpMessageTrip:
       "Hi Red Lantern Bikes! I have a question about booking the {bike} from {start} to {end}.",
     helpMessage: "Hi Red Lantern Bikes! I have a question about booking a bike.",
     mobileTotal: "Total",
-    review: "Review & reserve",
+    review: "Review & send",
     fieldErrors: {
       name: "Please enter your full name.",
       email: "Please check your email address.",
@@ -380,20 +381,19 @@ export const en = {
     total: "Total",
     deposit: "Deposit, non-refundable",
     balance: "Balance at pick-up",
-    payTitle: "Pay your deposit: {amount}",
-    payReference: "Use reference {reference} with your payment.",
-    payPlaceholder:
-      "Bank transfer and e-wallet QR codes will appear here. (Placeholder: payment details not set up yet.)",
-    newBooking: "Make a new booking",
-    heldTitle: "Your bike is held",
+    newBooking: "Send a new request",
+    heldTitle: "We've received your request",
     heldText:
-      "We'll keep it for you until {until} (Saigon time) while your deposit arrives. We've emailed you these details.",
+      "We're checking it and will answer by email by {until} (Saigon time) at the latest. Your bike is held in the meantime, and there's nothing to pay yet.",
     heldTomorrow: "tomorrow",
     confirmedTitle: "Your booking is confirmed",
-    confirmedText: "We've received your deposit. See you at the shop in District 1.",
-    expiredTitle: "This hold has expired",
-    expiredText: "The deposit didn't arrive in time, so the bike was released.",
+    confirmedText:
+      "Your bike is reserved for you. We'll contact you to arrange the deposit, if we haven't already. See you at the shop in District 1.",
+    expiredTitle: "We couldn't confirm this request in time",
+    expiredText:
+      "The hold on the bike has ended, and you haven't paid anything. Message us and we'll sort it out, or send a new request.",
     cancelledTitle: "This booking was cancelled",
+    cancelledText: "If you weren't expecting this, check your email or message us.",
   },
 };
 

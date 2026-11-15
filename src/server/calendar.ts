@@ -25,6 +25,23 @@ export async function loadCalendar(db: PrismaClient, windowStart: Date, days: nu
 
 export type CalendarBike = Awaited<ReturnType<typeof loadCalendar>>[number];
 
+/** Online booking requests the shop hasn't answered yet, most urgent first. */
+export async function waitingRequests(db: PrismaClient) {
+  return db.booking.findMany({
+    where: { status: "PENDING_PAYMENT", source: "ONLINE" },
+    select: {
+      id: true,
+      customerName: true,
+      startDate: true,
+      endDate: true,
+      holdExpiresAt: true,
+      bike: { select: { plate: true } },
+      bikeModel: { select: { name: true } },
+    },
+    orderBy: { holdExpiresAt: "asc" },
+  });
+}
+
 /** Bikes going out and coming back today. */
 export async function todaysMovements(db: PrismaClient, today: Date) {
   const select = {

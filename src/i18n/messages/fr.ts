@@ -90,8 +90,8 @@ export const fr: Messages = {
         rest: "Vous voyez tout de suite le prix total.",
       },
       {
-        strong: "Payez un petit acompte en ligne",
-        rest: "pour bloquer la moto. Le reste se paie au départ.",
+        strong: "Envoyez votre demande de réservation.",
+        rest: "C'est gratuit. Nous confirmons par e-mail, puis organisons l'acompte avec vous. Le reste se paie au départ.",
       },
       {
         strong: "Récupérez la moto à la boutique",
@@ -139,7 +139,8 @@ export const fr: Messages = {
     bookThis: "Réserver cette moto",
     rideOneWay: "En aller simple vers Hanoï",
     whatsappMessage: "Bonjour Red Lantern Bikes ! J'ai une question sur la {name}.",
-    depositNote: "Payez {deposit} en ligne pour bloquer la moto ; le reste au départ.",
+    depositNote:
+      "La demande est gratuite. Une fois confirmée, un acompte de {deposit} bloque la moto ; le reste se paie au départ.",
     photosOf: "Photos de notre {name}",
     reviewsTitle: "L'avis des voyageurs",
     goodFor: "Idéale pour",
@@ -274,10 +275,10 @@ export const fr: Messages = {
   book: {
     metaTitle: "Réserver une moto | Red Lantern Bikes",
     metaDescription:
-      "Louez une moto à Saïgon ou partez en aller simple vers Hanoï ou Da Nang. Disponibilités en direct, prix clairs et petit acompte en ligne.",
+      "Louez une moto à Saïgon ou partez en aller simple vers Hanoï ou Da Nang. Disponibilités en direct, prix clairs, et rien à payer avant notre confirmation.",
     title: "Réserver votre moto",
     intro:
-      "Choisissez votre voyage, vos dates et votre moto. Vous voyez le prix total avant de payer, et bloquez la moto avec un petit acompte.",
+      "Choisissez votre voyage, vos dates et votre moto : le prix total s'affiche tout de suite. Envoyez votre demande, nous confirmons par e-mail. Rien à payer d'ici là.",
     loading: "Chargement des motos et des prix…",
     whereTitle: "1. Où allez-vous ?",
     returnLabel: "Rouler et revenir à Saïgon",
@@ -299,7 +300,7 @@ export const fr: Messages = {
     chooseDates: "Choisissez vos dates pour voir les motos disponibles.",
     checking: "Vérification des motos disponibles…",
     checkFailed:
-      "Impossible de vérifier les disponibilités pour l'instant. Vous pouvez quand même choisir une moto ; nous confirmerons à la réservation.",
+      "Impossible de vérifier les disponibilités pour l'instant. Vous pouvez quand même choisir une moto ; nous vérifierons en répondant à votre demande.",
     forDays: "pour {days}",
     perDay: "/ jour",
     inclFee: "frais d'aller simple compris : {fee}",
@@ -316,7 +317,7 @@ export const fr: Messages = {
     detailsTitle: "{n}. Vos coordonnées",
     fullName: "Nom complet",
     email: "E-mail",
-    emailHint: "Nous vous envoyons ici votre réservation et les informations de paiement.",
+    emailHint: "Nous y envoyons le détail de votre réservation et notre réponse.",
     phone: "Téléphone ou WhatsApp (facultatif)",
     phoneHint: "Avec l'indicatif du pays, par ex. +33 6 12 34 56 78",
     note: "Quelque chose à nous dire ? (facultatif)",
@@ -328,20 +329,20 @@ export const fr: Messages = {
     savingHint: "Roulez {days} jours ou plus et payez {weekly} par jour au lieu de {daily}.",
     oneWayFee: "Frais d'aller simple",
     total: "Total",
-    depositNow: "Acompte maintenant, non remboursable",
+    depositNow: "Acompte après confirmation, non remboursable",
     balance: "Solde au départ",
     choosePrompt: "Choisissez votre voyage, vos dates et votre moto pour voir le prix.",
     accept:
-      "Je comprends que l'acompte en ligne n'est pas remboursable. Le solde se paie au départ.",
-    reserve: "Réserver cette moto",
-    reserving: "Réservation…",
-    fine: "Vous paierez l'acompte par virement bancaire ou QR code de portefeuille électronique à la page suivante. Nous bloquons la moto 24 heures en attendant votre paiement.",
+      "Je comprends que l'acompte, une fois payé, n'est pas remboursable. Le solde se paie au départ.",
+    reserve: "Envoyer la demande",
+    reserving: "Envoi…",
+    fine: "Rien à payer maintenant. Nous bloquons la moto le temps d'étudier votre demande et répondons par e-mail, en général en quelques heures. Une fois la réservation confirmée, nous vous contactons pour organiser l'acompte.",
     help: "Une question ? Écrivez-nous sur WhatsApp",
     helpMessageTrip:
       "Bonjour Red Lantern Bikes ! J'ai une question sur la réservation de la {bike} du {start} au {end}.",
     helpMessage: "Bonjour Red Lantern Bikes ! J'ai une question sur la réservation d'une moto.",
     mobileTotal: "Total",
-    review: "Vérifier et réserver",
+    review: "Vérifier et envoyer",
     fieldErrors: {
       name: "Merci d'indiquer votre nom complet.",
       email: "Merci de vérifier votre adresse e-mail.",
@@ -383,20 +384,18 @@ export const fr: Messages = {
     total: "Total",
     deposit: "Acompte, non remboursable",
     balance: "Solde au départ",
-    payTitle: "Payez votre acompte : {amount}",
-    payReference: "Indiquez la référence {reference} avec votre paiement.",
-    payPlaceholder:
-      "Les QR codes de virement bancaire et de portefeuille électronique apparaîtront ici. (Provisoire : coordonnées de paiement pas encore configurées.)",
-    newBooking: "Faire une nouvelle réservation",
-    heldTitle: "Votre moto est bloquée",
+    newBooking: "Envoyer une nouvelle demande",
+    heldTitle: "Nous avons bien reçu votre demande",
     heldText:
-      "Nous la gardons pour vous jusqu'au {until} (heure de Saïgon) en attendant votre acompte. Nous vous avons envoyé ces informations par e-mail.",
+      "Nous l'étudions et vous répondrons par e-mail au plus tard le {until} (heure de Saïgon). Votre moto est bloquée en attendant, et il n'y a rien à payer pour l'instant.",
     heldTomorrow: "demain",
     confirmedTitle: "Votre réservation est confirmée",
     confirmedText:
-      "Nous avons bien reçu votre acompte. À bientôt à la boutique, dans le 1er arrondissement.",
-    expiredTitle: "Ce blocage a expiré",
-    expiredText: "L'acompte n'est pas arrivé à temps, la moto a donc été libérée.",
+      "Votre moto vous est réservée. Nous vous contactons pour organiser l'acompte, si ce n'est pas déjà fait. À bientôt à la boutique, dans le 1er arrondissement.",
+    expiredTitle: "Nous n'avons pas pu confirmer cette demande à temps",
+    expiredText:
+      "La moto n'est plus bloquée, et vous n'avez rien payé. Écrivez-nous et nous arrangerons cela, ou envoyez une nouvelle demande.",
     cancelledTitle: "Cette réservation a été annulée",
+    cancelledText: "Si vous ne vous y attendiez pas, consultez vos e-mails ou écrivez-nous.",
   },
 };

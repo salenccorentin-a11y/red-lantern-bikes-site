@@ -4,11 +4,8 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { bookingInput } from "@/lib/booking-input";
 import { bookingErrorMessage } from "@/lib/booking-messages";
-import { dropoffLabel } from "@/lib/cities";
-import { formatSaigonDateTime, toIsoDate } from "@/lib/dates";
+import { sendRequestEmails } from "@/server/booking-requests";
 import { reserveBike } from "@/server/bookings";
-import { sendEmail } from "@/server/email";
-import { bookingReceivedEmail } from "@/server/emails/booking-received";
 import { reportError } from "@/server/report-error";
 import { getMessages } from "@/i18n";
 import { isLocale } from "@/i18n/config";
@@ -22,9 +19,11 @@ export type BookingFormState = {
 };
 
 /**
- * Creates an online booking from the booking page. Everything is checked
+ * Creates a booking request from the booking page. Everything is checked
  * again here; prices are recalculated from the database, never taken from
- * the browser. On success, the customer is sent to their booking page.
+ * the browser. The bike is held while the shop decides: the shop gets an
+ * email with Accept and Decline links (src/server/booking-requests.ts), and
+ * the customer is sent to their booking page.
  */
 export async function createOnlineBooking(input: unknown): Promise<BookingFormState> {
   const parsed = bookingInput.safeParse(input);
@@ -55,30 +54,13 @@ export async function createOnlineBooking(input: unknown): Promise<BookingFormSt
   if (!result.ok) return { error: bookingErrorMessage(result.error, form.lang) };
 
   const { booking } = result;
-  const model = await db.bikeModel.findUniqueOrThrow({ where: { id: booking.bikeModelId } });
-  const siteUrl = process.env.SITE_URL ?? "http://localhost:3000";
 
-  // The booking stands even if the email fails; the booking page has everything.
+  // The request stands even if an email fails: it's in the staff area, and
+  // the customer's booking page has everything.
   try {
-    await sendEmail(
-      bookingReceivedEmail({
-        to: form.email,
-        customerName: form.name,
-        reference: booking.reference,
-        bikeName: model.name,
-        startDate: toIsoDate(booking.startDate),
-        endDate: toIsoDate(booking.endDate),
-        days: booking.days,
-        dropoffLabel: dropoffLabel(booking.dropoffCity),
-        totalVnd: booking.totalVnd,
-        depositVnd: booking.depositVnd,
-        balanceVnd: booking.balanceVnd,
-        holdExpires: booking.holdExpiresAt ? formatSaigonDateTime(booking.holdExpiresAt) : "",
-        bookingUrl: `${siteUrl}/booking/${booking.viewToken}`,
-      }),
-    );
+    await sendRequestEmails(db, booking.id);
   } catch (error) {
-    await reportError(`Booking ${booking.reference}: confirmation email failed`, error);
+    await reportError(`Booking request ${booking.reference}: emails failed`, error);
   }
 
   redirect(localize(form.lang, `/booking/${booking.viewToken}`));

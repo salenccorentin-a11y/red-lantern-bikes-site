@@ -6,8 +6,8 @@ import { getSettings } from "@/server/availability";
 
 type Result = { ok: true } | { ok: false; error: string };
 
-/** The customer takes the bike. Allowed for confirmed bookings and, until online
- * payments exist, for unpaid ones whose deposit is paid at the counter. */
+/** The customer takes the bike. Allowed for confirmed bookings and for requests
+ * not answered yet (handing over the bike is the answer). */
 export async function checkOut(
   db: PrismaClient,
   bookingId: string,

@@ -5,10 +5,22 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { placeInWindow, windowDays } from "@/lib/calendar";
 import { CITY_NAME } from "@/lib/cities";
-import { addDays, parseIsoDate, toIsoDate, todayInSaigon } from "@/lib/dates";
+import {
+  addDays,
+  formatDisplayDate,
+  formatSaigonDateTime,
+  parseIsoDate,
+  toIsoDate,
+  todayInSaigon,
+} from "@/lib/dates";
 import { db } from "@/lib/db";
 import { releaseExpiredHolds } from "@/server/bookings";
-import { loadCalendar, todaysMovements, type CalendarBike } from "@/server/calendar";
+import {
+  loadCalendar,
+  todaysMovements,
+  waitingRequests,
+  type CalendarBike,
+} from "@/server/calendar";
 import { requireStaff } from "@/server/staff-session";
 import styles from "./calendar.module.css";
 import staffStyles from "../staff.module.css";
@@ -33,11 +45,12 @@ async function Calendar({
   const today = parseIsoDate(todayInSaigon())!;
   const from = (typeof params.from === "string" && parseIsoDate(params.from)) || addDays(today, -2);
 
-  // Unpaid holds that ran out shouldn't clutter the calendar.
+  // Requests that ran out unanswered shouldn't clutter the calendar.
   await releaseExpiredHolds(db);
-  const [bikes, movements] = await Promise.all([
+  const [bikes, movements, requests] = await Promise.all([
     loadCalendar(db, from, DAYS),
     todaysMovements(db, today),
+    waitingRequests(db),
   ]);
   const days = windowDays(from, DAYS);
   const weekBack = toIsoDate(addDays(from, -7));
@@ -46,6 +59,28 @@ async function Calendar({
   return (
     <>
       {params["owner-only"] && <p className={staffStyles.error}>That page is for owners only.</p>}
+
+      {requests.length > 0 && (
+        <section className={staffStyles.panel}>
+          <h2>Booking requests waiting for your answer</h2>
+          <ul className={styles.movements}>
+            {requests.map((b) => (
+              <li key={b.id}>
+                <Link href={`/staff/bookings/${b.id}`}>
+                  <b>{b.customerName}</b> · {b.bikeModel.name} {b.bike?.plate ?? ""} ·{" "}
+                  {formatDisplayDate(toIsoDate(b.startDate))} to{" "}
+                  {formatDisplayDate(toIsoDate(b.endDate))}
+                  {b.holdExpiresAt && (
+                    <span className={staffStyles.badge}>
+                      answer by {formatSaigonDateTime(b.holdExpiresAt)}
+                    </span>
+                  )}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <div className={styles.today}>
         <Movements title="Going out today" list={movements.pickups} empty="No pick-ups today." />
@@ -172,7 +207,7 @@ function Movements({ title, list, empty }: { title: string; list: Movement[]; em
                 <b>{b.customerName}</b> · {b.bikeModel.name} {b.bike?.plate ?? ""}
                 {b.dropoffCity !== "SAIGON" && ` · to ${CITY_NAME[b.dropoffCity]}`}
                 {b.status === "PENDING_PAYMENT" && (
-                  <span className={staffStyles.badge}>deposit not paid</span>
+                  <span className={staffStyles.badge}>not answered yet</span>
                 )}
               </Link>
             </li>
@@ -185,7 +220,7 @@ function Movements({ title, list, empty }: { title: string; list: Movement[]; em
 
 function Legend() {
   const items: [string, string][] = [
-    ["pending", "Waiting for deposit"],
+    ["pending", "Request, not answered yet"],
     ["confirmed", "Confirmed"],
     ["out", "Out with customer"],
     ["done", "Returned"],

@@ -8,6 +8,8 @@ import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import styles from "@/app/(booking)/booking/[token]/booking.module.css";
+import ui from "@/components/ui.module.css";
+import { WhatsAppLink } from "@/components/WhatsAppLink";
 import {
   addOnText,
   daysLabel,
@@ -52,7 +54,7 @@ async function BookingDetails(props: { lang: Locale; token: Promise<string> }) {
   if (!UUID.test(token)) notFound();
   await connection();
 
-  // Make sure an unpaid hold that has run out shows as expired.
+  // Make sure a request that ran out unanswered shows as such.
   await releaseExpiredHolds(db);
 
   const booking = await db.booking.findUnique({
@@ -110,21 +112,18 @@ async function BookingDetails(props: { lang: Locale; token: Promise<string> }) {
         <Line label={t.balance} value={formatVnd(booking.balanceVnd)} />
       </div>
 
-      {booking.status === "PENDING_PAYMENT" && (
-        <section className={styles.payment} aria-labelledby="pay-heading">
-          <h2 id="pay-heading">{fill(t.payTitle, { amount: formatVnd(booking.depositVnd) })}</h2>
-          <p>{fill(t.payReference, { reference: booking.reference })}</p>
-          {/* Placeholder until the payment step: Vietcombank and e-wallet details aren't set up yet. */}
-          <p className={styles.placeholder}>{t.payPlaceholder}</p>
-        </section>
-      )}
-
+      {/* No payment on the site yet: the shop accepts the request, then
+          arranges the deposit with the customer directly. */}
       {(booking.status === "EXPIRED" || booking.status === "CANCELLED") && (
-        <p>
+        <div className={ui.actions}>
           <Link href={localize(lang, "/book")} className={styles.button}>
             {t.newBooking}
           </Link>
-        </p>
+          <WhatsAppLink
+            label={getMessages(lang).common.askWhatsApp}
+            message={`Hi Red Lantern Bikes! About my booking request ${booking.reference}.`}
+          />
+        </div>
       )}
     </article>
   );
@@ -160,6 +159,7 @@ function StatusBanner(props: { t: Messages["booking"]; status: string; until: st
       return (
         <div className={`${styles.banner} ${styles.bannerOff}`}>
           <h1>{t.cancelledTitle}</h1>
+          <p>{t.cancelledText}</p>
         </div>
       );
   }

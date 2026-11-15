@@ -1,10 +1,12 @@
-// The hourly job: releases unpaid bookings whose hold ran out and sends the
-// reminder emails (src/server/reminders.ts).
+// The hourly job: reminds the shop about booking requests it hasn't answered,
+// releases the ones that ran out (and tells those customers), and sends the
+// day-before pick-up reminders (src/server/reminders.ts).
 //
 //   npm run jobs
 //
 // On Railway, a cron service runs this every hour ("0 * * * *"). It uses
-// DATABASE_URL, RESEND_API_KEY, EMAIL_FROM and SITE_URL from the environment.
+// DATABASE_URL, RESEND_API_KEY, EMAIL_FROM, BOOKINGS_EMAIL (or ENQUIRIES_EMAIL)
+// and SITE_URL from the environment.
 // Without RESEND_API_KEY the emails are printed instead of sent.
 
 import "dotenv/config";

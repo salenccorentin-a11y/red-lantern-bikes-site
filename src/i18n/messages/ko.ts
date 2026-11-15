@@ -88,8 +88,8 @@ export const ko: Messages = {
     steps: [
       { strong: "날짜와 오토바이를 고르세요.", rest: "전체 가격을 바로 확인할 수 있습니다." },
       {
-        strong: "온라인으로 소액의 보증금을 결제",
-        rest: "하면 오토바이가 확보됩니다. 나머지는 픽업할 때 결제합니다.",
+        strong: "결제 없이 예약 요청을 보내세요.",
+        rest: "이메일로 확정해 드린 뒤 보증금 결제를 안내해 드립니다. 나머지는 픽업할 때 결제합니다.",
       },
       {
         strong: "매장에서 픽업",
@@ -137,7 +137,8 @@ export const ko: Messages = {
     bookThis: "이 오토바이 예약",
     rideOneWay: "하노이까지 편도로",
     whatsappMessage: "안녕하세요 Red Lantern Bikes! {name}에 대해 문의드립니다.",
-    depositNote: "온라인으로 {deposit}을 결제하면 오토바이가 확보됩니다. 나머지는 픽업 시 결제.",
+    depositNote:
+      "예약 요청은 무료입니다. 확정되면 보증금 {deposit}으로 오토바이가 확보되며, 나머지는 픽업 시 결제합니다.",
     photosOf: "저희 {name} 사진",
     reviewsTitle: "라이더 후기",
     goodFor: "이런 여행에 좋아요",
@@ -267,10 +268,10 @@ export const ko: Messages = {
   book: {
     metaTitle: "오토바이 예약 | Red Lantern Bikes",
     metaDescription:
-      "사이공에서 오토바이를 빌리거나 하노이·다낭까지 편도로 떠나세요. 실시간 재고, 명확한 가격, 소액의 온라인 보증금.",
+      "사이공에서 오토바이를 빌리거나 하노이·다낭까지 편도로 떠나세요. 실시간 재고, 명확한 가격, 확정 전에는 결제 없음.",
     title: "오토바이 예약",
     intro:
-      "여행, 날짜, 오토바이를 고르세요. 결제 전에 전체 가격을 확인하고, 소액의 보증금으로 오토바이를 확보합니다.",
+      "여행, 날짜, 오토바이를 고르면 전체 가격이 바로 표시됩니다. 요청을 보내시면 이메일로 확정해 드립니다. 그 전에는 결제하실 것이 없습니다.",
     loading: "오토바이와 가격을 불러오는 중…",
     whereTitle: "1. 어디로 가시나요?",
     returnLabel: "여행 후 사이공으로 반납",
@@ -291,7 +292,8 @@ export const ko: Messages = {
     bikeTitle: "3. 오토바이 선택",
     chooseDates: "날짜를 고르면 이용 가능한 오토바이가 표시됩니다.",
     checking: "이용 가능한 오토바이 확인 중…",
-    checkFailed: "지금은 재고를 확인할 수 없습니다. 오토바이를 선택하시면 예약 시 확인해 드립니다.",
+    checkFailed:
+      "지금은 재고를 확인할 수 없습니다. 오토바이를 선택하시면 요청에 답변드릴 때 확인해 드립니다.",
     forDays: "{days} 기준",
     perDay: "/ 1일",
     inclFee: "편도 요금 {fee} 포함",
@@ -308,7 +310,7 @@ export const ko: Messages = {
     detailsTitle: "{n}. 예약자 정보",
     fullName: "이름 (여권과 동일)",
     email: "이메일",
-    emailHint: "예약 및 결제 안내를 이 주소로 보내드립니다.",
+    emailHint: "예약 내용과 답변을 이 주소로 보내드립니다.",
     phone: "전화 또는 WhatsApp (선택)",
     phoneHint: "국가 번호 포함, 예: +82 10 1234 5678",
     note: "전달할 내용이 있으신가요? (선택)",
@@ -320,19 +322,19 @@ export const ko: Messages = {
     savingHint: "{days}일 이상 타면 하루 {daily} 대신 {weekly}.",
     oneWayFee: "편도 요금",
     total: "합계",
-    depositNow: "보증금 (지금 결제, 환불 불가)",
+    depositNow: "보증금 (확정 후 결제, 환불 불가)",
     balance: "픽업 시 잔금",
     choosePrompt: "여행, 날짜, 오토바이를 고르면 가격이 표시됩니다.",
-    accept: "온라인 보증금은 환불되지 않으며, 잔금은 픽업 시 결제함을 이해합니다.",
-    reserve: "이 오토바이 예약하기",
-    reserving: "예약 중…",
-    fine: "다음 페이지에서 계좌 이체 또는 전자지갑 QR로 보증금을 결제합니다. 결제를 기다리는 동안 오토바이를 24시간 확보해 둡니다.",
+    accept: "보증금은 결제 후 환불되지 않으며, 잔금은 픽업 시 결제함을 이해합니다.",
+    reserve: "예약 요청 보내기",
+    reserving: "보내는 중…",
+    fine: "지금은 결제하실 것이 없습니다. 요청을 확인하는 동안 오토바이를 확보해 두고, 보통 몇 시간 안에 이메일로 답변드립니다. 확정되면 보증금 결제를 위해 연락드립니다.",
     help: "궁금한 점이 있으신가요? WhatsApp으로 문의하세요",
     helpMessageTrip:
       "안녕하세요 Red Lantern Bikes! {start}부터 {end}까지 {bike} 예약에 대해 문의드립니다.",
     helpMessage: "안녕하세요 Red Lantern Bikes! 오토바이 예약에 대해 문의드립니다.",
     mobileTotal: "합계",
-    review: "확인 후 예약",
+    review: "확인 후 요청",
     fieldErrors: {
       name: "이름을 입력해 주세요.",
       email: "이메일 주소를 확인해 주세요.",
@@ -373,19 +375,18 @@ export const ko: Messages = {
     total: "합계",
     deposit: "보증금 (환불 불가)",
     balance: "픽업 시 잔금",
-    payTitle: "보증금 결제: {amount}",
-    payReference: "결제 시 참조 번호 {reference}를 입력해 주세요.",
-    payPlaceholder:
-      "계좌 이체와 전자지갑 QR 코드가 여기에 표시됩니다. (임시: 결제 정보가 아직 설정되지 않았습니다.)",
-    newBooking: "새로 예약하기",
-    heldTitle: "오토바이가 확보되었습니다",
+    newBooking: "새로 요청하기",
+    heldTitle: "예약 요청이 접수되었습니다",
     heldText:
-      "보증금이 도착할 때까지 {until} (사이공 시간)까지 오토바이를 확보해 둡니다. 이 내용을 이메일로 보내드렸습니다.",
+      "요청을 확인 중이며, 늦어도 {until}(사이공 시간)까지 이메일로 답변드립니다. 그동안 오토바이는 확보해 두며, 아직 결제하실 것은 없습니다.",
     heldTomorrow: "내일",
     confirmedTitle: "예약이 확정되었습니다",
-    confirmedText: "보증금을 받았습니다. 1군 매장에서 뵙겠습니다.",
-    expiredTitle: "확보 기간이 만료되었습니다",
-    expiredText: "보증금이 제시간에 도착하지 않아 오토바이 확보가 해제되었습니다.",
+    confirmedText:
+      "오토바이가 예약되었습니다. 아직 연락을 받지 못하셨다면 보증금 결제를 위해 곧 연락드리겠습니다. 1군 매장에서 뵙겠습니다.",
+    expiredTitle: "제때 요청을 확정해 드리지 못했습니다",
+    expiredText:
+      "오토바이 확보가 해제되었으며, 결제하신 금액은 없습니다. 메시지를 보내 주시면 바로 도와드리겠습니다. 새로 요청하셔도 됩니다.",
     cancelledTitle: "이 예약은 취소되었습니다",
+    cancelledText: "예상하지 못한 취소라면 이메일을 확인하시거나 메시지를 보내 주세요.",
   },
 };

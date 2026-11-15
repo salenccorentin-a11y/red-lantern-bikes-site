@@ -1,7 +1,8 @@
 import { afterAll, beforeEach, describe, expect, it } from "vitest";
 import type { Email } from "@/server/email";
-import { reserveBike } from "@/server/bookings";
-import { sendHoldReminders, sendPickupReminders } from "@/server/reminders";
+import { acceptRequest, declineRequest } from "@/server/booking-requests";
+import { releaseExpiredHolds, reserveBike } from "@/server/bookings";
+import { sendAnswerReminders, sendExpiryNotices, sendPickupReminders } from "@/server/reminders";
 import { createTestClient, resetDatabase } from "@/test/db";
 import { NOW, onlineBooking, seededFleet } from "@/test/fixtures";
 
@@ -11,6 +12,7 @@ let fleet: Awaited<ReturnType<typeof seededFleet>>;
 beforeEach(async () => {
   await resetDatabase(db);
   fleet = await seededFleet(db);
+  process.env.BOOKINGS_EMAIL = "shop@example.com";
 });
 afterAll(() => db.$disconnect());
 
@@ -29,41 +31,42 @@ async function book(overrides: Parameters<typeof onlineBooking>[1] = {}) {
   return result.booking;
 }
 
-describe("hold reminders", () => {
-  // NOW is 10:00 on 11 Oct in Saigon; the hold runs out 24 hours later.
+describe("reminders to the shop about unanswered requests", () => {
+  // NOW is 10:00 on 11 Oct in Saigon; a request's hold runs out 24 hours later.
 
-  it("reminds once, about 3 hours before an unpaid hold runs out", async () => {
+  it("reminds the shop once, about 3 hours before a request runs out", async () => {
     const booking = await book();
     const box = outbox();
 
-    expect(await sendHoldReminders(db, later(20), box.send)).toBe(0); // 4 hours left
-    expect(await sendHoldReminders(db, later(21.5), box.send)).toBe(1); // 2.5 hours left
-    expect(await sendHoldReminders(db, later(22.5), box.send)).toBe(0); // already sent
+    expect(await sendAnswerReminders(db, later(20), box.send)).toBe(0); // 4 hours left
+    expect(await sendAnswerReminders(db, later(21.5), box.send)).toBe(1); // 2.5 hours left
+    expect(await sendAnswerReminders(db, later(22.5), box.send)).toBe(0); // already sent
 
     expect(box.sent).toHaveLength(1);
-    expect(box.sent[0].to).toBe("rider@example.com");
+    expect(box.sent[0].to).toBe("shop@example.com");
+    expect(box.sent[0].subject).toContain("Reminder");
     expect(box.sent[0].subject).toContain(booking.reference);
-    expect(box.sent[0].text).toContain(`/booking/${booking.viewToken}`);
+    expect(box.sent[0].text).toContain(`/staff/request/${booking.decisionToken}?answer=accept`);
   });
 
-  it("doesn't remind once the deposit is paid", async () => {
+  it("doesn't remind once the request is answered", async () => {
     const booking = await book();
-    await db.booking.update({ where: { id: booking.id }, data: { status: "CONFIRMED" } });
+    await acceptRequest(db, booking.id);
     const box = outbox();
-    expect(await sendHoldReminders(db, later(21.5), box.send)).toBe(0);
+    expect(await sendAnswerReminders(db, later(21.5), box.send)).toBe(0);
   });
 
   it("doesn't remind when less than 15 minutes are left", async () => {
     await book();
     const box = outbox();
-    expect(await sendHoldReminders(db, later(23.9), box.send)).toBe(0);
+    expect(await sendAnswerReminders(db, later(23.9), box.send)).toBe(0);
   });
 
-  it("doesn't remind when the hold is short (4 hours or less in settings)", async () => {
+  it("doesn't remind when the time to answer is short (4 hours or less in settings)", async () => {
     await db.siteSettings.update({ where: { id: 1 }, data: { holdHours: 4 } });
     await book();
     const box = outbox();
-    expect(await sendHoldReminders(db, later(2), box.send)).toBe(0);
+    expect(await sendAnswerReminders(db, later(2), box.send)).toBe(0);
   });
 
   it("tries again on the next run if sending failed", async () => {
@@ -71,14 +74,51 @@ describe("hold reminders", () => {
     const failing = async () => {
       throw new Error("Resend is down");
     };
-    expect(await sendHoldReminders(db, later(21), failing)).toBe(0);
+    expect(await sendAnswerReminders(db, later(21), failing)).toBe(0);
     const box = outbox();
-    expect(await sendHoldReminders(db, later(22), box.send)).toBe(1);
+    expect(await sendAnswerReminders(db, later(22), box.send)).toBe(1);
+  });
+});
+
+describe("telling customers their request ran out", () => {
+  it("emails the customer once, after the request lapsed unanswered", async () => {
+    const booking = await book();
+    const box = outbox();
+
+    // Still waiting: nothing to say.
+    expect(await sendExpiryNotices(db, later(23), box.send)).toBe(0);
+
+    await releaseExpiredHolds(db, later(25));
+    expect(await sendExpiryNotices(db, later(25), box.send)).toBe(1);
+    expect(await sendExpiryNotices(db, later(26), box.send)).toBe(0);
+
+    expect(box.sent).toHaveLength(1);
+    expect(box.sent[0].to).toBe("rider@example.com");
+    expect(box.sent[0].subject).toContain(booking.reference);
+    expect(box.sent[0].text).toContain("You haven't paid anything");
+  });
+
+  it("says nothing about requests that were answered", async () => {
+    const accepted = await book();
+    await acceptRequest(db, accepted.id);
+    const declined = await book({ startDate: "2026-12-01", endDate: "2026-12-05" });
+    await declineRequest(db, declined.id);
+
+    await releaseExpiredHolds(db, later(25));
+    const box = outbox();
+    expect(await sendExpiryNotices(db, later(25), box.send)).toBe(0);
+  });
+
+  it("says nothing about requests that lapsed more than two days ago", async () => {
+    await book();
+    await releaseExpiredHolds(db, later(25));
+    const box = outbox();
+    expect(await sendExpiryNotices(db, later(24 + 49), box.send)).toBe(0);
   });
 });
 
 describe("pick-up reminders", () => {
-  // A confirmed (paid) booking picking up on 13 Oct.
+  // An accepted booking picking up on 13 Oct.
   const confirmed = async (startDate = "2026-10-13") => {
     const booking = await book({ startDate, endDate: "2026-10-20" });
     await db.booking.update({ where: { id: booking.id }, data: { status: "CONFIRMED" } });
@@ -108,9 +148,9 @@ describe("pick-up reminders", () => {
     expect(await sendPickupReminders(db, dayBefore7am, box.send)).toBe(0);
   });
 
-  it("only for tomorrow's pick-ups, and only once the deposit is paid", async () => {
+  it("only for tomorrow's pick-ups, and only once the booking is accepted", async () => {
     await confirmed("2026-10-14"); // the day after tomorrow
-    await book({ startDate: "2026-10-13", endDate: "2026-10-20" }); // not paid yet
+    await book({ startDate: "2026-10-13", endDate: "2026-10-20" }); // not answered yet
     const box = outbox();
     expect(await sendPickupReminders(db, dayBefore10am, box.send)).toBe(0);
   });

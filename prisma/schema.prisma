@@ -191,15 +191,19 @@ model SiteSettings {
 // ─── Bookings and payments ──────────────────────────────────────────────────
 
 enum BookingStatus {
-  // Online booking waiting for its deposit; holds the bike until holdExpiresAt.
+  // Online booking request waiting for the shop's answer; holds the bike until
+  // holdExpiresAt. (Named for the online deposit it will wait for once online
+  // payments exist. Until then the shop accepts or declines each request and
+  // arranges payment with the customer directly.)
   PENDING_PAYMENT
+  // Accepted by the shop (or made at the counter).
   CONFIRMED
   // Customer has the bike.
   CHECKED_OUT
   // Bike is back.
   COMPLETED
   CANCELLED
-  // Deposit never arrived; the hold was released.
+  // The shop didn't answer in time; the hold was released.
   EXPIRED
 }
 
@@ -217,14 +221,17 @@ enum RateTier {
 }
 
 model Booking {
-  id        String        @id @default(cuid())
+  id            String        @id @default(cuid())
   // Customer-facing reference, also used on bank transfers, e.g. RLB-482913.
-  reference String        @unique
+  reference     String        @unique
   // Random code in the customer's booking link (/booking/<viewToken>). The
   // reference alone is too easy to guess to protect a customer's details.
-  viewToken String        @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  status    BookingStatus
-  source    BookingSource
+  viewToken     String        @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  // Random code in the shop's accept-or-decline link (/staff/request/<decisionToken>),
+  // sent only to the shop's own email address.
+  decisionToken String        @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  status        BookingStatus
+  source        BookingSource
 
   bikeModelId String
   bikeModel   BikeModel @relation(fields: [bikeModelId], references: [id])
@@ -258,9 +265,12 @@ model Booking {
   staffNote     String?
 
   holdExpiresAt        DateTime?
-  // Reminder emails (src/server/reminders.ts): when each was sent, so it's
-  // never sent twice.
+  // Emails from the hourly job (src/server/reminders.ts): when each was sent,
+  // so it's never sent twice. holdReminderSentAt: the shop was reminded that
+  // this request still needs an answer. expiryNoticeSentAt: the customer was
+  // told the request ran out unanswered.
   holdReminderSentAt   DateTime?
+  expiryNoticeSentAt   DateTime?
   pickupReminderSentAt DateTime?
   checkedOutAt         DateTime?
   checkedInAt          DateTime?
