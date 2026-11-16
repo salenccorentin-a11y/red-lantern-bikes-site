@@ -1,0 +1,291 @@
+/* The trip dates control on the booking page (DateRangePicker.tsx).
+   Colours and corners from docs/design.md: Night for the chosen days (red is
+   kept for the "book" action), Mist for the days in between, inputs 8px,
+   the calendar card 12px. Nothing here animates. */
+
+.picker {
+  container-type: inline-size;
+}
+
+/* ─── The button: pick-up day, trip length, drop-off day ────────────────── */
+
+.trigger {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  min-height: 62px;
+  padding: 0;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-input);
+  background: var(--paper-light);
+  font: inherit;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+
+.triggerOpen {
+  border-color: var(--night);
+  box-shadow: inset 0 0 0 1px var(--night);
+}
+
+.end {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 9px 12px;
+}
+
+.endLabel {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.endValue,
+.endEmpty {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.endValue {
+  font-weight: 600;
+}
+
+.endEmpty {
+  color: var(--muted);
+}
+
+/* Between the two days: a short rule, then the trip length once it's known. */
+.length {
+  display: flex;
+  justify-content: center;
+  min-width: 28px;
+}
+
+.length:empty::before {
+  content: "";
+  width: 16px;
+  border-top: 1.5px solid var(--line);
+}
+
+.pill {
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--mist);
+  color: var(--night);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ─── The calendar ──────────────────────────────────────────────────────── */
+
+.panel {
+  margin-top: 8px;
+  padding: 10px 12px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--white);
+}
+
+.months {
+  position: relative;
+  display: grid;
+  gap: 28px;
+}
+
+.monthSecond {
+  display: none;
+}
+
+/* Room for two months side by side (laptops; not phones). */
+@container (min-width: 640px) {
+  .months {
+    grid-template-columns: 1fr 1fr;
+  }
+  .monthSecond {
+    display: block;
+  }
+}
+
+.nav {
+  position: absolute;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: var(--radius-input);
+  background: none;
+  color: var(--night);
+  cursor: pointer;
+}
+
+.navPrev {
+  left: 0;
+}
+
+.navNext {
+  right: 0;
+}
+
+.nav:hover:not(:disabled) {
+  background: var(--mist);
+}
+
+.nav:disabled {
+  color: var(--fog);
+  cursor: not-allowed;
+}
+
+.nav:focus-visible,
+.close:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+
+.month {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+}
+
+.month caption {
+  height: 44px;
+  line-height: 44px;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.month th {
+  padding: 4px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+}
+
+.month td {
+  padding: 0;
+}
+
+.day {
+  display: block;
+  width: 100%;
+  height: 44px;
+  border: 0;
+  border-radius: var(--radius-input);
+  background: none;
+  font: inherit;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.day:hover:not(:disabled) {
+  background: var(--mist);
+}
+
+.day:disabled {
+  color: var(--fog);
+  cursor: not-allowed;
+}
+
+.day:focus-visible {
+  position: relative;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.dayToday {
+  font-weight: 800;
+  box-shadow: inset 0 0 0 1.5px var(--line);
+}
+
+/* The days between pick-up and drop-off join into one band. */
+.dayIn {
+  border-radius: 0;
+  background: var(--mist);
+}
+
+.dayStart,
+.dayEnd,
+.dayStart:hover:not(:disabled),
+.dayEnd:hover:not(:disabled) {
+  background: var(--night);
+  color: var(--white);
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.dayStart {
+  border-radius: var(--radius-input) 0 0 var(--radius-input);
+}
+
+.dayEnd {
+  border-radius: 0 var(--radius-input) var(--radius-input) 0;
+}
+
+/* With a mouse, before the drop-off day is chosen: where the trip would end. */
+.dayPreview,
+.dayPreview:hover:not(:disabled) {
+  border-radius: 0 var(--radius-input) var(--radius-input) 0;
+  background: var(--mist);
+  box-shadow: inset 0 0 0 1.5px var(--night);
+}
+
+.dayAlone {
+  border-radius: var(--radius-input);
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.foot p {
+  margin: 0;
+}
+
+.close {
+  flex: none;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--night);
+  cursor: pointer;
+}
+
+.close:hover {
+  background: var(--mist);
+}

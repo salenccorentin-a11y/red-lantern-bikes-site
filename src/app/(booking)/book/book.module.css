@@ -129,13 +129,7 @@
   box-shadow: inset 0 0 0 1px var(--night);
 }
 
-/* ─── Dates and text fields ─────────────────────────────────────────────── */
-
-.dates {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
+/* ─── Text fields (the dates are in DateRangePicker.module.css) ─────────── */
 
 .field {
   display: flex;
@@ -264,6 +258,17 @@
   color: var(--muted);
 }
 
+/* The type and the availability note. On laptop cards the wrapper is not a
+   box of its own, and the note is shown last, under the price. */
+.bikeMeta {
+  display: contents;
+}
+
+.status,
+.statusLow {
+  order: 1;
+}
+
 .status {
   margin-top: 6px;
   font-size: 12px;
@@ -283,6 +288,99 @@
   opacity: 0;
   width: 1px;
   height: 1px;
+}
+
+/* Phones and tablets: each bike is a compact row (photo, name and type,
+   price), so the whole fleet fits in about a screen and a half. Bikes that
+   can't be chosen for this trip are greyed out and listed last. Laptops keep
+   the cards above. */
+@media (max-width: 859px) {
+  .bikes {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .bike {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    column-gap: 12px;
+    align-items: center;
+    min-height: 64px;
+    padding: 8px 12px;
+  }
+
+  /* Beside every line of the row, however many there are. */
+  .bikeImage {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    align-self: center;
+    width: 72px;
+    margin: 0;
+  }
+
+  .bikeName {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
+  .bikeMeta {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 8px;
+  }
+
+  .price {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    margin: 0;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .price span {
+    display: block;
+  }
+
+  .bikeNote {
+    grid-column: 2 / 4;
+    margin-top: 2px;
+  }
+
+  .status,
+  .statusLow {
+    order: 0;
+    margin-top: 0;
+  }
+
+  /* Tighter lines than body text, so a row stays close to its photo height. */
+  .bike .small,
+  .bike .status,
+  .bike .statusLow,
+  .price,
+  .price span {
+    line-height: 1.35;
+  }
+
+  .bikeOff {
+    order: 1;
+  }
+
+  .bikeOff .bikeImage {
+    filter: grayscale(1);
+  }
+}
+
+@media (min-width: 600px) and (max-width: 859px) {
+  .bikes {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 /* ─── Extras ────────────────────────────────────────────────────────────── */
@@ -455,24 +553,88 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 20;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
+  min-height: 68px;
   padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-  background: var(--ink);
-  color: var(--paper);
-  text-decoration: none;
+  background: var(--night);
+  color: var(--white);
   font-size: 14px;
-  box-shadow: 0 -4px 16px rgb(0 0 0 / 0.15);
+  box-shadow: 0 -4px 16px rgb(15 27 45 / 0.18);
+}
+
+.mobileBarTrip {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.mobileBarBike {
+  font-family: var(--font-display);
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobileBarLine {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.mobileBarLine b {
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.mobileBarDates {
+  font-size: 13px;
+  color: var(--fog);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobileBarPrompt {
+  margin: 0;
+  color: var(--fog);
 }
 
 .mobileBarCta {
-  padding: 10px 14px;
-  border-radius: var(--radius-input);
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 999px;
   background: var(--lantern);
   color: #fff;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mobileBarCta:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+/* Read out, not shown. */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 @media (min-width: 860px) {

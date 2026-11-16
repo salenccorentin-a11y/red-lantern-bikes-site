@@ -7,9 +7,10 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState, useTransition } from "react";
-import { fill, type Locale } from "@/i18n/config";
+import { DATE_LOCALE, fill, type Locale } from "@/i18n/config";
 import type { Messages } from "@/i18n/messages/en";
-import { formatDisplayDate } from "@/lib/dates";
+import { tripDays } from "@/lib/date-range";
+import { formatDisplayDate, parseIsoDate } from "@/lib/dates";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
@@ -22,6 +23,7 @@ import {
 } from "@/lib/pricing";
 import type { Catalog, CatalogAddOn, CatalogModel, OneWayCity } from "@/server/catalog";
 import { createOnlineBooking, type BookingFormState } from "./actions";
+import { DateRangePicker } from "./DateRangePicker";
 import styles from "./book.module.css";
 
 type Dropoff = "SAIGON" | OneWayCity;
@@ -74,6 +76,7 @@ export function BookingForm(props: {
   const route = dropoff === "SAIGON" ? null : catalog.routes.find((r) => r.toCity === dropoff);
 
   // ── Dates ────────────────────────────────────────────────────────────────
+  // The picker only offers valid trips; this is a second check.
   const dateProblem = useMemo(() => {
     if (!startDate || !endDate) return null;
     if (startDate < today) return t.pastDate;
@@ -81,6 +84,7 @@ export function BookingForm(props: {
     return null;
   }, [startDate, endDate, today, t]);
   const datesReady = Boolean(startDate && endDate) && !dateProblem;
+  const tripLength = datesReady ? tripDays({ start: startDate, end: endDate }) : null;
 
   // Live availability for the chosen trip. While the answer for the current
   // trip hasn't arrived yet, the list shows as loading.
@@ -162,7 +166,8 @@ export function BookingForm(props: {
       : null;
 
   const priced = model ? priceFor(model, chosenAddOns) : null;
-  const tooShort = priced && !priced.ok && priced.error.code === "BELOW_MIN_DAYS";
+  // Known from the dates alone, before a bike is chosen.
+  const tooShortForRoute = Boolean(route && tripLength && tripLength < route.minDays);
 
   const canReserve =
     datesReady && model !== null && priced?.ok === true && availability.state !== "loading";
@@ -231,39 +236,37 @@ export function BookingForm(props: {
         {/* 2. Dates */}
         <fieldset className={styles.section}>
           <legend className={styles.heading}>{t.datesTitle}</legend>
-          <div className={styles.dates}>
-            <label className={styles.field}>
-              <span>{t.pickUp}</span>
-              <input
-                type="date"
-                value={startDate}
-                min={today}
-                onChange={(e) => setStartDate(e.target.value)}
-                required
-              />
-            </label>
-            <label className={styles.field}>
-              <span>
-                {route ? fill(t.dropOffIn, { city: cityLabel(route.toCity) }) : t.dropOff}
-              </span>
-              <input
-                type="date"
-                value={endDate}
-                min={startDate || today}
-                onChange={(e) => setEndDate(e.target.value)}
-                required
-              />
-            </label>
-          </div>
+          <DateRangePicker
+            range={{ start: startDate, end: endDate }}
+            onChange={(range) => {
+              setStartDate(range.start);
+              setEndDate(range.end);
+            }}
+            today={today}
+            lang={lang}
+            daysLabel={daysLabel}
+            lengthNote={tripLength ? fill(t.daysIncluded, { days: daysLabel(tripLength) }) : null}
+            labels={{
+              pickUp: t.pickUp,
+              dropOff: route ? fill(t.dropOffIn, { city: cityLabel(route.toCity) }) : t.dropOff,
+              placeholder: t.datePlaceholder,
+              calendar: t.calendarLabel,
+              hintStart: t.datesHintStart,
+              hintEnd: t.datesHintEnd,
+              prevMonth: t.prevMonth,
+              nextMonth: t.nextMonth,
+              close: t.closeCalendar,
+              dayPickUp: t.dayPickUp,
+              dayDropOff: t.dayDropOff,
+            }}
+          />
           <div aria-live="polite">
             {dateProblem && <p className={styles.warn}>{dateProblem}</p>}
-            {tooShort && route && (
+            {tooShortForRoute && route && (
               <p className={styles.warn}>{fill(t.tooShort, { days: route.minDays })}</p>
             )}
-            {datesReady && priced?.ok && (
-              <p className={styles.ok}>
-                {fill(t.daysIncluded, { days: daysLabel(priced.quote.days) })}
-              </p>
+            {tripLength && !tooShortForRoute && (
+              <p className={styles.ok}>{fill(t.daysIncluded, { days: daysLabel(tripLength) })}</p>
             )}
           </div>
         </fieldset>
@@ -302,11 +305,20 @@ export function BookingForm(props: {
                     alt=""
                     width={1200}
                     height={800}
-                    sizes="(max-width: 600px) 45vw, 200px"
+                    sizes="(max-width: 859px) 72px, 200px"
                     className={styles.bikeImage}
                   />
                   <span className={styles.bikeName}>{m.name}</span>
-                  <span className={styles.small}>{m.kind}</span>
+                  {/* The type and, if any, the availability note: one line in the
+                      phone rows; on laptop cards the note stays at the bottom. */}
+                  <span className={styles.bikeMeta}>
+                    <span className={styles.small}>{m.kind}</span>
+                    {noRoute && <span className={styles.status}>{t.notForTrip}</span>}
+                    {!noRoute && soldOut && <span className={styles.status}>{t.bookedOut}</span>}
+                    {!noRoute && free !== null && free > 0 && free <= 2 && (
+                      <span className={styles.statusLow}>{fill(t.onlyLeft, { n: free })}</span>
+                    )}
+                  </span>
                   {price?.ok ? (
                     <span className={styles.price}>
                       {formatVnd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}
@@ -319,19 +331,14 @@ export function BookingForm(props: {
                     </span>
                   )}
                   {route && m.oneWayFees[route.toCity] !== undefined && (
-                    <span className={styles.small}>
+                    <span className={`${styles.small} ${styles.bikeNote}`}>
                       {fill(t.inclFee, { fee: formatVnd(m.oneWayFees[route.toCity]!) })}
                     </span>
                   )}
                   {!price?.ok && !route && (
-                    <span className={styles.small}>
+                    <span className={`${styles.small} ${styles.bikeNote}`}>
                       {fill(t.fromMonthly, { price: formatVnd(m.monthlyRate) })}
                     </span>
-                  )}
-                  {noRoute && <span className={styles.status}>{t.notForTrip}</span>}
-                  {!noRoute && soldOut && <span className={styles.status}>{t.bookedOut}</span>}
-                  {!noRoute && free !== null && free > 0 && free <= 2 && (
-                    <span className={styles.statusLow}>{fill(t.onlyLeft, { n: free })}</span>
                   )}
                 </label>
               );
@@ -540,20 +547,45 @@ export function BookingForm(props: {
         </div>
       </aside>
 
-      {/* Phones: keep the total and the way to the summary in view. */}
-      {priced?.ok && (
-        <a href="#summary" className={styles.mobileBar}>
-          <span>
-            {t.mobileTotal}{" "}
-            <b>
-              <AnimatedNumber value={priced.quote.totalVnd} format={formatVnd} />
-            </b>
-          </span>
-          <span className={styles.mobileBarCta}>{t.review}</span>
-        </a>
-      )}
+      {/* Phones: the ticket is at the end of the page, so the bike, the dates
+          and the total stay in view in a bar at the bottom of the screen. */}
+      <div className={styles.mobileBar}>
+        {model && priced?.ok ? (
+          <>
+            <div className={styles.mobileBarTrip}>
+              <span className={styles.mobileBarBike}>{model.name}</span>
+              <span className={styles.mobileBarLine}>
+                <b>
+                  <span className={styles.srOnly}>{t.mobileTotal} </span>
+                  <AnimatedNumber value={priced.quote.totalVnd} format={formatVnd} />
+                </b>
+                <span className={styles.mobileBarDates}>
+                  {shortRange(startDate, endDate, lang)}
+                </span>
+              </span>
+            </div>
+            <a href="#summary" className={styles.mobileBarCta}>
+              {t.review}
+            </a>
+          </>
+        ) : (
+          <p className={styles.mobileBarPrompt}>{t.barPrompt}</p>
+        )}
+      </div>
     </form>
   );
+}
+
+/** "1–8 Dec" or "28 Dec – 3 Jan", in the page's language. */
+function shortRange(start: string, end: string, lang: Locale): string {
+  const from = parseIsoDate(start);
+  const to = parseIsoDate(end);
+  if (!from || !to) return "";
+  return new Intl.DateTimeFormat(DATE_LOCALE[lang], {
+    day: "numeric",
+    month: "short",
+    timeZone: "UTC",
+  }).formatRange(from, to);
 }
 
 function Option(props: {
