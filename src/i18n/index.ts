@@ -41,12 +41,9 @@ export function bikeContent(lang: Locale, slug: string): BikeContent | undefined
   return base && t ? { ...base, ...t } : base;
 }
 
-/** The quick facts for a bike's page, with "best use" in the page's language. */
-export function bikeFacts(lang: Locale, slug: string): BikeFacts {
-  const facts = BIKE_FACTS[slug] ?? {};
-  const bestUse = translated(lang)?.bikes[slug]?.bestUse;
-  // No translation yet: leave it out rather than show English on a French page.
-  return { ...facts, bestUse: lang === "en" ? facts.bestUse : bestUse };
+/** A bike's facts and specifications (numbers only, the same in every language). */
+export function bikeFacts(slug: string): BikeFacts {
+  return BIKE_FACTS[slug] ?? {};
 }
 
 export function licenceText(lang: Locale, licence: BikeContent["licence"]): string {

@@ -115,7 +115,7 @@ async function BikeInfo({ lang, slug }: { lang: Locale; slug: string }) {
     <div>
       <p className={bike.kind}>{kindLabel(lang, model.kind)}</p>
       <h1 className={bike.name}>{model.name}</h1>
-      <QuickFacts lang={lang} facts={bikeFacts(lang, slug)} />
+      <QuickFacts lang={lang} facts={bikeFacts(slug)} bestUse={content?.bestFor[0]} />
       {content && <p className={bike.description}>{content.description}</p>}
 
       <h2 className={bike.priceTitle}>{t.pricePerDay}</h2>
@@ -168,8 +168,11 @@ async function BikeInfo({ lang, slug }: { lang: Locale; slug: string }) {
       <div className={bike.mobileBar}>
         <p className={bike.mobileBarPrice}>
           {barBefore}
-          <b>{formatVnd(model.dailyRate)}</b>
-          {barAfter}
+          {/* The price and "a day" stay together on one line. */}
+          <span className={bike.nowrap}>
+            <b>{formatVnd(model.dailyRate)}</b>
+            {barAfter}
+          </span>
         </p>
         <Link href={to(`/book?model=${model.slug}`)} className={bike.mobileBarCta}>
           {t.bookThis}
@@ -189,6 +192,7 @@ async function BikeMore({ lang, slug }: { lang: Locale; slug: string }) {
       <GoogleReviews lang={lang} title={t.reviewsTitle} />
 
       <div className={bike.details}>
+        <Specs lang={lang} facts={bikeFacts(slug)} />
         {content && content.bestFor.length > 0 && (
           <section>
             <h2>{t.goodFor}</h2>
@@ -307,28 +311,38 @@ function Photos({ lang, slug }: { lang: Locale; slug: string }) {
 
 // ─── Quick facts ──────────────────────────────────────────────────────────
 
-/** Engine size, gearbox, seat height and best use: only the ones we know. */
-function QuickFacts({ lang, facts }: { lang: Locale; facts: BikeFacts }) {
+/** Engine size, gearbox, fuel tank and best use: only the ones we know. */
+function QuickFacts({
+  lang,
+  facts,
+  bestUse,
+}: {
+  lang: Locale;
+  facts: BikeFacts;
+  /** The bike's first "best for" tag, in the page's language. */
+  bestUse?: string;
+}) {
   const t = getMessages(lang).bike;
-  const gearbox = (g: NonNullable<BikeFacts["gearbox"]>) => {
-    if (g.type === "automatic") return t.gearAutomatic;
-    if (g.type === "semi-automatic")
-      return g.speeds ? fill(t.gearSemiSpeeds, { n: g.speeds }) : t.gearSemi;
-    return g.speeds ? fill(t.gearManualSpeeds, { n: g.speeds }) : t.gearManual;
-  };
+  const num = numberIn(lang);
   const items = [
     facts.engineCc && {
       icon: <EngineIcon />,
       label: t.factEngine,
       value: fill(t.engineCc, { cc: facts.engineCc }),
     },
-    facts.gearbox && { icon: <GearboxIcon />, label: t.factGearbox, value: gearbox(facts.gearbox) },
-    facts.seatHeightMm && {
-      icon: <SeatIcon />,
-      label: t.factSeat,
-      value: fill(t.seatMm, { mm: facts.seatHeightMm }),
+    facts.gearbox && {
+      icon: <GearboxIcon />,
+      label: t.factGearbox,
+      value: gearboxText(lang, facts.gearbox),
     },
-    facts.bestUse && { icon: <RouteIcon />, label: t.factBestUse, value: facts.bestUse },
+    facts.fuelTankL && {
+      icon: <TankIcon />,
+      label: t.factTank,
+      value: facts.rangeKm
+        ? fill(t.tankRange, { l: num(facts.fuelTankL), km: num(facts.rangeKm) })
+        : fill(t.litres, { l: num(facts.fuelTankL) }),
+    },
+    bestUse && { icon: <RouteIcon />, label: t.factBestUse, value: bestUse },
   ].filter((item) => !!item);
   if (items.length === 0) return null;
 
@@ -344,6 +358,65 @@ function QuickFacts({ lang, facts }: { lang: Locale; facts: BikeFacts }) {
     </dl>
   );
 }
+
+/** Specifications lower on the page: only the ones we know. */
+function Specs({ lang, facts }: { lang: Locale; facts: BikeFacts }) {
+  const t = getMessages(lang).bike;
+  const num = numberIn(lang);
+  const brakes = (b: NonNullable<BikeFacts["brakes"]>) => {
+    const text =
+      b.front === "disc" && b.rear === "disc"
+        ? t.brakesDiscDisc
+        : b.front === "disc"
+          ? t.brakesDiscDrum
+          : t.brakesDrumDrum;
+    return b.abs ? fill(t.withAbs, { brakes: text }) : text;
+  };
+  const rows: [string, string | undefined][] = [
+    [t.factEngine, facts.engineCc ? fill(t.engineCc, { cc: facts.engineCc }) : undefined],
+    [t.factGearbox, facts.gearbox ? gearboxText(lang, facts.gearbox) : undefined],
+    [t.specPower, facts.powerHp ? fill(t.hp, { hp: num(facts.powerHp) }) : undefined],
+    [t.specWeight, facts.weightKg ? fill(t.kg, { kg: num(facts.weightKg) }) : undefined],
+    [t.factTank, facts.fuelTankL ? fill(t.litres, { l: num(facts.fuelTankL) }) : undefined],
+    [t.specRange, facts.rangeKm ? fill(t.rangeKm, { km: num(facts.rangeKm) }) : undefined],
+    [t.specBrakes, facts.brakes ? brakes(facts.brakes) : undefined],
+    [
+      t.specClearance,
+      facts.groundClearanceMm ? fill(t.mm, { mm: num(facts.groundClearanceMm) }) : undefined,
+    ],
+  ];
+  const known = rows.filter((r): r is [string, string] => !!r[1]);
+  // Engine and gearbox alone are already in the quick facts at the top.
+  if (known.length <= 2) return null;
+
+  return (
+    <section>
+      <h2>{t.specsTitle}</h2>
+      <dl className={bike.specs}>
+        {known.map(([label, value]) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
+function gearboxText(lang: Locale, g: NonNullable<BikeFacts["gearbox"]>): string {
+  const t = getMessages(lang).bike;
+  if (g.type === "automatic") return t.gearAutomatic;
+  if (g.type === "semi-automatic")
+    return g.speeds ? fill(t.gearSemiSpeeds, { n: g.speeds }) : t.gearSemi;
+  return g.speeds ? fill(t.gearManualSpeeds, { n: g.speeds }) : t.gearManual;
+}
+
+/** Numbers written the local way (12.75 in English, 12,75 in French). */
+const numberIn = (lang: Locale) => {
+  const format = new Intl.NumberFormat(lang, { maximumFractionDigits: 2 });
+  return (n: number) => format.format(n);
+};
 
 // Small line icons (decorative: the label beside each says what it is).
 const iconProps = {
@@ -377,11 +450,12 @@ function GearboxIcon() {
   );
 }
 
-/** A height marker: seat height. */
-function SeatIcon() {
+/** A fuel pump: the fuel tank. */
+function TankIcon() {
   return (
     <svg {...iconProps}>
-      <path d="M12 4v16M8.5 7.5 12 4l3.5 3.5M8.5 16.5 12 20l3.5-3.5M5 4h14M5 20h14" />
+      <path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M4 10h10" />
+      <path d="M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3" />
     </svg>
   );
 }

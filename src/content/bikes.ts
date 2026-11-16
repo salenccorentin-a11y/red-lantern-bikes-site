@@ -20,7 +20,7 @@ export const BIKE_CONTENT: Record<string, BikeContent> = {
   "wave-alpha-110": {
     summary: "Light, frugal and easy: the bike most of Vietnam rides.",
     description:
-      "The Wave Alpha is Vietnam's everyday workhorse. Four gears and no clutch lever make it easy to learn, it sips fuel, and any mechanic in the country can fix it. Ideal for getting around Saigon or a relaxed trip up the coast.",
+      "The Wave Alpha is Vietnam's everyday workhorse. Four gears and no clutch lever make it easy to learn, it sips fuel, and any mechanic in the country can fix it. Ideal for getting around Saigon or a do the whole country without any issues.",
     bestFor: ["First-time riders", "City riding", "Budget trips"],
     licence: "IDP_OR_A1",
     seoTitle: "Honda Wave Rental Saigon | Red Lantern Bikes",
@@ -60,7 +60,7 @@ export const BIKE_CONTENT: Record<string, BikeContent> = {
   "yamaha-nvx125": {
     summary: "An automatic scooter: twist and go.",
     description:
-      "No gears at all. The NVX is comfortable, has storage under the seat, and is the easiest way to get around Saigon if you don't want to think about shifting.",
+      "No gears at all. The NVX is comfortable, has storage under the seat, and is the easiest ride for long and confortable road-trip if you don't want to think about shifting.",
     bestFor: ["City riding", "No gears", "Day trips"],
     licence: "IDP_OR_A1",
     seoTitle: "Yamaha NVX Rental Saigon | Red Lantern Bikes",
@@ -139,40 +139,126 @@ export const BIKE_CONTENT: Record<string, BikeContent> = {
   },
 };
 
-// ─── Quick facts under the name on each bike's page ───────────────────────
-// Only values the shop has confirmed. Never guess a specification: a fact
-// left out here is simply not shown.
+// ─── Facts and specifications on each bike's page ─────────────────────────
+// Never guess a specification: a value left out here is simply not shown.
+// The quick facts under the name are the engine, gearbox, fuel tank and the
+// first "best for" tag; the rest is listed lower on the page.
+//
+// Sources (November 2026):
+// - Engine sizes: the shop.
+// - Gearbox type: each model's "kind" in the fleet list.
+// - Gears, power, weight, tank, range, brakes, ground clearance: the spec
+//   sheets of Style Motorbikes (stylemotorbikes.com: Wave Alpha, GD110,
+//   XR150L, CB150X, Versys-X 300) and Tigit Motorbikes' fleet table
+//   (tigitmotorbikes.com/bookmotorbike: CRF150, Winner 150, WR155R).
+// - EN125, CB125, NVX125, GSX-R150: no reliable source yet (other markets and
+//   years disagree), so only the engine size and gearbox type.
 
 export type Gearbox =
   | { type: "automatic" }
   | { type: "semi-automatic"; speeds?: number }
   | { type: "manual"; speeds?: number };
 
+export type Brakes = { front: "disc" | "drum"; rear: "disc" | "drum"; abs?: boolean };
+
 export type BikeFacts = {
   /** Engine size in cc. */
   engineCc?: number;
   gearbox?: Gearbox;
-  seatHeightMm?: number;
-  /** A few words, e.g. "Saigon to Hanoi". French and Korean are in
-   * src/i18n/content (bestUse). */
-  bestUse?: string;
+  powerHp?: number;
+  /** Ready to ride (curb) weight. */
+  weightKg?: number;
+  fuelTankL?: number;
+  /** Roughly how far a full tank goes. */
+  rangeKm?: number;
+  brakes?: Brakes;
+  groundClearanceMm?: number;
 };
 
-// Gearbox types follow each model's "kind" in the fleet list (Automatic
-// scooter, Semi-automatic, Manual…). The Wave's 110cc is from the fleet list.
 export const BIKE_FACTS: Record<string, BikeFacts> = {
-  "wave-alpha-110": { engineCc: 110, gearbox: { type: "semi-automatic" } },
-  "suzuki-gd110": { gearbox: { type: "manual" } },
-  "suzuki-en125": { gearbox: { type: "manual" } },
-  "honda-cb125": { gearbox: { type: "manual" } },
-  "yamaha-nvx125": { gearbox: { type: "automatic" } },
-  "honda-winner-x-150": { gearbox: { type: "manual" } },
-  "suzuki-gsx-r150": { gearbox: { type: "manual" } },
-  "honda-xr150": { gearbox: { type: "manual" } },
-  "honda-cb150x": { gearbox: { type: "manual" } },
-  "honda-crf150": { gearbox: { type: "manual" } },
-  "yamaha-wr155r": { gearbox: { type: "manual" } },
-  "kawasaki-versys-x300": { gearbox: { type: "manual" } },
+  // Style Motorbikes
+  "wave-alpha-110": {
+    engineCc: 110,
+    gearbox: { type: "semi-automatic", speeds: 4 },
+    powerHp: 8.3,
+    weightKg: 97,
+    fuelTankL: 3.7,
+    rangeKm: 150,
+    brakes: { front: "drum", rear: "drum" },
+    groundClearanceMm: 134,
+  },
+  // Style Motorbikes
+  "suzuki-gd110": {
+    engineCc: 110,
+    gearbox: { type: "manual", speeds: 4 },
+    powerHp: 8,
+    weightKg: 108,
+    fuelTankL: 9.2,
+    rangeKm: 300,
+    brakes: { front: "drum", rear: "drum" },
+    groundClearanceMm: 140,
+  },
+  "suzuki-en125": { engineCc: 125, gearbox: { type: "manual" } },
+  "honda-cb125": { engineCc: 125, gearbox: { type: "manual" } },
+  "yamaha-nvx125": { engineCc: 125, gearbox: { type: "automatic" } },
+  // Tigit Motorbikes ("Honda Winner 150cc")
+  "honda-winner-x-150": {
+    engineCc: 150,
+    gearbox: { type: "manual", speeds: 6 },
+    powerHp: 16.1,
+    weightKg: 119,
+    fuelTankL: 4.5,
+  },
+  "suzuki-gsx-r150": { engineCc: 150, gearbox: { type: "manual" } },
+  // Style Motorbikes ("Honda XR150L")
+  "honda-xr150": {
+    engineCc: 150,
+    gearbox: { type: "manual", speeds: 5 },
+    powerHp: 12.1,
+    weightKg: 123,
+    fuelTankL: 12,
+    rangeKm: 300,
+    brakes: { front: "disc", rear: "drum" },
+    groundClearanceMm: 245,
+  },
+  // Style Motorbikes
+  "honda-cb150x": {
+    engineCc: 150,
+    gearbox: { type: "manual", speeds: 6 },
+    powerHp: 15.5,
+    weightKg: 139,
+    fuelTankL: 12,
+    rangeKm: 300,
+    brakes: { front: "disc", rear: "disc" },
+    groundClearanceMm: 181,
+  },
+  // Tigit Motorbikes ("Honda CRF 150cc")
+  "honda-crf150": {
+    engineCc: 150,
+    gearbox: { type: "manual", speeds: 5 },
+    powerHp: 12.75,
+    weightKg: 122,
+    fuelTankL: 7.2,
+  },
+  // Tigit Motorbikes ("Yamaha WR 155R"). Engine size as the shop gave it.
+  "yamaha-wr155r": {
+    engineCc: 150,
+    gearbox: { type: "manual", speeds: 6 },
+    powerHp: 16.5,
+    weightKg: 134,
+    fuelTankL: 8.1,
+  },
+  // Style Motorbikes ("Kawasaki Versys-X 300")
+  "kawasaki-versys-x300": {
+    engineCc: 300,
+    gearbox: { type: "manual", speeds: 6 },
+    powerHp: 40,
+    weightKg: 175,
+    fuelTankL: 17,
+    rangeKm: 300,
+    brakes: { front: "disc", rear: "disc", abs: true },
+    groundClearanceMm: 180,
+  },
 };
 
 // ─── The first photo on each bike's page ──────────────────────────────────
@@ -195,5 +281,5 @@ export const LEAD_PHOTO: Record<string, string> = {
 export const LICENCE_TEXT: Record<BikeContent["licence"], string> = {
   IDP_OR_A1:
     "Needs a Vietnamese motorcycle licence, or an International Driving Permit (1949 Geneva Convention) that covers motorbikes.",
-  A2: "Over 175cc: needs a full Vietnamese motorcycle licence.",
+  A2: "Over 175cc: Needs a Vietnamese motorcycle licence, or an International Driving Permit (1949 Geneva Convention) that covers motorbikes.",
 };
