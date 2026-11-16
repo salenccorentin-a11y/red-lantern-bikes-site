@@ -12,7 +12,6 @@ export function SiteHeader({ lang = "en" }: { lang?: Locale }) {
   const nav = [
     { href: "/bikes", label: t.bikes },
     { href: "/one-way", label: t.oneWay },
-    { href: "/tours", label: t.tours },
     { href: "/faq", label: t.faq },
     { href: "/contact", label: t.contact },
   ].map((item) => ({ ...item, href: localize(lang, item.href) }));

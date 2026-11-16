@@ -1,4 +1,4 @@
-// Enquiries from the tour pages and the contact page.
+// Enquiries from the contact page (and, before 16 Nov 2026, the tour pages).
 
 import { z } from "zod";
 import type { PrismaClient } from "@/generated/prisma/client";

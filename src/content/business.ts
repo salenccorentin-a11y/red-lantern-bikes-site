@@ -40,8 +40,8 @@ export const BUSINESS = {
     },
     {
       name: "Coco",
-      role: "Co-founder, customer care and tour guide",
-      bio: "Coco looks after riders before, during and after their trip, and leads our guided tours. The Coco Loop is his favourite ride.",
+      role: "Co-founder and customer care",
+      bio: "Coco looks after riders before, during and after their trip.",
     },
   ],
   /** Included with every rental, at no extra cost. */

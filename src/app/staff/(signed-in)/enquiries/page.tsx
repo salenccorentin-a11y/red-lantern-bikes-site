@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { findTour } from "@/content/tours";
 import { formatSaigonDateTime, toIsoDate } from "@/lib/dates";
 import { db } from "@/lib/db";
 import { requireStaff } from "@/server/staff-session";
@@ -54,7 +53,7 @@ async function Enquiries({
           <h2>
             {e.name} <span className={styles.badge}>{KIND[e.kind]}</span>
             {e.topic && (
-              <span className={styles.muted}> · {findTour(e.topic)?.name ?? e.topic}</span>
+              <span className={styles.muted}> · {e.topic}</span>
             )}
           </h2>
           <p className={styles.muted}>

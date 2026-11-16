@@ -13,6 +13,12 @@ Choices made while planning the rebuild, with the reason for each. Pricing rules
 - **Bookings for the same bike take turns** (11 October 2026). Before saving a booking or maintenance block, the system locks that one bike for a few milliseconds and re-checks it's free. Customers booking different bikes never wait for each other. Without this, two customers booking the same bike at the same instant could stall each other for about a second until the database cancelled one, which then failed with an error instead of getting another bike. The no-overlap rule remains the final guarantee.
 - **Timezone.** All dates are in Asia/Ho_Chi_Minh.
 
+## Before launch: tours, drop-off cities, contract terms (16 November 2026)
+
+- **No tour pages.** The shop doesn't run guided tours, only self-guided trips with its map. The tour pages, their nav and footer links, the home tile and the sitemap entries are gone. `/tours` and `/tours/*` (also under `/fr` and `/ko`) redirect to the one-way page. To bring tours back, restore `src/content/tours.ts`, `src/views/ToursView.tsx`, `src/components/tourPhotos.ts` and the `tours` route folders from the commit before this change, and remove the redirect. The `TOUR` enquiry kind stays in the database for enquiries sent before.
+- **Drop-off cities.** Bookable online: Da Nang and Hanoi only. Da Lat, Hue and Nha Trang can be arranged on request, so the one-way page, FAQ and terms say so and point to the contact page.
+- **Terms, FAQ and the insurance extra follow the rental contract of 11 November 2026:** the new insurance cover and its two conditions (oil-change photos, contact the shop before any repair), return hours (9am to 4pm in Da Nang and Hanoi, more flexible in Saigon) and hourly late fees. Flat tyres stay covered (owner, 16 Nov 2026). The site doesn't show the fine amounts; they are in the contract. The 24-hour rental (for pick-ups after noon) is handled case by case and stays off the site on purpose. The deposit stays 1,500,000₫, non-refundable (confirmed 16 Nov 2026). The seed doesn't overwrite existing extras, so a database seeded before this change keeps the old insurance description until it's edited in staff settings.
+
 ## Booking requests instead of online payment (15 November 2026)
 
 Online payment isn't possible yet, so this replaces the "Payments" rules below until it is.

@@ -9,7 +9,6 @@ export const ko: Messages = {
     main: "주 메뉴",
     bikes: "오토바이",
     oneWay: "편도 여행",
-    tours: "투어",
     faq: "자주 묻는 질문",
     contact: "문의",
     book: "오토바이 예약",
@@ -21,7 +20,6 @@ export const ko: Messages = {
     rideWithUs: "함께 달려요",
     ourBikes: "오토바이 목록",
     oneWay: "하노이·다낭 편도",
-    tours: "투어",
     guides: "여행 가이드 (영어)",
     faq: "자주 묻는 질문",
     about: "회사 소개 (영어)",
@@ -60,7 +58,7 @@ export const ko: Messages = {
     oneWayTitle: "편도 여행",
     oneWayIntro:
       "돌아올 필요 없이 베트남을 종단하세요. 고원 지대, 중부 해안, 하이반 고개, 그리고 북부의 카르스트 지형까지. 다낭이나 하노이에 오토바이를 두고 가시면 저희가 회수합니다.",
-    waysTitle: "세 가지 여행 방법",
+    waysTitle: "두 가지 여행 방법",
     ways: {
       rent: {
         title: "사이공에서 대여",
@@ -71,11 +69,6 @@ export const ko: Messages = {
         title: "하노이·다낭 편도",
         text: "원하는 속도로 북쪽으로 달리고 도착지에 오토바이를 두세요. 저희가 회수합니다.",
         alt: "베트남 북부에서 작은 배로 강을 건너는 라이더와 오토바이",
-      },
-      tours: {
-        title: "투어",
-        text: "가이드 동행 또는 자유 여행으로, 메콩 델타부터 베트남 종단까지.",
-        alt: "해 질 녘 산골짜기 위의 어드벤처 바이크 라이더",
       },
     },
     popularTitle: "인기 오토바이",
@@ -209,6 +202,9 @@ export const ko: Messages = {
         rest: "은 마지막 날 협력 지점에서. 사이공으로 돌려보내는 일은 저희가 맡습니다.",
       },
     ],
+    otherCities:
+      "달랏, 후에, 나트랑에서 반납하고 싶으신가요? 온라인 예약은 안 되지만, 요청하시면 방법을 마련해 드릴 수 있습니다.",
+    otherCitiesLink: "다른 도시 문의하기",
     howPhotoAlt: "붉은 흙길 위의 사이드 가방을 단 가와사키 베르시스",
     feesTitle: "편도 요금",
     feesIntro: "요금은 오토바이에 따라 다르며 대여료에 한 번만 추가됩니다.",
@@ -223,29 +219,7 @@ export const ko: Messages = {
     ],
     readGuide: "",
     guideLink: "사이공–하노이 완벽 경로 가이드",
-    orTour: "를 읽어 보시거나, 가이드와 함께하는",
-    tourLink: "사이공–하노이 투어",
-    guideNote: "(가이드는 영어)",
-  },
-  tours: {
-    metaTitle: "베트남 오토바이 투어 | Red Lantern Bikes",
-    metaDescription:
-      "사이공 출발 가이드·자유 오토바이 투어: 코코 루프, 메콩 델타, 사이공 루프, 하노이까지 종단. 1~6명 소그룹.",
-    title: "오토바이 투어",
-    intro:
-      "현지 가이드와 함께, 또는 저희 경로와 도로 지원을 받으며 자유롭게. 1~6명 그룹으로, 일정과 경험에 맞춰 계획합니다.",
-    photoAlt: "해 질 녘 산골짜기 위의 라이더",
-    askDates: "일정과 가격을 문의하세요",
-    tourMetaTitle: "{name} 오토바이 투어 | Red Lantern Bikes",
-    allTours: "모든 투어",
-    route: "경로",
-    duration: "기간",
-    group: "인원",
-    price: "가격",
-    highlights: "하이라이트",
-    ask: "이 투어 문의하기",
-    askIntro: "날짜, 인원, 그리고 오토바이 경험을 알려 주세요.",
-    placeholder: "예: 두 명, 12월 초, 일주일 정도. 한 명은 수동 오토바이를 타 본 적이 없어요.",
+    guideNote: "(가이드는 영어)를 읽어 보세요",
   },
   faq: {
     metaTitle: "자주 묻는 질문: 면허, 보증금, 편도 렌탈 | Red Lantern Bikes",
@@ -258,7 +232,7 @@ export const ko: Messages = {
   },
   contact: {
     metaTitle: "문의 | Red Lantern Bikes",
-    metaDescription: "Red Lantern Bikes 주소: {address}. 렌탈, 편도 여행, 투어에 대해 문의하세요.",
+    metaDescription: "Red Lantern Bikes 주소: {address}. 렌탈과 편도 여행에 대해 문의하세요.",
     title: "문의하기",
     intro:
       "오토바이, 경로, 계획 중인 여행에 대해 궁금한 점이 있으신가요? 메시지를 보내시거나 1군 매장으로 찾아오세요.",

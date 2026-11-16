@@ -8,7 +8,6 @@ const TRANSLATED_PATHS = [
   /^\/$/,
   /^\/bikes(\/[^/]+)?$/,
   /^\/one-way$/,
-  /^\/tours(\/[^/]+)?$/,
   /^\/faq$/,
   /^\/contact$/,
   /^\/book$/,

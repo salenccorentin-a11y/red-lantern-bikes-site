@@ -35,9 +35,6 @@ export function SiteFooter({ lang = "en" }: { lang?: Locale }) {
               <Link href={to("/one-way")}>{t.oneWay}</Link>
             </li>
             <li>
-              <Link href={to("/tours")}>{t.tours}</Link>
-            </li>
-            <li>
               <Link href="/blog">{t.guides}</Link>
             </li>
             <li>

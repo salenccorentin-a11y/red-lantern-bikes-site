@@ -1,4 +1,4 @@
-// French content: bike descriptions, FAQ, tours and the one-way route.
+// French content: bike descriptions, FAQ and the one-way route.
 // Translated from src/content (English is the reference: change it there first).
 
 import type { TranslatedContent } from "./types";
@@ -173,7 +173,8 @@ export const frContent: TranslatedContent = {
       question: "L'assurance est-elle incluse ?",
       answer: [
         "L'assurance tous risques est une option, au prix par jour selon la taille de la moto : 80 000 ₫ pour les 110 à 125 cc, 130 000 ₫ pour les 150 cc, 180 000 ₫ pour les CB150X, CRF150 et WR155R, et 260 000 ₫ pour la Kawasaki Versys X300. Ajoutez-la à la réservation.",
-        "Elle couvre les accidents, les problèmes mécaniques et les crevaisons. Elle ne couvre pas le vol ou la perte de la moto, ni ce qui concerne la police ou une infraction à la loi.",
+        "Elle couvre les accidents sur la route, les crevaisons et les problèmes mécaniques qui viennent de la moto elle-même, sauf s'ils sont dus au conducteur. Elle ne couvre pas le vol, ce qui concerne la police, les inondations, les dommages causés à des tiers ni les problèmes de santé.",
+        "Elle ne s'applique que si vous respectez deux règles. Chaque vidange pendant le voyage est faite correctement, et à chaque fois vous nous envoyez une photo du mécanicien qui la fait et une photo du compteur kilométrique complet. Et vous nous contactez avant toute réparation : si vous appelez alors qu'un mécanicien travaille déjà sur la moto, ou après la réparation, nous ne la payons pas.",
         "Sans assurance, nous prenons en charge uniquement les pannes moteur. Les accidents, les autres réparations et le vol sont à la charge du conducteur.",
       ],
     },
@@ -189,7 +190,7 @@ export const frContent: TranslatedContent = {
       id: "breakdown",
       question: "Et si la moto tombe en panne ?",
       answer: [
-        "Écrivez-nous sur WhatsApp, où que vous soyez au Vietnam. Nous vous guidons, trouvons un mécanicien près de vous ou organisons de l'aide.",
+        "Écrivez-nous sur WhatsApp avant que quiconque touche à la moto, où que vous soyez au Vietnam. Nous vous guidons, trouvons un mécanicien près de vous ou organisons de l'aide. Une réparation commencée avant de nous avoir contactés n'est pas couverte par l'assurance.",
       ],
     },
     {
@@ -197,6 +198,7 @@ export const frContent: TranslatedContent = {
       question: "Comment fonctionnent les allers simples ?",
       answer: [
         "Récupérez la moto à Saïgon et laissez-la à notre point de dépôt partenaire à Hanoï (locations de 12 jours ou plus) ou à Da Nang (7 jours ou plus). Des frais d'aller simple, selon la moto, s'ajoutent au prix. Nous nous occupons de ramener la moto à Saïgon.",
+        "Vous voulez finir à Da Lat, Hué ou Nha Trang ? Ces villes ne se réservent pas en ligne, mais écrivez-nous et nous pouvons organiser quelque chose.",
       ],
     },
     {
@@ -204,6 +206,14 @@ export const frContent: TranslatedContent = {
       question: "Puis-je partir de Hanoï ou Da Nang ?",
       answer: [
         "Nous organisons à la main les voyages de Hanoï ou Da Nang vers Saïgon, ils ne se réservent donc pas en ligne. Envoyez-nous un message avec vos dates et la moto souhaitée, et nous vous dirons ce qui est possible.",
+      ],
+    },
+    {
+      id: "return",
+      question: "Quand rendre la moto, et si je suis en retard ?",
+      answer: [
+        "Les points de dépôt de Da Nang et Hanoï reprennent les motos entre 9 h et 16 h. À Saïgon, nous sommes plus souples : dites-nous l'heure qui vous convient.",
+        "Les retards sont facturés à l'heure, au tarif indiqué dans votre contrat de location.",
       ],
     },
     {
@@ -228,66 +238,6 @@ export const frContent: TranslatedContent = {
       ],
     },
   ],
-  tours: {
-    "the-coco-loop": {
-      name: "La boucle de Coco",
-      summary: "Montagnes, plages et pays du café en une grande boucle au départ de Saïgon.",
-      description: [
-        "La balade préférée de Coco : une boucle au départ de Saïgon vers les hauts plateaux frais de Da Lat, puis les plages de Nha Trang, et retour par la côte via Phan Thiet.",
-        "Au programme : forêts de pins et plantations de café, cols avec vue sur la mer, fruits de mer frais et routes côtières tranquilles. Nous adaptons l'itinéraire à votre rythme et à votre temps.",
-      ],
-      duration: "6 à 10 jours",
-      groupSize: "1 à 6 motards",
-      priceFrom: "Dès 500 $",
-      highlights: [
-        "Les hauts plateaux de Da Lat",
-        "Les cols jusqu'à la côte",
-        "Les plages de Nha Trang",
-        "Les dunes de Phan Thiet",
-      ],
-    },
-    "mekong-delta": {
-      name: "Delta du Mékong",
-      summary: "Rivières, rizières et marchés flottants, à deux pas de Saïgon.",
-      description: [
-        "Descendez dans le delta du Mékong : petites routes entre rizières et cocoteraies, bacs, vergers et marchés flottants au petit matin.",
-        "Une introduction en douceur à la moto au Vietnam, avec beaucoup d'arrêts pour manger.",
-      ],
-      duration: "3 à 7 jours",
-      groupSize: "1 à 6 motards",
-      priceFrom: "100 $ par jour",
-      highlights: ["Marchés flottants", "Bacs sur le fleuve", "Petites routes de village"],
-    },
-    "ho-chi-minh-loop": {
-      name: "Boucle de Hồ Chí Minh",
-      summary: "Une courte boucle au départ de Saïgon pour ceux qui ont quelques jours.",
-      description: [
-        "Quelques jours sur la route sans aller trop loin : nous vous proposons une boucle au départ de Saïgon adaptée à votre temps et à votre expérience, avec retour à la boutique.",
-      ],
-      duration: null,
-      groupSize: "1 à 6 motards",
-      priceFrom: null,
-      highlights: [],
-    },
-    "saigon-to-hanoi": {
-      name: "De Hồ Chí Minh à Hà Nội",
-      summary: "Le grand voyage : toute la longueur du Vietnam, de Saïgon à Hanoï.",
-      description: [
-        "Environ 2 500 km par les hauts plateaux, le long de la côte du centre, par le col de Hai Van et la route Hô Chi Minh jusqu'au pays karstique du nord. La plupart des voyageurs prennent trois à quatre semaines.",
-        "Avec un guide, ou en autonomie avec une location aller simple, nos notes d'itinéraire et une assistance tout le long du trajet.",
-      ],
-      duration: "21 à 30 jours",
-      groupSize: "1 à 6 motards",
-      priceFrom: "120 $ par jour",
-      highlights: [
-        "Da Lat",
-        "Col de Hai Van",
-        "Hội An et Huế",
-        "Grottes de Phong Nha",
-        "Ninh Bình",
-      ],
-    },
-  },
   route: {
     Saigon: {
       city: "Saïgon",
@@ -321,7 +271,7 @@ export const frContent: TranslatedContent = {
     insurance: {
       name: "Assurance tous risques",
       description:
-        "Couvre les accidents, les problèmes mécaniques et les crevaisons. Non couverts : le vol ou la perte de la moto, les problèmes avec la police ou les infractions à la loi.",
+        "Couvre les accidents sur la route, les crevaisons et les problèmes mécaniques venant de la moto. Non couverts : le vol, ce qui concerne la police, les inondations, les dommages à des tiers, les problèmes de santé. Photos de chaque vidange et appel avant toute réparation obligatoires.",
     },
     "premium-helmet": {
       name: "Casque premium",

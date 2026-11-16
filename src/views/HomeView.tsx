@@ -22,7 +22,6 @@ import { db } from "@/lib/db";
 import { getSettings } from "@/server/availability";
 import { listModels } from "@/server/fleet";
 import karstRoad from "../../public/photos/karst-road.webp";
-import mountainSunset from "../../public/photos/mountain-sunset.webp";
 import riverCrossing from "../../public/photos/river-crossing.webp";
 import saigonOpera from "../../public/photos/saigon-opera.webp";
 
@@ -48,7 +47,6 @@ export function HomeView({ lang }: { lang: Locale }) {
   const ways = [
     { href: to("/bikes"), photo: saigonOpera, ...t.ways.rent },
     { href: to("/one-way"), photo: riverCrossing, ...t.ways.oneWay },
-    { href: to("/tours"), photo: mountainSunset, ...t.ways.tours },
   ];
 
   return (

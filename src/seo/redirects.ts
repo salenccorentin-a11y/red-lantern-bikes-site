@@ -106,8 +106,21 @@ export function oldSiteRedirects(): Redirect[] {
         ] as [string, string][])),
   ]);
 
+  // The tour pages were removed on 16 Nov 2026 (no guided tours, only
+  // self-guided trips). Links to them land on the one-way page instead.
+  const removedTours: [string, string][] = (["en", "fr", "ko"] as Locale[]).flatMap(
+    (lang): [string, string][] => {
+      const prefix = lang === "en" ? "" : `/${lang}`;
+      return [
+        [`${prefix}/tours`, localize(lang, "/one-way")],
+        [`${prefix}/tours/:slug`, localize(lang, "/one-way")],
+      ];
+    },
+  );
+
   return [
     ...rules,
+    ...removedTours,
     ...withLang,
     ...blogCategories,
     ...keptLangs,

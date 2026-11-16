@@ -14,7 +14,6 @@ import {
 import { BUSINESS } from "@/content/business";
 import { FAQ, type Faq } from "@/content/faq";
 import { ONE_WAY_ROUTE, type RouteStop } from "@/content/route";
-import { TOURS, type Tour } from "@/content/tours";
 import type { City } from "@/generated/prisma/enums";
 import { formatDisplayDate, formatSaigonDateTime } from "@/lib/dates";
 import { fill, type Locale } from "./config";
@@ -57,16 +56,6 @@ export function kindLabel(lang: Locale, kind: string): string {
 
 export function faqFor(lang: Locale): Faq[] {
   return translated(lang)?.faq ?? FAQ;
-}
-
-export function toursFor(lang: Locale): Tour[] {
-  const t = translated(lang);
-  if (!t) return TOURS;
-  return TOURS.map((tour) => ({ ...tour, ...t.tours[tour.slug] }));
-}
-
-export function findTourFor(lang: Locale, slug: string): Tour | undefined {
-  return toursFor(lang).find((tour) => tour.slug === slug);
 }
 
 /** The one-way stops, with links in the same language. */

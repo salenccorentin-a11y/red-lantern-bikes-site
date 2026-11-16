@@ -48,7 +48,8 @@ export const FAQ: Faq[] = [
     question: "Is insurance included?",
     answer: [
       "Full coverage insurance is an optional extra, priced per day by bike size: 80,000₫ for 110 to 125cc bikes, 130,000₫ for 150cc, 180,000₫ for the CB150X, CRF150 and WR155R, and 260,000₫ for the Kawasaki Versys X300. Add it when you book.",
-      "It covers accidents, mechanical problems and flat tyres. It doesn't cover theft or loss of the bike, or anything to do with the police or breaking the law.",
+      "It covers accidents on the road, flat tyres, and mechanical problems that come from the bike itself, unless the rider caused them. It doesn't cover theft, anything to do with the police, floods, damage to third parties, or health problems.",
+      "It only applies if you follow two rules. Every oil change on your trip is done properly, and each time you send us a photo of the mechanic doing it and a photo of the full odometer. And you contact us before any repair: if you call once a mechanic is already working on the bike, or after the repair, we don't pay for it.",
       "Without insurance, we cover engine failures only. Accidents, other repairs and theft are paid by the rider.",
     ],
   },
@@ -64,7 +65,7 @@ export const FAQ: Faq[] = [
     id: "breakdown",
     question: "What if the bike breaks down?",
     answer: [
-      "Message us on WhatsApp, wherever you are in Vietnam. We'll talk you through it, find a mechanic near you, or arrange help.",
+      "Message us on WhatsApp before anyone works on the bike, wherever you are in Vietnam. We'll talk you through it, find a mechanic near you, or arrange help. A repair that starts before you've contacted us isn't covered by the insurance.",
     ],
   },
   {
@@ -72,6 +73,7 @@ export const FAQ: Faq[] = [
     question: "How do one-way rentals work?",
     answer: [
       "Pick up in Saigon and leave the bike at our partner drop-off point in Hanoi (rentals of 12 days or more) or Da Nang (7 days or more). A one-way fee, depending on the bike, is added to the price. We take care of getting the bike back to Saigon.",
+      "Want to finish in Da Lat, Hue or Nha Trang? Those can't be booked online, but message us and we can arrange something.",
     ],
   },
   {
@@ -79,6 +81,14 @@ export const FAQ: Faq[] = [
     question: "Can I start in Hanoi or Da Nang?",
     answer: [
       "We arrange trips from Hanoi or Da Nang to Saigon by hand, so they can't be booked online. Send us a message with your dates and the bike you'd like, and we'll let you know what we can do.",
+    ],
+  },
+  {
+    id: "return",
+    question: "When do I return the bike, and what if I'm late?",
+    answer: [
+      "The drop-off points in Da Nang and Hanoi take bikes back between 9am and 4pm. In Saigon we're more flexible: tell us what time suits you.",
+      "Late returns are charged by the hour, at the rate in your rental contract.",
     ],
   },
   {

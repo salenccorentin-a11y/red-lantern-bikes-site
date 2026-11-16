@@ -1,6 +1,5 @@
 "use server";
 
-import { findTour } from "@/content/tours";
 import { db } from "@/lib/db";
 import { sendEmail } from "@/server/email";
 import { enquiryReceivedEmail } from "@/server/emails/enquiry-received";
@@ -10,12 +9,13 @@ import { reportError } from "@/server/report-error";
 export type EnquiryState = { sent?: boolean; error?: string; field?: string };
 
 const KIND_LABEL: Record<string, string> = {
+  // No tour pages since 16 Nov 2026; kept for enquiries sent before.
   TOUR: "Tour",
   REVERSE_ROUTE: "Trip from Hanoi or Da Nang",
   GENERAL: "General question",
 };
 
-/** The enquiry form on tour pages and the contact page. */
+/** The enquiry form on the contact page. */
 export async function sendEnquiry(_previous: EnquiryState, form: FormData): Promise<EnquiryState> {
   const raw = Object.fromEntries(form.entries());
   const result = await createEnquiry(db, raw);
@@ -29,7 +29,7 @@ export async function sendEnquiry(_previous: EnquiryState, form: FormData): Prom
       await sendEmail(
         enquiryReceivedEmail(to, {
           kindLabel: KIND_LABEL[enquiry.kind],
-          topicLabel: enquiry.topic ? (findTour(enquiry.topic)?.name ?? enquiry.topic) : undefined,
+          topicLabel: enquiry.topic ?? undefined,
           name: enquiry.name,
           email: enquiry.email,
           phone: enquiry.phone,

@@ -8,7 +8,6 @@ export const fr: Messages = {
     main: "Principal",
     bikes: "Motos",
     oneWay: "Allers simples",
-    tours: "Circuits",
     faq: "FAQ",
     contact: "Contact",
     book: "Réserver une moto",
@@ -20,7 +19,6 @@ export const fr: Messages = {
     rideWithUs: "Rouler avec nous",
     ourBikes: "Nos motos",
     oneWay: "Aller simple vers Hanoï et Da Nang",
-    tours: "Circuits",
     guides: "Guides de voyage (en anglais)",
     faq: "FAQ",
     about: "À propos (en anglais)",
@@ -59,7 +57,7 @@ export const fr: Messages = {
     oneWayTitle: "Allers simples",
     oneWayIntro:
       "Traversez le Vietnam sans faire le chemin du retour : les hauts plateaux, la côte du centre, le col de Hai Van et le karst du nord. Laissez la moto à Da Nang ou Hanoï, nous la rapatrions.",
-    waysTitle: "Trois façons de rouler",
+    waysTitle: "Deux façons de rouler",
     ways: {
       rent: {
         title: "Louer à Saïgon",
@@ -70,11 +68,6 @@ export const fr: Messages = {
         title: "Aller simple vers Hanoï ou Da Nang",
         text: "Remontez vers le nord à votre rythme et laissez la moto à l'arrivée. Nous la rapatrions.",
         alt: "Un motard et sa moto traversant une rivière sur une petite barque dans le nord du Vietnam",
-      },
-      tours: {
-        title: "Circuits",
-        text: "Avec ou sans guide, du delta du Mékong à la traversée du pays.",
-        alt: "Un motard sur une moto trail au-dessus d'une vallée au coucher du soleil",
       },
     },
     popularTitle: "Motos populaires",
@@ -212,6 +205,9 @@ export const fr: Messages = {
         rest: "chez notre partenaire le dernier jour. Nous nous occupons de la ramener à Saïgon.",
       },
     ],
+    otherCities:
+      "Vous préférez finir à Da Lat, Hué ou Nha Trang ? Ces villes ne se réservent pas en ligne, mais sur demande nous pouvons organiser quelque chose.",
+    otherCitiesLink: "Demander pour une autre ville",
     howPhotoAlt: "Une Kawasaki Versys avec sacoches sur une piste de terre rouge",
     feesTitle: "Frais d'aller simple",
     feesIntro:
@@ -227,30 +223,7 @@ export const fr: Messages = {
     ],
     readGuide: "Lisez notre",
     guideLink: "guide complet de l'itinéraire Saïgon – Hanoï",
-    orTour: ", ou faites-le avec un guide lors de notre",
-    tourLink: "circuit Saïgon – Hanoï",
     guideNote: "(guide en anglais)",
-  },
-  tours: {
-    metaTitle: "Circuits à moto au Vietnam | Red Lantern Bikes",
-    metaDescription:
-      "Circuits à moto avec ou sans guide au départ de Saïgon : la boucle de Coco, le delta du Mékong, une boucle autour de Saïgon et la traversée jusqu'à Hanoï. Groupes de 1 à 6 motards.",
-    title: "Circuits à moto",
-    intro:
-      "Roulez avec un guide local, ou seul avec notre itinéraire et notre assistance. Des groupes d'une à six personnes, organisés selon vos dates et votre expérience.",
-    photoAlt: "Un motard au-dessus d'une vallée de montagne au coucher du soleil",
-    askDates: "Demandez-nous les dates et le prix",
-    tourMetaTitle: "Circuit à moto {name} | Red Lantern Bikes",
-    allTours: "Tous les circuits",
-    route: "Itinéraire",
-    duration: "Durée",
-    group: "Groupe",
-    price: "Prix",
-    highlights: "Les temps forts",
-    ask: "Se renseigner sur ce circuit",
-    askIntro: "Dites-nous vos dates, combien vous êtes et votre expérience de la moto.",
-    placeholder:
-      "Par ex. Deux personnes, début décembre, environ une semaine. L'un de nous n'a jamais conduit de moto à vitesses.",
   },
   faq: {
     metaTitle: "FAQ : permis, acompte, aller simple | Red Lantern Bikes",
@@ -264,7 +237,7 @@ export const fr: Messages = {
   contact: {
     metaTitle: "Contact | Red Lantern Bikes",
     metaDescription:
-      "Retrouvez Red Lantern Bikes au {address}. Écrivez-nous pour une location, un aller simple ou un circuit.",
+      "Retrouvez Red Lantern Bikes au {address}. Écrivez-nous pour une location ou un aller simple.",
     title: "Nous contacter",
     intro:
       "Une question sur les motos, les itinéraires ou un voyage en préparation ? Envoyez-nous un message, ou passez nous voir dans le 1er arrondissement.",

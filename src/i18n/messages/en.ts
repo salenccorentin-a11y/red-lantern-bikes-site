@@ -2,7 +2,7 @@
 // have exactly the same keys (the Messages type checks it). "{name}" marks a
 // value filled in by the page (see fill() in ../config.ts).
 //
-// Bike descriptions, FAQ answers and tours live in src/content (English) and
+// Bike descriptions and FAQ answers live in src/content (English) and
 // src/i18n/content (French and Korean).
 
 export const en = {
@@ -11,7 +11,6 @@ export const en = {
     main: "Main",
     bikes: "Bikes",
     oneWay: "One-way trips",
-    tours: "Tours",
     faq: "FAQ",
     contact: "Contact",
     book: "Book a bike",
@@ -23,7 +22,6 @@ export const en = {
     rideWithUs: "Ride with us",
     ourBikes: "Our bikes",
     oneWay: "One-way to Hanoi and Da Nang",
-    tours: "Tours",
     guides: "Travel guides",
     faq: "FAQ",
     about: "About us",
@@ -62,7 +60,7 @@ export const en = {
     oneWayTitle: "One-way trips",
     oneWayIntro:
       "Ride the length of Vietnam without riding back: the highlands, the central coast, the Hai Van Pass and the karst of the north. Leave the bike in Da Nang or Hanoi and we bring it home.",
-    waysTitle: "Three ways to ride",
+    waysTitle: "Two ways to ride",
     ways: {
       rent: {
         title: "Rent in Saigon",
@@ -73,11 +71,6 @@ export const en = {
         title: "One-way to Hanoi or Da Nang",
         text: "Ride north at your own pace and leave the bike at the end. We bring it home.",
         alt: "A rider and bike crossing a river on a small boat in northern Vietnam",
-      },
-      tours: {
-        title: "Tours",
-        text: "Guided or self-guided, from the Mekong Delta to the length of the country.",
-        alt: "A rider on an adventure bike above a mountain valley at sunset",
       },
     },
     popularTitle: "Popular bikes",
@@ -213,6 +206,9 @@ export const en = {
         rest: "at our partner point on your last day. We handle getting the bike back to Saigon.",
       },
     ],
+    otherCities:
+      "Want to finish in Da Lat, Hue or Nha Trang instead? Those can't be booked online, but if you ask, we can arrange something.",
+    otherCitiesLink: "Ask about another city",
     howPhotoAlt: "A Kawasaki Versys with panniers on a red dirt road",
     feesTitle: "One-way fees",
     feesIntro: "The fee depends on the bike and is added once to the rental price.",
@@ -227,29 +223,7 @@ export const en = {
     ],
     readGuide: "Read our",
     guideLink: "complete Saigon to Hanoi route guide",
-    orTour: ", or ride it with a guide on our",
-    tourLink: "Saigon to Hanoi tour",
     guideNote: "(in English)",
-  },
-  tours: {
-    metaTitle: "Motorbike tours in Vietnam | Red Lantern Bikes",
-    metaDescription:
-      "Guided and self-guided motorbike tours from Saigon: The Coco Loop, the Mekong Delta, a Saigon loop and the full ride to Hanoi. Small groups of 1 to 6 riders.",
-    title: "Motorbike tours",
-    intro:
-      "Ride with a local guide, or on your own with our route and roadside assistance. Groups of one to six riders, planned around your dates and riding experience.",
-    photoAlt: "A rider above a mountain valley at sunset",
-    askDates: "Ask us about dates and price",
-    tourMetaTitle: "{name} motorbike tour | Red Lantern Bikes",
-    allTours: "All tours",
-    route: "Route",
-    duration: "Duration",
-    group: "Group",
-    price: "Price",
-    highlights: "Highlights",
-    ask: "Ask about this tour",
-    askIntro: "Tell us your dates, how many riders, and how much riding experience you have.",
-    placeholder: "e.g. Two of us, early December, about a week. One has never ridden a manual.",
   },
   faq: {
     metaTitle: "FAQ: licence, deposit, one-way rentals | Red Lantern Bikes",
@@ -264,7 +238,7 @@ export const en = {
   contact: {
     metaTitle: "Contact | Red Lantern Bikes",
     metaDescription:
-      "Find Red Lantern Bikes at {address}. Send us a message about rentals, one-way trips or tours.",
+      "Find Red Lantern Bikes at {address}. Send us a message about rentals or one-way trips.",
     title: "Contact us",
     intro:
       "Questions about bikes, routes or a trip you're planning? Send us a message, or come and see us in District 1.",

@@ -14,7 +14,7 @@ export function LocalBusinessData() {
     "@id": `${base}/#business`,
     name: BUSINESS.name,
     description:
-      "Motorbike rentals in District 1, Saigon, with one-way rentals to Hanoi and Da Nang and guided tours.",
+      "Motorbike rentals in District 1, Saigon, with one-way rentals to Hanoi and Da Nang.",
     url: base,
     address: {
       "@type": "PostalAddress",

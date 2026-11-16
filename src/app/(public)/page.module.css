@@ -122,7 +122,7 @@
   color: var(--star);
 }
 
-/* ─── Three ways to ride: photo tiles ────────────────────────────────── */
+/* ─── Two ways to ride: photo tiles ─────────────────────────────────── */
 
 .ways {
   display: grid;
@@ -131,7 +131,7 @@
 
 @media (min-width: 760px) {
   .ways {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

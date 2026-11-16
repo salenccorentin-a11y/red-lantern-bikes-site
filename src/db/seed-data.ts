@@ -163,7 +163,7 @@ export const ADD_ONS: {
     slug: "insurance",
     name: "Full coverage insurance",
     description:
-      "Covers accidents, mechanical problems and flat tyres. Not covered: theft or loss of the bike, or trouble with the police or breaking the law.",
+      "Covers accidents on the road, flat tyres and mechanical problems from the bike itself. Not covered: theft, police matters, floods, damage to third parties, health problems. Oil-change photos and a call to us before any repair are required.",
     pricing: "PER_DAY",
     // About $3, $5, $7 and $10 a day, rounded (26,000 VND per USD).
     price: 80_000,

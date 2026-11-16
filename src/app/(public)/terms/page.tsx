@@ -12,7 +12,9 @@ export const metadata: Metadata = {
 };
 
 // DRAFT. Written from the booking rules and the owner's answers (21 Oct 2026).
-// Have it reviewed, ideally by a Vietnamese lawyer, before launch.
+// Insurance, return hours and late returns follow the rental contract of
+// 11 Nov 2026. The fine amounts stay in the contract, not on the site (owner,
+// 16 Nov 2026). Have it reviewed, ideally by a Vietnamese lawyer, before launch.
 
 export default function TermsPage() {
   return (
@@ -72,20 +74,32 @@ export default function TermsPage() {
           <p>
             One-way rentals to Hanoi (at least 12 days) and Da Nang (at least 7 days) include a
             one-way fee that depends on the bike. The bike must be returned to our partner drop-off
-            point in that city on the last day of the rental.
+            point in that city on the last day of the rental. Drop-off in Da Lat, Hue or Nha Trang
+            can&apos;t be booked online, but we can arrange it on request.
           </p>
 
           <h2>5. Looking after the bike</h2>
           <ul>
             <li>Ride safely, lock the bike, and follow Vietnamese traffic law.</li>
             <li>
-              If the bike breaks down or is damaged, contact us straight away on WhatsApp before
-              arranging repairs.
+              If the bike breaks down or is damaged, contact us on WhatsApp before any repair
+              starts.
             </li>
             <li>
               Optional full coverage insurance, added when you book, is charged per day by bike
-              size. It covers accidents, mechanical problems and flat tyres. It does not cover theft
-              or loss of the bike, or any problem with the police or from breaking the law.
+              size. It covers accidents on the road, flat tyres, and mechanical problems that come
+              from the bike, unless the rider caused them. It does not cover theft, police matters, floods,
+              damage to third parties, or health problems.
+            </li>
+            <li>
+              The insurance only applies if every oil change during the rental is done properly
+              and, each time, you send us a photo of the mechanic doing it and a photo of the full
+              odometer.
+            </li>
+            <li>
+              It also only applies if you contact us before any repair. We do not pay for a repair
+              if you contact us once a mechanic has already started on the bike, or after the
+              repair is done.
             </li>
             <li>
               Without insurance, we cover engine failures only. Theft, accidents and all other
@@ -100,9 +114,10 @@ export default function TermsPage() {
           <ul>
             <li>Return the bike on the agreed day, at our shop or the agreed drop-off point.</li>
             <li>
-              Late returns are charged for each extra day at the daily rate in your rental contract,
-              added at the end of the rental.
+              The drop-off points in Da Nang and Hanoi take bikes back between 9am and 4pm. In Ho
+              Chi Minh City, return times are more flexible: agree yours with us.
             </li>
+            <li>Late returns are charged per hour, at the rate set in your rental contract.</li>
             <li>We don&apos;t check the fuel level or ask you to clean the bike.</li>
           </ul>
 

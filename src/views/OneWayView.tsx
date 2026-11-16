@@ -65,6 +65,12 @@ export function OneWayView({ lang }: { lang: Locale }) {
                   </li>
                 ))}
               </ol>
+              <p>
+                {t.otherCities}{" "}
+                <Link href={to("/contact")} className={ui.link}>
+                  {t.otherCitiesLink}
+                </Link>
+              </p>
             </div>
             <Image
               src={versysDirtRoad}
@@ -100,10 +106,6 @@ export function OneWayView({ lang }: { lang: Locale }) {
                   {t.guideLink}
                 </Link>
                 {lang !== "en" && ` ${t.guideNote}`}
-                {t.orTour}{" "}
-                <Link href={to("/tours/saigon-to-hanoi")} className={ui.link}>
-                  {t.tourLink}
-                </Link>
                 .
               </p>
             </div>
