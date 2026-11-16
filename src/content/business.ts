@@ -15,10 +15,10 @@ export const BUSINESS = {
   /** For the "Open in Google Maps" link. */
   mapsQuery: "235B/A11/9 Nguyen Van Cu, District 1, Ho Chi Minh City",
   /** Opening hours, shown on the site. */
-  hours: "Open every day, 8am to 7pm",
+  hours: "Open every day, 8am to 8pm",
   /** The same hours for search engines (24-hour clock, every day). */
   opens: "08:00",
-  closes: "19:00",
+  closes: "20:00",
   /** International format, e.g. "+84 90 123 4567". */
   phone: "+84 382 681 859" as string | null,
   /** International format without spaces or "+", e.g. "84901234567", for wa.me links. */

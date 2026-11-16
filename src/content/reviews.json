@@ -1,7 +1,29 @@
 {
   "_help": "Used only when the Google Places API isn't set up (GOOGLE_PLACES_API_KEY). Paste real reviews from the shop's Google Maps page, exactly as written, with the reviewer's name. Example review: { \"author\": \"Anna\", \"authorUrl\": null, \"rating\": 5, \"text\": \"...\", \"when\": \"March 2026\" }",
   "rating": 4.9,
-  "count": 251,
-  "url": null,
-  "reviews": []
+  "count": 252,
+  "url": "https://maps.google.com/?cid=938614193660070559",
+  "reviews": [
+    {
+      "author": "Антон Старовойтов",
+      "authorUrl": "https://www.google.com/maps/contrib/115237436703351203517/reviews",
+      "rating": 5,
+      "text": "Great place, everything was perfect. They gave me a bike, gave me instructions, and provided prompt support along the way. I received a map with comments, which I used to adjust my route. In total, I covered 3,100 km along incredible coastal roads and through the mountains inland.\nA polite and responsive young man was very helpful, I am very grateful to him. I recommend him to everyone, and I will definitely come back for such an incredible experience.",
+      "when": "2026"
+    },
+    {
+      "author": "James Norris",
+      "authorUrl": "https://www.google.com/maps/contrib/106684996592969102841/reviews",
+      "rating": 5,
+      "text": "I had a fantastic experience renting with Red Lantern Bikes! Coco contacted me after a Facebook post explaining he could help me on my search for a motorbike to go from Ho Chi Minh to Hanoi with my partner. We turned up the next day and his partner was there ready for us waiting with a beautiful Suzuki GSX150. He gave a lot of information about the company itself, and the bikes they rent. He offed an excellent price for my 1 month rental and added a new chain and new rear wheel before we took it the next day. While on the road we had no problems at all. The bag rack did end up breaking once just due to wear and tear but it took a 10 minute welding job at a little shop and all was good for the rest of the trip. Coco was very helpful and friendly throughout our experience and was always ready to help us with any queries or questions. In addition to this he also gave us a link to an app with all the fantastic spots to experience throughout the country that he had experienced himself. I am extremely happy I rented with this company and VERY happy with my experience 👍 I would definitely recommend them if you’re looking for a good quality motorbike, with amazing customer service and an easy ride through the country with no stress. Thanks Coco and the team 🫶🫡",
+      "when": "2026"
+    },
+    {
+      "author": "nick humphreys",
+      "authorUrl": "https://www.google.com/maps/contrib/118367561292206599156/reviews",
+      "rating": 5,
+      "text": "My girlfriend and I rented a Honda XR in Hanoi and dropped it Ho Chi Minh. We had an amazing trip and the rental process was very easy. The company also sent are big bags separately for us. So we could just take a couple small bags on the back of the bike. The bike had a little issue nearing the end of the trip but everything was resolved. Would highly recommend!",
+      "when": "2026"
+    }
+  ]
 }

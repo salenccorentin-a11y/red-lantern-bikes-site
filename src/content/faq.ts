@@ -9,8 +9,7 @@ export const FAQ: Faq[] = [
     question: "Which licence do I need?",
     answer: [
       "Your home country driving licence on its own is not valid in Vietnam.",
-      "For bikes from 50cc to 175cc (all our bikes except the Kawasaki Versys X300), you need a Vietnamese motorcycle licence, or an International Driving Permit issued under the 1949 Geneva Convention that includes motorbikes.",
-      "For bikes over 175cc, like the Versys X300, you need a full Vietnamese motorcycle licence.",
+      "For all our bikes, from the 110cc Wave to the Kawasaki Versys X300, you need a Vietnamese motorcycle licence, or an International Driving Permit issued under the 1968 Vienna Convention that includes motorbikes.",
     ],
   },
   {

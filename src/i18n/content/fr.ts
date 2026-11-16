@@ -116,8 +116,8 @@ export const frContent: TranslatedContent = {
   },
   licence: {
     IDP_OR_A1:
-      "Demande un permis moto vietnamien, ou un permis de conduire international (Convention de Genève de 1949) valable pour les motos.",
-    A2: "Plus de 175 cc : demande un permis moto vietnamien complet.",
+      "Demande un permis moto vietnamien, ou un permis de conduire international (Convention de Vienne de 1968) valable pour les motos.",
+    A2: "Plus de 175 cc : demande un permis moto vietnamien, ou un permis de conduire international (Convention de Vienne de 1968) valable pour les motos.",
   },
   kinds: {
     "Semi-automatic": "Semi-automatique",
@@ -134,8 +134,7 @@ export const frContent: TranslatedContent = {
       question: "Quel permis faut-il ?",
       answer: [
         "Le permis de conduire de votre pays ne suffit pas à lui seul au Vietnam.",
-        "Pour les motos de 50 à 175 cc (toutes nos motos sauf la Kawasaki Versys X300), il faut un permis moto vietnamien, ou un permis de conduire international délivré selon la Convention de Genève de 1949 et valable pour les motos.",
-        "Pour les motos de plus de 175 cc, comme la Versys X300, il faut un permis moto vietnamien complet.",
+        "Pour toutes nos motos, de la Wave 110 cc à la Kawasaki Versys X300, il faut un permis moto vietnamien, ou un permis de conduire international délivré selon la Convention de Vienne de 1968 et valable pour les motos.",
       ],
     },
     {
@@ -266,7 +265,7 @@ export const frContent: TranslatedContent = {
     "Assistance partout au Vietnam, par WhatsApp",
     "Livraison gratuite à votre hôtel dans le 1er arrondissement ou à proximité",
   ],
-  hours: "Ouvert tous les jours, de 8 h à 19 h",
+  hours: "Ouvert tous les jours, de 8 h à 20 h",
   addOns: {
     insurance: {
       name: "Assurance tous risques",

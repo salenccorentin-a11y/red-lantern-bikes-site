@@ -272,7 +272,6 @@ export const LEAD_PHOTO: Record<string, string> = {
   "yamaha-nvx125": "/bikes/gallery/yamaha-nvx125-1.webp",
   "honda-winner-x-150": "/bikes/gallery/honda-winner-x-150-1.webp",
   "suzuki-gsx-r150": "/bikes/gallery/suzuki-gsx-r150-2.webp",
-  "honda-xr150": "/bikes/gallery/honda-xr150-1.webp",
   "honda-cb150x": "/bikes/gallery/honda-cb150x-1.webp",
   "yamaha-wr155r": "/bikes/gallery/yamaha-wr155r-3.webp",
   "kawasaki-versys-x300": "/bikes/gallery/kawasaki-versys-x300-1.webp",
@@ -280,6 +279,6 @@ export const LEAD_PHOTO: Record<string, string> = {
 
 export const LICENCE_TEXT: Record<BikeContent["licence"], string> = {
   IDP_OR_A1:
-    "Needs a Vietnamese motorcycle licence, or an International Driving Permit (1949 Geneva Convention) that covers motorbikes.",
-  A2: "Over 175cc: Needs a Vietnamese motorcycle licence, or an International Driving Permit (1949 Geneva Convention) that covers motorbikes.",
+    "Needs a Vietnamese motorcycle licence, or an International Driving Permit (1968 Vienna Convention) that covers motorbikes.",
+  A2: "Over 175cc: Needs a Vietnamese motorcycle licence, or an International Driving Permit (1968 Vienna Convention) that covers motorbikes.",
 };

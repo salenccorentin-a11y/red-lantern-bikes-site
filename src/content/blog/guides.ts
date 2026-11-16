@@ -65,7 +65,7 @@ export const GUIDES: Guide[] = [
 <p>The roads are paved the whole way. A Honda XR150 or CB150X is comfortable for luggage and the mountain passes; a Honda Winner X is lighter and quick on the coast road. If you've never ridden a manual, the Honda Wave Alpha is easy to learn on, just slower on the climbs.</p>
 <h2>Good to know</h2>
 <ul>
-<li>You need a Vietnamese motorbike licence or an International Driving Permit (1949 Geneva Convention) that covers motorbikes.</li>
+<li>You need a Vietnamese motorbike licence or an International Driving Permit (1968 Vienna Convention) that covers motorbikes.</li>
 <li>One-way rentals to Da Nang are at least 7 days. The one-way fee depends on the bike and is shown when you book.</li>
 <li>Every rental includes a helmet, phone holder, luggage rack and roadside help by WhatsApp, wherever you are.</li>
 </ul>`,

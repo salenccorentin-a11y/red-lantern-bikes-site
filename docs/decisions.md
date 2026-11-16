@@ -13,6 +13,15 @@ Choices made while planning the rebuild, with the reason for each. Pricing rules
 - **Bookings for the same bike take turns** (11 October 2026). Before saving a booking or maintenance block, the system locks that one bike for a few milliseconds and re-checks it's free. Customers booking different bikes never wait for each other. Without this, two customers booking the same bike at the same instant could stall each other for about a second until the database cancelled one, which then failed with an error instead of getting another bike. The no-overlap rule remains the final guarantee.
 - **Timezone.** All dates are in Asia/Ho_Chi_Minh.
 
+## Blog clean-up, licence, reviews (16 November 2026)
+
+- **Licence.** International Driving Permits are recognised in Vietnam under the 1968 Vienna Convention, not the 1949 Geneva Convention (owner, 16 Nov 2026). Every licence text says 1968 Vienna (bike pages, FAQ, guides, old blog post, pick-up email, FR and KO). The site doesn't discuss enforcement, and doesn't say the insurance depends on the licence: the shop decides that case by case.
+- **Old blog posts** (imported from Odoo) now match the site: Vietnam drives on the right; booking is a free request, confirmed by email, then a 1,500,000₫ deposit paid directly to the shop and the rest at pick-up; free delivery to hotels in or near District 1; prices from the bike pages. Fake "•" bullets became real lists, the comparison is a real table, stray `&nbsp;` removed.
+- **Bikes over 175cc** (the Versys X300) follow the same rule as the others: a Vietnamese motorcycle licence or a 1968 Vienna IDP covering motorbikes (owner, 16 Nov 2026).
+- **Opening hours.** Every day, 8am to 8pm (owner, 16 Nov 2026), in the text and the structured data.
+- **XR150 photos.** The riding photo with the old logo pasted on it is out of the gallery (file kept). The studio photo comes first, replaced by the owner's cut-out `XR.png` (black and orange XR150) on a white 1200×800 background like the other bikes.
+- **Reviews.** Until the Google Places key is set up, `src/content/reviews.json` holds three real 5-star reviews copied word for word from the Google Maps listing on 16 Nov 2026 (4.9 from 252 reviews). Once the key is set, the live reviews replace them.
+
 ## Before launch: tours, drop-off cities, contract terms (16 November 2026)
 
 - **No tour pages.** The shop doesn't run guided tours, only self-guided trips with its map. The tour pages, their nav and footer links, the home tile and the sitemap entries are gone. `/tours` and `/tours/*` (also under `/fr` and `/ko`) redirect to the one-way page. To bring tours back, restore `src/content/tours.ts`, `src/views/ToursView.tsx`, `src/components/tourPhotos.ts` and the `tours` route folders from the commit before this change, and remove the redirect. The `TOUR` enquiry kind stays in the database for enquiries sent before.
