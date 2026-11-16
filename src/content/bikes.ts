@@ -130,7 +130,7 @@ export const BIKE_CONTENT: Record<string, BikeContent> = {
   "kawasaki-versys-x300": {
     summary: "Our biggest bike: a twin-cylinder tourer for the long haul.",
     description:
-      "The Versys X300 has the power to cruise highways all day, two-up or loaded with luggage, and it comes with a top box. Our top pick for Saigon to Hanoi in comfort. Over 175cc, so it needs a full Vietnamese motorcycle licence.",
+      "The Versys X300 has the power to cruise highways all day, two-up or loaded with luggage, and it comes with a top box. Our top pick for Saigon to Hanoi in comfort.",
     bestFor: ["Saigon to Hanoi", "Riding two-up", "Highway touring"],
     licence: "A2",
     seoTitle: "Kawasaki Versys X300 Rental Saigon | Red Lantern Bikes",
@@ -240,9 +240,9 @@ export const BIKE_FACTS: Record<string, BikeFacts> = {
     weightKg: 122,
     fuelTankL: 7.2,
   },
-  // Tigit Motorbikes ("Yamaha WR 155R"). Engine size as the shop gave it.
+  // Tigit Motorbikes ("Yamaha WR 155R")
   "yamaha-wr155r": {
-    engineCc: 150,
+    engineCc: 155,
     gearbox: { type: "manual", speeds: 6 },
     powerHp: 16.5,
     weightKg: 134,

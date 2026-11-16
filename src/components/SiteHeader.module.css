@@ -83,6 +83,51 @@
   cursor: pointer;
 }
 
+/* Small phones (360px and less): tighter spacing, so the logo, the language
+   and the menu button fit on one line without the page scrolling sideways. */
+@media (max-width: 389px) {
+  .inner {
+    gap: 8px;
+  }
+
+  .right {
+    gap: 4px;
+  }
+
+  .mobileNav summary {
+    gap: 8px;
+    padding: 8px 12px;
+  }
+}
+
+/* "Menu" on one line in every language (Korean would otherwise break it). */
+.menuLabel {
+  white-space: nowrap;
+}
+
+/* Narrow phones: the menu icon alone (the word stays for screen readers), so
+   the logo has room. */
+@media (max-width: 399px) {
+  .mobileNav summary {
+    padding: 8px 14px;
+  }
+
+  .menuLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 359px) {
+  .inner {
+    padding-inline: 12px;
+  }
+}
+
 .mobileNav summary::-webkit-details-marker {
   display: none;
 }

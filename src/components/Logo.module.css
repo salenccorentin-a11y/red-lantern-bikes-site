@@ -26,3 +26,10 @@
 .lg .name {
   font-size: 1.375rem;
 }
+
+/* The smallest phones: a slightly smaller name, so the header fits. */
+@media (max-width: 359px) {
+  .name {
+    font-size: 1rem;
+  }
+}

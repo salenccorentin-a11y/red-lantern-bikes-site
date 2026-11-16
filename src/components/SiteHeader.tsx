@@ -47,7 +47,7 @@ export function SiteHeader({ lang = "en" }: { lang?: Locale }) {
           <details className={styles.mobileNav}>
             <summary>
               <span className={styles.burger} aria-hidden="true" />
-              {t.menu}
+              <span className={styles.menuLabel}>{t.menu}</span>
             </summary>
             <nav aria-label={t.main}>
               {nav.map((item) => (

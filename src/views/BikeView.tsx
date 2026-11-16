@@ -185,6 +185,7 @@ async function BikeInfo({ lang, slug }: { lang: Locale; slug: string }) {
 async function BikeMore({ lang, slug }: { lang: Locale; slug: string }) {
   const { model } = await loadBike(slug);
   const content = bikeContent(lang, slug);
+  const facts = bikeFacts(slug);
   const t = getMessages(lang).bike;
 
   return (
@@ -192,7 +193,7 @@ async function BikeMore({ lang, slug }: { lang: Locale; slug: string }) {
       <GoogleReviews lang={lang} title={t.reviewsTitle} />
 
       <div className={bike.details}>
-        <Specs lang={lang} facts={bikeFacts(slug)} />
+        <Specs lang={lang} facts={facts} />
         {content && content.bestFor.length > 0 && (
           <section>
             <h2>{t.goodFor}</h2>
@@ -201,15 +202,19 @@ async function BikeMore({ lang, slug }: { lang: Locale; slug: string }) {
                 <li key={b}>{b}</li>
               ))}
             </ul>
+            <p className={bike.small}>
+              {model.units === 1 ? t.unitsOne : fill(t.unitsMany, { n: model.units })}
+            </p>
           </section>
         )}
-        <section>
-          <h2>{t.licence}</h2>
-          <p>{licenceText(lang, content?.licence ?? "IDP_OR_A1")}</p>
-          <p className={styles.muted}>
-            {model.units === 1 ? t.unitsOne : fill(t.unitsMany, { n: model.units })}
-          </p>
-        </section>
+        {/* The shop's choice: the permit wording only on 150cc and bigger
+            bikes, the same for all of them; nothing on the small ones. */}
+        {(facts.engineCc ?? 0) >= 150 && (
+          <section>
+            <h2>{t.licence}</h2>
+            <p>{licenceText(lang, "IDP_OR_A1")}</p>
+          </section>
+        )}
         <section>
           <h2>{t.included}</h2>
           <ul className={bike.included}>

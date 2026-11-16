@@ -107,7 +107,7 @@ export const frContent: TranslatedContent = {
     "kawasaki-versys-x300": {
       summary: "Notre plus grosse moto : une bicylindre pour les longues distances.",
       description:
-        "La Versys X300 a la puissance pour avaler les nationales toute la journée, en duo ou chargée de bagages, et elle a un top-case. Notre choix pour faire Saïgon – Hanoï dans le confort. Plus de 175 cc : elle demande un permis moto vietnamien complet.",
+        "La Versys X300 a la puissance pour avaler les nationales toute la journée, en duo ou chargée de bagages, et elle a un top-case. Notre choix pour faire Saïgon – Hanoï dans le confort.",
       bestFor: ["Saïgon – Hanoï", "En duo", "Voyage sur nationale"],
       seoTitle: "Location Kawasaki Versys X300 Saïgon | Red Lantern Bikes",
       seoDescription:
