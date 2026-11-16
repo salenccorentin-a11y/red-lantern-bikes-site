@@ -139,6 +139,59 @@ export const BIKE_CONTENT: Record<string, BikeContent> = {
   },
 };
 
+// ─── Quick facts under the name on each bike's page ───────────────────────
+// Only values the shop has confirmed. Never guess a specification: a fact
+// left out here is simply not shown.
+
+export type Gearbox =
+  | { type: "automatic" }
+  | { type: "semi-automatic"; speeds?: number }
+  | { type: "manual"; speeds?: number };
+
+export type BikeFacts = {
+  /** Engine size in cc. */
+  engineCc?: number;
+  gearbox?: Gearbox;
+  seatHeightMm?: number;
+  /** A few words, e.g. "Saigon to Hanoi". French and Korean are in
+   * src/i18n/content (bestUse). */
+  bestUse?: string;
+};
+
+// Gearbox types follow each model's "kind" in the fleet list (Automatic
+// scooter, Semi-automatic, Manual…). The Wave's 110cc is from the fleet list.
+export const BIKE_FACTS: Record<string, BikeFacts> = {
+  "wave-alpha-110": { engineCc: 110, gearbox: { type: "semi-automatic" } },
+  "suzuki-gd110": { gearbox: { type: "manual" } },
+  "suzuki-en125": { gearbox: { type: "manual" } },
+  "honda-cb125": { gearbox: { type: "manual" } },
+  "yamaha-nvx125": { gearbox: { type: "automatic" } },
+  "honda-winner-x-150": { gearbox: { type: "manual" } },
+  "suzuki-gsx-r150": { gearbox: { type: "manual" } },
+  "honda-xr150": { gearbox: { type: "manual" } },
+  "honda-cb150x": { gearbox: { type: "manual" } },
+  "honda-crf150": { gearbox: { type: "manual" } },
+  "yamaha-wr155r": { gearbox: { type: "manual" } },
+  "kawasaki-versys-x300": { gearbox: { type: "manual" } },
+};
+
+// ─── The first photo on each bike's page ──────────────────────────────────
+// The best riding photo of the model, from src/content/bike-gallery.json. It
+// comes first, then the studio photo, then the others. Models without one
+// (or without any photos yet) start with the studio photo.
+export const LEAD_PHOTO: Record<string, string> = {
+  "wave-alpha-110": "/bikes/gallery/wave-alpha-110-3.webp",
+  "suzuki-gd110": "/bikes/gallery/suzuki-gd110-1.webp",
+  "suzuki-en125": "/bikes/gallery/suzuki-en125-1.webp",
+  "yamaha-nvx125": "/bikes/gallery/yamaha-nvx125-1.webp",
+  "honda-winner-x-150": "/bikes/gallery/honda-winner-x-150-1.webp",
+  "suzuki-gsx-r150": "/bikes/gallery/suzuki-gsx-r150-2.webp",
+  "honda-xr150": "/bikes/gallery/honda-xr150-1.webp",
+  "honda-cb150x": "/bikes/gallery/honda-cb150x-1.webp",
+  "yamaha-wr155r": "/bikes/gallery/yamaha-wr155r-3.webp",
+  "kawasaki-versys-x300": "/bikes/gallery/kawasaki-versys-x300-1.webp",
+};
+
 export const LICENCE_TEXT: Record<BikeContent["licence"], string> = {
   IDP_OR_A1:
     "Needs a Vietnamese motorcycle licence, or an International Driving Permit (1949 Geneva Convention) that covers motorbikes.",

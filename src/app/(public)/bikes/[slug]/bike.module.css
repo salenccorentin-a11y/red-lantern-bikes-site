@@ -2,6 +2,13 @@
   background: var(--white);
 }
 
+/* Phones: room at the bottom for the price bar. */
+@media (max-width: 899px) {
+  .main {
+    padding-bottom: 76px;
+  }
+}
+
 .top {
   display: grid;
   gap: 28px;
@@ -16,10 +23,7 @@
 }
 
 .imagePanel {
-  border-radius: var(--radius-photo);
-  background: var(--white);
-  border: 1px solid var(--rule);
-  overflow: hidden;
+  min-width: 0;
 }
 
 @media (min-width: 900px) {
@@ -27,12 +31,6 @@
     position: sticky;
     top: 24px;
   }
-}
-
-.image {
-  display: block;
-  width: 100%;
-  height: auto;
 }
 
 .kind {
@@ -52,10 +50,188 @@
   max-width: 56ch;
 }
 
-.caption {
-  text-align: left;
+/* ─── Quick facts under the name ─────────────────────────────────────── */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0 0;
+  padding: 14px 0;
+  border-block: 1px solid var(--rule);
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 8px;
+  align-content: start;
+}
+
+.factIcon {
+  grid-row: 1 / 3;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  color: var(--night);
+}
+
+.fact dt {
+  font-size: var(--text-sm);
+  color: var(--slate);
+  line-height: 1.3;
+}
+
+.fact dd {
+  margin: 0;
   font-weight: 700;
-  padding-bottom: 4px;
+  line-height: 1.3;
+}
+
+/* Phones: icon above the words, so four fit in a row. */
+@media (max-width: 559px) {
+  .facts {
+    gap: 8px;
+  }
+
+  .fact {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2px;
+  }
+
+  .factIcon {
+    grid-row: auto;
+    margin: 0 0 4px;
+  }
+
+  .fact dd {
+    font-size: var(--text-sm);
+  }
+}
+
+/* ─── Prices: three boxes, one-way fee underneath ────────────────────── */
+
+/* Two classes, to win over the page's general h2 style. */
+.priceTitle.priceTitle {
+  margin: 0 0 10px;
+  font-size: var(--text-lg);
+}
+
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tier {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-card);
+}
+
+/* Takes the spare height, so the prices line up even when one label wraps. */
+.tierLabel {
+  flex: 1;
+  font-size: var(--text-sm);
+  line-height: 1.3;
+  color: var(--slate);
+}
+
+.tierPrice {
+  font-size: var(--text-lg);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tierUsd {
+  font-size: var(--text-sm);
+  color: var(--slate);
+}
+
+@media (min-width: 560px) {
+  .tier {
+    padding: 14px 16px;
+  }
+
+  .tierPrice {
+    font-size: var(--text-xl);
+  }
+}
+
+.oneWay {
+  margin: 10px 0 0;
+  font-size: 0.9375rem;
+  color: var(--slate);
+}
+
+/* ─── Phones: price and "Book this bike" fixed to the bottom ─────────── */
+
+.mobileBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-height: 68px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: var(--night);
+  color: var(--white);
+  box-shadow: 0 -4px 16px rgb(15 27 45 / 0.18);
+}
+
+.mobileBarPrice {
+  margin: 0;
+  min-width: 0;
+  color: var(--fog);
+  font-size: var(--text-sm);
+}
+
+.mobileBarPrice b {
+  color: var(--white);
+  font-size: var(--text-base);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.mobileBarCta {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--lantern-red);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mobileBarCta:hover {
+  background: var(--lantern-red-deep);
+}
+
+.mobileBarCta:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+@media (min-width: 900px) {
+  .mobileBar {
+    display: none;
+  }
 }
 
 .small {
@@ -113,7 +289,7 @@
   margin-top: 4px;
 }
 
-/* "Longer is cheaper", under the price table. */
+/* "Longer is cheaper", under the prices. */
 .saving {
   margin: 16px 0 0;
   padding: 12px 14px;

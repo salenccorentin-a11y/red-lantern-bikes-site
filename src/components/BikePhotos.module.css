@@ -1,0 +1,132 @@
+/* Photos at the top of a bike's page (BikePhotos.tsx). */
+
+.photos {
+  min-width: 0;
+}
+
+/* One photo wide; swipe (or scroll) sideways for the next. */
+.track {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: var(--radius-photo);
+  border: 1px solid var(--rule);
+  background: var(--mist);
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track:focus-visible {
+  outline: 3px solid var(--night);
+  outline-offset: 3px;
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 100%;
+  aspect-ratio: 4 / 3;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Riding photos fill the frame. */
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The studio photo is a cut-out on white: shown whole. */
+.cutout {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4%;
+  background: var(--white);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.dot,
+.dotOn {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rule);
+}
+
+.dotOn {
+  background: var(--night);
+}
+
+.thumbs {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .dots {
+    display: none;
+  }
+
+  .thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .thumb {
+    display: block;
+    width: 88px;
+    aspect-ratio: 4 / 3;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: var(--radius-input);
+    overflow: hidden;
+    background: var(--white);
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
+  .thumb:hover {
+    opacity: 1;
+  }
+
+  .thumb[aria-current="true"] {
+    border-color: var(--night);
+    opacity: 1;
+  }
+
+  .thumb:focus-visible {
+    outline: 3px solid var(--night);
+    outline-offset: 2px;
+  }
+
+  .thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .thumb .thumbCutout {
+    object-fit: contain;
+    padding: 6%;
+  }
+}

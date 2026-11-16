@@ -4,7 +4,13 @@
 // Server code only: interactive (client) components receive the wording they
 // need as props, so browsers never download the other languages.
 
-import { BIKE_CONTENT, LICENCE_TEXT, type BikeContent } from "@/content/bikes";
+import {
+  BIKE_CONTENT,
+  BIKE_FACTS,
+  LICENCE_TEXT,
+  type BikeContent,
+  type BikeFacts,
+} from "@/content/bikes";
 import { BUSINESS } from "@/content/business";
 import { FAQ, type Faq } from "@/content/faq";
 import { ONE_WAY_ROUTE, type RouteStop } from "@/content/route";
@@ -33,6 +39,14 @@ export function bikeContent(lang: Locale, slug: string): BikeContent | undefined
   const base = BIKE_CONTENT[slug];
   const t = translated(lang)?.bikes[slug];
   return base && t ? { ...base, ...t } : base;
+}
+
+/** The quick facts for a bike's page, with "best use" in the page's language. */
+export function bikeFacts(lang: Locale, slug: string): BikeFacts {
+  const facts = BIKE_FACTS[slug] ?? {};
+  const bestUse = translated(lang)?.bikes[slug]?.bestUse;
+  // No translation yet: leave it out rather than show English on a French page.
+  return { ...facts, bestUse: lang === "en" ? facts.bestUse : bestUse };
 }
 
 export function licenceText(lang: Locale, licence: BikeContent["licence"]): string {

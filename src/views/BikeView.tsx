@@ -13,21 +13,31 @@ import { cache, Suspense } from "react";
 import bike from "@/app/(public)/bikes/[slug]/bike.module.css";
 import styles from "@/app/(public)/content.module.css";
 import { bikeImage } from "@/components/BikeCard";
-import { BikeGallery } from "@/components/BikeGallery";
+import { BikePhotos } from "@/components/BikePhotos";
+import photoStyles from "@/components/BikePhotos.module.css";
 import { GoogleReviews } from "@/components/GoogleReviews";
 import { SharedElement } from "@/components/motion/SharedElement";
 import ui from "@/components/ui.module.css";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
-import { BIKE_CONTENT } from "@/content/bikes";
+import galleries from "@/content/bike-gallery.json";
+import { BIKE_CONTENT, LEAD_PHOTO, type BikeFacts } from "@/content/bikes";
 import { BIKE_MODELS } from "@/db/seed-data";
-import { bikeContent, cityName, getMessages, includedFor, kindLabel, licenceText } from "@/i18n";
+import {
+  bikeContent,
+  bikeFacts,
+  cityName,
+  getMessages,
+  includedFor,
+  kindLabel,
+  licenceText,
+} from "@/i18n";
 import { fill, OG_LOCALE, type Locale } from "@/i18n/config";
 import { languageAlternates, localize } from "@/i18n/paths";
 import { db } from "@/lib/db";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
 import { MONTHLY_FROM_DAYS, WEEKLY_FROM_DAYS, savingVsDaily } from "@/lib/pricing";
 import { getSettings } from "@/server/availability";
-import { listModels } from "@/server/fleet";
+import { listModels, type PublicModel } from "@/server/fleet";
 
 export function bikeSlugs() {
   return Object.keys(BIKE_CONTENT).map((slug) => ({ slug }));
@@ -65,20 +75,10 @@ export function BikeView({ lang, slug }: { lang: Locale; slug: string }) {
         </Link>
         <article>
           <div className={bike.top}>
-            {/* Outside the loading step, so the photo is there the moment the
-                page opens and the card's photo can grow into it. */}
+            {/* Outside the loading step, so the photos are there the moment
+                the page opens and the card's photo can grow into the first. */}
             <div className={bike.imagePanel}>
-              <SharedElement name={`bike-${slug}`}>
-                <Image
-                  src={bikeImage(slug)}
-                  alt={fill(t.photoAlt, { name: MODEL_NAME[slug] ?? "" })}
-                  width={1200}
-                  height={800}
-                  priority
-                  sizes="(max-width: 900px) 100vw, 55vw"
-                  className={bike.image}
-                />
-              </SharedElement>
+              <Photos lang={lang} slug={slug} />
             </div>
             <Suspense fallback={<div style={{ minHeight: 420 }} />}>
               <BikeInfo lang={lang} slug={slug} />
@@ -109,48 +109,34 @@ async function BikeInfo({ lang, slug }: { lang: Locale; slug: string }) {
   const t = getMessages(lang).bike;
   const usd = (vnd: number) => formatUsdApprox(vnd, settings.usdToVndRate);
   const to = (href: string) => localize(lang, href);
+  const [barBefore, barAfter = ""] = t.barFrom.split("{price}");
 
   return (
     <div>
       <p className={bike.kind}>{kindLabel(lang, model.kind)}</p>
       <h1 className={bike.name}>{model.name}</h1>
+      <QuickFacts lang={lang} facts={bikeFacts(lang, slug)} />
       {content && <p className={bike.description}>{content.description}</p>}
 
-      <table className={styles.table}>
-        <caption className={bike.caption}>{t.pricePerDay}</caption>
-        <tbody>
-          <tr>
-            <td>{t.tierDaily}</td>
-            <td className={styles.num}>
-              {formatVnd(model.dailyRate)} <small>{usd(model.dailyRate)}</small>
-            </td>
-          </tr>
-          <tr>
-            <td>{t.tierWeekly}</td>
-            <td className={styles.num}>
-              {formatVnd(model.weeklyRate)} <small>{usd(model.weeklyRate)}</small>
-            </td>
-          </tr>
-          <tr>
-            <td>{t.tierMonthly}</td>
-            <td className={styles.num}>
-              {formatVnd(model.monthlyRate)} <small>{usd(model.monthlyRate)}</small>
-            </td>
-          </tr>
-          {model.oneWayFees.map((f) => (
-            <tr key={f.toCity}>
-              <td>
-                {fill(t.oneWayFeeTo, { city: cityName(lang, f.toCity) })}
-                <br />
-                <small>{fill(t.forTrips, { days: f.minDays })}</small>
-              </td>
-              <td className={styles.num}>
-                {formatVnd(f.fee)} <small>{usd(f.fee)}</small>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <h2 className={bike.priceTitle}>{t.pricePerDay}</h2>
+      <ul className={bike.tiers}>
+        {(
+          [
+            [t.tierDaily, model.dailyRate],
+            [t.tierWeekly, model.weeklyRate],
+            [t.tierMonthly, model.monthlyRate],
+          ] as const
+        ).map(([label, rate]) => (
+          <li key={label} className={bike.tier}>
+            <span className={bike.tierLabel}>{label}</span>
+            <b className={bike.tierPrice}>{formatVnd(rate)}</b>
+            <span className={bike.tierUsd}>{usd(rate)}</span>
+          </li>
+        ))}
+      </ul>
+      {model.oneWayFees.length > 0 && (
+        <p className={bike.oneWay}>{oneWayLine(lang, model.oneWayFees)}</p>
+      )}
 
       <p className={bike.saving}>
         {fill(t.savingStart, { weekDays: WEEKLY_FROM_DAYS })}{" "}
@@ -177,6 +163,18 @@ async function BikeInfo({ lang, slug }: { lang: Locale; slug: string }) {
       <p className={bike.small}>
         {fill(t.depositNote, { deposit: formatVnd(settings.depositVnd) })}
       </p>
+
+      {/* Phones: the price and the button stay in reach while scrolling. */}
+      <div className={bike.mobileBar}>
+        <p className={bike.mobileBarPrice}>
+          {barBefore}
+          <b>{formatVnd(model.dailyRate)}</b>
+          {barAfter}
+        </p>
+        <Link href={to(`/book?model=${model.slug}`)} className={bike.mobileBarCta}>
+          {t.bookThis}
+        </Link>
+      </div>
     </div>
   );
 }
@@ -188,11 +186,6 @@ async function BikeMore({ lang, slug }: { lang: Locale; slug: string }) {
 
   return (
     <>
-      <BikeGallery
-        slug={model.slug}
-        name={model.name}
-        title={fill(t.photosOf, { name: model.name })}
-      />
       <GoogleReviews lang={lang} title={t.reviewsTitle} />
 
       <div className={bike.details}>
@@ -224,4 +217,207 @@ async function BikeMore({ lang, slug }: { lang: Locale; slug: string }) {
       </div>
     </>
   );
+}
+
+// ─── Photos ───────────────────────────────────────────────────────────────
+
+type Photo = {
+  src: string;
+  alt: string;
+  blur?: string;
+  width: number;
+  height: number;
+  /** The studio cut-out on white: shown whole, not cropped. */
+  cutout?: boolean;
+};
+
+/** The best riding photo first, then the studio photo, then the others. */
+function photosFor(slug: string, studioAlt: string): Photo[] {
+  const gallery =
+    (galleries as Record<string, { src: string; alt: string; blur: string }[]>)[slug] ?? [];
+  const lead = gallery.find((p) => p.src === LEAD_PHOTO[slug]);
+  const square = (p: (typeof gallery)[number]): Photo => ({ ...p, width: 960, height: 960 });
+  const studio: Photo = {
+    src: bikeImage(slug),
+    alt: studioAlt,
+    width: 1200,
+    height: 800,
+    cutout: true,
+  };
+  return [
+    ...(lead ? [square(lead)] : []),
+    studio,
+    ...gallery.filter((p) => p !== lead).map(square),
+  ];
+}
+
+function Photos({ lang, slug }: { lang: Locale; slug: string }) {
+  const t = getMessages(lang).bike;
+  const name = MODEL_NAME[slug] ?? "";
+  const photos = photosFor(slug, fill(t.photoAlt, { name }));
+
+  const slides = photos.map((p, i) => {
+    const image = (
+      <Image
+        key={p.src}
+        src={p.src}
+        alt={p.alt}
+        width={p.width}
+        height={p.height}
+        sizes="(max-width: 899px) 100vw, 600px"
+        // The first photo is what the page opens on: fetched straight away.
+        preload={i === 0}
+        placeholder={p.blur ? "blur" : "empty"}
+        blurDataURL={p.blur}
+        className={p.cutout ? photoStyles.cutout : photoStyles.photo}
+      />
+    );
+    // The fleet page's card photo grows into the first photo here.
+    return i === 0 ? (
+      <SharedElement key={p.src} name={`bike-${slug}`}>
+        {image}
+      </SharedElement>
+    ) : (
+      image
+    );
+  });
+
+  const thumbs = photos.map((p) => (
+    <Image
+      key={p.src}
+      src={p.src}
+      alt=""
+      width={p.width}
+      height={p.height}
+      sizes="88px"
+      className={p.cutout ? photoStyles.thumbCutout : undefined}
+    />
+  ));
+
+  return (
+    <BikePhotos
+      label={fill(t.photosLabel, { name })}
+      slides={slides}
+      thumbs={thumbs}
+      photoOf={t.photoOf}
+      showPhoto={t.showPhoto}
+    />
+  );
+}
+
+// ─── Quick facts ──────────────────────────────────────────────────────────
+
+/** Engine size, gearbox, seat height and best use: only the ones we know. */
+function QuickFacts({ lang, facts }: { lang: Locale; facts: BikeFacts }) {
+  const t = getMessages(lang).bike;
+  const gearbox = (g: NonNullable<BikeFacts["gearbox"]>) => {
+    if (g.type === "automatic") return t.gearAutomatic;
+    if (g.type === "semi-automatic")
+      return g.speeds ? fill(t.gearSemiSpeeds, { n: g.speeds }) : t.gearSemi;
+    return g.speeds ? fill(t.gearManualSpeeds, { n: g.speeds }) : t.gearManual;
+  };
+  const items = [
+    facts.engineCc && {
+      icon: <EngineIcon />,
+      label: t.factEngine,
+      value: fill(t.engineCc, { cc: facts.engineCc }),
+    },
+    facts.gearbox && { icon: <GearboxIcon />, label: t.factGearbox, value: gearbox(facts.gearbox) },
+    facts.seatHeightMm && {
+      icon: <SeatIcon />,
+      label: t.factSeat,
+      value: fill(t.seatMm, { mm: facts.seatHeightMm }),
+    },
+    facts.bestUse && { icon: <RouteIcon />, label: t.factBestUse, value: facts.bestUse },
+  ].filter((item) => !!item);
+  if (items.length === 0) return null;
+
+  return (
+    <dl className={bike.facts} aria-label={t.factsLabel}>
+      {items.map((item) => (
+        <div key={item.label} className={bike.fact}>
+          {item.icon}
+          <dt>{item.label}</dt>
+          <dd>{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+// Small line icons (decorative: the label beside each says what it is).
+const iconProps = {
+  viewBox: "0 0 24 24",
+  "aria-hidden": true,
+  className: bike.factIcon,
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.8,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+} as const;
+
+/** A speedometer: engine size. */
+function EngineIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M3.5 18a9 9 0 1 1 17 0" />
+      <path d="M12 14l4.5-4.5" />
+      <circle cx="12" cy="14.5" r="1" />
+    </svg>
+  );
+}
+
+/** A gear-shift pattern: the gearbox. */
+function GearboxIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M6 5v14M12 5v14M18 5v7H6" />
+    </svg>
+  );
+}
+
+/** A height marker: seat height. */
+function SeatIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M12 4v16M8.5 7.5 12 4l3.5 3.5M8.5 16.5 12 20l3.5-3.5M5 4h14M5 20h14" />
+    </svg>
+  );
+}
+
+/** A winding route: best use. */
+function RouteIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="6" cy="19" r="2.5" />
+      <circle cx="18" cy="5" r="2.5" />
+      <path d="M8.5 19H17a3.5 3.5 0 0 0 0-7H7a3.5 3.5 0 0 1 0-7h8.5" />
+    </svg>
+  );
+}
+
+// ─── One-way fee ──────────────────────────────────────────────────────────
+
+/** e.g. "One-way to Da Nang (7+ days) or Hanoi (12+ days): 1.600.000₫ extra." */
+function oneWayLine(lang: Locale, fees: PublicModel["oneWayFees"]): string {
+  const t = getMessages(lang).bike;
+  const list = new Intl.ListFormat(lang, { type: "disjunction" });
+  // Usually one fee for every destination; if not, one sentence per fee.
+  const byFee = new Map<number, typeof fees>();
+  for (const f of [...fees].sort((a, b) => a.minDays - b.minDays)) {
+    byFee.set(f.fee, [...(byFee.get(f.fee) ?? []), f]);
+  }
+  return [...byFee]
+    .map(([fee, group]) =>
+      fill(t.oneWayLine, {
+        places: list.format(
+          group.map((f) =>
+            fill(t.oneWayPlace, { city: cityName(lang, f.toCity), days: f.minDays }),
+          ),
+        ),
+        fee: formatVnd(fee),
+      }),
+    )
+    .join(" ");
 }

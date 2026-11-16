@@ -10,6 +10,8 @@ export type TranslatedContent = {
       bestFor: string[];
       seoTitle: string;
       seoDescription: string;
+      /** The "best use" quick fact (src/content/bikes.ts, BIKE_FACTS). */
+      bestUse?: string;
     }
   >;
   licence: { IDP_OR_A1: string; A2: string };
