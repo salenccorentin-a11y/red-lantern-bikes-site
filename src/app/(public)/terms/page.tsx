@@ -106,7 +106,8 @@ export default function TermsPage() {
               repairs are paid by the rider.
             </li>
             <li>
-              Rented premium helmets and gloves are returned with the bike at the end of the rental.
+              Rented premium helmets are returned with the bike at the end of the rental. Gloves are
+              bought, so you keep them.
             </li>
           </ul>
 

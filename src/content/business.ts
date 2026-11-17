@@ -46,10 +46,10 @@ export const BUSINESS = {
   ],
   /** Included with every rental, at no extra cost. */
   included: [
-    "Full-face helmet",
+    "Second-hand helmet",
     "Phone holder",
     "Luggage rack and bungee cords",
-    "Printed map of our favourite roads",
+    "Online map of the best roads to ride in Vietnam",
     "Roadside assistance anywhere in Vietnam, by WhatsApp",
     "Free delivery to your hotel in or near District 1",
   ],

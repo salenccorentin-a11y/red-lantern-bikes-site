@@ -74,7 +74,8 @@
    when the animation script arrives. Must match WIDE in OneWayScroll. */
 @media (min-width: 900px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
   .track {
-    height: 210svh;
+    /* 50svh of scrolling draws the road (was 110svh, too slow; owner 2026-11-17). */
+    height: 150svh;
   }
 
   .pin {

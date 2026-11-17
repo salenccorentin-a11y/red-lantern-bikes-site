@@ -39,7 +39,7 @@ export const FAQ: Faq[] = [
     id: "included",
     question: "What's included?",
     answer: [
-      "Every bike comes with a full-face helmet, a phone holder, a luggage rack and bungee cords, a printed map of our favourite roads, and roadside assistance anywhere in Vietnam.",
+      "Every bike comes with a second-hand helmet, a phone holder, a luggage rack and bungee cords, an online map of the best roads to ride in Vietnam, and roadside assistance anywhere in Vietnam.",
     ],
   },
   {

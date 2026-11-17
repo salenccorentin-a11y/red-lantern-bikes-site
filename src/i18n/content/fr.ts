@@ -164,7 +164,7 @@ export const frContent: TranslatedContent = {
       id: "included",
       question: "Qu'est-ce qui est inclus ?",
       answer: [
-        "Chaque moto est fournie avec un casque intégral, un support de téléphone, un porte-bagages et des tendeurs, une carte imprimée de nos routes préférées, et une assistance partout au Vietnam.",
+        "Chaque moto est fournie avec un casque d'occasion, un support de téléphone, un porte-bagages et des tendeurs, une carte en ligne des meilleures routes à moto du Vietnam, et une assistance partout au Vietnam.",
       ],
     },
     {
@@ -258,10 +258,10 @@ export const frContent: TranslatedContent = {
     },
   },
   included: [
-    "Casque intégral",
+    "Casque d'occasion",
     "Support de téléphone",
     "Porte-bagages et tendeurs",
-    "Carte imprimée de nos routes préférées",
+    "Carte en ligne des meilleures routes à moto du Vietnam",
     "Assistance partout au Vietnam, par WhatsApp",
     "Livraison gratuite à votre hôtel dans le 1er arrondissement ou à proximité",
   ],
@@ -279,7 +279,7 @@ export const frContent: TranslatedContent = {
     },
     gloves: {
       name: "Gants de moto",
-      description: "Loués pour votre voyage, rendus avec la moto. Prix par paire.",
+      description: "Achetés, ils sont à vous : pas besoin de les rendre. Prix par paire.",
     },
   },
 };

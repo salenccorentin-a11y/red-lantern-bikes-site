@@ -61,7 +61,7 @@ A flat online deposit of 1,500,000 per booking, non-refundable. The rest is paid
 6. **Add-ons** (decided 17 Oct 2026). Editable in staff settings; the seed sets:
    - **Full coverage insurance**, optional, per day, priced by bike size: 80,000 VND (110–125cc: Wave Alpha, GD110, EN125, CB125, NVX125), 130,000 (150cc: Winner X, GSX-R150, XR150), 180,000 (CB150X, CRF150, WR155R), 260,000 (Versys X300). That's the owner's $3 / $5 / $7 / $10, rounded at 26,000 VND per USD. Stored as a price per model (`AddOnModelPrice`). Covers accidents, mechanical problems and flat tyres; not theft or loss of the bike, police problems or breaking the law (owner, 21 Oct 2026). Without insurance the shop covers engine failures only.
    - **Premium helmet**, 500,000 VND one-off each, rented and returned, up to 2 per booking.
-   - **Motorcycle gloves**, 500,000 VND one-off per pair, rented and returned, up to 2 per booking.
+   - **Motorcycle gloves**, 800,000 VND one-off per pair, bought and kept (no return), up to 2 per booking (owner, 2026-11-17; was 500,000 VND rented).
    - Phone mount, luggage rack and straps are included free, so they are not add-ons. The prototype's placeholder add-ons are switched off.
 7. **Day count.** Customers choose dates only, no times. Both the pick-up and drop-off days count: 10 to 17 October is 8 days.
 

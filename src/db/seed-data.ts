@@ -145,8 +145,8 @@ export const ROUTES: {
   { fromCity: "DA_NANG", toCity: "SAIGON", minDays: 7, transitDays: null, bookableOnline: false },
 ];
 
-// Extras, from the owner (17 Oct 2026). The helmet and gloves are rented for
-// the trip and handed back. Phone mount, luggage rack and straps are free
+// Extras, from the owner (17 Oct 2026). The premium helmet is rented for the
+// trip and handed back; gloves are bought and kept (800,000 VND, owner 17 Nov 2026). Phone mount, luggage rack and straps are free
 // (BUSINESS.included), so they are not extras.
 export const ADD_ONS: {
   slug: string;
@@ -194,9 +194,9 @@ export const ADD_ONS: {
   {
     slug: "gloves",
     name: "Motorcycle gloves",
-    description: "Rented for your trip, returned with the bike. Price per pair.",
+    description: "Yours to keep: no need to return them. Price per pair.",
     pricing: "FLAT",
-    price: 500_000,
+    price: 800_000,
     maxQuantity: 2,
   },
 ];
