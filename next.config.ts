@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
     // Puts the (small) CSS in the page instead of a separate file, so phones on
     // slow connections can paint sooner. Most visitors are first-time tourists.
     inlineCss: true,
+    // Set by `next upgrade --agent=security` (16.4.3 → 16.4.6, 2026-11-17).
+    agentUpgrade: "security",
   },
   // Old Odoo addresses → new pages, as permanent 301s (src/seo/redirects.ts).
   async redirects() {
