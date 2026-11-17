@@ -13,6 +13,14 @@ Choices made while planning the rebuild, with the reason for each. Pricing rules
 - **Bookings for the same bike take turns** (11 October 2026). Before saving a booking or maintenance block, the system locks that one bike for a few milliseconds and re-checks it's free. Customers booking different bikes never wait for each other. Without this, two customers booking the same bike at the same instant could stall each other for about a second until the database cancelled one, which then failed with an error instead of getting another bike. The no-overlap rule remains the final guarantee.
 - **Timezone.** All dates are in Asia/Ho_Chi_Minh.
 
+## WhatsApp, deposits, home page (17 November 2026)
+
+- **WhatsApp button on every public page** (`FloatingWhatsApp`), bottom right. On phones it's a round icon and sits above the price bar on bike and booking pages; on the booking page it moves to the left so it never covers the prices. Wider screens show "Chat on WhatsApp".
+- **Two deposits, two names.** "Booking deposit": 1,500,000₫, non-refundable, paid to the shop after confirmation. "Security deposit": passport or cash (US$300 scooter, US$500 motorcycle), left at pick-up and returned. The booking page states the booking deposit amount at the tick box and explains the security deposit before the request is sent. In Korean the booking deposit is 예약금 and the security deposit 보증금.
+- **Phone or WhatsApp is required** on the booking form (at least 6 digits), because the booking deposit is arranged through it.
+- **≈ $ on the booking page**: each bike row and the total in the phone bar.
+- **Home page**: the "Two ways to ride" tiles and the Lao Tzu quote are gone (they repeated the route section). The riders wall and Google reviews come straight after the route, on mist. A "Why rent instead of buying?" block follows the popular bikes, for backpackers who'd otherwise buy a bike in Saigon and sell it in Hanoi.
+
 ## Blog clean-up, licence, reviews (16 November 2026)
 
 - **Licence.** International Driving Permits are recognised in Vietnam under the 1968 Vienna Convention, not the 1949 Geneva Convention (owner, 16 Nov 2026). Every licence text says 1968 Vienna (bike pages, FAQ, guides, old blog post, pick-up email, FR and KO). The site doesn't discuss enforcement, and doesn't say the insurance depends on the licence: the shop decides that case by case.

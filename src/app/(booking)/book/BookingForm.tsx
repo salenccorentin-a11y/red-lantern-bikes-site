@@ -166,6 +166,9 @@ export function BookingForm(props: {
       : null;
 
   const priced = model ? priceFor(model, chosenAddOns) : null;
+  // The booking deposit, next to the tick box: the whole price if it's less.
+  const depositVnd = priced?.ok ? priced.quote.depositVnd : catalog.depositVnd;
+  const depositLabel = `${formatVnd(depositVnd)} (${usd(depositVnd)})`;
   // Known from the dates alone, before a bike is chosen.
   const tooShortForRoute = Boolean(route && tripLength && tripLength < route.minDays);
 
@@ -322,12 +325,19 @@ export function BookingForm(props: {
                   {price?.ok ? (
                     <span className={styles.price}>
                       {formatVnd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}
-                      <span> {fill(t.forDays, { days: daysLabel(price.quote.days) })}</span>
+                      <span>
+                        {" "}
+                        {usd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}{" "}
+                        {fill(t.forDays, { days: daysLabel(price.quote.days) })}
+                      </span>
                     </span>
                   ) : (
                     <span className={styles.price}>
                       {formatVnd(m.dailyRate)}
-                      <span> {t.perDay}</span>
+                      <span>
+                        {" "}
+                        {usd(m.dailyRate)} {t.perDay}
+                      </span>
                     </span>
                   )}
                   {route && m.oneWayFees[route.toCity] !== undefined && (
@@ -433,6 +443,7 @@ export function BookingForm(props: {
               error={fieldError("phone")}
               autoComplete="tel"
               hint={t.phoneHint}
+              required
             />
             <label className={`${styles.field} ${styles.wide}`}>
               <span>{t.note}</span>
@@ -506,13 +517,15 @@ export function BookingForm(props: {
           <p className={styles.ticketMeta}>{t.choosePrompt}</p>
         )}
 
+        <p className={styles.ticketSecurity}>{t.security}</p>
+
         <label className={styles.accept}>
           <input
             type="checkbox"
             checked={acceptDeposit}
             onChange={(e) => setAcceptDeposit(e.target.checked)}
           />
-          <span>{t.accept}</span>
+          <span>{fill(t.accept, { deposit: depositLabel })}</span>
         </label>
         {fieldError("acceptDeposit") && (
           <p className={styles.ticketWarn}>{fieldError("acceptDeposit")}</p>
@@ -549,19 +562,22 @@ export function BookingForm(props: {
 
       {/* Phones: the ticket is at the end of the page, so the bike, the dates
           and the total stay in view in a bar at the bottom of the screen. */}
-      <div className={styles.mobileBar}>
+      <div className={styles.mobileBar} data-bottom-bar="booking">
         {model && priced?.ok ? (
           <>
             <div className={styles.mobileBarTrip}>
-              <span className={styles.mobileBarBike}>{model.name}</span>
+              <span className={styles.mobileBarBike}>
+                {model.name}{" "}
+                <span className={styles.mobileBarDates}>
+                  {shortRange(startDate, endDate, lang)}
+                </span>
+              </span>
               <span className={styles.mobileBarLine}>
                 <b>
                   <span className={styles.srOnly}>{t.mobileTotal} </span>
                   <AnimatedNumber value={priced.quote.totalVnd} format={formatVnd} />
                 </b>
-                <span className={styles.mobileBarDates}>
-                  {shortRange(startDate, endDate, lang)}
-                </span>
+                <span className={styles.mobileBarUsd}>{usd(priced.quote.totalVnd)}</span>
               </span>
             </div>
             <a href="#summary" className={styles.mobileBarCta}>

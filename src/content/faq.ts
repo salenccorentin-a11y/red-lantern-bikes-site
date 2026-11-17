@@ -14,17 +14,17 @@ export const FAQ: Faq[] = [
   },
   {
     id: "booking",
-    question: "How does booking and the deposit work?",
+    question: "How do booking and the booking deposit work?",
     answer: [
       "Choose your dates and bike on the booking page and you'll see the full price. Then send your booking request: it costs nothing. We hold the bike while we check it, and answer by email, usually within a few hours and within 24 hours at the latest.",
-      "Once we confirm, we contact you to arrange a 1,500,000₫ deposit (or the whole price, if it's less). The deposit is part of the price, not extra, and it's non-refundable. The balance is paid when you pick up.",
+      "Once we confirm, we contact you to arrange a 1,500,000₫ booking deposit (or the whole price, if it's less). The booking deposit is part of the price, not extra, and it's non-refundable. The balance is paid when you pick up.",
     ],
   },
   {
     id: "payment",
     question: "How can I pay?",
     answer: [
-      "There's nothing to pay on the website. Once your booking is confirmed, we contact you to arrange the deposit directly. The balance can be paid in cash at pick-up. We don't take cards yet.",
+      "There's nothing to pay on the website. Once your booking is confirmed, we contact you to arrange the booking deposit directly. The balance can be paid in cash at pick-up. We don't take cards yet.",
     ],
   },
   {
@@ -99,7 +99,7 @@ export const FAQ: Faq[] = [
     id: "cancel",
     question: "Can I cancel?",
     answer: [
-      "Yes. Until we've confirmed your booking and you've paid the deposit, you owe nothing. Once paid, the deposit is non-refundable, and you don't owe anything beyond it. If your plans change, message us and we'll try to move your dates instead.",
+      "Yes. Until we've confirmed your booking and you've paid the booking deposit, you owe nothing. Once paid, the booking deposit is non-refundable, and you don't owe anything beyond it. If your plans change, message us and we'll try to move your dates instead.",
     ],
   },
   {

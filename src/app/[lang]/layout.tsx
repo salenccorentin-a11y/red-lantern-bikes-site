@@ -1,3 +1,4 @@
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { Monitoring } from "@/components/Monitoring";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -23,6 +24,7 @@ export default async function LanguageLayout({ children, params }: LayoutProps<"
         <MotionProvider>{children}</MotionProvider>
       </div>
       <SiteFooter lang={lang} />
+      <FloatingWhatsApp lang={lang} />
       <Monitoring />
     </div>
   );

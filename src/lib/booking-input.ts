@@ -17,10 +17,18 @@ export const bookingInput = z.object({
     .max(20),
   name: z.string().trim().min(2, "Please enter your name.").max(100),
   email: z.email("Please enter a valid email address.").max(200),
-  phone: z.string().trim().max(40).optional(),
+  // Required: the shop arranges the booking deposit by phone or WhatsApp.
+  phone: z
+    .string()
+    .trim()
+    .max(40)
+    .refine(
+      (v) => (v.match(/\d/g)?.length ?? 0) >= 6,
+      "Please enter your phone or WhatsApp number.",
+    ),
   note: z.string().trim().max(1000).optional(),
   acceptDeposit: z.literal(true, {
-    error: "Please confirm you understand the deposit is non-refundable.",
+    error: "Please confirm you understand the booking deposit is non-refundable.",
   }),
   // The page's language, for messages and where to go next.
   lang: z.enum(["en", "fr", "ko"]).default("en"),

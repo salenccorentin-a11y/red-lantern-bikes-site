@@ -540,6 +540,16 @@
   color: #ff9a8f;
 }
 
+.ticketSecurity {
+  margin: 16px 0 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-input);
+  background: var(--night);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #d5dceb;
+}
+
 .ticketFine {
   margin: 12px 0 0;
   font-size: 12px;
@@ -588,6 +598,12 @@
   min-width: 0;
 }
 
+.mobileBarUsd {
+  font-size: 13px;
+  color: var(--fog);
+  white-space: nowrap;
+}
+
 .mobileBarLine b {
   font-size: 16px;
   font-variant-numeric: tabular-nums;
@@ -595,6 +611,8 @@
 }
 
 .mobileBarDates {
+  font-family: var(--font-body);
+  font-weight: 400;
   font-size: 13px;
   color: var(--fog);
   white-space: nowrap;

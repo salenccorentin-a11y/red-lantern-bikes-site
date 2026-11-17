@@ -178,7 +178,7 @@ describe("booking request emails", () => {
     await acceptRequest(db, booking.id);
     expect(await sendAnswerEmail(db, booking.id, { accepted: true }, box.send)).toBe(true);
     expect(box.sent[0].subject).toBe(`Booking ${booking.reference} is confirmed`);
-    expect(box.sent[0].text).toContain("arrange the deposit");
+    expect(box.sent[0].text).toContain("arrange the booking deposit");
 
     const other = await request({ startDate: "2026-12-01", endDate: "2026-12-05" });
     await declineRequest(db, other.id);

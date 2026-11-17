@@ -34,9 +34,9 @@ export function WhatsAppLink({
   );
 }
 
-function ChatIcon() {
+export function ChatIcon({ size = 20 }: { size?: number }) {
   return (
-    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" className={styles.icon}>
+    <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" className={styles.icon}>
       <path d="M12 2.5a9.5 9.5 0 0 0-8.2 14.3L2.5 21.5l4.8-1.3A9.5 9.5 0 1 0 12 2.5Z" />
       <path
         className={styles.phone}

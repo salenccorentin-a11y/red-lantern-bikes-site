@@ -48,7 +48,9 @@ export function OneWayScroll() {
     };
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) load();
+        // At least a pixel of it on screen: a section that only touches the
+        // bottom edge (right under a one-screen hero) does not count.
+        if (entries.some((e) => e.isIntersecting && e.intersectionRatio > 0)) load();
       },
       { rootMargin: "0px" },
     );

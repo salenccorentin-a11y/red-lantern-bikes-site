@@ -68,7 +68,7 @@ function priceRows(d: RequestEmailData): [string, string][] {
       formatVnd(a.totalVnd),
     ]),
     ["Total", formatVnd(d.totalVnd)],
-    ["Deposit (non-refundable)", formatVnd(d.depositVnd)],
+    ["Booking deposit (non-refundable)", formatVnd(d.depositVnd)],
     ["Balance at pick-up", formatVnd(d.balanceVnd)],
   ];
 }
@@ -82,7 +82,7 @@ export function bookingReceivedEmail(to: string, d: RequestEmailData): Email {
     d.answerBy ? `, by ${d.answerBy} (Saigon time) at the latest` : " soon"
   }. Your ${d.bikeName} is held for you in the meantime.`;
   const payment =
-    "There's nothing to pay yet. Once we confirm your booking, we'll contact you to arrange the deposit. The balance is paid at pick-up.";
+    "There's nothing to pay yet. Once we confirm your booking, we'll contact you to arrange the booking deposit. The balance is paid at pick-up.";
   const rows = [...tripRows(d), ...priceRows(d).slice(-3)];
 
   const text = [
@@ -186,7 +186,7 @@ export function bookingAcceptedEmail(to: string, d: RequestEmailData): Email {
   const intro = `Good news: your booking is confirmed, and your ${d.bikeName} is reserved for you.`;
   const payment = `We'll contact you shortly${
     d.customerPhone ? " by email or WhatsApp" : " by email"
-  } to arrange the deposit of ${formatVnd(d.depositVnd)} (non-refundable).${
+  } to arrange the booking deposit of ${formatVnd(d.depositVnd)} (non-refundable).${
     d.balanceVnd > 0 ? ` The balance of ${formatVnd(d.balanceVnd)} is paid at pick-up.` : ""
   }`;
   const rows = [...tripRows(d), ...priceRows(d).slice(-3)];

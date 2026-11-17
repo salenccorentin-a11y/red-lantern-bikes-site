@@ -1,0 +1,70 @@
+/* Night with a white ring, so it shows on light and dark sections alike;
+   WhatsApp's green stays on the icon only (see WhatsAppLink.module.css). */
+.float {
+  position: fixed;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: var(--night);
+  color: var(--white);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow:
+    0 0 0 2px rgb(255 255 255 / 0.9),
+    0 8px 20px rgb(15 27 45 / 0.3);
+}
+
+.float:focus-visible {
+  outline: 3px solid var(--star);
+  outline-offset: 3px;
+}
+
+/* Read by screen readers on phones, shown on wider screens. */
+.label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Bike and booking pages have a price bar fixed to the bottom on phones:
+   sit just above it. */
+@media (max-width: 899px) {
+  :global(body:has([data-bottom-bar])) .float {
+    bottom: calc(84px + env(safe-area-inset-bottom));
+  }
+
+  /* On the booking page the prices are on the right: keep them clear. */
+  :global(body:has([data-bottom-bar="booking"])) .float {
+    right: auto;
+    left: 12px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (min-width: 900px) {
+  .float {
+    right: 24px;
+    bottom: 24px;
+    width: auto;
+    padding: 0 22px 0 16px;
+  }
+
+  .label {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+}

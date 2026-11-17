@@ -36,6 +36,7 @@ export const en = {
     included: "Included with every bike",
     bookABike: "Book a bike",
     askWhatsApp: "Ask on WhatsApp",
+    chatWhatsApp: "Chat on WhatsApp",
     openMaps: "Open in Google Maps",
     city: { SAIGON: "Saigon", HANOI: "Hanoi", DA_NANG: "Da Nang" },
     dropoffReturn: "Saigon (return to the shop)",
@@ -49,8 +50,6 @@ export const en = {
     metaDescription:
       "Rent a motorbike in Ho Chi Minh City from $9/day. Honda, Kawasaki & Suzuki fleet. One-way rental to Hanoi & Da Nang. Rated 4.9★ by 245+ riders. Book online.",
     heroAlt: "A Red Lantern bike on an empty road through the karst mountains",
-    quote: "“A journey of a thousand miles begins with a single step.”",
-    quoteBy: "Lao Tzu",
     title: "Motorbike rental in Saigon, and one-way to Hanoi or Da Nang",
     lead: "Well-kept bikes, fair prices and a team that answers WhatsApp wherever you are in Vietnam. Book online in a few minutes and pick up in District 1.",
     seeOneWay: "See one-way trips",
@@ -60,19 +59,27 @@ export const en = {
     oneWayTitle: "One-way trips",
     oneWayIntro:
       "Ride the length of Vietnam without riding back: the highlands, the central coast, the Hai Van Pass and the karst of the north. Leave the bike in Da Nang or Hanoi and we bring it home.",
-    waysTitle: "Two ways to ride",
-    ways: {
-      rent: {
-        title: "Rent in Saigon",
-        text: "By the day, week or month. The longer you ride, the less each day costs.",
-        alt: "A rider on a scooter in front of Saigon's Opera House",
+    whyRentTitle: "Why rent instead of buying?",
+    whyRentIntro:
+      "Plenty of travellers buy a cheap bike in Saigon and sell it again in Hanoi. Here's what you get by renting from us instead.",
+    whyRent: [
+      {
+        title: "A bike we look after",
+        text: "Every bike is serviced in our own shop by Phi, who has kept motorbikes running for 15 years.",
       },
-      oneWay: {
-        title: "One-way to Hanoi or Da Nang",
-        text: "Ride north at your own pace and leave the bike at the end. We bring it home.",
-        alt: "A rider and bike crossing a river on a small boat in northern Vietnam",
+      {
+        title: "Help on the road",
+        text: "Message us on WhatsApp wherever you are in Vietnam. We talk you through it or find a mechanic near you.",
       },
-    },
+      {
+        title: "Insurance if you want it",
+        text: "Add our full coverage when you book. It covers accidents, mechanical problems and flat tyres, on the conditions in our FAQ.",
+      },
+      {
+        title: "Nothing to sell at the end",
+        text: "Leave the bike at our drop-off point in Hanoi or Da Nang on your last day. No buyer to find before your flight.",
+      },
+    ],
     popularTitle: "Popular bikes",
     popularIntro:
       "From an easy semi-automatic for the city to an adventure bike for the whole country.",
@@ -85,7 +92,7 @@ export const en = {
       { strong: "Choose your dates and bike.", rest: "You see the full price straight away." },
       {
         strong: "Send your booking request.",
-        rest: "It costs nothing. We confirm by email, then arrange the deposit with you. The rest is paid at pick-up.",
+        rest: "It costs nothing. We confirm by email, then arrange the booking deposit with you. The rest is paid at pick-up.",
       },
       {
         strong: "Pick up at our shop",
@@ -133,7 +140,7 @@ export const en = {
     rideOneWay: "Ride it one-way to Hanoi",
     whatsappMessage: "Hi Red Lantern Bikes! I have a question about the {name}.",
     depositNote:
-      "Sending a request costs nothing. Once we confirm, a {deposit} deposit secures the bike; the rest is paid at pick-up.",
+      "Sending a request costs nothing. Once we confirm, a {deposit} booking deposit secures the bike; the rest is paid at pick-up.",
     reviewsTitle: "What riders say",
     goodFor: "Good for",
     licence: "Licence",
@@ -331,8 +338,9 @@ export const en = {
     fullName: "Full name",
     email: "Email",
     emailHint: "We send your booking details and our answer here.",
-    phone: "Phone or WhatsApp (optional)",
-    phoneHint: "With country code, e.g. +44 7700 900123",
+    phone: "Phone or WhatsApp",
+    phoneHint:
+      "With country code, e.g. +44 7700 900123. We use it to arrange your booking deposit.",
     note: "Anything we should know? (optional)",
     summary: "Your booking",
     chooseBike: "Choose a bike",
@@ -342,13 +350,16 @@ export const en = {
     savingHint: "Ride {days} days or more and pay {weekly} a day instead of {daily}.",
     oneWayFee: "One-way fee",
     total: "Total",
-    depositNow: "Deposit once we confirm, non-refundable",
+    depositNow: "Booking deposit, once we confirm (non-refundable)",
     balance: "Balance at pick-up",
     choosePrompt: "Choose your trip, dates and bike to see the price.",
-    accept: "I understand the deposit is non-refundable once paid. The balance is paid at pick-up.",
+    accept:
+      "I understand the booking deposit of {deposit} is non-refundable once paid. The balance is paid at pick-up.",
     reserve: "Send booking request",
     reserving: "Sending…",
-    fine: "Nothing to pay now. We hold the bike while we check your request, and answer by email, usually within a few hours. Once we confirm, we contact you to arrange the deposit.",
+    fine: "Nothing to pay now. We hold the bike while we check your request, and answer by email, usually within a few hours. Once we confirm, we contact you to arrange the booking deposit.",
+    security:
+      "At pick-up you also leave a security deposit: your passport, or cash (US$300 for a scooter, US$500 for a motorcycle). You get it back when you return the bike.",
     help: "Questions? Ask us on WhatsApp",
     helpMessageTrip:
       "Hi Red Lantern Bikes! I have a question about booking the {bike} from {start} to {end}.",
@@ -358,8 +369,8 @@ export const en = {
     fieldErrors: {
       name: "Please enter your full name.",
       email: "Please check your email address.",
-      phone: "Please check your phone number.",
-      acceptDeposit: "Please tick the box to accept the deposit terms.",
+      phone: "Please enter your phone or WhatsApp number, with country code.",
+      acceptDeposit: "Please tick the box to accept the booking deposit terms.",
       modelId: "Please choose a bike.",
     },
     checkFields: "Please check the highlighted fields.",
@@ -393,7 +404,7 @@ export const en = {
     rental: "Rental, {days}",
     oneWayFee: "One-way fee",
     total: "Total",
-    deposit: "Deposit, non-refundable",
+    deposit: "Booking deposit, non-refundable",
     balance: "Balance at pick-up",
     newBooking: "Send a new request",
     heldTitle: "We've received your request",
@@ -402,7 +413,7 @@ export const en = {
     heldTomorrow: "tomorrow",
     confirmedTitle: "Your booking is confirmed",
     confirmedText:
-      "Your bike is reserved for you. We'll contact you to arrange the deposit, if we haven't already. See you at the shop in District 1.",
+      "Your bike is reserved for you. We'll contact you to arrange the booking deposit, if we haven't already. See you at the shop in District 1.",
     expiredTitle: "We couldn't confirm this request in time",
     expiredText:
       "The hold on the bike has ended, and you haven't paid anything. Message us and we'll sort it out, or send a new request.",

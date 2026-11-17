@@ -33,6 +33,7 @@ export const fr: Messages = {
     included: "Inclus avec chaque moto",
     bookABike: "Réserver une moto",
     askWhatsApp: "Nous écrire sur WhatsApp",
+    chatWhatsApp: "Discuter sur WhatsApp",
     openMaps: "Ouvrir dans Google Maps",
     city: { SAIGON: "Saïgon", HANOI: "Hanoï", DA_NANG: "Da Nang" },
     dropoffReturn: "Saïgon (retour à la boutique)",
@@ -46,8 +47,6 @@ export const fr: Messages = {
     metaDescription:
       "Louez une moto à Hô Chi Minh-Ville dès 9 $ par jour. Honda, Kawasaki et Suzuki. Location aller simple vers Hanoï et Da Nang. Noté 4,9★. Réservation en ligne.",
     heroAlt: "Une moto Red Lantern sur une route déserte entre les montagnes karstiques",
-    quote: "« Un voyage de mille lieues commence toujours par un premier pas. »",
-    quoteBy: "Lao Tseu",
     title: "Location de moto à Saïgon, et aller simple vers Hanoï ou Da Nang",
     lead: "Des motos bien entretenues, des prix justes et une équipe qui répond sur WhatsApp partout au Vietnam. Réservez en ligne en quelques minutes, récupérez la moto dans le 1er arrondissement.",
     seeOneWay: "Voir les allers simples",
@@ -57,19 +56,27 @@ export const fr: Messages = {
     oneWayTitle: "Allers simples",
     oneWayIntro:
       "Traversez le Vietnam sans faire le chemin du retour : les hauts plateaux, la côte du centre, le col de Hai Van et le karst du nord. Laissez la moto à Da Nang ou Hanoï, nous la rapatrions.",
-    waysTitle: "Deux façons de rouler",
-    ways: {
-      rent: {
-        title: "Louer à Saïgon",
-        text: "À la journée, à la semaine ou au mois. Plus vous roulez longtemps, moins chaque jour coûte cher.",
-        alt: "Un motard en scooter devant l'Opéra de Saïgon",
+    whyRentTitle: "Pourquoi louer plutôt qu'acheter ?",
+    whyRentIntro:
+      "Beaucoup de voyageurs achètent une moto pas chère à Saïgon pour la revendre à Hanoï. Voici ce que vous gagnez à louer chez nous.",
+    whyRent: [
+      {
+        title: "Une moto entretenue",
+        text: "Chaque moto est entretenue dans notre atelier par Phi, qui répare des motos depuis 15 ans.",
       },
-      oneWay: {
-        title: "Aller simple vers Hanoï ou Da Nang",
-        text: "Remontez vers le nord à votre rythme et laissez la moto à l'arrivée. Nous la rapatrions.",
-        alt: "Un motard et sa moto traversant une rivière sur une petite barque dans le nord du Vietnam",
+      {
+        title: "De l'aide sur la route",
+        text: "Écrivez-nous sur WhatsApp où que vous soyez au Vietnam. Nous vous guidons ou trouvons un mécanicien près de vous.",
       },
-    },
+      {
+        title: "Une assurance si vous la voulez",
+        text: "Ajoutez notre assurance tous risques en réservant. Elle couvre les accidents, les pannes mécaniques et les crevaisons, aux conditions indiquées dans la FAQ.",
+      },
+      {
+        title: "Rien à revendre à la fin",
+        text: "Laissez la moto à notre point de dépôt à Hanoï ou Da Nang le dernier jour. Pas d'acheteur à trouver avant votre vol.",
+      },
+    ],
     popularTitle: "Motos populaires",
     popularIntro: "D'une semi-automatique facile pour la ville à une moto trail pour tout le pays.",
     seeAllBikes: "Voir toutes les motos",
@@ -84,7 +91,7 @@ export const fr: Messages = {
       },
       {
         strong: "Envoyez votre demande de réservation.",
-        rest: "C'est gratuit. Nous confirmons par e-mail, puis organisons l'acompte avec vous. Le reste se paie au départ.",
+        rest: "C'est gratuit. Nous confirmons par e-mail, puis organisons l'acompte de réservation avec vous. Le reste se paie au départ.",
       },
       {
         strong: "Récupérez la moto à la boutique",
@@ -131,7 +138,7 @@ export const fr: Messages = {
     rideOneWay: "En aller simple vers Hanoï",
     whatsappMessage: "Bonjour Red Lantern Bikes ! J'ai une question sur la {name}.",
     depositNote:
-      "La demande est gratuite. Une fois confirmée, un acompte de {deposit} bloque la moto ; le reste se paie au départ.",
+      "La demande est gratuite. Une fois confirmée, un acompte de réservation de {deposit} bloque la moto ; le reste se paie au départ.",
     reviewsTitle: "L'avis des voyageurs",
     goodFor: "Idéale pour",
     licence: "Permis",
@@ -331,8 +338,9 @@ export const fr: Messages = {
     fullName: "Nom complet",
     email: "E-mail",
     emailHint: "Nous y envoyons le détail de votre réservation et notre réponse.",
-    phone: "Téléphone ou WhatsApp (facultatif)",
-    phoneHint: "Avec l'indicatif du pays, par ex. +33 6 12 34 56 78",
+    phone: "Téléphone ou WhatsApp",
+    phoneHint:
+      "Avec l'indicatif du pays, par ex. +33 6 12 34 56 78. Nous l'utilisons pour organiser votre acompte de réservation.",
     note: "Quelque chose à nous dire ? (facultatif)",
     summary: "Votre réservation",
     chooseBike: "Choisissez une moto",
@@ -342,14 +350,16 @@ export const fr: Messages = {
     savingHint: "Roulez {days} jours ou plus et payez {weekly} par jour au lieu de {daily}.",
     oneWayFee: "Frais d'aller simple",
     total: "Total",
-    depositNow: "Acompte après confirmation, non remboursable",
+    depositNow: "Acompte de réservation après confirmation, non remboursable",
     balance: "Solde au départ",
     choosePrompt: "Choisissez votre voyage, vos dates et votre moto pour voir le prix.",
     accept:
-      "Je comprends que l'acompte, une fois payé, n'est pas remboursable. Le solde se paie au départ.",
+      "Je comprends que l'acompte de réservation de {deposit}, une fois payé, n'est pas remboursable. Le solde se paie au départ.",
     reserve: "Envoyer la demande",
     reserving: "Envoi…",
-    fine: "Rien à payer maintenant. Nous bloquons la moto le temps d'étudier votre demande et répondons par e-mail, en général en quelques heures. Une fois la réservation confirmée, nous vous contactons pour organiser l'acompte.",
+    fine: "Rien à payer maintenant. Nous bloquons la moto le temps d'étudier votre demande et répondons par e-mail, en général en quelques heures. Une fois la réservation confirmée, nous vous contactons pour organiser l'acompte de réservation.",
+    security:
+      "Au départ, vous laissez aussi une caution : votre passeport, ou des espèces (300 $ US pour un scooter, 500 $ US pour une moto). Elle vous est rendue au retour de la moto.",
     help: "Une question ? Écrivez-nous sur WhatsApp",
     helpMessageTrip:
       "Bonjour Red Lantern Bikes ! J'ai une question sur la réservation de la {bike} du {start} au {end}.",
@@ -359,8 +369,9 @@ export const fr: Messages = {
     fieldErrors: {
       name: "Merci d'indiquer votre nom complet.",
       email: "Merci de vérifier votre adresse e-mail.",
-      phone: "Merci de vérifier votre numéro de téléphone.",
-      acceptDeposit: "Merci de cocher la case pour accepter les conditions de l'acompte.",
+      phone: "Merci d'indiquer votre numéro de téléphone ou WhatsApp, avec l'indicatif du pays.",
+      acceptDeposit:
+        "Merci de cocher la case pour accepter les conditions de l'acompte de réservation.",
       modelId: "Merci de choisir une moto.",
     },
     checkFields: "Merci de vérifier les champs signalés.",
@@ -395,7 +406,7 @@ export const fr: Messages = {
     rental: "Location, {days}",
     oneWayFee: "Frais d'aller simple",
     total: "Total",
-    deposit: "Acompte, non remboursable",
+    deposit: "Acompte de réservation, non remboursable",
     balance: "Solde au départ",
     newBooking: "Envoyer une nouvelle demande",
     heldTitle: "Nous avons bien reçu votre demande",
@@ -404,7 +415,7 @@ export const fr: Messages = {
     heldTomorrow: "demain",
     confirmedTitle: "Votre réservation est confirmée",
     confirmedText:
-      "Votre moto vous est réservée. Nous vous contactons pour organiser l'acompte, si ce n'est pas déjà fait. À bientôt à la boutique, dans le 1er arrondissement.",
+      "Votre moto vous est réservée. Nous vous contactons pour organiser l'acompte de réservation, si ce n'est pas déjà fait. À bientôt à la boutique, dans le 1er arrondissement.",
     expiredTitle: "Nous n'avons pas pu confirmer cette demande à temps",
     expiredText:
       "La moto n'est plus bloquée, et vous n'avez rien payé. Écrivez-nous et nous arrangerons cela, ou envoyez une nouvelle demande.",

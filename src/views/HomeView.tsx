@@ -1,7 +1,7 @@
 // The home page, in any language (English at /, French at /fr, Korean at /ko).
 
 import type { Metadata } from "next";
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
@@ -22,8 +22,7 @@ import { db } from "@/lib/db";
 import { getSettings } from "@/server/availability";
 import { listModels } from "@/server/fleet";
 import karstRoad from "../../public/photos/karst-road.webp";
-import riverCrossing from "../../public/photos/river-crossing.webp";
-import saigonOpera from "../../public/photos/saigon-opera.webp";
+import karstRoadPhone from "../../public/photos/karst-road-phone.webp";
 
 const styles = pageStyles;
 
@@ -44,10 +43,6 @@ export function HomeView({ lang }: { lang: Locale }) {
   const m = getMessages(lang);
   const t = m.home;
   const to = (href: string) => localize(lang, href);
-  const ways = [
-    { href: to("/bikes"), photo: saigonOpera, ...t.ways.rent },
-    { href: to("/one-way"), photo: riverCrossing, ...t.ways.oneWay },
-  ];
 
   return (
     <main>
@@ -55,26 +50,12 @@ export function HomeView({ lang }: { lang: Locale }) {
 
       <section className={styles.hero}>
         <div className={styles.heroMedia}>
-          {/* The first thing phones download after the page: preloaded, high priority. */}
-          <Image
-            src={karstRoad}
-            alt={t.heroAlt}
-            fill
-            preload
-            fetchPriority="high"
-            placeholder="blur"
-            sizes="(max-width: 900px) 100vw, 55vw"
-            className={styles.heroPhoto}
-          />
-          <figure className={styles.heroQuote}>
-            <blockquote>{t.quote}</blockquote>
-            <figcaption>{t.quoteBy}</figcaption>
-          </figure>
+          <HeroPhoto alt={t.heroAlt} />
         </div>
         <div className={styles.heroText}>
           <h1 className={styles.heroTitle}>{t.title}</h1>
           <p className={styles.lead}>{t.lead}</p>
-          <div className={ui.actions}>
+          <div className={`${ui.actions} ${styles.heroActions}`}>
             <Link href={to("/book")} className={ui.primary}>
               {m.common.bookABike}
             </Link>
@@ -84,41 +65,33 @@ export function HomeView({ lang }: { lang: Locale }) {
           </div>
           <ul className={styles.trust}>
             <li>
-              <Star /> {fill(t.trustRating, { rating: BUSINESS.googleRating })}
+              <StarIcon /> {fill(t.trustRating, { rating: BUSINESS.googleRating })}
             </li>
-            <li>{t.trustGear}</li>
-            <li>{t.trustHelp}</li>
+            <li>
+              <HelmetIcon /> {t.trustGear}
+            </li>
+            <li>
+              <WrenchIcon /> {t.trustHelp}
+            </li>
           </ul>
         </div>
       </section>
 
       <OneWayTrips lang={lang} title={t.oneWayTitle} intro={t.oneWayIntro} />
 
-      <section className={ui.section}>
+      {/* Straight after the route: what riders say, then the bikes. */}
+      <section className={`${ui.section} ${ui.sectionMist}`}>
         <div className={ui.container}>
-          <h2 className={ui.sectionTitle}>{t.waysTitle}</h2>
-          <div className={styles.ways}>
-            {ways.map((way) => (
-              <Link key={way.href} href={way.href} className={styles.way}>
-                <Image
-                  src={way.photo}
-                  alt={way.alt}
-                  fill
-                  placeholder="blur"
-                  sizes="(max-width: 760px) 100vw, 33vw"
-                  className={styles.wayPhoto}
-                />
-                <span className={styles.wayText}>
-                  <span className={styles.wayTitle}>{way.title}</span>
-                  <span>{way.text}</span>
-                </span>
-              </Link>
-            ))}
-          </div>
+          <h2 className={ui.sectionTitle}>{t.ridersTitle}</h2>
+          <p className={ui.sectionIntro}>
+            {fill(t.ridersIntro, { rating: BUSINESS.googleRating })}
+          </p>
+          <RiderWall alt={t.ridersAlt} />
+          <GoogleReviews lang={lang} />
         </div>
       </section>
 
-      <section className={`${ui.section} ${ui.sectionMist}`}>
+      <section className={ui.section}>
         <div className={ui.container}>
           <h2 className={ui.sectionTitle}>{t.popularTitle}</h2>
           <p className={ui.sectionIntro}>{t.popularIntro}</p>
@@ -133,14 +106,24 @@ export function HomeView({ lang }: { lang: Locale }) {
         </div>
       </section>
 
-      <section className={`${ui.section} ${ui.sectionNight}`}>
+      {/* For backpackers weighing up buying a bike in Saigon and selling it in Hanoi. */}
+      <section className={`${ui.section} ${ui.sectionMist}`}>
         <div className={ui.container}>
-          <h2 className={ui.sectionTitle}>{t.ridersTitle}</h2>
-          <p className={ui.sectionIntro}>
-            {fill(t.ridersIntro, { rating: BUSINESS.googleRating })}
+          <h2 className={ui.sectionTitle}>{t.whyRentTitle}</h2>
+          <p className={ui.sectionIntro}>{t.whyRentIntro}</p>
+          <ul className={styles.whyRent}>
+            {t.whyRent.map((point) => (
+              <li key={point.title}>
+                <h3>{point.title}</h3>
+                <p>{point.text}</p>
+              </li>
+            ))}
+          </ul>
+          <p className={styles.after}>
+            <Link href={to("/one-way")} className={ui.ghostLight}>
+              {t.seeOneWay}
+            </Link>
           </p>
-          <RiderWall alt={t.ridersAlt} />
-          <GoogleReviews lang={lang} tone="night" />
         </div>
       </section>
 
@@ -203,12 +186,97 @@ export function HomeView({ lang }: { lang: Locale }) {
   );
 }
 
-function Star() {
+// Where the hero switches from "photo behind the text" to "photo on the right".
+const WIDE = "(min-width: 900px)";
+
+/**
+ * The hero photo: a tall crop on phones (public/photos/karst-road-phone.webp,
+ * cut from karst-road.webp with its bottom faded to night), the
+ * whole photo on wider screens. Both are preloaded at high priority, each only
+ * on the screens that show it, so on a phone it is the first thing painted
+ * (its blurred version comes with the page itself).
+ */
+function HeroPhoto({ alt }: { alt: string }) {
+  const common = {
+    alt,
+    fill: true,
+    placeholder: "blur",
+    fetchPriority: "high",
+    loading: "eager",
+  } as const;
+  const wide = getImageProps({ ...common, src: karstRoad, sizes: "40vw" }).props;
+  // The tall phone crop has more pixels than the wide photo: a lighter quality
+  // keeps its download about the same as before.
+  const phone = getImageProps({
+    ...common,
+    src: karstRoadPhone,
+    sizes: "100vw",
+    quality: 60,
+  }).props;
   return (
-    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" className={styles.star}>
+    <>
+      <link
+        rel="preload"
+        as="image"
+        imageSrcSet={phone.srcSet}
+        imageSizes={phone.sizes}
+        media="(max-width: 899px)"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        imageSrcSet={wide.srcSet}
+        imageSizes={wide.sizes}
+        media={WIDE}
+        fetchPriority="high"
+      />
+      <picture>
+        <source media={WIDE} srcSet={wide.srcSet} sizes={wide.sizes} />
+        {/* A <picture> needs a plain <img>; getImageProps gives it the same
+            srcset, sizes and blur placeholder next/image would. */}
+        {/* eslint-disable-next-line jsx-a11y/alt-text -- the alt text is in {...phone} */}
+        <img {...phone} className={styles.heroPhoto} />
+      </picture>
+    </>
+  );
+}
+
+// Small line icons for the three trust points (hidden from screen readers:
+// the text beside each says it all).
+
+function StarIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.trustIcon}>
       <path
         fill="currentColor"
         d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"
+      />
+    </svg>
+  );
+}
+
+function HelmetIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.trustIcon}>
+      <g fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round">
+        <path d="M3.5 17c0-6.2 4-10.5 9-10.5s8 3.6 8 8V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z" />
+        <path d="M12 10.5h8.2M12 10.5v4h8.5" />
+      </g>
+    </svg>
+  );
+}
+
+function WrenchIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.trustIcon}>
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"
       />
     </svg>
   );

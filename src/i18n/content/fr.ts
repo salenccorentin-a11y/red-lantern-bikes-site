@@ -139,17 +139,17 @@ export const frContent: TranslatedContent = {
     },
     {
       id: "booking",
-      question: "Comment fonctionnent la réservation et l'acompte ?",
+      question: "Comment fonctionnent la réservation et l'acompte de réservation ?",
       answer: [
         "Choisissez vos dates et votre moto sur la page de réservation et vous voyez le prix total. Envoyez ensuite votre demande de réservation : c'est gratuit. Nous bloquons la moto le temps de l'étudier et répondons par e-mail, en général en quelques heures et au plus tard sous 24 heures.",
-        "Une fois la réservation confirmée, nous vous contactons pour organiser un acompte de 1 500 000 ₫ (ou le prix total, s'il est inférieur). L'acompte fait partie du prix, il ne s'ajoute pas, et il n'est pas remboursable. Le solde se paie au départ.",
+        "Une fois la réservation confirmée, nous vous contactons pour organiser un acompte de réservation de 1 500 000 ₫ (ou le prix total, s'il est inférieur). L'acompte de réservation fait partie du prix, il ne s'ajoute pas, et il n'est pas remboursable. Le solde se paie au départ.",
       ],
     },
     {
       id: "payment",
       question: "Comment payer ?",
       answer: [
-        "Il n'y a rien à payer sur le site. Une fois votre réservation confirmée, nous vous contactons pour organiser l'acompte directement. Le solde peut se payer en espèces au départ. Nous n'acceptons pas encore les cartes.",
+        "Il n'y a rien à payer sur le site. Une fois votre réservation confirmée, nous vous contactons pour organiser l'acompte de réservation directement. Le solde peut se payer en espèces au départ. Nous n'acceptons pas encore les cartes.",
       ],
     },
     {
@@ -226,7 +226,7 @@ export const frContent: TranslatedContent = {
       id: "cancel",
       question: "Puis-je annuler ?",
       answer: [
-        "Oui. Tant que nous n'avons pas confirmé votre réservation et que vous n'avez pas payé l'acompte, vous ne devez rien. Une fois payé, l'acompte n'est pas remboursable, mais vous ne devez rien de plus. Si vos plans changent, écrivez-nous et nous essaierons plutôt de décaler vos dates.",
+        "Oui. Tant que nous n'avons pas confirmé votre réservation et que vous n'avez pas payé l'acompte de réservation, vous ne devez rien. Une fois payé, l'acompte de réservation n'est pas remboursable, mais vous ne devez rien de plus. Si vos plans changent, écrivez-nous et nous essaierons plutôt de décaler vos dates.",
       ],
     },
     {

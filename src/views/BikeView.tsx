@@ -165,7 +165,7 @@ async function BikeInfo({ lang, slug }: { lang: Locale; slug: string }) {
       </p>
 
       {/* Phones: the price and the button stay in reach while scrolling. */}
-      <div className={bike.mobileBar}>
+      <div className={bike.mobileBar} data-bottom-bar>
         <p className={bike.mobileBarPrice}>
           {barBefore}
           {/* The price and "a day" stay together on one line. */}

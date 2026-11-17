@@ -34,6 +34,7 @@ export const ko: Messages = {
     included: "모든 오토바이에 포함",
     bookABike: "오토바이 예약",
     askWhatsApp: "WhatsApp으로 문의",
+    chatWhatsApp: "WhatsApp 채팅",
     openMaps: "Google 지도에서 보기",
     city: { SAIGON: "사이공", HANOI: "하노이", DA_NANG: "다낭" },
     dropoffReturn: "사이공 (매장으로 반납)",
@@ -47,8 +48,6 @@ export const ko: Messages = {
     metaDescription:
       "호치민시에서 하루 9달러부터 오토바이를 빌리세요. 혼다, 가와사키, 스즈키. 하노이·다낭 편도 렌탈. Google 평점 4.9★. 온라인 예약.",
     heroAlt: "카르스트 산맥 사이 텅 빈 도로 위의 Red Lantern 오토바이",
-    quote: "“천 리 길도 한 걸음부터.”",
-    quoteBy: "노자",
     title: "사이공 오토바이 렌탈, 하노이·다낭 편도까지",
     lead: "잘 관리된 오토바이, 합리적인 가격, 그리고 베트남 어디에서든 WhatsApp으로 답하는 팀. 몇 분이면 온라인으로 예약하고 1군에서 받아 가세요.",
     seeOneWay: "편도 여행 보기",
@@ -58,19 +57,27 @@ export const ko: Messages = {
     oneWayTitle: "편도 여행",
     oneWayIntro:
       "돌아올 필요 없이 베트남을 종단하세요. 고원 지대, 중부 해안, 하이반 고개, 그리고 북부의 카르스트 지형까지. 다낭이나 하노이에 오토바이를 두고 가시면 저희가 회수합니다.",
-    waysTitle: "두 가지 여행 방법",
-    ways: {
-      rent: {
-        title: "사이공에서 대여",
-        text: "일, 주, 월 단위로. 오래 탈수록 하루 요금이 내려갑니다.",
-        alt: "사이공 오페라 하우스 앞의 스쿠터 라이더",
+    whyRentTitle: "왜 사지 않고 빌려야 할까요?",
+    whyRentIntro:
+      "많은 여행자가 사이공에서 저렴한 오토바이를 사서 하노이에서 다시 팝니다. 저희에게 빌리면 이런 점이 다릅니다.",
+    whyRent: [
+      {
+        title: "관리된 오토바이",
+        text: "모든 오토바이는 15년 동안 오토바이를 정비해 온 피(Phi)가 저희 정비소에서 직접 정비합니다.",
       },
-      oneWay: {
-        title: "하노이·다낭 편도",
-        text: "원하는 속도로 북쪽으로 달리고 도착지에 오토바이를 두세요. 저희가 회수합니다.",
-        alt: "베트남 북부에서 작은 배로 강을 건너는 라이더와 오토바이",
+      {
+        title: "길 위의 도움",
+        text: "베트남 어디에 있든 WhatsApp으로 연락하세요. 해결 방법을 안내하거나 가까운 정비사를 찾아 드립니다.",
       },
-    },
+      {
+        title: "원하면 보험까지",
+        text: "예약할 때 종합 보험을 추가하세요. FAQ에 안내된 조건에 따라 사고, 기계 고장, 펑크를 보장합니다.",
+      },
+      {
+        title: "끝나도 팔 필요 없음",
+        text: "마지막 날 하노이나 다낭의 반납 장소에 오토바이를 두고 가세요. 비행기 타기 전에 살 사람을 찾을 필요가 없습니다.",
+      },
+    ],
     popularTitle: "인기 오토바이",
     popularIntro: "도시용 쉬운 반자동부터 전국 여행용 어드벤처 바이크까지.",
     seeAllBikes: "모든 오토바이 보기",
@@ -82,7 +89,7 @@ export const ko: Messages = {
       { strong: "날짜와 오토바이를 고르세요.", rest: "전체 가격을 바로 확인할 수 있습니다." },
       {
         strong: "결제 없이 예약 요청을 보내세요.",
-        rest: "이메일로 확정해 드린 뒤 보증금 결제를 안내해 드립니다. 나머지는 픽업할 때 결제합니다.",
+        rest: "이메일로 확정해 드린 뒤 예약금 결제를 안내해 드립니다. 나머지는 픽업할 때 결제합니다.",
       },
       {
         strong: "매장에서 픽업",
@@ -129,7 +136,7 @@ export const ko: Messages = {
     rideOneWay: "하노이까지 편도로",
     whatsappMessage: "안녕하세요 Red Lantern Bikes! {name}에 대해 문의드립니다.",
     depositNote:
-      "예약 요청은 무료입니다. 확정되면 보증금 {deposit}으로 오토바이가 확보되며, 나머지는 픽업 시 결제합니다.",
+      "예약 요청은 무료입니다. 확정되면 예약금 {deposit}으로 오토바이가 확보되며, 나머지는 픽업 시 결제합니다.",
     reviewsTitle: "라이더 후기",
     goodFor: "이런 여행에 좋아요",
     licence: "면허",
@@ -325,8 +332,8 @@ export const ko: Messages = {
     fullName: "이름 (여권과 동일)",
     email: "이메일",
     emailHint: "예약 내용과 답변을 이 주소로 보내드립니다.",
-    phone: "전화 또는 WhatsApp (선택)",
-    phoneHint: "국가 번호 포함, 예: +82 10 1234 5678",
+    phone: "전화 또는 WhatsApp",
+    phoneHint: "국가 번호 포함, 예: +82 10 1234 5678. 예약금 결제 안내에 사용합니다.",
     note: "전달할 내용이 있으신가요? (선택)",
     summary: "예약 내역",
     chooseBike: "오토바이를 선택하세요",
@@ -336,13 +343,15 @@ export const ko: Messages = {
     savingHint: "{days}일 이상 타면 하루 {daily} 대신 {weekly}.",
     oneWayFee: "편도 요금",
     total: "합계",
-    depositNow: "보증금 (확정 후 결제, 환불 불가)",
+    depositNow: "예약금 (확정 후 결제, 환불 불가)",
     balance: "픽업 시 잔금",
     choosePrompt: "여행, 날짜, 오토바이를 고르면 가격이 표시됩니다.",
-    accept: "보증금은 결제 후 환불되지 않으며, 잔금은 픽업 시 결제함을 이해합니다.",
+    accept: "예약금 {deposit}은 결제 후 환불되지 않으며, 잔금은 픽업 시 결제함을 이해합니다.",
     reserve: "예약 요청 보내기",
     reserving: "보내는 중…",
-    fine: "지금은 결제하실 것이 없습니다. 요청을 확인하는 동안 오토바이를 확보해 두고, 보통 몇 시간 안에 이메일로 답변드립니다. 확정되면 보증금 결제를 위해 연락드립니다.",
+    fine: "지금은 결제하실 것이 없습니다. 요청을 확인하는 동안 오토바이를 확보해 두고, 보통 몇 시간 안에 이메일로 답변드립니다. 확정되면 예약금 결제를 위해 연락드립니다.",
+    security:
+      "픽업 시 보증금도 맡기셔야 합니다: 여권 또는 현금(스쿠터 미화 300달러, 오토바이 미화 500달러). 오토바이를 반납하면 돌려드립니다.",
     help: "궁금한 점이 있으신가요? WhatsApp으로 문의하세요",
     helpMessageTrip:
       "안녕하세요 Red Lantern Bikes! {start}부터 {end}까지 {bike} 예약에 대해 문의드립니다.",
@@ -352,8 +361,8 @@ export const ko: Messages = {
     fieldErrors: {
       name: "이름을 입력해 주세요.",
       email: "이메일 주소를 확인해 주세요.",
-      phone: "전화번호를 확인해 주세요.",
-      acceptDeposit: "보증금 조건에 동의하려면 확인란을 선택해 주세요.",
+      phone: "국가 번호를 포함한 전화 또는 WhatsApp 번호를 입력해 주세요.",
+      acceptDeposit: "예약금 조건에 동의하려면 확인란을 선택해 주세요.",
       modelId: "오토바이를 선택해 주세요.",
     },
     checkFields: "표시된 항목을 확인해 주세요.",
@@ -387,7 +396,7 @@ export const ko: Messages = {
     rental: "대여료, {days}",
     oneWayFee: "편도 요금",
     total: "합계",
-    deposit: "보증금 (환불 불가)",
+    deposit: "예약금 (환불 불가)",
     balance: "픽업 시 잔금",
     newBooking: "새로 요청하기",
     heldTitle: "예약 요청이 접수되었습니다",
@@ -396,7 +405,7 @@ export const ko: Messages = {
     heldTomorrow: "내일",
     confirmedTitle: "예약이 확정되었습니다",
     confirmedText:
-      "오토바이가 예약되었습니다. 아직 연락을 받지 못하셨다면 보증금 결제를 위해 곧 연락드리겠습니다. 1군 매장에서 뵙겠습니다.",
+      "오토바이가 예약되었습니다. 아직 연락을 받지 못하셨다면 예약금 결제를 위해 곧 연락드리겠습니다. 1군 매장에서 뵙겠습니다.",
     expiredTitle: "제때 요청을 확정해 드리지 못했습니다",
     expiredText:
       "오토바이 확보가 해제되었으며, 결제하신 금액은 없습니다. 메시지를 보내 주시면 바로 도와드리겠습니다. 새로 요청하셔도 됩니다.",
