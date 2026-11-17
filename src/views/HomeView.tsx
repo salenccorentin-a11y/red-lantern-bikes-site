@@ -14,8 +14,8 @@ import { OneWayTrips } from "@/components/oneway/OneWayTrips";
 import { RiderWall } from "@/components/RiderWall";
 import { ShopMap } from "@/components/ShopMap";
 import ui from "@/components/ui.module.css";
-import { ADDRESS_LINE, BUSINESS, mapsLink } from "@/content/business";
-import { getMessages, hoursFor, includedFor } from "@/i18n";
+import { ADDRESS_LINE, BUSINESS } from "@/content/business";
+import { getMessages, includedFor } from "@/i18n";
 import { fill, OG_LOCALE, type Locale } from "@/i18n/config";
 import { languageAlternates, localize } from "@/i18n/paths";
 import { db } from "@/lib/db";
@@ -55,25 +55,29 @@ export function HomeView({ lang }: { lang: Locale }) {
         <div className={styles.heroText}>
           <h1 className={styles.heroTitle}>{t.title}</h1>
           <p className={styles.lead}>{t.lead}</p>
-          <div className={`${ui.actions} ${styles.heroActions}`}>
-            <Link href={to("/book")} className={ui.primary}>
-              {m.common.bookABike}
-            </Link>
-            <Link href={to("/one-way")} className={ui.ghostDark}>
-              {t.seeOneWay}
-            </Link>
+          {/* The booking "ticket": the two actions and the reasons to trust the
+              shop, on a raised night card like the booking page's summary. */}
+          <div className={styles.ticket}>
+            <div className={styles.ticketActions}>
+              <Link href={to("/book")} className={ui.primary}>
+                {m.common.bookABike}
+              </Link>
+              <Link href={to("/one-way")} className={styles.ticketLink}>
+                {t.seeOneWay}
+              </Link>
+            </div>
+            <ul className={styles.trust}>
+              <li>
+                <StarIcon /> {fill(t.trustRating, { rating: BUSINESS.googleRating })}
+              </li>
+              <li>
+                <HelmetIcon /> {t.trustGear}
+              </li>
+              <li>
+                <WrenchIcon /> {t.trustHelp}
+              </li>
+            </ul>
           </div>
-          <ul className={styles.trust}>
-            <li>
-              <StarIcon /> {fill(t.trustRating, { rating: BUSINESS.googleRating })}
-            </li>
-            <li>
-              <HelmetIcon /> {t.trustGear}
-            </li>
-            <li>
-              <WrenchIcon /> {t.trustHelp}
-            </li>
-          </ul>
         </div>
       </section>
 
@@ -151,48 +155,31 @@ export function HomeView({ lang }: { lang: Locale }) {
       </section>
 
       <section className={`${ui.section} ${ui.sectionMist}`}>
+        {/* Where the shop is: just the map, and the way to meet the team. */}
         <div className={`${ui.container} ${styles.visit}`}>
-          <div>
-            <h2 className={styles.splitTitle}>{t.teamTitle}</h2>
-            <p>
-              {t.teamText} {t.teamBio}
-            </p>
-            <p>
-              <Link href="/about" className={ui.link}>
-                {t.meetTeam}
-              </Link>
-            </p>
-          </div>
-          <div className={styles.shopCard}>
-            <ShopMap title={fill(m.common.shopMap, { address: ADDRESS_LINE })} />
-            <h3>{t.visitShop}</h3>
-            <p>
-              {ADDRESS_LINE}
-              <br />
-              {hoursFor(lang)}
-            </p>
-            <div className={ui.actions}>
-              <Link href={to("/book")} className={ui.primary}>
-                {m.common.bookABike}
-              </Link>
-              <a href={mapsLink()} target="_blank" rel="noopener" className={ui.ghostLight}>
-                {m.common.openMaps}
-              </a>
-            </div>
-          </div>
+          <h2 className={styles.splitTitle}>{t.teamTitle}</h2>
+          <ShopMap
+            title={fill(m.common.shopMap, { address: ADDRESS_LINE })}
+            className={styles.visitMap}
+          />
+          <p className={styles.visitFoot}>
+            <Link href="/about" className={ui.link}>
+              {t.meetTeam}
+            </Link>
+          </p>
         </div>
       </section>
     </main>
   );
 }
 
-// Where the hero switches from "photo behind the text" to "photo on the right".
+// Where the hero switches from the tall phone crop to the whole photo.
 const WIDE = "(min-width: 900px)";
 
 /**
- * The hero photo: a tall crop on phones (public/photos/karst-road-phone.webp,
- * cut from karst-road.webp with its bottom faded to night), the
- * whole photo on wider screens. Both are preloaded at high priority, each only
+ * The hero photo, behind the text at every size: a tall crop on phones
+ * (public/photos/karst-road-phone.webp, cut from karst-road.webp with its
+ * bottom faded to night), the whole photo on wider screens. Both are preloaded at high priority, each only
  * on the screens that show it, so on a phone it is the first thing painted
  * (its blurred version comes with the page itself).
  */
@@ -204,7 +191,8 @@ function HeroPhoto({ alt }: { alt: string }) {
     fetchPriority: "high",
     loading: "eager",
   } as const;
-  const wide = getImageProps({ ...common, src: karstRoad, sizes: "40vw" }).props;
+  // Full width on wide screens too: the photo runs behind the text.
+  const wide = getImageProps({ ...common, src: karstRoad, sizes: "100vw" }).props;
   // The tall phone crop has more pixels than the wide photo: a lighter quality
   // keeps its download about the same as before.
   const phone = getImageProps({
