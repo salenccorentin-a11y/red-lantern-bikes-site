@@ -75,6 +75,11 @@
   text-underline-offset: 3px;
 }
 
+/* On mist, lantern red is 4.4:1; the deep red keeps links readable (6:1+). */
+.sectionMist .link {
+  color: var(--lantern-red-deep);
+}
+
 .link:hover {
   color: var(--lantern-red-deep);
 }

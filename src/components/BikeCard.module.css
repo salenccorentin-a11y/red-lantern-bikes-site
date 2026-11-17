@@ -23,7 +23,7 @@
 }
 
 .card:hover {
-  border-color: rgb(232 85 43 / 0.45);
+  border-color: rgb(var(--lantern-red-rgb) / 0.45);
 }
 
 .image {

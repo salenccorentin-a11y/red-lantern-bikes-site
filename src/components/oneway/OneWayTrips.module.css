@@ -168,7 +168,7 @@
 }
 
 .roadGlow {
-  stroke: rgb(232 85 43 / 0.3);
+  stroke: rgb(var(--lantern-red-rgb) / 0.3);
   stroke-width: 10;
 }
 
@@ -284,17 +284,20 @@
   border: 1px solid var(--night-line);
   border-radius: var(--radius-card);
   background: rgb(255 255 255 / 0.03);
-  opacity: 0.5;
   transition:
-    opacity 400ms ease,
     border-color 400ms ease,
     box-shadow 400ms ease;
 }
 
+/* Not reached yet on the scroll: the words stay full contrast; only the
+   gold note waits (fog) until the route lights the card up. */
+.card:not(.lit) .cardNote {
+  color: var(--fog);
+}
+
 .card.lit {
-  opacity: 1;
-  border-color: rgb(232 85 43 / 0.55);
-  box-shadow: 0 14px 36px -20px rgb(232 85 43 / 0.7);
+  border-color: rgb(var(--lantern-red-rgb) / 0.6);
+  box-shadow: 0 14px 36px -20px rgb(var(--lantern-red-rgb) / 0.75);
 }
 
 .cardCity {
@@ -306,6 +309,7 @@
   margin: 2px 0 0;
   color: var(--star);
   font-weight: 600;
+  transition: color 400ms ease;
 }
 
 .cardDetail {

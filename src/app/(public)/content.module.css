@@ -321,8 +321,8 @@
 
 .draftNote {
   padding: 14px 16px;
-  border-left: 4px solid var(--star);
-  border-radius: 4px;
+  border: 1px solid rgb(255 204 0 / 0.55);
+  border-radius: var(--radius-input);
   background: #fff8db;
   font-size: var(--text-base);
 }

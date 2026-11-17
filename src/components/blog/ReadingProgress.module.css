@@ -124,7 +124,7 @@
 
 /* The lit lantern: glow, red body and gold caps, faded in on arrival. */
 .glow {
-  fill: rgb(232 85 43 / 0.45);
+  fill: rgb(var(--lantern-red-rgb) / 0.45);
 }
 
 .litLayer,

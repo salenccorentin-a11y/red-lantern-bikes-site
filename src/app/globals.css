@@ -6,6 +6,8 @@
   --night-line: #2c3f61;
   --lantern-red: #d62a1e;
   --lantern-red-deep: #ad1f15;
+  /* Lantern red as channels, for glows and tints: rgb(var(--lantern-red-rgb) / 0.5). */
+  --lantern-red-rgb: 214 42 30;
   --star: #ffcc00;
   --white: #ffffff;
   --mist: #eef2f7;
