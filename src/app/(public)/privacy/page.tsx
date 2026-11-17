@@ -84,8 +84,9 @@ export default function PrivacyPage() {
           <h2>How long we keep it</h2>
           <p>
             We keep your booking details (your name, contact details, note and booking) on this site
-            until your rental is over. Then we move them to our private archive of past rentals and
-            remove them from the website&apos;s database.
+            to manage your rental. After the rental, we also record it in our private archive of
+            past rentals. We keep these records until you ask us to delete them, unless the law
+            requires us to keep them.
           </p>
 
           <h2>Your choices</h2>

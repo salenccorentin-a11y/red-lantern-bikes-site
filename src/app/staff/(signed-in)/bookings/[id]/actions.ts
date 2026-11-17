@@ -3,7 +3,6 @@
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { checkIn, checkOut, saveStaffNote } from "@/server/booking-admin";
-import { archiveBooking, notionArchiveFromEnv } from "@/server/booking-archive";
 import {
   ANSWER_ERROR_TEXT,
   acceptRequest,
@@ -81,24 +80,4 @@ export async function saveNoteAction(form: FormData) {
   const id = String(form.get("id"));
   await saveStaffNote(db, id, String(form.get("note") ?? "").slice(0, 2000));
   back(id, { done: "Note saved." });
-}
-
-/** Sends a finished rental to the Notion archive and removes the customer's details. */
-export async function archiveAction(form: FormData) {
-  await requireStaff();
-  const id = String(form.get("id"));
-  if (form.get("confirm") !== "yes") back(id, { error: "Tick the box to confirm the archive." });
-  const append = notionArchiveFromEnv();
-  if (!append) {
-    back(id, {
-      error: "Notion isn't connected yet (NOTION_TOKEN and NOTION_RENTALS_PAGE_ID are missing).",
-    });
-  }
-  const result = await archiveBooking(db, id, append);
-  back(
-    id,
-    result.ok
-      ? { done: "Archived in Notion. The customer's details are removed from the site." }
-      : { error: result.error },
-  );
 }

@@ -275,9 +275,6 @@ model Booking {
   checkedOutAt         DateTime?
   checkedInAt          DateTime?
   cancelledAt          DateTime?
-  // Sent to the owner's archive in Notion, and the customer's details removed
-  // from here (src/server/booking-archive.ts).
-  archivedAt           DateTime?
 
   createdById String?
   createdBy   StaffUser? @relation(fields: [createdById], references: [id])

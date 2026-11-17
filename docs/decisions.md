@@ -16,9 +16,9 @@ Choices made while planning the rebuild, with the reason for each. Pricing rules
 ## Launch set-up and data (17 November 2026)
 
 - **Hosting**: Railway (Singapore) for the site, database and hourly job; Cloudflare's free plan for the domain's DNS, the bare-domain redirect to `www`, and email forwarding. The live branch is `main`, kept in step with `build/foundation`.
+- **Archiving finished rentals** (2026-11-17, owner's choice): done by hand in the owner's Notion Rentals database. The "Archive to Notion" button was removed; its `archivedAt` column is dropped by a later migration rather than deleting the migration that added it, so databases that already ran it stay in step.
 - **Email**: there's no mailbox on the domain; the owner uses a Gmail address. Booking emails go out through Resend from an address on the domain, and Cloudflare Email Routing forwards replies sent to that address to the owner's Gmail, which is never shown to customers.
-- **How long booking data is kept**: until the rental is over. Then the booking goes to the archive in the owner's Rentals page in Notion and is removed from the site's database. The privacy page says so. Not built yet: the step that archives finished rentals and removes customers' details from the database.
-- **Archive button** (staff booking page, owner's choice over an automatic job): on a returned, cancelled or ran-out booking, "Archive to Notion" adds a row to the Archive table on the owner's RENTALS page in Notion (same columns as the owner's own rows; Deposit and Last oil change left blank), then removes the customer's name, email, phone and notes from the database and sets `archivedAt`. Bike, dates and money stay. If Notion refuses the row, nothing is removed. Needs `NOTION_TOKEN` (an internal integration with access to the RENTALS page) and `NOTION_RENTALS_PAGE_ID`.
+- **How long booking data is kept** (changed 2026-11-17): booking details stay on the site to manage the rental, and the owner also records the rental by hand in the Notion Rentals database. Both are kept until the customer asks for deletion, unless the law requires keeping them. The privacy page says so.
 - **Drop-off points** in Hanoi and Da Nang are near the city centre (FAQ and one-way page, EN, FR, KO).
 - **One-way fee** for the CRF150 and WR155R confirmed at $60, the same as the XR150 (already in the seed).
 
