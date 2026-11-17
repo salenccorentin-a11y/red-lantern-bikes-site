@@ -13,6 +13,14 @@ Choices made while planning the rebuild, with the reason for each. Pricing rules
 - **Bookings for the same bike take turns** (11 October 2026). Before saving a booking or maintenance block, the system locks that one bike for a few milliseconds and re-checks it's free. Customers booking different bikes never wait for each other. Without this, two customers booking the same bike at the same instant could stall each other for about a second until the database cancelled one, which then failed with an error instead of getting another bike. The no-overlap rule remains the final guarantee.
 - **Timezone.** All dates are in Asia/Ho_Chi_Minh.
 
+## Launch set-up and data (17 November 2026)
+
+- **Hosting**: Railway (Singapore) for the site, database and hourly job; Cloudflare's free plan for the domain's DNS, the bare-domain redirect to `www`, and email forwarding. The live branch is `main`, kept in step with `build/foundation`.
+- **Email**: there's no mailbox on the domain; the owner uses a Gmail address. Booking emails go out through Resend from an address on the domain, and Cloudflare Email Routing forwards replies sent to that address to the owner's Gmail, which is never shown to customers.
+- **How long booking data is kept**: until the rental is over. Then the booking goes to the archive in the owner's Rentals page in Notion and is removed from the site's database. The privacy page says so. Not built yet: the step that archives finished rentals and removes customers' details from the database.
+- **Drop-off points** in Hanoi and Da Nang are near the city centre (FAQ and one-way page, EN, FR, KO).
+- **One-way fee** for the CRF150 and WR155R confirmed at $60, the same as the XR150 (already in the seed).
+
 ## WhatsApp, deposits, home page (17 November 2026)
 
 - **WhatsApp button on every public page** (`FloatingWhatsApp`), bottom right. On phones it's a round icon and sits above the price bar on bike and booking pages; on the booking page it moves to the left so it never covers the prices. Wider screens show "Chat on WhatsApp".

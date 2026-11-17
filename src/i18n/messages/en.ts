@@ -187,7 +187,7 @@ export const en = {
       "Pick up a motorbike in Saigon and leave it in Hanoi or Da Nang. Fixed one-way fee per bike, roadside assistance the whole way, and we bring the bike home.",
     title: "One-way rental: Saigon to Hanoi or Da Nang",
     intro:
-      "Ride the length of Vietnam without riding back. Pick up in District 1, take the route you like, and leave the bike at our drop-off point in Hanoi or Da Nang. We send it home by train.",
+      "Ride the length of Vietnam without riding back. Pick up in District 1, take the route you like, and leave the bike at our drop-off point near the city centre in Hanoi or Da Nang. We send it home by train.",
     photoAlt: "A rider and bike crossing a river on a small boat in northern Vietnam",
     bookHanoi: "Book one-way to Hanoi",
     bookDaNang: "Book one-way to Da Nang",
@@ -210,7 +210,7 @@ export const en = {
       },
       {
         strong: "Drop off",
-        rest: "at our partner point on your last day. We handle getting the bike back to Saigon.",
+        rest: "at our partner point near the city centre on your last day. We handle getting the bike back to Saigon.",
       },
     ],
     otherCities:

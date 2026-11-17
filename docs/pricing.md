@@ -42,6 +42,8 @@ The same fee applies to both routes. It's set in US dollars and charged in VND a
 | Honda CB150X, Kawasaki Versys X300 | $80 | 2,100,000 |
 | All other models | $60 | 1,600,000 |
 
+The CRF150 and WR155R pay the same as the XR150, $60 (confirmed by the owner, 17 November 2026).
+
 These replace the earlier ranges (Hanoi 1,200,000 to 1,800,000; Da Nang 1,000,000 to 1,600,000). The $80 fee is above both old ranges.
 
 ## Deposit

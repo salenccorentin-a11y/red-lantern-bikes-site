@@ -196,7 +196,7 @@ export const frContent: TranslatedContent = {
       id: "one-way",
       question: "Comment fonctionnent les allers simples ?",
       answer: [
-        "Récupérez la moto à Saïgon et laissez-la à notre point de dépôt partenaire à Hanoï (locations de 12 jours ou plus) ou à Da Nang (7 jours ou plus). Des frais d'aller simple, selon la moto, s'ajoutent au prix. Nous nous occupons de ramener la moto à Saïgon.",
+        "Récupérez la moto à Saïgon et laissez-la à notre point de dépôt partenaire, près du centre-ville, à Hanoï (locations de 12 jours ou plus) ou à Da Nang (7 jours ou plus). Des frais d'aller simple, selon la moto, s'ajoutent au prix. Nous nous occupons de ramener la moto à Saïgon.",
         "Vous voulez finir à Da Lat, Hué ou Nha Trang ? Ces villes ne se réservent pas en ligne, mais écrivez-nous et nous pouvons organiser quelque chose.",
       ],
     },

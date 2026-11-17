@@ -71,7 +71,7 @@ export const FAQ: Faq[] = [
     id: "one-way",
     question: "How do one-way rentals work?",
     answer: [
-      "Pick up in Saigon and leave the bike at our partner drop-off point in Hanoi (rentals of 12 days or more) or Da Nang (7 days or more). A one-way fee, depending on the bike, is added to the price. We take care of getting the bike back to Saigon.",
+      "Pick up in Saigon and leave the bike at our partner drop-off point near the city centre in Hanoi (rentals of 12 days or more) or Da Nang (7 days or more). A one-way fee, depending on the bike, is added to the price. We take care of getting the bike back to Saigon.",
       "Want to finish in Da Lat, Hue or Nha Trang? Those can't be booked online, but message us and we can arrange something.",
     ],
   },

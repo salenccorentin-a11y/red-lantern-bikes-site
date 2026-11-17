@@ -34,9 +34,8 @@ export default function PrivacyPage() {
           <h2>What we collect</h2>
           <ul>
             <li>
-              <b>When you book:</b> your name, email address, phone or WhatsApp number if you give
-              it, your note to us, and the details of your booking (bike, dates, route, price,
-              payments).
+              <b>When you book:</b> your name, email address, phone or WhatsApp number, your note to
+              us, and the details of your booking (bike, dates, route, price, payments).
             </li>
             <li>
               <b>When you send a message:</b> your name, email, phone if you give it, and what you
@@ -62,6 +61,11 @@ export default function PrivacyPage() {
             <li>Railway, which hosts our website and database in Singapore.</li>
             <li>Resend, which sends our booking emails.</li>
             <li>
+              Cloudflare, which manages our domain name and forwards the emails sent to our booking
+              address.
+            </li>
+            <li>Notion, where we keep our private archive of past rentals.</li>
+            <li>
               Umami, which counts visits to our pages without cookies and without collecting
               personal data. Booking page addresses are shortened before they are counted, so your
               private booking link is never sent.
@@ -79,8 +83,9 @@ export default function PrivacyPage() {
 
           <h2>How long we keep it</h2>
           <p>
-            To confirm: how long booking records and messages are kept (typically as long as
-            accounting rules require).
+            We keep your booking details (your name, contact details, note and booking) on this site
+            until your rental is over. Then we move them to our private archive of past rentals and
+            remove them from the website&apos;s database.
           </p>
 
           <h2>Your choices</h2>

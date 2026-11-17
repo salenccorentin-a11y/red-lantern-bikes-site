@@ -185,7 +185,7 @@ export const fr: Messages = {
       "Récupérez une moto à Saïgon et laissez-la à Hanoï ou Da Nang. Frais d'aller simple fixes par moto, assistance tout le long du trajet, et nous rapatrions la moto.",
     title: "Location aller simple : de Saïgon à Hanoï ou Da Nang",
     intro:
-      "Traversez le Vietnam sans faire le trajet retour. Partez du 1er arrondissement, prenez la route qui vous plaît et laissez la moto à notre point de dépôt à Hanoï ou Da Nang. Nous la renvoyons par le train.",
+      "Traversez le Vietnam sans faire le trajet retour. Partez du 1er arrondissement, prenez la route qui vous plaît et laissez la moto à notre point de dépôt près du centre-ville, à Hanoï ou Da Nang. Nous la renvoyons par le train.",
     photoAlt:
       "Un motard et sa moto traversant une rivière sur une petite barque dans le nord du Vietnam",
     bookHanoi: "Réserver un aller simple vers Hanoï",
@@ -209,7 +209,7 @@ export const fr: Messages = {
       },
       {
         strong: "Déposez la moto",
-        rest: "chez notre partenaire le dernier jour. Nous nous occupons de la ramener à Saïgon.",
+        rest: "chez notre partenaire, près du centre-ville, le dernier jour. Nous nous occupons de la ramener à Saïgon.",
       },
     ],
     otherCities:
