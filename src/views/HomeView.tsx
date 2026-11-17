@@ -79,19 +79,8 @@ export function HomeView({ lang }: { lang: Locale }) {
 
       <OneWayTrips lang={lang} title={t.oneWayTitle} intro={t.oneWayIntro} />
 
-      {/* Straight after the route: what riders say, then the bikes. */}
+      {/* Straight after the route: the bikes, then what riders say. */}
       <section className={`${ui.section} ${ui.sectionMist}`}>
-        <div className={ui.container}>
-          <h2 className={ui.sectionTitle}>{t.ridersTitle}</h2>
-          <p className={ui.sectionIntro}>
-            {fill(t.ridersIntro, { rating: BUSINESS.googleRating })}
-          </p>
-          <RiderWall alt={t.ridersAlt} />
-          <GoogleReviews lang={lang} />
-        </div>
-      </section>
-
-      <section className={ui.section}>
         <div className={ui.container}>
           <h2 className={ui.sectionTitle}>{t.popularTitle}</h2>
           <p className={ui.sectionIntro}>{t.popularIntro}</p>
@@ -103,6 +92,17 @@ export function HomeView({ lang }: { lang: Locale }) {
               {t.seeAllBikes}
             </Link>
           </p>
+        </div>
+      </section>
+
+      <section className={ui.section}>
+        <div className={ui.container}>
+          <h2 className={ui.sectionTitle}>{t.ridersTitle}</h2>
+          <p className={ui.sectionIntro}>
+            {fill(t.ridersIntro, { rating: BUSINESS.googleRating })}
+          </p>
+          <RiderWall alt={t.ridersAlt} strip />
+          <GoogleReviews lang={lang} />
         </div>
       </section>
 

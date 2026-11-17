@@ -20,8 +20,8 @@ export const BIKE_CONTENT: Record<string, BikeContent> = {
   "wave-alpha-110": {
     summary: "Light, frugal and easy: the bike most of Vietnam rides.",
     description:
-      "The Wave Alpha is Vietnam's everyday workhorse. Four gears and no clutch lever make it easy to learn, it sips fuel, and any mechanic in the country can fix it. Ideal for getting around Saigon or a do the whole country without any issues.",
-    bestFor: ["First-time riders", "City riding", "Budget trips"],
+      "The Wave Alpha is Vietnam's everyday workhorse. Four gears and no clutch lever make it easy to learn, it sips fuel, and any mechanic in the country can fix it. Good for getting around Saigon, and for riding the whole country on your own.",
+    bestFor: ["First-time riders", "Solo long trips", "Budget trips"],
     licence: "IDP_OR_A1",
     seoTitle: "Honda Wave Rental Saigon | Red Lantern Bikes",
     seoDescription:
@@ -259,22 +259,6 @@ export const BIKE_FACTS: Record<string, BikeFacts> = {
     brakes: { front: "disc", rear: "disc", abs: true },
     groundClearanceMm: 180,
   },
-};
-
-// ─── The first photo on each bike's page ──────────────────────────────────
-// The best riding photo of the model, from src/content/bike-gallery.json. It
-// comes first, then the studio photo, then the others. Models without one
-// (or without any photos yet) start with the studio photo.
-export const LEAD_PHOTO: Record<string, string> = {
-  "wave-alpha-110": "/bikes/gallery/wave-alpha-110-3.webp",
-  "suzuki-gd110": "/bikes/gallery/suzuki-gd110-1.webp",
-  "suzuki-en125": "/bikes/gallery/suzuki-en125-1.webp",
-  "yamaha-nvx125": "/bikes/gallery/yamaha-nvx125-1.webp",
-  "honda-winner-x-150": "/bikes/gallery/honda-winner-x-150-1.webp",
-  "suzuki-gsx-r150": "/bikes/gallery/suzuki-gsx-r150-2.webp",
-  "honda-cb150x": "/bikes/gallery/honda-cb150x-1.webp",
-  "yamaha-wr155r": "/bikes/gallery/yamaha-wr155r-3.webp",
-  "kawasaki-versys-x300": "/bikes/gallery/kawasaki-versys-x300-1.webp",
 };
 
 export const LICENCE_TEXT: Record<BikeContent["licence"], string> = {

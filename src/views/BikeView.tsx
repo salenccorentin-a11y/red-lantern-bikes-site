@@ -15,12 +15,11 @@ import styles from "@/app/(public)/content.module.css";
 import { bikeImage } from "@/components/BikeCard";
 import { BikePhotos } from "@/components/BikePhotos";
 import photoStyles from "@/components/BikePhotos.module.css";
-import { GoogleReviews } from "@/components/GoogleReviews";
 import { SharedElement } from "@/components/motion/SharedElement";
 import ui from "@/components/ui.module.css";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import galleries from "@/content/bike-gallery.json";
-import { BIKE_CONTENT, LEAD_PHOTO, type BikeFacts } from "@/content/bikes";
+import { BIKE_CONTENT, type BikeFacts } from "@/content/bikes";
 import { BIKE_MODELS } from "@/db/seed-data";
 import {
   bikeContent,
@@ -190,8 +189,6 @@ async function BikeMore({ lang, slug }: { lang: Locale; slug: string }) {
 
   return (
     <>
-      <GoogleReviews lang={lang} title={t.reviewsTitle} />
-
       <div className={bike.details}>
         <Specs lang={lang} facts={facts} />
         {content && content.bestFor.length > 0 && (
@@ -240,24 +237,16 @@ type Photo = {
   cutout?: boolean;
 };
 
-/** The best riding photo first, then the studio photo, then the others. */
+/**
+ * The shop's own photos of the model (4:3, in the order of
+ * scripts/brand/prepare-photos.cjs). The studio cut-out stays on the cards,
+ * not here (owner, 2026-11-17); it only stands in for a model with no photos yet.
+ */
 function photosFor(slug: string, studioAlt: string): Photo[] {
   const gallery =
     (galleries as Record<string, { src: string; alt: string; blur: string }[]>)[slug] ?? [];
-  const lead = gallery.find((p) => p.src === LEAD_PHOTO[slug]);
-  const square = (p: (typeof gallery)[number]): Photo => ({ ...p, width: 960, height: 960 });
-  const studio: Photo = {
-    src: bikeImage(slug),
-    alt: studioAlt,
-    width: 1200,
-    height: 800,
-    cutout: true,
-  };
-  return [
-    ...(lead ? [square(lead)] : []),
-    studio,
-    ...gallery.filter((p) => p !== lead).map(square),
-  ];
+  if (gallery.length > 0) return gallery.map((p) => ({ ...p, width: 1200, height: 900 }));
+  return [{ src: bikeImage(slug), alt: studioAlt, width: 1200, height: 800, cutout: true }];
 }
 
 function Photos({ lang, slug }: { lang: Locale; slug: string }) {

@@ -1,9 +1,9 @@
 // Turns the original photos (OneDrive "Project vietnam/Bikes") into web-sized
 // WebP files in public/. Rerun after swapping a photo in the list below.
 //
-//   node scripts/brand/prepare-photos.cjs ["path to the Bikes folder"]
+//   node scripts/brand/prepare-photos.cjs ["path to the Bikes folder"] [--gallery]
 //
-// Bikes: trimmed and centred on white, 1200×800. Galleries: square crops of
+// Bikes: trimmed and centred on white, 1200×800. Galleries: 4:3 frames of
 // your own photos of each model. Scenery: up to 2000px wide. Riders: square
 // crops for the "rode with us" wall.
 
@@ -11,7 +11,12 @@ const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 
-const ROOT = process.argv[2] ?? "C:/Users/33782/OneDrive/Documents/Project vietnam/Bikes";
+const ARGS = process.argv.slice(2);
+// --gallery: only redo the photos at the top of the bike pages.
+const ONLY_GALLERY = ARGS.includes("--gallery");
+const ROOT =
+  ARGS.find((a) => !a.startsWith("--")) ??
+  "C:/Users/33782/OneDrive/Documents/Project vietnam/Bikes";
 
 // Studio shots of the 12 fleet models (keyed by model slug).
 const BIKES = {
@@ -29,83 +34,150 @@ const BIKES = {
   "kawasaki-versys-x300": "Without background/Kawasaki Versys_X300.jpg",
 };
 
-// Your own photos of each model, shown under the studio shot on its page.
-// Chosen to avoid faces of people who haven't agreed to appear.
+// Your own photos of each model, at the top of its page. Only from the
+// "Website image" folder (owner, 2026-11-17); the first is what the page opens
+// on. box = [left, top, right, bottom], the part of the photo to keep, chosen
+// so the whole bike sits in the middle. Every photo comes out 4:3; a photo
+// that isn't 4:3 after the box (most upright phone photos) is shown whole over
+// a blurred copy of itself rather than cut.
+const W = "Website image/";
 const GALLERY = {
   "wave-alpha-110": [
-    ["Wave Alpha Shoot/IMG_2097.JPG", "A black Wave Alpha parked on a Saigon street"],
-    ["Wave Alpha Shoot/IMG_2274.JPG", "A black Wave Alpha among yellow flowers"],
-    ["Wave Alpha Shoot/IMG_2226.JPG", "Riding a Wave Alpha down a Saigon lane, headlight on"],
-    ["Honda Wave Alpha/IMG-20250830-WA0002.jpg", "A blue Wave Alpha, side view"],
+    [W + "IMG_2093.JPG", "A black Wave Alpha parked on a Saigon street", [0, 0.1, 0.9, 1]],
+    [W + "IMG_2153.JPG", "Riding a Wave Alpha past Ben Thanh market", [0, 0.25, 1, 1]],
+    [W + "IMG_2151.JPG", "A rider on a black Wave Alpha in Saigon", [0, 0.1, 1, 1]],
+    [W + "IMG-20250830-WA0002.jpg", "A blue Wave Alpha, side view"],
+    [W + "IMG_2266.JPG", "A Wave Alpha in front of City Hall in Saigon", [0, 0.15, 1, 1]],
   ],
   "suzuki-gd110": [
-    ["Suzuki GD110/Motorcycle front page.png", "A black GD110 parked on a city street"],
-    ["Suzuki GD110/6 2.jpg", "A GD110 with leather saddlebags outside the shop"],
-    ["Suzuki GD110/6 6.jpg", "A GD110 with saddlebags and a rear rack"],
+    [W + "Suzuki at the beach.jpg", "A loaded GD110 on the beach", [0, 0.22, 1, 0.97]],
+    [W + "6 2.jpg", "A GD110 with leather saddlebags outside the shop", [0.08, 0.08, 1, 1]],
+    [W + "6 1.jpg", "A black GD110 with leather saddlebags"],
   ],
   "suzuki-en125": [
-    ["Suzuki EN125cc/IMG-20250623-WA0012.jpg", "A loaded EN125 above rice terraces in the north"],
-    ["Suzuki EN125cc/IMG-20250419-WA0005.jpg", "An EN125 at a mountain viewpoint"],
-    ["Suzuki EN125cc/IMG-20250623-WA0001.jpg", "An EN125 on a bridge in the mountains"],
-    ["Suzuki EN125cc/IMG-20250623-WA0011.jpg", "An EN125 with luggage on a mountain road"],
+    [W + "IMG-20250623-WA0012.jpg", "A loaded EN125 above rice terraces in the north"],
+    [W + "IMG-20250623-WA0006.jpg", "An EN125 on an empty road through karst mountains"],
+    [W + "EN 2.jpg", "A red EN125 by the rice fields", [0.25, 0.22, 1, 0.88]],
+    [W + "IMG-20250623-WA0011.jpg", "An EN125 with luggage above the rice terraces"],
+    [W + "IMG-20250623-WA0001.jpg", "An EN125 on a bridge in the mountains"],
+    [W + "IMG-20250419-WA0005.jpg", "An EN125 at a mountain viewpoint", [0, 0.32, 1, 0.88]],
   ],
   "yamaha-nvx125": [
-    ["Yamaha NVX125/IMG-20250815-WA0009.jpg", "A red NVX125, front three-quarter view"],
-    ["Yamaha NVX125/IMG-20250815-WA0010.jpg", "A red NVX125 parked by a garden"],
-    ["Yamaha NVX125/IMG-20250813-WA0001.jpg", "A black and gold NVX125, side view"],
+    [W + "IMG-20250815-WA0009.jpg", "A red NVX125, front three-quarter view", [0, 0.18, 1, 0.92]],
+    [W + "IMG-20250815-WA0010.jpg", "A red NVX125 parked by a garden", [0, 0.05, 1, 1]],
+    [W + "IMG-20250815-WA0012.jpg", "A red NVX125 from behind", [0, 0.1, 1, 1]],
+    [W + "IMG-20250813-WA0001.jpg", "A black and gold NVX125, side view"],
   ],
   "honda-winner-x-150": [
     [
-      "Honda Winner X/WhatsApp Image 2025-12-19 at 4.54.52 PM.jpeg",
-      "A loaded Winner X by the beach",
+      W + "WhatsApp Image 2025-12-19 at 4.54.55 PM.jpeg",
+      "A blue Winner X loaded for the trip",
+      [0, 0.05, 0.85, 0.9],
     ],
     [
-      "Honda Winner X/WhatsApp Image 2025-12-18 at 8.55.50 AM.jpeg",
-      "A blue Winner X with a top box against a white wall",
+      W + "545697262_1500941047820186_3366812824896945328_n.jpg",
+      "A red Winner X, side view",
+      [0, 0.1, 0.9, 1],
     ],
-    [
-      "Honda Winner X/WhatsApp Image 2025-12-18 at 8.55.40 AM.jpeg",
-      "A Winner X with luggage on a country road",
-    ],
+    [W + "544899619_1500941037820187_7727859536678679195_n.jpg", "A red Winner X from the front"],
+    [W + "Honda Winner X.jpg", "A black Winner X in front of a gate", [0, 0.3, 1, 0.86]],
   ],
   "suzuki-gsx-r150": [
     [
-      "Suzuki GSX RR/518199034_1457498092164482_8653781470905826138_n.jpg",
-      "A white and black GSX-R150 outside the shop",
+      W + "518346930_1457498255497799_3799175047607141511_n.jpg",
+      "A white and black Suzuki 150 on a Saigon street at night",
+      [0.06, 0.08, 0.98, 1],
     ],
     [
-      "Suzuki GSX RR/518346930_1457498255497799_3799175047607141511_n.jpg",
-      "A GSX-R150 on a Saigon street at night",
+      W + "538916284_1494015041846120_7897132706742520960_n.jpg",
+      "A rider ready to leave on a black Suzuki 150 with luggage",
     ],
+    [
+      W + "539758242_1494015091846115_2250211974947493514_n.jpg",
+      "A black Suzuki 150, side view",
+      [0, 0.1, 0.88, 0.98],
+    ],
+    [
+      W + "541776179_1494015125179445_970348750117534548_n.jpg",
+      "A black Suzuki 150 with a rear rack",
+      [0, 0.1, 0.9, 1],
+    ],
+    [W + "IMG-20250820-WA0004.jpg", "A rider on a white and black Suzuki 150 at the shop"],
   ],
   "honda-xr150": [
-    ["Honda XR150 125/3.png", "A rider kicking up dust on an XR150"],
-    ["Honda XR150 125/Black XR tr.jpeg", "A loaded XR150 in misty hills"],
-    ["Honda XR150 125/XR tailored.jpg", "An XR150 fitted for the long ride"],
-    ["Wave Alpha Shoot/IMG_2085.JPG", "A rider on a red XR150 in Saigon"],
+    [
+      W + "493267865_1399762754604683_2218561016064431293_n.jpg",
+      "A red XR150 loaded with bags outside the shop",
+      [0.12, 0.15, 0.97, 1],
+    ],
+    [W + "Black XR tr.jpeg", "A loaded XR150 on a grassy hill", [0, 0.44, 1, 1]],
+    [W + "Black XR t.jpeg", "An XR150 above a misty valley", [0, 0.42, 1, 0.98]],
+    [W + "boat.jpeg", "An XR150 on a ferry in the mountains", [0, 0.18, 1, 1]],
+    [W + "B XR.jpeg", "A black and red XR150, side view", [0.08, 0.08, 1, 1]],
+    [W + "XR 125 W.jpeg", "A white XR, side view"],
+    [
+      W + "WhatsApp Image 2025-10-27 at 11.53.41 AM.jpeg",
+      "White XRs lined up at the shop",
+      [0, 0.3, 1, 1],
+    ],
+    [W + "IMG-20250830-WA0010.jpg", "Two riders with a white XR at a viewpoint", [0, 0.12, 1, 1]],
   ],
   "honda-cb150x": [
-    ["CB150X/Scenery.jpeg", "A CB150X at a viewpoint above the sea"],
-    ["CB150X/IMG-20250814-WA0004.jpg", "A black CB150X with side cases"],
-    ["CB150X/IMG-20250815-WA0016.jpg", "A CB150X ready to go outside the shop"],
+    [W + "IMG-20250814-WA0004.jpg", "A black CB150X with side cases", [0, 0.3, 1, 0.92]],
+    [W + "Scenery.jpeg", "A CB150X at a viewpoint above the sea", [0.5, 0, 1, 1]],
+    [W + "IMG-20250814-WA0007.jpg", "A black CB150X parked on the street", [0, 0.2, 1, 0.98]],
+    [
+      W + "484557270_1369046717676287_3689599291219447985_n.jpg",
+      "A rider on a red CB150X at the shop",
+      [0, 0.18, 1, 1],
+    ],
+    [W + "IMG-20250814-WA0005.jpg", "The CB150X from the rider's seat", [0, 0.25, 1, 1]],
+  ],
+  "honda-crf150": [
+    [
+      W + "WhatsApp Image 2026-08-15 at 2.19.50 PM.jpeg",
+      "Riders setting off on a red CRF150 and a WR155R",
+      [0, 0.44, 1, 1],
+    ],
   ],
   "yamaha-wr155r": [
-    ["Yamaha WR155/WhatsApp Image 2026-08-15 at 2.19.29 PM.jpeg", "A WR155R outside the shop"],
-    ["Yamaha WR155/WhatsApp Image 2026-08-15 at 2.19.32 PM.jpeg", "A WR155R with a rear rack"],
-    ["Yamaha WR155/WhatsApp Image 2026-08-15 at 2.19.39 PM.jpeg", "A WR155R with panniers"],
+    [
+      W + "WhatsApp Image 2026-08-15 at 2.19.32 PM.jpeg",
+      "A WR155R outside the shop",
+      [0, 0.15, 1, 0.92],
+    ],
+    [W + "WhatsApp Image 2026-08-15 at 2.19.29 PM.jpeg", "A WR155R, side view", [0, 0.15, 1, 1]],
+    [
+      W + "WhatsApp Image 2026-08-15 at 2.19.31 PM.jpeg",
+      "A WR155R with a rear rack",
+      [0, 0.25, 1, 1],
+    ],
   ],
   "kawasaki-versys-x300": [
     [
-      "Kawasaki Versys X 300/WhatsApp Image 2025-11-30 at 2.15.52 PM.jpeg",
+      W + "WhatsApp Image 2025-11-30 at 2.15.52 PM.jpeg",
       "A loaded Versys-X 300 above the mountains",
+      [0, 0.38, 1, 1],
     ],
     [
-      "Kawasaki Versys X 300/WhatsApp Image 2025-11-30 at 2.15.52 PM (1).jpeg",
-      "A Versys-X 300 on a dirt track",
+      W + "WhatsApp Image 2025-11-30 at 2.15.51 PM.jpeg",
+      "A Versys-X 300 with cases by the rice terraces",
+      [0, 0.3, 1, 0.98],
     ],
     [
-      "Kawasaki Versys X 300/WhatsApp Image 2025-07-07 at 15.37.56_2e7435b1.jpg",
-      "A Versys-X 300 with side cases",
+      W + "WhatsApp Image 2025-11-30 at 2.15.50 PM.jpeg",
+      "A loaded Versys-X 300 on a red dirt road",
+      [0, 0.36, 1, 0.92],
+    ],
+    [
+      W + "WhatsApp Image 2025-11-26 at 9.59.16 AM.jpeg",
+      "A rider on a Versys-X 300 at sunrise",
+      [0, 0.34, 1, 0.9],
+    ],
+    [
+      W + "WhatsApp Image 2025-11-30 at 2.15.53 PM.jpeg",
+      "A Versys-X 300 with two helmets on the mirrors",
+      [0, 0.08, 1, 1],
     ],
   ],
 };
@@ -220,16 +292,57 @@ async function scenery(name, { src, crop }) {
   return { name, width, height };
 }
 
+const FRAME = { width: 1200, height: 900 };
+
+/** One gallery photo: the box cut out, then fitted to a 4:3 frame. */
+async function framed(rel, box = [0, 0, 1, 1]) {
+  const src = await sharp(path.join(ROOT, rel)).rotate().toBuffer();
+  const { width, height } = await sharp(src).metadata();
+  const [l, t, r, b] = box;
+  const cut = await sharp(src)
+    .extract({
+      left: Math.round(width * l),
+      top: Math.round(height * t),
+      width: Math.round(width * (r - l)),
+      height: Math.round(height * (b - t)),
+    })
+    .toBuffer();
+  const ratio = (width * (r - l)) / (height * (b - t));
+  // Already 4:3 (give or take 3%): fill the frame.
+  if (Math.abs(ratio / (4 / 3) - 1) < 0.03) {
+    return sharp(cut).resize(FRAME.width, FRAME.height, { fit: "cover" }).toBuffer();
+  }
+  // Otherwise the whole photo in the middle, over a blurred, darker copy of it.
+  const back = await sharp(cut)
+    .resize(FRAME.width, FRAME.height, { fit: "cover" })
+    .blur(40)
+    .modulate({ brightness: 0.8 })
+    .toBuffer();
+  const front = await sharp(cut)
+    .resize(FRAME.width, FRAME.height, { fit: "inside" })
+    .toBuffer({ resolveWithObject: true });
+  return sharp(back)
+    .composite([
+      {
+        input: front.data,
+        left: Math.round((FRAME.width - front.info.width) / 2),
+        top: Math.round((FRAME.height - front.info.height) / 2),
+      },
+    ])
+    .toBuffer();
+}
+
 async function gallery(slug, photos) {
   const out = [];
-  for (const [i, [rel, alt]] of photos.entries()) {
-    const file = `${slug}-${i + 1}.webp`;
-    const img = sharp(path.join(ROOT, rel))
-      .rotate()
-      .resize(960, 960, { fit: "cover", position: "attention" });
-    await img.clone().webp({ quality: 76 }).toFile(`public/bikes/gallery/${file}`);
+  for (const [i, [rel, alt, box]] of photos.entries()) {
+    const img = sharp(await framed(rel, box));
+    const webp = await img.clone().webp({ quality: 78 }).toBuffer();
+    // The name changes with the photo, so no browser keeps showing an old one.
+    const hash = require("crypto").createHash("sha1").update(webp).digest("hex").slice(0, 8);
+    const file = `${slug}-${i + 1}-${hash}.webp`;
+    fs.writeFileSync(`public/bikes/gallery/${file}`, webp);
     // A tiny version shown blurred while the photo loads.
-    const tiny = await img.clone().resize(12, 12).webp({ quality: 40 }).toBuffer();
+    const tiny = await img.clone().resize(16, 12).webp({ quality: 40 }).toBuffer();
     out.push({
       src: `/bikes/gallery/${file}`,
       alt,
@@ -256,11 +369,17 @@ async function rider(rel, i) {
   ]) {
     fs.mkdirSync(dir, { recursive: true });
   }
-  for (const [slug, rel] of Object.entries(BIKES)) await bike(slug, rel);
+  // Start the galleries afresh, so no photo from an older list stays behind.
+  for (const f of fs.readdirSync("public/bikes/gallery")) fs.unlinkSync(`public/bikes/gallery/${f}`);
   const galleries = {};
   for (const [slug, photos] of Object.entries(GALLERY))
     galleries[slug] = await gallery(slug, photos);
   fs.writeFileSync("src/content/bike-gallery.json", JSON.stringify(galleries, null, 2) + "\n");
+  if (ONLY_GALLERY) {
+    console.log(`${Object.values(galleries).flat().length} gallery photos`);
+    return;
+  }
+  for (const [slug, rel] of Object.entries(BIKES)) await bike(slug, rel);
   const sizes = [];
   for (const [name, spec] of Object.entries(SCENERY)) sizes.push(await scenery(name, spec));
   for (const [i, rel] of RIDERS.entries()) await rider(rel, i);

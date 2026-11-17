@@ -16,18 +16,28 @@ const RIDERS = [r6, r1, r2, r3, r4, r5, r7, r8, r9];
 
 export function RiderWall({
   alt = "Riders with their Red Lantern bikes outside the shop in District 1",
+  strip = false,
 }: {
   alt?: string;
+  /** One short row instead of the full wall: a swipeable row on phones, the
+   * first six photos side by side on wider screens (home page). */
+  strip?: boolean;
 }) {
   return (
-    <ul className={styles.wall}>
+    <ul className={strip ? styles.strip : styles.wall}>
       {RIDERS.map((photo, i) => (
         <li key={i} className={styles.tile}>
           <Image
             src={photo}
             alt={alt}
             placeholder="blur"
-            sizes={i === 0 ? "(max-width: 760px) 100vw, 50vw" : "(max-width: 760px) 50vw, 25vw"}
+            sizes={
+              strip
+                ? "(max-width: 760px) 42vw, 200px"
+                : i === 0
+                  ? "(max-width: 760px) 100vw, 50vw"
+                  : "(max-width: 760px) 50vw, 25vw"
+            }
             className={styles.photo}
           />
         </li>

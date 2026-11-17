@@ -25,6 +25,27 @@
   list-style: none;
 }
 
+/* Phones: the reviews sit in one row you swipe through, so they don't stack
+   into a long column. */
+@media (max-width: 759px) {
+  .list {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .list > li {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+}
+
 .card {
   display: flex;
   flex-direction: column;

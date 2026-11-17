@@ -137,7 +137,6 @@ export const ko: Messages = {
     whatsappMessage: "안녕하세요 Red Lantern Bikes! {name}에 대해 문의드립니다.",
     depositNote:
       "예약 요청은 무료입니다. 확정되면 예약금 {deposit}으로 오토바이가 확보되며, 나머지는 픽업 시 결제합니다.",
-    reviewsTitle: "라이더 후기",
     goodFor: "이런 여행에 좋아요",
     licence: "면허",
     unitsOne: "보유 대수: 1대.",

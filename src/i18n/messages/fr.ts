@@ -139,7 +139,6 @@ export const fr: Messages = {
     whatsappMessage: "Bonjour Red Lantern Bikes ! J'ai une question sur la {name}.",
     depositNote:
       "La demande est gratuite. Une fois confirmée, un acompte de réservation de {deposit} bloque la moto ; le reste se paie au départ.",
-    reviewsTitle: "L'avis des voyageurs",
     goodFor: "Idéale pour",
     licence: "Permis",
     unitsOne: "Nous en avons une dans notre flotte.",

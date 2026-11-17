@@ -141,7 +141,6 @@ export const en = {
     whatsappMessage: "Hi Red Lantern Bikes! I have a question about the {name}.",
     depositNote:
       "Sending a request costs nothing. Once we confirm, a {deposit} booking deposit secures the bike; the rest is paid at pick-up.",
-    reviewsTitle: "What riders say",
     goodFor: "Good for",
     licence: "Licence",
     unitsOne: "We have one of these in the fleet.",

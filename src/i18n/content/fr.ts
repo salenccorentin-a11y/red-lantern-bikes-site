@@ -8,8 +8,8 @@ export const frContent: TranslatedContent = {
     "wave-alpha-110": {
       summary: "Légère, économe et facile : la moto que tout le Vietnam conduit.",
       description:
-        "La Wave Alpha est la bête de somme du quotidien au Vietnam. Quatre vitesses sans levier d'embrayage la rendent facile à prendre en main, elle consomme très peu, et n'importe quel mécanicien du pays sait la réparer. Idéale pour circuler dans Saïgon ou remonter tranquillement la côte.",
-      bestFor: ["Premiers pas à moto", "La ville", "Petits budgets"],
+        "La Wave Alpha est la bête de somme du quotidien au Vietnam. Quatre vitesses sans levier d'embrayage la rendent facile à prendre en main, elle consomme très peu, et n'importe quel mécanicien du pays sait la réparer. Idéale pour circuler dans Saïgon, ou pour traverser tout le pays en solo.",
+      bestFor: ["Premiers pas à moto", "Long voyage en solo", "Petits budgets"],
       seoTitle: "Location Honda Wave Saïgon | Red Lantern Bikes",
       seoDescription:
         "Louez une Honda Wave 110 cc à Hô Chi Minh-Ville, à la journée, à la semaine ou au mois, jusqu'à Hanoï. Facile, économe et fiable. Parfaite pour découvrir le Vietnam.",
