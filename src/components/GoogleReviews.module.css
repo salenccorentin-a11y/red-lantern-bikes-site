@@ -95,6 +95,7 @@
 /* ─── On night sections ──────────────────────────────────────────────── */
 
 .night .card {
+  --focus-ring: var(--star);
   background: var(--night-raised);
   border: 1px solid var(--night-line);
 }

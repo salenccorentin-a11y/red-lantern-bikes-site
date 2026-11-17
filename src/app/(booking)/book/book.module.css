@@ -54,12 +54,12 @@
 }
 
 .small {
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: var(--muted);
 }
 
 .hint {
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--muted);
   margin: 10px 0 0;
   min-height: 1em;
@@ -71,13 +71,13 @@
 
 .warn {
   margin: 10px 0 0;
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--lantern);
 }
 
 .ok {
   margin: 10px 0 0;
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--ok);
 }
 
@@ -104,7 +104,7 @@
   gap: 4px 10px;
   min-height: 48px;
   padding: 12px 14px;
-  border: 1.5px solid var(--line);
+  border: 1.5px solid var(--field-line);
   border-radius: var(--radius-card);
   background: var(--white);
   font-size: var(--text-base);
@@ -135,7 +135,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--muted);
   min-width: 0;
 }
@@ -145,7 +145,7 @@
   width: 100%;
   min-height: 44px;
   padding: 9px 10px;
-  border: 1.5px solid var(--line);
+  border: 1.5px solid var(--field-line);
   border-radius: var(--radius-input);
   background: var(--paper-light);
   font: inherit;
@@ -164,12 +164,12 @@
 }
 
 .fieldHint {
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: var(--muted);
 }
 
 .fieldError {
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: var(--lantern);
 }
 
@@ -211,7 +211,7 @@
   flex-direction: column;
   gap: 2px;
   padding: 10px 12px 14px;
-  border: 1.5px solid var(--line);
+  border: 1.5px solid var(--field-line);
   border-radius: var(--radius-card);
   background: var(--white);
   cursor: pointer;
@@ -254,7 +254,7 @@
 
 .price span {
   font-weight: 400;
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: var(--muted);
 }
 
@@ -271,14 +271,14 @@
 
 .status {
   margin-top: 6px;
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--muted);
 }
 
 .statusLow {
   margin-top: 6px;
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--lantern);
 }
@@ -412,7 +412,7 @@
 }
 
 .addonPrice small {
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: var(--slate);
 }
 
@@ -420,7 +420,7 @@
   min-width: 56px;
   min-height: 40px;
   padding: 6px 8px;
-  border: 1.5px solid #c7d0df;
+  border: 1.5px solid var(--field-line);
   border-radius: var(--radius-input);
   background: var(--white);
   font: inherit;
@@ -460,7 +460,7 @@
 }
 
 .ticketMeta {
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--fog);
   line-height: 1.5;
 }
@@ -494,7 +494,7 @@
 
 .usd {
   display: block;
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 400;
   color: var(--fog);
 }
@@ -504,7 +504,7 @@
   gap: 10px;
   align-items: flex-start;
   margin-top: 16px;
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: #d5dceb;
   cursor: pointer;
 }
@@ -536,7 +536,7 @@
 
 .ticketWarn {
   margin: 10px 0 0;
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: #ff9a8f;
 }
 
@@ -545,14 +545,14 @@
   padding: 10px 12px;
   border-radius: var(--radius-input);
   background: var(--night);
-  font-size: 13px;
+  font-size: var(--text-sm);
   line-height: 1.5;
   color: #d5dceb;
 }
 
 .ticketFine {
   margin: 12px 0 0;
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: var(--fog);
 }
 
@@ -599,7 +599,7 @@
 }
 
 .mobileBarUsd {
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--fog);
   white-space: nowrap;
 }
@@ -613,7 +613,7 @@
 .mobileBarDates {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--fog);
   white-space: nowrap;
   overflow: hidden;
@@ -665,7 +665,7 @@
 .saving {
   margin: -2px 0 8px;
   color: var(--star);
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 600;
   line-height: 1.45;
 }

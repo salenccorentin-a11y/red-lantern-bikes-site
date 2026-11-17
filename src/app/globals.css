@@ -12,6 +12,9 @@
   --slate: #4a5872;
   --fog: #aab6cb;
   --rule: #d8dfea;
+  /* Borders of fields people fill in or pick: 3.4:1 on white, 3:1 on mist,
+     so the box itself is visible (dividers and card edges keep --rule). */
+  --field-line: #7d8ba3;
   --success: #2e7d4f;
 
   /* Older names still used by the booking and staff pages, mapped to the palette. */
@@ -107,9 +110,10 @@ img {
   max-width: 100%;
 }
 
-/* Keyboard focus is always visible, in the action colour. */
+/* Keyboard focus is always visible, in the action colour. Raised night
+   panels, where red is too faint, set --focus-ring to the star yellow. */
 :focus-visible {
-  outline: 3px solid var(--lantern-red);
+  outline: 3px solid var(--focus-ring, var(--lantern-red));
   outline-offset: 2px;
 }
 
