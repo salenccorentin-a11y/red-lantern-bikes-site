@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import styles from "@/app/(public)/content.module.css";
+import styles from "@/app/(en)/(public)/content.module.css";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { LocalBusinessData } from "@/components/LocalBusinessData";
 import { PageHeader } from "@/components/PageHeader";

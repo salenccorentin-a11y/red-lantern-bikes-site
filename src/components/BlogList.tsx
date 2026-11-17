@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { BlogPost } from "@/content/blog";
 import { formatDisplayDate } from "@/lib/dates";
-import styles from "@/app/(public)/content.module.css";
+import styles from "@/app/(en)/(public)/content.module.css";
 
 export function BlogList({ posts }: { posts: BlogPost[] }) {
   return (

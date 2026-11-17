@@ -3,8 +3,8 @@
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { Suspense } from "react";
-import styles from "@/app/(booking)/book/book.module.css";
-import { BookingForm } from "@/app/(booking)/book/BookingForm";
+import styles from "@/app/(en)/(booking)/book/book.module.css";
+import { BookingForm } from "@/app/(en)/(booking)/book/BookingForm";
 import { PageHeader } from "@/components/PageHeader";
 import { addOnText, getMessages, kindLabel } from "@/i18n";
 import { OG_LOCALE, type Locale } from "@/i18n/config";

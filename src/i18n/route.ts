@@ -10,6 +10,17 @@ export async function langFrom(params: Promise<{ lang: string }>): Promise<Local
   return lang;
 }
 
+/**
+ * For the [lang] root layout, which must always draw a page: the language
+ * from the address, or English when it is not /fr or /ko. The pages below
+ * still call langFrom, so an unknown address (/nope, /xx/book) becomes a 404
+ * drawn inside the site's header and footer (app/[lang]/not-found.tsx).
+ */
+export async function langOrEnglish(params: Promise<{ lang: string }>): Promise<Locale> {
+  const { lang } = await params;
+  return isLocale(lang) && lang !== "en" ? lang : "en";
+}
+
 export function langParams() {
   return PREFIXED_LOCALES.map((lang) => ({ lang }));
 }

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
-import styles from "@/app/(booking)/booking/[token]/booking.module.css";
+import styles from "@/app/(en)/(booking)/booking/[token]/booking.module.css";
 import ui from "@/components/ui.module.css";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import {

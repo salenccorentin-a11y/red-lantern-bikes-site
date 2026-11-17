@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
-import styles from "@/app/(public)/content.module.css";
+import styles from "@/app/(en)/(public)/content.module.css";
 import { BikeCard } from "@/components/BikeCard";
 import cardStyles from "@/components/BikeCard.module.css";
 import { PageHeader } from "@/components/PageHeader";

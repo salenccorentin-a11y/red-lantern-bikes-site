@@ -1,7 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
 import { siteUrl } from "@/seo/site";
-import "./globals.css";
+import "@/app/globals.css";
+
+// The <html> and <body> shared by the site's two root layouts:
+// app/(en)/layout.tsx (English, at the original addresses) and
+// app/[lang]/layout.tsx (/fr and /ko). Each sets its own `lang` on <html>,
+// so browsers, screen readers, translation prompts and search engines all
+// read the page's real language.
 
 // One family for everything (docs/design.md): designed for Vietnamese, so
 // place names keep their accents properly. Only the basic Latin files are
@@ -15,7 +21,7 @@ const beVietnam = Be_Vietnam_Pro({
 
 // Defaults for every page; pages set their own title, description and
 // canonical address. metadataBase makes those addresses absolute.
-export const metadata: Metadata = {
+export const rootMetadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: "Red Lantern Bikes",
   description: "Motorbike rentals and one-way trips from District 1, Saigon.",
@@ -27,13 +33,13 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = {
+export const rootViewport: Viewport = {
   themeColor: "#0F1B2D",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export function RootDocument({ lang, children }: { lang: string; children: React.ReactNode }) {
   return (
-    <html lang="en" className={beVietnam.variable}>
+    <html lang={lang} className={beVietnam.variable}>
       <body>{children}</body>
     </html>
   );

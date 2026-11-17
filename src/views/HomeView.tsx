@@ -5,7 +5,7 @@ import { getImageProps } from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
-import pageStyles from "@/app/(public)/page.module.css";
+import pageStyles from "@/app/(en)/(public)/page.module.css";
 import { BikeCard } from "@/components/BikeCard";
 import cardStyles from "@/components/BikeCard.module.css";
 import { GoogleReviews } from "@/components/GoogleReviews";

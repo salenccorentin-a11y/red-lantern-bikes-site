@@ -141,8 +141,12 @@
   right: 0;
 }
 
-.nav:hover:not(:disabled) {
-  background: var(--mist);
+/* Hover tints only where there is a real pointer: on phones a tapped day or
+   arrow would otherwise keep the tint until the next tap elsewhere. */
+@media (hover: hover) {
+  .nav:hover:not(:disabled) {
+    background: var(--mist);
+  }
 }
 
 .nav:disabled {
@@ -199,8 +203,10 @@
   cursor: pointer;
 }
 
-.day:hover:not(:disabled) {
-  background: var(--mist);
+@media (hover: hover) {
+  .day:hover:not(:disabled) {
+    background: var(--mist);
+  }
 }
 
 .day:disabled {
@@ -285,6 +291,8 @@
   cursor: pointer;
 }
 
-.close:hover {
-  background: var(--mist);
+@media (hover: hover) {
+  .close:hover {
+    background: var(--mist);
+  }
 }

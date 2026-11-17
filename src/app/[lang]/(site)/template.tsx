@@ -1,2 +1,2 @@
 // The same page crossfade as the English pages (none in the booking steps).
-export { default } from "../../(public)/template";
+export { default } from "../../(en)/(public)/template";

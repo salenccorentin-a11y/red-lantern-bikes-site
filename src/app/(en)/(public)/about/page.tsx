@@ -4,7 +4,7 @@ import { ADDRESS_LINE, BUSINESS, mapsLink } from "@/content/business";
 import { PageHeader } from "@/components/PageHeader";
 import { RiderWall } from "@/components/RiderWall";
 import ui from "@/components/ui.module.css";
-import saigonOpera from "../../../../public/photos/saigon-opera.webp";
+import saigonOpera from "../../../../../public/photos/saigon-opera.webp";
 import styles from "../content.module.css";
 import about from "./about.module.css";
 

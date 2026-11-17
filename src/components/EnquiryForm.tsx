@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { sendEnquiry, type EnquiryState } from "@/app/(public)/enquiry-actions";
+import { sendEnquiry, type EnquiryState } from "@/app/(en)/(public)/enquiry-actions";
 import type { Messages } from "@/i18n/messages/en";
 import styles from "./EnquiryForm.module.css";
 
