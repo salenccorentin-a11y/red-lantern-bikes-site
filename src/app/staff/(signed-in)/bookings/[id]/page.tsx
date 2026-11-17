@@ -5,9 +5,11 @@ import { dropoffLabel } from "@/lib/cities";
 import { formatDisplayDate, formatSaigonDateTime, toIsoDate } from "@/lib/dates";
 import { db } from "@/lib/db";
 import { formatVnd } from "@/lib/money";
+import { ARCHIVABLE_STATUSES } from "@/server/booking-archive";
 import { requireStaff } from "@/server/staff-session";
 import {
   acceptRequestAction,
+  archiveAction,
   cancelAction,
   checkInAction,
   checkOutAction,
@@ -48,6 +50,8 @@ async function BookingAdmin(props: {
   const canCheckOut = booking.status === "CONFIRMED" || booking.status === "PENDING_PAYMENT";
   const canCheckIn = booking.status === "CHECKED_OUT";
   const canCancel = canCheckOut;
+  const canArchive =
+    !booking.archivedAt && (ARCHIVABLE_STATUSES as readonly string[]).includes(booking.status);
   // Online bookings are requests until the shop answers. One that ran out
   // unanswered can still be accepted while its bike is free.
   const canAnswer =
@@ -176,7 +180,7 @@ async function BookingAdmin(props: {
                 <th className={styles.num}>{formatVnd(booking.totalVnd)}</th>
               </tr>
               <tr>
-                <td>Deposit (non-refundable)</td>
+                <td>Booking deposit (non-refundable)</td>
                 <td className={styles.num}>{formatVnd(booking.depositVnd)}</td>
               </tr>
               <tr>
@@ -257,6 +261,34 @@ async function BookingAdmin(props: {
           </form>
         )}
       </section>
+
+      {canArchive && (
+        <section className={styles.panel}>
+          <h2>Archive</h2>
+          <p className={styles.muted}>
+            The rental is over. Archiving adds it to the Archive table on your RENTALS page in
+            Notion (customer, bike, dates, money, extras, notes and logged problems), then removes
+            the customer&apos;s name, contact details and notes from the site, as the privacy page
+            promises. Bike, dates and money stay here.
+          </p>
+          <form action={archiveAction} className={styles.form}>
+            <input type="hidden" name="id" value={booking.id} />
+            <label>
+              <input type="checkbox" name="confirm" value="yes" /> Yes, archive it and remove the
+              customer&apos;s details from the site.
+            </label>
+            <div>
+              <button className={styles.primary}>Archive to Notion</button>
+            </div>
+          </form>
+        </section>
+      )}
+      {booking.archivedAt && (
+        <p className={styles.muted}>
+          Archived in Notion on {formatSaigonDateTime(booking.archivedAt)}. The customer&apos;s
+          details were removed from the site.
+        </p>
+      )}
 
       <section className={styles.panel}>
         <h2>Staff note</h2>
