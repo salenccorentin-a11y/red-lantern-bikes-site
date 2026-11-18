@@ -4,15 +4,22 @@ import { PrismaClient } from "@/generated/prisma/client";
 import { requireEnv } from "@/lib/env";
 
 // Reuse one client across hot reloads in development, so `next dev`
-// doesn't open a new pool of database connections on every edit.
-const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+// doesn't open a new pool of database connections on every edit. After a
+// schema change (`prisma migrate dev` regenerates the client), the kept client
+// still knows only the old columns ("Unknown argument …" on save, 18 Nov
+// 2026), so one made from an older generated client is replaced.
+const globalForPrisma = globalThis as unknown as {
+  prisma?: { $disconnect(): Promise<void> };
+};
 
 function client(): PrismaClient {
-  if (!globalForPrisma.prisma) {
-    const adapter = new PrismaPg({ connectionString: requireEnv("DATABASE_URL") });
-    globalForPrisma.prisma = new PrismaClient({ adapter });
-  }
-  return globalForPrisma.prisma;
+  const kept = globalForPrisma.prisma;
+  if (kept instanceof PrismaClient) return kept;
+  void kept?.$disconnect();
+  const adapter = new PrismaPg({ connectionString: requireEnv("DATABASE_URL") });
+  const fresh = new PrismaClient({ adapter });
+  globalForPrisma.prisma = fresh;
+  return fresh;
 }
 
 /**
