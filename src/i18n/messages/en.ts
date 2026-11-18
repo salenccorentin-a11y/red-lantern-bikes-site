@@ -53,6 +53,7 @@ export const en = {
     title: "Motorbike rental in Saigon, and one-way to Hanoi or Da Nang",
     lead: "Well-kept bikes, fair prices and a team that answers WhatsApp wherever you are in Vietnam. Book online in a few minutes and pick up in District 1.",
     seeOneWay: "See one-way trips",
+    dropoffQuestion: "Where do you leave the bike?",
     trustRating: "{rating} on Google",
     trustGear: "Helmet and gear included",
     trustHelp: "Help on the road, anywhere in Vietnam",

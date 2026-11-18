@@ -1,242 +1,240 @@
 /* Home page. */
 
 /* ─── Hero ─────────────────────────────────────────────────────────────
-   The photo runs behind the text at every size. Phones: it fills the top of
-   the first screen and night rises from the bottom, where the text sits. Wide
-   screens: it covers the whole hero and night washes in from the left, under
-   the words. The booking actions and the trust points sit on a "ticket", a
-   raised night card like the booking page's summary.
+   "Open road" (picked by the owner on 18 November 2026 in /impeccable live,
+   version 2): the whole road photo behind centred words, and a booking bar in
+   the middle. The bar asks where the rider leaves the bike and opens the
+   booking page with that drop-off chosen (/book?dropoff=…), so it works
+   without JavaScript. The trust points sit under it as small chips.
 
-   On arrival: the photo opens like a shutter (top to bottom on phones, from
-   the right on wide screens) and settles, the words come up, then the ticket
-   lands. Reduced motion shows the final state at once (globals.css). */
+   On arrival: the photo comes up out of the dark, then the words, the bar
+   and the chips rise one after the other. Reduced motion shows the final
+   state at once (globals.css, and no delays below). */
 
 .hero {
   position: relative;
   isolation: isolate;
   display: grid;
+  place-items: center;
   /* The first screen, under the 64px header. */
   min-height: calc(100svh - 64px);
+  padding: 48px var(--gutter) 36px;
   background: var(--night);
   color: var(--white);
+  text-align: center;
+  overflow: hidden;
 }
 
 .heroMedia {
   position: absolute;
-  inset: 0 0 auto;
-  height: 72%;
+  inset: 0;
   z-index: -1;
-  overflow: hidden;
   background: var(--night-raised);
-  animation: hero-shutter 1.4s cubic-bezier(0.77, 0, 0.18, 1) both;
+  animation: hero-dawn 2.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .heroPhoto {
   object-fit: cover;
-  object-position: 50% 100%;
-  animation: hero-settle 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  object-position: 50% 62%;
 }
 
-/* Night rising from the bottom, so the text over the photo stays readable. */
+/* A light night veil, darker in the middle under the words and at the
+   bottom, where the hero meets the route band. */
 .heroMedia::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    var(--night) 0%,
-    rgb(15 27 45 / 0.92) 22%,
-    rgb(15 27 45 / 0.5) 48%,
-    rgb(15 27 45 / 0) 70%
-  );
+  background:
+    radial-gradient(
+      ellipse 75% 60% at 50% 52%,
+      rgb(15 27 45 / 0.45) 0%,
+      rgb(15 27 45 / 0.21) 60%,
+      rgb(15 27 45 / 0.12) 100%
+    ),
+    linear-gradient(to top, var(--night) 0%, rgb(15 27 45 / 0) 30%),
+    linear-gradient(to bottom, rgb(15 27 45 / 0.5) 0%, rgb(15 27 45 / 0) 20%);
 }
 
-.heroText {
-  align-self: end;
-  padding: 32px var(--gutter) 24px;
+.heroInner {
+  width: 100%;
+  max-width: 780px;
+  margin-inline: auto;
 }
 
 .heroTitle {
-  margin: 0;
-  /* Three lines at most on a phone, in every language. */
-  font-size: clamp(1.5rem, 7.2vw, 2.25rem);
-  line-height: 1.06;
-  letter-spacing: -0.025em;
+  margin: 0 auto;
+  max-width: 18ch;
+  /* Four lines at most on a phone, in every language. */
+  font-size: clamp(2rem, 8vw, 4rem);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
   text-wrap: balance;
-  animation: hero-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  text-shadow: 0 2px 28px rgb(15 27 45 / 0.55);
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
 }
 
 .lead {
-  margin: 12px 0 20px;
-  max-width: 46ch;
+  margin: 16px auto 0;
+  max-width: 44ch;
   font-size: var(--text-base);
   line-height: 1.55;
-  color: #dbe2ee;
-  animation: hero-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
+  color: #e4e9f2;
+  text-shadow: 0 1px 16px rgb(15 27 45 / 0.6);
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
 }
 
-.ticket {
-  max-width: 440px;
-  margin-top: 22px;
-  padding: 18px 18px 16px;
-  border: 1px solid var(--night-line);
-  border-radius: var(--radius-card);
-  background: var(--night-raised);
-  box-shadow: 0 24px 48px -28px rgb(0 0 0 / 0.8);
-  rotate: -1.5deg;
-  transform-origin: 20% 100%;
-  animation: hero-ticket 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) 0.85s both;
+/* The booking bar: a stacked card on phones, one pill on wide screens. */
+.heroBar {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  max-width: 600px;
+  margin: 26px auto 0;
+  padding: 14px;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 22px;
+  background: rgb(26 44 74 / 0.8);
+  backdrop-filter: blur(16px) saturate(1.2);
+  box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.85);
+  text-align: left;
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;
 }
 
-.ticketActions {
+.heroField {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: 0 6px;
+}
+
+.heroLabel {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--fog);
+}
+
+.heroField select {
+  appearance: none;
+  width: 100%;
+  padding: 2px 28px 2px 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23aab6cb' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")
+    no-repeat right 2px center / 16px;
+  color: var(--white);
+  font: inherit;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.heroField select:focus-visible {
+  outline: 2px solid var(--star);
+  outline-offset: 4px;
+}
+
+.heroField option {
+  color: var(--night);
+  background: var(--white);
+}
+
+/* The three reasons to trust the shop, as small chips under the bar. */
+.trust {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 12px 20px;
-}
-
-.ticketLink {
-  color: var(--white);
-  font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--lantern-red);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 5px;
-}
-
-@keyframes hero-shutter {
-  from {
-    clip-path: inset(0 0 100% 0);
-  }
-  to {
-    clip-path: inset(0);
-  }
-}
-
-@keyframes hero-shutter-wide {
-  from {
-    clip-path: inset(0 0 0 100%);
-  }
-  to {
-    clip-path: inset(0);
-  }
-}
-
-@keyframes hero-settle {
-  from {
-    transform: scale(1.12) translateY(-3%);
-  }
-  to {
-    transform: none;
-  }
-}
-
-@keyframes hero-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes hero-ticket {
-  from {
-    opacity: 0;
-    transform: translateY(40px) rotate(3deg);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (min-width: 900px) {
-  .hero {
-    min-height: clamp(560px, calc(100svh - 64px), 880px);
-  }
-
-  .heroMedia {
-    inset: 0;
-    height: auto;
-    animation-name: hero-shutter-wide;
-  }
-
-  .heroPhoto {
-    object-position: 50% 62%;
-  }
-
-  /* Night washing in from the left, under the words, and a little from the
-     bottom, under the ticket. */
-  .heroMedia::after {
-    background:
-      linear-gradient(
-        to right,
-        rgb(15 27 45 / 0.89) 0%,
-        rgb(15 27 45 / 0.68) 38%,
-        rgb(15 27 45 / 0.21) 68%,
-        rgb(15 27 45 / 0) 100%
-      ),
-      linear-gradient(to top, rgb(15 27 45 / 0.85) 0%, rgb(15 27 45 / 0) 30%);
-  }
-
-  .heroText {
-    align-self: center;
-    max-width: calc(var(--content) * 0.62 + max(var(--gutter), (100vw - var(--content)) / 2));
-    padding: 64px 48px 64px max(var(--gutter), calc((100vw - var(--content)) / 2));
-  }
-
-  .heroTitle {
-    /* Three lines at most in the text column. */
-    font-size: clamp(2.5rem, 3.9vw, 3.5rem);
-    line-height: 1.04;
-  }
-
-  .lead {
-    margin: 18px 0 28px;
-    font-size: var(--text-lg);
-  }
-}
-
-/* The three reasons to trust the shop, under a torn-ticket line: one row,
-   a small icon each. */
-.trust {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin: 16px 0 0;
-  padding: 14px 0 0;
-  border-top: 2px dashed var(--night-line);
+  justify-content: center;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
   list-style: none;
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.05s both;
+}
+
+.trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px 7px 10px;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 999px;
+  background: rgb(15 27 45 / 0.6);
   font-size: var(--text-sm);
   line-height: 1.35;
   color: #dbe2ee;
 }
 
-.trust li {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
 .trustIcon {
   flex: none;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   color: var(--star);
 }
 
+.heroLink {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--white);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--lantern-red);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.15s both;
+}
+
+@keyframes hero-dawn {
+  from {
+    filter: brightness(0.12) saturate(0.4);
+    transform: scale(1.06);
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroMedia,
+  .heroTitle,
+  .lead,
+  .heroBar,
+  .trust,
+  .heroLink {
+    animation-delay: 0s;
+  }
+}
+
 @media (min-width: 900px) {
-  .trust {
-    gap: 16px;
+  .hero {
+    min-height: clamp(600px, calc(100svh - 64px), 900px);
+    padding: 64px 48px 48px;
   }
 
-  .trust li {
+  .lead {
+    font-size: var(--text-lg);
+  }
+
+  .heroBar {
     flex-direction: row;
-    align-items: flex-start;
-    gap: 8px;
+    align-items: center;
+    padding: 8px 8px 8px 26px;
+    border-radius: 999px;
+  }
+
+  .heroField {
+    flex: 1;
+    padding: 0;
+  }
+
+  .heroBar button {
+    flex: none;
   }
 }
 

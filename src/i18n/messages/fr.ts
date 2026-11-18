@@ -50,6 +50,7 @@ export const fr: Messages = {
     title: "Location de moto à Saïgon, et aller simple vers Hanoï ou Da Nang",
     lead: "Des motos bien entretenues, des prix justes et une équipe qui répond sur WhatsApp partout au Vietnam. Réservez en ligne en quelques minutes, récupérez la moto dans le 1er arrondissement.",
     seeOneWay: "Voir les allers simples",
+    dropoffQuestion: "Où laissez-vous la moto ?",
     trustRating: "{rating} sur Google",
     trustGear: "Casque et équipement inclus",
     trustHelp: "Assistance sur la route, partout au Vietnam",

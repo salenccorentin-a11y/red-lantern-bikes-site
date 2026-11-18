@@ -51,6 +51,7 @@ export const ko: Messages = {
     title: "사이공 오토바이 렌탈, 하노이·다낭 편도까지",
     lead: "잘 관리된 오토바이, 합리적인 가격, 그리고 베트남 어디에서든 WhatsApp으로 답하는 팀. 몇 분이면 온라인으로 예약하고 1군에서 받아 가세요.",
     seeOneWay: "편도 여행 보기",
+    dropoffQuestion: "어디에서 오토바이를 반납하시나요?",
     trustRating: "Google 평점 {rating}",
     trustGear: "헬멧과 장비 포함",
     trustHelp: "베트남 어디서나 도로 위 지원",

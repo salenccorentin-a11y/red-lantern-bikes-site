@@ -48,36 +48,46 @@ export function HomeView({ lang }: { lang: Locale }) {
     <main>
       <LocalBusinessData />
 
+      {/* The whole road photo behind the words, and a booking bar in the
+          middle: pick where you leave the bike and go straight to booking. */}
       <section className={styles.hero}>
         <div className={styles.heroMedia}>
           <HeroPhoto alt={t.heroAlt} />
         </div>
-        <div className={styles.heroText}>
+        <div className={styles.heroInner}>
           <h1 className={styles.heroTitle}>{t.title}</h1>
           <p className={styles.lead}>{t.lead}</p>
-          {/* The booking "ticket": the two actions and the reasons to trust the
-              shop, on a raised night card like the booking page's summary. */}
-          <div className={styles.ticket}>
-            <div className={styles.ticketActions}>
-              <Link href={to("/book")} className={ui.primary}>
-                {m.common.bookABike}
-              </Link>
-              <Link href={to("/one-way")} className={styles.ticketLink}>
-                {t.seeOneWay}
-              </Link>
-            </div>
-            <ul className={styles.trust}>
-              <li>
-                <StarIcon /> {fill(t.trustRating, { rating: BUSINESS.googleRating })}
-              </li>
-              <li>
-                <HelmetIcon /> {t.trustGear}
-              </li>
-              <li>
-                <WrenchIcon /> {t.trustHelp}
-              </li>
-            </ul>
-          </div>
+          <form className={styles.heroBar} action={to("/book")} method="get">
+            <label className={styles.heroField}>
+              <span className={styles.heroLabel}>{t.dropoffQuestion}</span>
+              <select name="dropoff" defaultValue="SAIGON">
+                <option value="SAIGON">{m.common.dropoffReturn}</option>
+                <option value="DA_NANG">
+                  {fill(m.common.dropoffOneWay, { city: m.common.city.DA_NANG })}
+                </option>
+                <option value="HANOI">
+                  {fill(m.common.dropoffOneWay, { city: m.common.city.HANOI })}
+                </option>
+              </select>
+            </label>
+            <button type="submit" className={ui.primary}>
+              {m.common.bookABike}
+            </button>
+          </form>
+          <ul className={styles.trust}>
+            <li>
+              <StarIcon /> {fill(t.trustRating, { rating: BUSINESS.googleRating })}
+            </li>
+            <li>
+              <HelmetIcon /> {t.trustGear}
+            </li>
+            <li>
+              <WrenchIcon /> {t.trustHelp}
+            </li>
+          </ul>
+          <Link href={to("/one-way")} className={styles.heroLink}>
+            {t.seeOneWay}
+          </Link>
         </div>
       </section>
 
