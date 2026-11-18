@@ -46,3 +46,6 @@ next-env.d.ts
 
 # Notion rows for the import (customer names): never committed.
 notion-rows*.json
+
+# Impeccable design plugin: audit reports, live-mode config and sessions (local only).
+/.impeccable/
