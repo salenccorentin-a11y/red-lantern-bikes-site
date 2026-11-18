@@ -40,6 +40,34 @@ export function bikeContent(lang: Locale, slug: string): BikeContent | undefined
   return base && t ? { ...base, ...t } : base;
 }
 
+/**
+ * Customer text for a model: the written text for the original twelve, or,
+ * for a model added from the staff area, the text entered there (in English
+ * on every language's page until it's translated).
+ */
+export function modelContent(
+  lang: Locale,
+  model: {
+    slug: string;
+    name: string;
+    summary?: string | null;
+    description?: string | null;
+    licence?: BikeContent["licence"] | null;
+  },
+): BikeContent | undefined {
+  const written = bikeContent(lang, model.slug);
+  if (written) return written;
+  if (!model.summary || !model.description) return undefined;
+  return {
+    summary: model.summary,
+    description: model.description,
+    bestFor: [],
+    licence: model.licence ?? "IDP_OR_A1",
+    seoTitle: `${model.name} Rental Saigon | Red Lantern Bikes`,
+    seoDescription: model.summary,
+  };
+}
+
 /** A bike's facts and specifications (numbers only, the same in every language). */
 export function bikeFacts(slug: string): BikeFacts {
   return BIKE_FACTS[slug] ?? {};

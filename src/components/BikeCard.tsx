@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { bikeContent, getMessages, kindLabel } from "@/i18n";
+import { getMessages, kindLabel, modelContent } from "@/i18n";
 import type { Locale } from "@/i18n/config";
 import { localize } from "@/i18n/paths";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
@@ -8,9 +8,6 @@ import type { PublicModel } from "@/server/fleet";
 import { HoverLift } from "./motion/HoverLift";
 import { SharedElement } from "./motion/SharedElement";
 import styles from "./BikeCard.module.css";
-
-/** Studio photo for a model (public/bikes/<slug>.webp, made by scripts/brand/prepare-photos.cjs). */
-export const bikeImage = (slug: string) => `/bikes/${slug}.webp`;
 
 export function BikeCard({
   model,
@@ -21,7 +18,7 @@ export function BikeCard({
   usdRate: number;
   lang?: Locale;
 }) {
-  const content = bikeContent(lang, model.slug);
+  const content = modelContent(lang, model);
   const t = getMessages(lang).common;
   return (
     <HoverLift className={styles.lift}>
@@ -29,7 +26,7 @@ export function BikeCard({
         {/* Grows into the photo on the bike's page (same name there). */}
         <SharedElement name={`bike-${model.slug}`}>
           <Image
-            src={bikeImage(model.slug)}
+            src={model.image}
             alt={model.name}
             width={1200}
             height={800}

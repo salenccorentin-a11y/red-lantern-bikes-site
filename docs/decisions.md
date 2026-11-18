@@ -83,3 +83,10 @@ Not in use yet: see "Booking requests" above.
 - **Requests can be checked out** without being accepted first (handing over the bike is the answer): the customer pays at the counter.
 - **Early returns.** Checking in a Saigon round trip before its end date frees the remaining days (after the cleaning gap) so the bike can be rented again. The price doesn't change. One-way trips keep their train-back days.
 - **Profit per bike** = revenue from rentals where the bike actually went out (counted in the period the rental started) minus the incident and repair log's parts, labour and other costs, plus anything recovered from the customer or insurer. Kept deposits from cancellations will be added once payments are recorded.
+
+## Fleet and prices from the staff area (18 November 2026)
+
+- **Five price tiers** (owner): daily, weekly from 7 days, 3 weeks from 21, monthly from 30, 45 days from 45, each a price per day applied to every day. The 3-week and 45-day prices are optional columns: until the owner enters them, a model skips that tier. Booking snapshots record the new tiers (`THREE_WEEKS`, `FORTY_FIVE_DAYS`). See `docs/pricing.md`.
+- **Adding and removing bikes** (owner): staff add several bikes of a model at once (one plate per line). A bike with no bookings, blocks or repairs can be deleted (added by mistake); any other bike is retired, which keeps its history.
+- **New models from the staff area** (owner): name, type, licence, prices, one-way fees and an English summary and description, stored on the model. Its page is `/bikes/<slug>`, with the lantern logo until a studio photo is added to `public/bikes/<slug>.webp`, and English text on the French and Korean pages until translated. It isn't in the sitemap until its text moves to `src/content/bikes.ts`. A model with no bikes and no bookings can be deleted; otherwise it's taken off sale.
+- **Booking page follows the link** (bug fix): the booking form kept the bike chosen on an earlier visit when reopened from another bike's "Book this bike" (pages stay alive in the background with `cacheComponents`). The bike and trip in the address now win, and the address follows the visitor's choices.

@@ -6,6 +6,7 @@
 // reserves; nothing price-related is sent from the browser.
 
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { DATE_LOCALE, fill, type Locale } from "@/i18n/config";
 import type { Messages } from "@/i18n/messages/en";
@@ -15,6 +16,7 @@ import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import {
+  pricedTiers,
   WEEKLY_FROM_DAYS,
   addOnUnitPrice,
   quote,
@@ -71,6 +73,46 @@ export function BookingForm(props: {
   const [availabilityCheck, setAvailabilityCheck] = useState(0);
   const [result, setResult] = useState<BookingFormState>({});
   const [submitting, startSubmit] = useTransition();
+
+  // The site keeps a visited page alive in the background (cacheComponents),
+  // so this form's state would outlive a new link such as a bike page's
+  // "Book this bike" and keep the bike chosen on an earlier visit. When the
+  // address changes, the bike and trip in it win. The address follows the
+  // visitor's own choices (chooseModel, chooseDropoff), so it always says
+  // what the form shows.
+  const searchParams = useSearchParams();
+  const urlModel = searchParams.get("model");
+  const urlDropoff = searchParams.get("dropoff");
+  const urlKey = `${urlModel}|${urlDropoff}`;
+  const [appliedUrl, setAppliedUrl] = useState(urlKey);
+  if (appliedUrl !== urlKey) {
+    // Adjusting state while rendering, as React recommends over an effect.
+    setAppliedUrl(urlKey);
+    const fromUrl = catalog.models.find((m) => m.slug === urlModel);
+    if (fromUrl) setModelId(fromUrl.id);
+    const city = catalog.routes.find((r) => r.toCity === urlDropoff)?.toCity;
+    setDropoff(city ?? "SAIGON");
+  }
+
+  function updateAddress(changes: Record<string, string | null>) {
+    const params = new URLSearchParams(window.location.search);
+    for (const [key, value] of Object.entries(changes)) {
+      if (value) params.set(key, value);
+      else params.delete(key);
+    }
+    const query = params.toString();
+    window.history.replaceState(null, "", query ? `?${query}` : window.location.pathname);
+  }
+
+  function chooseModel(m: CatalogModel) {
+    setModelId(m.id);
+    updateAddress({ model: m.slug });
+  }
+
+  function chooseDropoff(city: Dropoff) {
+    setDropoff(city);
+    updateAddress({ dropoff: city === "SAIGON" ? null : city });
+  }
 
   const usd = (vnd: number) => formatUsdApprox(vnd, catalog.usdToVndRate);
   const route = dropoff === "SAIGON" ? null : catalog.routes.find((r) => r.toCity === dropoff);
@@ -215,7 +257,7 @@ export function BookingForm(props: {
           <div className={styles.options}>
             <Option
               checked={dropoff === "SAIGON"}
-              onChange={() => setDropoff("SAIGON")}
+              onChange={() => chooseDropoff("SAIGON")}
               name="dropoff"
               label={t.returnLabel}
               note={t.returnNote}
@@ -224,7 +266,7 @@ export function BookingForm(props: {
               <Option
                 key={r.toCity}
                 checked={dropoff === r.toCity}
-                onChange={() => setDropoff(r.toCity)}
+                onChange={() => chooseDropoff(r.toCity)}
                 name="dropoff"
                 label={fill(t.oneWayLabel, { city: cityLabel(r.toCity) })}
                 note={fill(t.oneWayNote, { days: r.minDays })}
@@ -301,10 +343,10 @@ export function BookingForm(props: {
                     className={styles.visuallyHidden}
                     checked={m.id === model?.id}
                     disabled={disabled}
-                    onChange={() => setModelId(m.id)}
+                    onChange={() => chooseModel(m)}
                   />
                   <Image
-                    src={`/bikes/${m.slug}.webp`}
+                    src={m.image}
                     alt=""
                     width={1200}
                     height={800}
@@ -347,7 +389,7 @@ export function BookingForm(props: {
                   )}
                   {!price?.ok && !route && (
                     <span className={`${styles.small} ${styles.bikeNote}`}>
-                      {fill(t.fromMonthly, { price: formatVnd(m.monthlyRate) })}
+                      {fill(t.fromLongest, { price: formatVnd(lowestRate(m)) })}
                     </span>
                   )}
                 </label>
@@ -678,4 +720,9 @@ function Line({ label, value, sub }: { label: string; value: string; sub?: strin
       </span>
     </div>
   );
+}
+
+/** The lowest price per day: the longest tier the model has a price for. */
+function lowestRate(model: CatalogModel): number {
+  return Math.min(...pricedTiers(model).map((tier) => tier.rate));
 }

@@ -3,6 +3,7 @@
 // edits show up on the next page load.
 
 import type { PrismaClient } from "@/generated/prisma/client";
+import { studioPhoto } from "./bike-photo";
 import { getSettings } from "@/server/availability";
 
 export type OneWayCity = "HANOI" | "DA_NANG";
@@ -14,7 +15,11 @@ export type CatalogModel = {
   kind: string;
   dailyRate: number;
   weeklyRate: number;
+  threeWeekRate: number | null;
   monthlyRate: number;
+  fortyFiveDayRate: number | null;
+  /** Studio photo, or the lantern for a model without one yet. */
+  image: string;
   /** One-way fee per destination; missing if none is set for this model. */
   oneWayFees: Partial<Record<OneWayCity, number>>;
 };
@@ -77,7 +82,10 @@ export async function loadCatalog(db: PrismaClient): Promise<Catalog> {
         kind: m.kind,
         dailyRate: m.dailyRate,
         weeklyRate: m.weeklyRate,
+        threeWeekRate: m.threeWeekRate,
         monthlyRate: m.monthlyRate,
+        fortyFiveDayRate: m.fortyFiveDayRate,
+        image: studioPhoto(m.slug),
         oneWayFees,
       };
     }),

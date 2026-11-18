@@ -24,10 +24,20 @@ model BikeModel {
   name        String
   // Short description shown to customers, e.g. "Manual dual-sport".
   kind        String
-  // Price per day for each tier. Weekly from 7 days, monthly from 30 days.
-  dailyRate   Int
-  weeklyRate  Int
-  monthlyRate Int
+  // Price per day for each tier: weekly from 7 days, 3 weeks from 21,
+  // monthly from 30, 45 days from 45 (src/lib/pricing.ts). An empty 3-week or
+  // 45-day price means that tier isn't priced yet, and the weekly or monthly
+  // price applies instead.
+  dailyRate        Int
+  weeklyRate       Int
+  threeWeekRate    Int?
+  monthlyRate      Int
+  fortyFiveDayRate Int?
+  // Customer text for models added from the staff area. The original twelve
+  // keep theirs, with French and Korean, in src/content/bikes.ts.
+  summary     String?
+  description String?
+  licence     Licence?
   active      Boolean @default(true)
   sortOrder   Int     @default(0)
 
@@ -38,6 +48,12 @@ model BikeModel {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// Which licence a rider needs for a model (wording in src/content/bikes.ts).
+enum Licence {
+  IDP_OR_A1
+  A2
 }
 
 enum BikeStatus {
@@ -217,7 +233,9 @@ enum BookingSource {
 enum RateTier {
   DAILY
   WEEKLY
+  THREE_WEEKS
   MONTHLY
+  FORTY_FIVE_DAYS
 }
 
 model Booking {

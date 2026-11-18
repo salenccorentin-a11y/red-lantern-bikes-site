@@ -1,0 +1,470 @@
+/* A route guide laid out as the trip: see RouteGuide.tsx. */
+
+.guide {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.prose > div > p,
+.prose > div > ul {
+  margin: 0 0 14px;
+}
+
+.prose a {
+  color: var(--lantern);
+  text-underline-offset: 3px;
+}
+
+/* The opening paragraphs: the first one a little larger. */
+.intro > div:first-child p {
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  color: var(--night);
+}
+
+.section {
+  margin-top: 56px;
+}
+
+.section h2,
+.cta h2 {
+  margin: 0 0 16px;
+  font-size: clamp(1.5rem, 4.6vw, 1.875rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* ─── At a glance ──────────────────────────────────────────────────── */
+
+.facts {
+  display: grid;
+  gap: 1px;
+  margin: 0 0 20px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-card);
+  background: var(--rule);
+}
+
+.facts > div {
+  padding: 14px 18px;
+  background: var(--white);
+}
+
+.facts dt {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--slate);
+}
+
+.facts dd {
+  margin: 2px 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--night);
+}
+
+@media (min-width: 640px) {
+  .facts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* The whole route as a strip of stops: the site's gold-stop route line. */
+.ribbon {
+  margin: 0 0 20px;
+  padding: 22px 22px 24px;
+  border-radius: var(--radius-photo);
+  background: var(--night);
+  color: var(--white);
+}
+
+.ribbon h3 {
+  margin: 0 0 14px;
+  font-size: 1rem;
+  color: var(--fog);
+}
+
+.ribbon ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ribbon li {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* A short stretch of road before every stop but the first. */
+.ribbon li + li::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  margin: 0 8px;
+  background: var(--night-line);
+}
+
+.ribbon a,
+.ribbon span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.ribbon a::before,
+.ribbon span::before {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--star);
+}
+
+.ribbon li:first-child a::before,
+.ribbon li:last-child a::before {
+  width: 13px;
+  height: 13px;
+  box-shadow: 0 0 0 3px rgb(255 204 0 / 0.25);
+}
+
+.ribbon a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--star);
+  text-underline-offset: 4px;
+}
+
+.ribbon a:focus-visible {
+  outline: 2px solid var(--star);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── The stops, down a timeline ───────────────────────────────────── */
+
+.timeline {
+  position: relative;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The road: a line through the stop numbers. */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 17px;
+  width: 2px;
+  background: var(--rule);
+}
+
+.stop {
+  position: relative;
+  padding: 0 0 40px 54px;
+  /* Room under the sticky header when jumping from the route strip. */
+  scroll-margin-top: 88px;
+}
+
+.stop:last-child {
+  padding-bottom: 0;
+}
+
+.dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--night);
+  color: var(--star);
+  font-size: 0.9375rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 5px var(--white);
+}
+
+.dot svg {
+  width: 18px;
+  height: 18px;
+}
+
+.stop h3 {
+  margin: 2px 0 12px;
+  font-size: clamp(1.375rem, 4.4vw, 1.625rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 10px;
+  border-radius: 10px;
+  background: var(--mist);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--night);
+}
+
+.chips li > span {
+  display: grid;
+}
+
+.chips small {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.chips svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--slate);
+}
+
+.chips .days {
+  background: var(--night);
+  color: var(--white);
+}
+
+.chips .days svg {
+  color: var(--star);
+}
+
+/* A rider's tip, set apart from the story. */
+.tip {
+  display: flex;
+  gap: 12px;
+  margin: 4px 0 16px;
+  padding: 14px 18px;
+  border-radius: var(--radius-card);
+  background: var(--mist);
+}
+
+.tip p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.tipIcon {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  color: var(--night);
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  margin: 12px 0 0;
+  border-radius: var(--radius-photo);
+}
+
+/* ─── The northern extension, on a night band ──────────────────────── */
+
+.north {
+  margin-inline: calc(-1 * var(--gutter));
+  padding: 36px var(--gutter) 40px;
+  background: var(--night);
+  color: #dbe2ee;
+}
+
+.north h2,
+.north h3 {
+  color: var(--white);
+}
+
+.north .timeline::before {
+  background: var(--night-line);
+}
+
+.north .dot {
+  background: var(--star);
+  color: var(--night);
+  box-shadow: 0 0 0 5px var(--night);
+}
+
+.north .chips li,
+.north .tip {
+  background: var(--night-raised);
+  color: var(--white);
+}
+
+.north .chips small,
+.north .chips svg {
+  color: var(--fog);
+}
+
+.north .chips .days {
+  background: var(--star);
+  color: var(--night);
+}
+
+.north .chips .days svg,
+.north .tipIcon {
+  color: var(--star);
+}
+
+.north .prose a {
+  color: var(--white);
+}
+
+@media (min-width: 760px) {
+  .north {
+    margin-inline: 0;
+    padding: 40px 36px 44px;
+    border-radius: var(--radius-photo);
+  }
+}
+
+/* ─── Practical tips ───────────────────────────────────────────────── */
+
+.tips {
+  display: grid;
+  gap: 8px 32px;
+}
+
+.tips > div {
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+}
+
+.tips h3 {
+  margin: 0 0 6px;
+  font-size: 1.125rem;
+}
+
+@media (min-width: 680px) {
+  .tips {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tipWide {
+    grid-column: 1 / -1;
+  }
+}
+
+.checklist {
+  display: grid;
+  gap: 10px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checklist li {
+  display: flex;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.check {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  color: var(--success);
+}
+
+/* ─── Bike picks and the closing call ──────────────────────────────── */
+
+.bikes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bikes a {
+  display: grid;
+  gap: 4px;
+  padding: 10px 14px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-card);
+  background: var(--white);
+  color: var(--night);
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.2s ease-out;
+}
+
+.bikes a:hover {
+  border-color: var(--night);
+}
+
+.bikes img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+}
+
+.cta {
+  margin-top: 56px;
+  padding: 32px 24px;
+  border-radius: var(--radius-photo);
+  background: var(--night);
+  color: #dbe2ee;
+}
+
+.cta h2 {
+  color: var(--white);
+}
+
+.cta .prose a {
+  color: var(--white);
+  text-decoration-color: var(--lantern-red);
+  text-decoration-thickness: 2px;
+}
+
+.ctaHelp {
+  margin: 16px 0 0;
+}
+
+@media (min-width: 760px) {
+  .cta {
+    padding: 40px 36px;
+  }
+}

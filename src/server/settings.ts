@@ -11,6 +11,8 @@ import { isUniqueViolation } from "@/server/db-errors";
 type Result = { ok: true } | { ok: false; error: string };
 const ok: Result = { ok: true };
 const fail = (error: string): Result => ({ ok: false, error });
+/** Like fail(), for functions that return more than ok on success. */
+const failWith = (error: string) => ({ ok: false as const, error });
 const firstIssue = (e: z.ZodError) => e.issues[0].message;
 
 const vnd = (label: string, min = 0, max = 100_000_000) =>
@@ -52,11 +54,24 @@ export async function updateSiteSettings(db: PrismaClient, raw: unknown): Promis
 
 // ─── Model prices and one-way fees ──────────────────────────────────────────
 
-const modelPricing = z.object({
-  modelId: z.string().min(1),
+/** A price that may be left empty: "" or missing → null (tier not priced). */
+const optionalVnd = (label: string) =>
+  z.preprocess(
+    (v) => (v === undefined || (typeof v === "string" && v.trim() === "") ? null : v),
+    vnd(label, 1_000).nullable(),
+  );
+
+const rateFields = {
   dailyRate: vnd("Daily rate", 1_000),
   weeklyRate: vnd("Weekly rate", 1_000),
+  threeWeekRate: optionalVnd("3-week rate"),
   monthlyRate: vnd("Monthly rate", 1_000),
+  fortyFiveDayRate: optionalVnd("45-day rate"),
+};
+
+const modelPricing = z.object({
+  modelId: z.string().min(1),
+  ...rateFields,
   active: checkbox,
   /** routeId → fee; an empty value removes the fee (model not offered on that route). */
   fees: z.record(z.string(), z.string()).default({}),
@@ -256,6 +271,172 @@ export async function setBikeRetired(
     }
   }
   await db.bike.update({ where: { id: bikeId }, data: { status: retired ? "RETIRED" : "ACTIVE" } });
+  return ok;
+}
+
+/**
+ * Add one or more bikes of a model at once: one plate per line (or separated
+ * by commas). Purchase date and price, if given, go on every bike added.
+ * All or nothing: if one plate is taken, no bike is added.
+ */
+export async function addBikes(db: PrismaClient, raw: unknown): Promise<Result> {
+  const parsed = z
+    .object({
+      modelId: z.string().min(1, "Choose a model."),
+      plates: z.string(),
+      acquiredOn: bikeDetails.shape.acquiredOn,
+      purchaseVnd: bikeDetails.shape.purchaseVnd,
+    })
+    .safeParse(raw);
+  if (!parsed.success) return fail(firstIssue(parsed.error));
+  const { modelId, acquiredOn, purchaseVnd } = parsed.data;
+
+  const plates: string[] = [];
+  for (const line of parsed.data.plates.split(/[\n,]/)) {
+    if (line.trim() === "") continue;
+    const p = plate.safeParse(line);
+    if (!p.success) return fail(`${line.trim()}: ${firstIssue(p.error)}`);
+    plates.push(p.data);
+  }
+  if (plates.length === 0) return fail("Enter at least one plate.");
+  if (plates.length > 30) return fail("At most 30 bikes at a time.");
+  const twice = plates.find((p, i) => plates.indexOf(p) !== i);
+  if (twice) return fail(`Plate ${twice} is in the list twice.`);
+
+  const taken = await db.bike.findMany({
+    where: { plate: { in: plates } },
+    select: { plate: true },
+  });
+  if (taken.length > 0) {
+    return fail(`Another bike already has plate ${taken.map((b) => b.plate).join(", ")}.`);
+  }
+  try {
+    await db.bike.createMany({
+      data: plates.map((p) => ({
+        modelId,
+        plate: p,
+        acquiredOn: acquiredOn ? parseIsoDate(acquiredOn) : null,
+        purchaseVnd: purchaseVnd === "" || purchaseVnd === undefined ? null : purchaseVnd,
+      })),
+    });
+  } catch (error) {
+    if (isUniqueViolation(error))
+      return fail("One of these plates was just added by someone else.");
+    throw error;
+  }
+  return ok;
+}
+
+/**
+ * Delete a bike for good: only for one added by mistake, with no bookings,
+ * blocks or repair records. A bike with history is retired instead.
+ */
+export async function deleteBike(db: PrismaClient, bikeId: string): Promise<Result> {
+  const bike = await db.bike.findUnique({
+    where: { id: bikeId },
+    select: {
+      plate: true,
+      _count: { select: { bookings: true, occupancies: true, incidents: true } },
+    },
+  });
+  if (!bike) return fail("This bike no longer exists.");
+  const { bookings, occupancies, incidents } = bike._count;
+  if (bookings + occupancies + incidents > 0) {
+    return fail(
+      `${bike.plate} has bookings, blocks or repairs on record, so it can't be deleted. Retire it instead: it's never offered again and keeps its history.`,
+    );
+  }
+  await db.bike.delete({ where: { id: bikeId } });
+  return ok;
+}
+
+// ─── Bike models ────────────────────────────────────────────────────────────
+
+const newModel = z.object({
+  name: z.string().trim().min(2, "Model name: at least 2 characters.").max(60),
+  kind: z.string().trim().min(2, "Type: at least 2 characters, e.g. Manual dual-sport.").max(40),
+  ...rateFields,
+  hanoiFee: optionalVnd("One-way fee to Hanoi"),
+  daNangFee: optionalVnd("One-way fee to Da Nang"),
+  licence: z.enum(["IDP_OR_A1", "A2"], { error: "Choose the licence needed." }),
+  summary: z.string().trim().min(10, "One-line summary: at least 10 characters.").max(140),
+  description: z.string().trim().min(20, "Description: at least 20 characters.").max(800),
+  active: checkbox,
+});
+
+/** "Honda Wave RSX 110" → "honda-wave-rsx-110" (the bike page's address). */
+export function modelSlug(name: string): string {
+  return (
+    name
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "") || "bike"
+  );
+}
+
+/**
+ * A new model, with its prices, one-way fees and the text customers see.
+ * Its page is at /bikes/<slug> and it's listed last; add its bikes with
+ * addBikes. The shop's lantern stands in for a photo until one is added.
+ */
+export async function createModel(
+  db: PrismaClient,
+  raw: unknown,
+): Promise<{ ok: true; slug: string } | { ok: false; error: string }> {
+  const parsed = newModel.safeParse(raw);
+  if (!parsed.success) return failWith(firstIssue(parsed.error));
+  const { hanoiFee, daNangFee, ...data } = parsed.data;
+  const slug = modelSlug(data.name);
+
+  const routes = await db.route.findMany({
+    where: { fromCity: "SAIGON", toCity: { in: ["HANOI", "DA_NANG"] } },
+    select: { id: true, toCity: true },
+  });
+  const fees = routes.flatMap((r) => {
+    const fee = r.toCity === "HANOI" ? hanoiFee : daNangFee;
+    return fee === null ? [] : [{ routeId: r.id, fee }];
+  });
+  const last = await db.bikeModel.aggregate({ _max: { sortOrder: true } });
+
+  try {
+    await db.bikeModel.create({
+      data: {
+        ...data,
+        slug,
+        sortOrder: (last._max.sortOrder ?? 0) + 1,
+        routeFees: { create: fees },
+      },
+    });
+  } catch (error) {
+    if (isUniqueViolation(error))
+      return failWith(`A model called "${data.name}" (or very close) already exists.`);
+    throw error;
+  }
+  return { ok: true, slug };
+}
+
+/**
+ * Remove a model for good: only one with no bikes and no bookings (e.g. added
+ * by mistake). Otherwise take it off sale: it stays in the records.
+ */
+export async function deleteModel(db: PrismaClient, modelId: string): Promise<Result> {
+  const model = await db.bikeModel.findUnique({
+    where: { id: modelId },
+    select: { name: true, _count: { select: { bikes: true, bookings: true } } },
+  });
+  if (!model) return fail("This model no longer exists.");
+  if (model._count.bikes + model._count.bookings > 0) {
+    return fail(
+      `${model.name} has bikes or bookings, so it can't be deleted. Untick "On sale" to stop offering it, and retire its bikes.`,
+    );
+  }
+  await db.$transaction([
+    db.routeFee.deleteMany({ where: { bikeModelId: modelId } }),
+    db.addOnModelPrice.deleteMany({ where: { bikeModelId: modelId } }),
+    db.bikeModel.delete({ where: { id: modelId } }),
+  ]);
   return ok;
 }
 

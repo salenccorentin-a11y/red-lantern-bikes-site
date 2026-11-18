@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
+import { ROUTE_GUIDE_POSTS, RouteGuide } from "@/components/blog/RouteGuide";
 import { POSTS, findPost, fullTitle, type BlogPost } from "@/content/blog";
 import { formatDisplayDate } from "@/lib/dates";
 import styles from "../../../content.module.css";
@@ -33,6 +34,8 @@ export default async function BlogPostPage(props: PageProps<"/blog/[blog]/[post]
   const { blog, post } = await props.params;
   const found = findPost(blog, post);
   if (!found) notFound();
+  // Long route guides get a layout of their own (same words, laid out as the trip).
+  const routeGuide = ROUTE_GUIDE_POSTS.has(found.postSlug);
 
   return (
     <ReadingProgress trip={tripFor(found)}>
@@ -67,15 +70,21 @@ export default async function BlogPostPage(props: PageProps<"/blog/[blog]/[post]
           )}
           {/* Content imported from our own old site and cleaned to plain tags
             (scripts/seo/import-blog.ts), so it's safe to render as HTML. */}
-          <div className={blogStyles.body} dangerouslySetInnerHTML={{ __html: found.html }} />
-          <div className={styles.actions}>
-            <Link href="/book" className={styles.primary}>
-              Book a bike
-            </Link>
-            <Link href="/one-way" className={styles.secondary}>
-              One-way trips
-            </Link>
-          </div>
+          {routeGuide ? (
+            <RouteGuide html={found.html} />
+          ) : (
+            <>
+              <div className={blogStyles.body} dangerouslySetInnerHTML={{ __html: found.html }} />
+              <div className={styles.actions}>
+                <Link href="/book" className={styles.primary}>
+                  Book a bike
+                </Link>
+                <Link href="/one-way" className={styles.secondary}>
+                  One-way trips
+                </Link>
+              </div>
+            </>
+          )}
         </article>
       </main>
     </ReadingProgress>

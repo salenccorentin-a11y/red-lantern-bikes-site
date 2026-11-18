@@ -1,10 +1,14 @@
 "use server";
 
+import { updateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import {
-  addBike,
+  addBikes,
   addStaff,
+  createModel,
+  deleteBike,
+  deleteModel,
   saveAddOn,
   saveAddOnModelPrices,
   setBikeRetired,
@@ -16,6 +20,9 @@ import {
 import { requireOwner } from "@/server/staff-session";
 
 type Result = { ok: true } | { ok: false; error: string };
+
+/** Bike pages for models added here are cached; this refreshes them. */
+const refreshFleet = () => updateTag("fleet");
 
 function back(path: string, result: Result, done: string): never {
   const query: Record<string, string> = result.ok ? { done } : { error: result.error };
@@ -36,6 +43,7 @@ export async function saveModelAction(form: FormData) {
     if (key.startsWith("fee:")) fees[key.slice(4)] = String(value);
   }
   const result = await updateModelPricing(db, { ...fields(form), fees });
+  refreshFleet();
   back("/staff/settings", result, `${form.get("modelName")} saved.`);
 }
 
@@ -59,9 +67,42 @@ export async function saveBikeAction(form: FormData) {
   back("/staff/settings/bikes", await updateBike(db, fields(form)), "Bike saved.");
 }
 
-export async function addBikeAction(form: FormData) {
+export async function addBikesAction(form: FormData) {
   await requireOwner();
-  back("/staff/settings/bikes", await addBike(db, fields(form)), "Bike added.");
+  const plates = String(form.get("plates") ?? "")
+    .split(/[\n,]/)
+    .filter((p) => p.trim()).length;
+  back(
+    "/staff/settings/bikes",
+    await addBikes(db, fields(form)),
+    plates === 1 ? "Bike added." : `${plates} bikes added.`,
+  );
+}
+
+export async function deleteBikeAction(form: FormData) {
+  await requireOwner();
+  const result = await deleteBike(db, String(form.get("bikeId")));
+  back("/staff/settings/bikes", result, `${form.get("plate")} deleted.`);
+}
+
+export async function createModelAction(form: FormData) {
+  await requireOwner();
+  const result = await createModel(db, fields(form));
+  if (result.ok) refreshFleet();
+  back(
+    "/staff/settings/models",
+    result.ok ? { ok: true } : result,
+    result.ok
+      ? `${form.get("name")} added. Its page is /bikes/${result.slug}. Now add its bikes under Bikes and plates.`
+      : "",
+  );
+}
+
+export async function deleteModelAction(form: FormData) {
+  await requireOwner();
+  const result = await deleteModel(db, String(form.get("modelId")));
+  if (result.ok) refreshFleet();
+  back("/staff/settings/models", result, `${form.get("modelName")} deleted.`);
 }
 
 export async function retireBikeAction(form: FormData) {

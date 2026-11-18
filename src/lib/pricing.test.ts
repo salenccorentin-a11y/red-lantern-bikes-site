@@ -67,11 +67,24 @@ describe("rate tiers (rule 3): weekly from 7 days, monthly from 30, applied to e
     [1, "DAILY"],
     [6, "DAILY"],
     [7, "WEEKLY"],
-    [29, "WEEKLY"],
+    [20, "WEEKLY"],
+    [21, "THREE_WEEKS"],
+    [29, "THREE_WEEKS"],
     [30, "MONTHLY"],
-    [90, "MONTHLY"],
-  ] as const)("%i days → %s", (days, tier) => {
+    [44, "MONTHLY"],
+    [45, "FORTY_FIVE_DAYS"],
+    [90, "FORTY_FIVE_DAYS"],
+  ] as const)("every tier priced: %i days → %s", (days, tier) => {
     expect(rateTierFor(days)).toBe(tier);
+  });
+
+  it.each([
+    [21, "WEEKLY"],
+    [29, "WEEKLY"],
+    [45, "MONTHLY"],
+    [90, "MONTHLY"],
+  ] as const)("no 3-week or 45-day price yet: %i days → %s", (days, tier) => {
+    expect(rateTierFor(days, XR150)).toBe(tier);
   });
 
   it("6-day XR150 at the daily rate: 6 × 400,000", () => {
@@ -160,6 +173,69 @@ describe("price cap: never more than the next tier's minimum length (decided 11 
       }
     },
   );
+});
+
+// The 3-week and 45-day prices (added 18 November 2026) aren't set yet; these
+// are made-up test rates, not the shop's prices.
+const XR150_ALL_TIERS = { ...XR150, threeWeekRate: 320_000, fortyFiveDayRate: 280_000 };
+
+describe("3-week tier from 21 days and 45-day tier from 45 days", () => {
+  it("21 days at the 3-week rate for all 21 days", () => {
+    expect(priced({ rates: XR150_ALL_TIERS, endDate: endFor(21) })).toMatchObject({
+      rateTier: "THREE_WEEKS",
+      dailyRate: 320_000,
+      rentalVnd: 6_720_000,
+      cappedAt: null,
+    });
+  });
+
+  it("20 days costs the 21-day price when that is cheaper (price cap)", () => {
+    expect(priced({ rates: XR150_ALL_TIERS, endDate: endFor(20) })).toMatchObject({
+      rateTier: "WEEKLY",
+      rentalVnd: 6_720_000,
+      cappedAt: { tier: "THREE_WEEKS", days: 21 },
+    });
+  });
+
+  it("29 days at the 3-week rate is capped at the 30-day monthly price", () => {
+    expect(priced({ rates: XR150_ALL_TIERS, endDate: endFor(29) })).toMatchObject({
+      rateTier: "THREE_WEEKS",
+      rentalVnd: 9_000_000,
+      cappedAt: { tier: "MONTHLY", days: 30 },
+    });
+  });
+
+  it("45 days at the 45-day rate for all 45 days", () => {
+    expect(priced({ rates: XR150_ALL_TIERS, endDate: endFor(45) })).toMatchObject({
+      rateTier: "FORTY_FIVE_DAYS",
+      dailyRate: 280_000,
+      rentalVnd: 12_600_000,
+    });
+  });
+
+  it("44 days at the monthly rate is capped at the 45-day price", () => {
+    expect(priced({ rates: XR150_ALL_TIERS, endDate: endFor(44) })).toMatchObject({
+      rateTier: "MONTHLY",
+      rentalVnd: 12_600_000,
+      cappedAt: { tier: "FORTY_FIVE_DAYS", days: 45 },
+    });
+  });
+
+  it("without those prices, nothing changes: 45-day XR150 is 45 × 300,000", () => {
+    expect(priced({ rates: XR150, endDate: endFor(45) })).toMatchObject({
+      rateTier: "MONTHLY",
+      rentalVnd: 13_500_000,
+    });
+  });
+
+  it("one more day never costs less, from 1 to 90 days", () => {
+    let previous = 0;
+    for (let days = 1; days <= 90; days++) {
+      const price = priced({ rates: XR150_ALL_TIERS, endDate: endFor(days) }).rentalVnd;
+      expect(price, `${days} days`).toBeGreaterThanOrEqual(previous);
+      previous = price;
+    }
+  });
 });
 
 describe("day count (rule 7): both the pick-up and drop-off days count", () => {

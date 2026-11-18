@@ -8,6 +8,7 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
       <nav className={styles.subnav} aria-label="Settings">
         <Link href="/staff/settings">Business and prices</Link>
         <Link href="/staff/settings/add-ons">Add-ons</Link>
+        <Link href="/staff/settings/models">Bike models</Link>
         <Link href="/staff/settings/bikes">Bikes and plates</Link>
         <Link href="/staff/settings/staff">Staff</Link>
       </nav>

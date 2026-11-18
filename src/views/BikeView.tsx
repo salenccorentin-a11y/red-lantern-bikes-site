@@ -12,7 +12,6 @@ import { connection } from "next/server";
 import { cache, Suspense } from "react";
 import bike from "@/app/(en)/(public)/bikes/[slug]/bike.module.css";
 import styles from "@/app/(en)/(public)/content.module.css";
-import { bikeImage } from "@/components/BikeCard";
 import { BikePhotos } from "@/components/BikePhotos";
 import photoStyles from "@/components/BikePhotos.module.css";
 import { SharedElement } from "@/components/motion/SharedElement";
@@ -27,6 +26,7 @@ import {
   cityName,
   getMessages,
   includedFor,
+  modelContent,
   kindLabel,
   licenceText,
 } from "@/i18n";
@@ -34,16 +34,23 @@ import { fill, OG_LOCALE, type Locale } from "@/i18n/config";
 import { languageAlternates, localize } from "@/i18n/paths";
 import { db } from "@/lib/db";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
-import { MONTHLY_FROM_DAYS, WEEKLY_FROM_DAYS, savingVsDaily } from "@/lib/pricing";
+import { MONTHLY_FROM_DAYS, WEEKLY_FROM_DAYS, pricedTiers, savingVsDaily } from "@/lib/pricing";
 import { getSettings } from "@/server/availability";
+import { PHOTO_PLACEHOLDER, studioPhoto } from "@/server/bike-photo";
 import { listModels, type PublicModel } from "@/server/fleet";
+import { modelOnSale } from "@/server/model-on-sale";
 
 export function bikeSlugs() {
   return Object.keys(BIKE_CONTENT).map((slug) => ({ slug }));
 }
 
-export function bikeMetadata(lang: Locale, slug: string): Metadata {
-  const content = bikeContent(lang, slug);
+export async function bikeMetadata(lang: Locale, slug: string): Promise<Metadata> {
+  let content = bikeContent(lang, slug);
+  if (!content) {
+    // A model added from the staff area.
+    const model = await modelOnSale(slug);
+    content = model ? modelContent(lang, model) : undefined;
+  }
   if (!content) return {};
   // English wording from the old site's product pages.
   return {
@@ -52,7 +59,7 @@ export function bikeMetadata(lang: Locale, slug: string): Metadata {
     alternates: languageAlternates(lang, `/bikes/${slug}`),
     openGraph: {
       locale: OG_LOCALE[lang],
-      images: [{ url: bikeImage(slug), width: 1200, height: 800 }],
+      images: [{ url: studioPhoto(slug), width: 1200, height: 800 }],
     },
   };
 }
@@ -63,8 +70,12 @@ const MODEL_NAME: Record<string, string> = Object.fromEntries(
   BIKE_MODELS.map((m) => [m.slug, m.name]),
 );
 
-export function BikeView({ lang, slug }: { lang: Locale; slug: string }) {
-  if (!BIKE_CONTENT[slug]) notFound();
+export async function BikeView({ lang, slug }: { lang: Locale; slug: string }) {
+  // The original twelve are known ahead; a model added from the staff area
+  // is looked up (cached), so an unknown address is still a real 404.
+  const added = BIKE_CONTENT[slug] ? null : await modelOnSale(slug);
+  if (!BIKE_CONTENT[slug] && !added) notFound();
+  const name = MODEL_NAME[slug] ?? added?.name ?? "";
   const t = getMessages(lang).bike;
   return (
     <main className={bike.main}>
@@ -77,7 +88,7 @@ export function BikeView({ lang, slug }: { lang: Locale; slug: string }) {
             {/* Outside the loading step, so the photos are there the moment
                 the page opens and the card's photo can grow into the first. */}
             <div className={bike.imagePanel}>
-              <Photos lang={lang} slug={slug} />
+              <Photos lang={lang} slug={slug} name={name} />
             </div>
             <Suspense fallback={<div style={{ minHeight: 420 }} />}>
               <BikeInfo lang={lang} slug={slug} />
@@ -104,7 +115,7 @@ const loadBike = cache(async (slug: string) => {
 
 async function BikeInfo({ lang, slug }: { lang: Locale; slug: string }) {
   const { model, settings } = await loadBike(slug);
-  const content = bikeContent(lang, slug);
+  const content = modelContent(lang, model);
   const t = getMessages(lang).bike;
   const usd = (vnd: number) => formatUsdApprox(vnd, settings.usdToVndRate);
   const to = (href: string) => localize(lang, href);
@@ -119,13 +130,7 @@ async function BikeInfo({ lang, slug }: { lang: Locale; slug: string }) {
 
       <h2 className={bike.priceTitle}>{t.pricePerDay}</h2>
       <ul className={bike.tiers}>
-        {(
-          [
-            [t.tierDaily, model.dailyRate],
-            [t.tierWeekly, model.weeklyRate],
-            [t.tierMonthly, model.monthlyRate],
-          ] as const
-        ).map(([label, rate]) => (
+        {tierRows(lang, model).map(([label, rate]) => (
           <li key={label} className={bike.tier}>
             <span className={bike.tierLabel}>{label}</span>
             <b className={bike.tierPrice}>{formatVnd(rate)}</b>
@@ -183,7 +188,7 @@ async function BikeInfo({ lang, slug }: { lang: Locale; slug: string }) {
 
 async function BikeMore({ lang, slug }: { lang: Locale; slug: string }) {
   const { model } = await loadBike(slug);
-  const content = bikeContent(lang, slug);
+  const content = modelContent(lang, model);
   const facts = bikeFacts(slug);
   const t = getMessages(lang).bike;
 
@@ -212,6 +217,14 @@ async function BikeMore({ lang, slug }: { lang: Locale; slug: string }) {
             <p>{licenceText(lang, "IDP_OR_A1")}</p>
           </section>
         )}
+        {/* A model added from the staff area: no engine size on file, so the
+            licence wording only when it needs more than the usual permit. */}
+        {!BIKE_CONTENT[slug] && content?.licence === "A2" && (
+          <section>
+            <h2>{t.licence}</h2>
+            <p>{licenceText(lang, "A2")}</p>
+          </section>
+        )}
         <section>
           <h2>{t.included}</h2>
           <ul className={bike.included}>
@@ -223,6 +236,19 @@ async function BikeMore({ lang, slug }: { lang: Locale; slug: string }) {
       </div>
     </>
   );
+}
+
+/** "1 to 6 days" … "30 days or more": one row per tier the model has a price for. */
+function tierRows(lang: Locale, model: PublicModel): [string, number][] {
+  const t = getMessages(lang).bike;
+  const tiers = pricedTiers(model);
+  return tiers.map((tier, i) => {
+    const next = tiers[i + 1];
+    const label = next
+      ? fill(t.tierRange, { from: tier.fromDays, to: next.fromDays - 1 })
+      : fill(t.tierFrom, { from: tier.fromDays });
+    return [label, tier.rate];
+  });
 }
 
 // ─── Photos ───────────────────────────────────────────────────────────────
@@ -246,12 +272,16 @@ function photosFor(slug: string, studioAlt: string): Photo[] {
   const gallery =
     (galleries as Record<string, { src: string; alt: string; blur: string }[]>)[slug] ?? [];
   if (gallery.length > 0) return gallery.map((p) => ({ ...p, width: 1200, height: 900 }));
-  return [{ src: bikeImage(slug), alt: studioAlt, width: 1200, height: 800, cutout: true }];
+  const src = studioPhoto(slug);
+  return [
+    src === PHOTO_PLACEHOLDER
+      ? { src, alt: "", width: 95, height: 160, cutout: true }
+      : { src, alt: studioAlt, width: 1200, height: 800, cutout: true },
+  ];
 }
 
-function Photos({ lang, slug }: { lang: Locale; slug: string }) {
+function Photos({ lang, slug, name }: { lang: Locale; slug: string; name: string }) {
   const t = getMessages(lang).bike;
-  const name = MODEL_NAME[slug] ?? "";
   const photos = photosFor(slug, fill(t.photoAlt, { name }));
 
   const slides = photos.map((p, i) => {

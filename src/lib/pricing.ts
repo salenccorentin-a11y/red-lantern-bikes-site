@@ -4,19 +4,59 @@
 
 import { daysInclusive, parseIsoDate } from "@/lib/dates";
 
-/** Weekly rate applies from this many days, to every day of the rental. */
+/** Each tier's rate applies from this many days, to every day of the rental. */
 export const WEEKLY_FROM_DAYS = 7;
-/** Monthly rate applies from this many days, to every day of the rental. */
+export const THREE_WEEKS_FROM_DAYS = 21;
 export const MONTHLY_FROM_DAYS = 30;
+export const FORTY_FIVE_DAYS_FROM_DAYS = 45;
 
-export type RateTier = "DAILY" | "WEEKLY" | "MONTHLY";
+export type RateTier = "DAILY" | "WEEKLY" | "THREE_WEEKS" | "MONTHLY" | "FORTY_FIVE_DAYS";
 
-/** Price per day for each tier, in VND. */
+/**
+ * Price per day for each tier, in VND. The 3-week and 45-day prices are
+ * optional (added 18 November 2026): while a model has none, that tier is
+ * skipped and the weekly or monthly price carries on.
+ */
 export type RateCard = {
   dailyRate: number;
   weeklyRate: number;
+  threeWeekRate?: number | null;
   monthlyRate: number;
+  fortyFiveDayRate?: number | null;
 };
+
+/** The tiers, shortest first, with the rental length each starts at. */
+export const TIERS: readonly { tier: RateTier; fromDays: number }[] = [
+  { tier: "DAILY", fromDays: 1 },
+  { tier: "WEEKLY", fromDays: WEEKLY_FROM_DAYS },
+  { tier: "THREE_WEEKS", fromDays: THREE_WEEKS_FROM_DAYS },
+  { tier: "MONTHLY", fromDays: MONTHLY_FROM_DAYS },
+  { tier: "FORTY_FIVE_DAYS", fromDays: FORTY_FIVE_DAYS_FROM_DAYS },
+];
+
+/** The tier's price per day, or null when the model has no price for it. */
+export function rateFor(rates: RateCard, tier: RateTier): number | null {
+  switch (tier) {
+    case "DAILY":
+      return rates.dailyRate;
+    case "WEEKLY":
+      return rates.weeklyRate;
+    case "THREE_WEEKS":
+      return rates.threeWeekRate ?? null;
+    case "MONTHLY":
+      return rates.monthlyRate;
+    case "FORTY_FIVE_DAYS":
+      return rates.fortyFiveDayRate ?? null;
+  }
+}
+
+/** The tiers this model has a price for, shortest first, e.g. for a price table. */
+export function pricedTiers(rates: RateCard): { tier: RateTier; fromDays: number; rate: number }[] {
+  return TIERS.flatMap(({ tier, fromDays }) => {
+    const rate = rateFor(rates, tier);
+    return rate === null ? [] : [{ tier, fromDays, rate }];
+  });
+}
 
 export type OneWayTerms = {
   minDays: number;
@@ -77,21 +117,16 @@ export type QuoteError =
 
 export type QuoteResult = { ok: true; quote: Quote } | { ok: false; error: QuoteError };
 
-export function rateTierFor(days: number): RateTier {
-  if (days >= MONTHLY_FROM_DAYS) return "MONTHLY";
-  if (days >= WEEKLY_FROM_DAYS) return "WEEKLY";
-  return "DAILY";
-}
-
-function rateFor(rates: RateCard, tier: RateTier): number {
-  switch (tier) {
-    case "MONTHLY":
-      return rates.monthlyRate;
-    case "WEEKLY":
-      return rates.weeklyRate;
-    case "DAILY":
-      return rates.dailyRate;
+/**
+ * The tier for a rental of `days` days: the longest one it reaches that the
+ * model has a price for. Without `rates`, every tier counts as priced.
+ */
+export function rateTierFor(days: number, rates?: RateCard): RateTier {
+  let found: RateTier = "DAILY";
+  for (const { tier, fromDays } of TIERS) {
+    if (days >= fromDays && (!rates || rateFor(rates, tier) !== null)) found = tier;
   }
+  return found;
 }
 
 /**
@@ -103,21 +138,18 @@ export function rentalPrice(
   rates: RateCard,
   days: number,
 ): Pick<Quote, "rateTier" | "dailyRate" | "rentalVnd" | "cappedAt"> {
-  const rateTier = rateTierFor(days);
-  const dailyRate = rateFor(rates, rateTier);
+  const rateTier = rateTierFor(days, rates);
+  // Never null: rateTierFor only picks tiers with a price.
+  const dailyRate = rateFor(rates, rateTier)!;
   let rentalVnd = dailyRate * days;
   let cappedAt: Quote["cappedAt"] = null;
 
-  const longerTiers = [
-    { tier: "WEEKLY", days: WEEKLY_FROM_DAYS },
-    { tier: "MONTHLY", days: MONTHLY_FROM_DAYS },
-  ] as const;
-  for (const longer of longerTiers) {
-    if (days >= longer.days) continue;
-    const price = rateFor(rates, longer.tier) * longer.days;
+  for (const longer of pricedTiers(rates)) {
+    if (days >= longer.fromDays) continue;
+    const price = longer.rate * longer.fromDays;
     if (price < rentalVnd) {
       rentalVnd = price;
-      cappedAt = { tier: longer.tier, days: longer.days };
+      cappedAt = { tier: longer.tier, days: longer.fromDays };
     }
   }
 

@@ -1,8 +1,13 @@
 import { afterAll, beforeEach, describe, expect, it } from "vitest";
 import { reserveBike } from "@/server/bookings";
+import { listModels } from "@/server/fleet";
 import {
   addBike,
+  addBikes,
   addStaff,
+  createModel,
+  deleteBike,
+  deleteModel,
   saveAddOn,
   saveAddOnModelPrices,
   setBikeRetired,
@@ -106,6 +111,55 @@ describe("model prices and one-way fees", () => {
   });
 });
 
+describe("3-week and 45-day prices", () => {
+  const xr150Prices = {
+    dailyRate: "400000",
+    weeklyRate: "350000",
+    monthlyRate: "300000",
+    active: "on",
+  };
+
+  it("saves them, and clears them when left empty", async () => {
+    await updateModelPricing(db, {
+      modelId: fleet.xr150.id,
+      ...xr150Prices,
+      threeWeekRate: "320000",
+      fortyFiveDayRate: "280000",
+    });
+    expect(await db.bikeModel.findUniqueOrThrow({ where: { id: fleet.xr150.id } })).toMatchObject({
+      threeWeekRate: 320_000,
+      fortyFiveDayRate: 280_000,
+    });
+
+    await updateModelPricing(db, {
+      modelId: fleet.xr150.id,
+      ...xr150Prices,
+      threeWeekRate: "",
+      fortyFiveDayRate: " ",
+    });
+    expect(await db.bikeModel.findUniqueOrThrow({ where: { id: fleet.xr150.id } })).toMatchObject({
+      threeWeekRate: null,
+      fortyFiveDayRate: null,
+    });
+  });
+
+  it("charges a 45-day booking at the 45-day price", async () => {
+    await updateModelPricing(db, {
+      modelId: fleet.xr150.id,
+      ...xr150Prices,
+      fortyFiveDayRate: "280000",
+    });
+    // 10 November to 24 December: 45 days.
+    const booked = await reserveBike(db, onlineBooking(fleet.xr150.id, { endDate: "2026-12-24" }));
+    if (!booked.ok) throw new Error(JSON.stringify(booked));
+    expect(booked.booking).toMatchObject({
+      days: 45,
+      rateTier: "FORTY_FIVE_DAYS",
+      rentalVnd: 45 * 280_000,
+    });
+  });
+});
+
 describe("add-ons", () => {
   it("adds and edits an add-on", async () => {
     expect(
@@ -203,6 +257,113 @@ describe("bikes", () => {
 
     await db.booking.update({ where: { id: booked.booking.id }, data: { status: "CANCELLED" } });
     expect(await setBikeRetired(db, booked.booking.bikeId!, true, NOW)).toEqual({ ok: true });
+  });
+
+  it("adds several bikes at once, one plate per line", async () => {
+    const result = await addBikes(db, {
+      modelId: fleet.versys.id,
+      plates: "59-x2 111.11\n\n59-X2 222.22 , 59-X2 333.33",
+      acquiredOn: "2026-11-01",
+      purchaseVnd: "120000000",
+    });
+    expect(result).toEqual({ ok: true });
+    const added = await db.bike.findMany({
+      where: { modelId: fleet.versys.id, plate: { startsWith: "59-X2" } },
+      orderBy: { plate: "asc" },
+    });
+    expect(added.map((b) => b.plate)).toEqual(["59-X2 111.11", "59-X2 222.22", "59-X2 333.33"]);
+    expect(added.every((b) => b.purchaseVnd === 120_000_000)).toBe(true);
+  });
+
+  it("adds none when one plate is taken or listed twice", async () => {
+    const taken = (await db.bike.findFirstOrThrow({ where: { modelId: fleet.cb150x.id } })).plate;
+    const before = await db.bike.count();
+    expect(
+      (await addBikes(db, { modelId: fleet.versys.id, plates: `59-X3 444.44\n${taken}` })).ok,
+    ).toBe(false);
+    expect(
+      (await addBikes(db, { modelId: fleet.versys.id, plates: "59-X3 444.44\n59-x3 444.44" })).ok,
+    ).toBe(false);
+    expect(await addBikes(db, { modelId: fleet.versys.id, plates: "  " })).toEqual({
+      ok: false,
+      error: "Enter at least one plate.",
+    });
+    expect(await db.bike.count()).toBe(before);
+  });
+
+  it("deletes a bike added by mistake, but not one with history", async () => {
+    await addBikes(db, { modelId: fleet.versys.id, plates: "59-X4 555.55" });
+    const mistake = await db.bike.findUniqueOrThrow({ where: { plate: "59-X4 555.55" } });
+    expect(await deleteBike(db, mistake.id)).toEqual({ ok: true });
+    expect(await db.bike.findUnique({ where: { id: mistake.id } })).toBeNull();
+
+    const booked = await reserveBike(db, onlineBooking(fleet.versys.id));
+    if (!booked.ok) throw new Error("booking failed");
+    const refused = await deleteBike(db, booked.booking.bikeId!);
+    expect(refused.ok).toBe(false);
+    if (!refused.ok) expect(refused.error).toContain("Retire it instead");
+  });
+});
+
+describe("bike models", () => {
+  const newModel = {
+    name: "Honda Wave RSX 110",
+    kind: "Semi-automatic",
+    dailyRate: "250000",
+    weeklyRate: "210000",
+    threeWeekRate: "",
+    monthlyRate: "190000",
+    fortyFiveDayRate: "170000",
+    hanoiFee: "1300000",
+    daNangFee: "",
+    licence: "IDP_OR_A1",
+    summary: "A newer Wave with a bit more room for luggage.",
+    description:
+      "The same easy Honda Wave, in its newer RSX version. Good in town and on long rides.",
+    active: "on",
+  };
+
+  it("adds a model with its prices, fees and text, listed for customers", async () => {
+    const result = await createModel(db, newModel);
+    expect(result).toEqual({ ok: true, slug: "honda-wave-rsx-110" });
+
+    const model = await db.bikeModel.findUniqueOrThrow({
+      where: { slug: "honda-wave-rsx-110" },
+      include: { routeFees: { include: { route: true } } },
+    });
+    expect(model).toMatchObject({
+      dailyRate: 250_000,
+      threeWeekRate: null,
+      fortyFiveDayRate: 170_000,
+      licence: "IDP_OR_A1",
+      active: true,
+    });
+    expect(model.routeFees.map((f) => [f.route.toCity, f.fee])).toEqual([["HANOI", 1_300_000]]);
+
+    const listed = (await listModels(db)).find((m) => m.slug === "honda-wave-rsx-110");
+    expect(listed).toMatchObject({ units: 0, summary: newModel.summary });
+    // No studio photo yet: the lantern stands in.
+    expect(listed?.image).toBe("/brand/lantern.webp");
+  });
+
+  it("refuses a second model with the same name", async () => {
+    await createModel(db, newModel);
+    const again = await createModel(db, { ...newModel, name: "Honda Wave RSX-110" });
+    expect(again.ok).toBe(false);
+  });
+
+  it("refuses a model without its required text", async () => {
+    expect((await createModel(db, { ...newModel, summary: "" })).ok).toBe(false);
+  });
+
+  it("deletes a model with no bikes and no bookings, and refuses one with bikes", async () => {
+    await createModel(db, newModel);
+    const added = await db.bikeModel.findUniqueOrThrow({ where: { slug: "honda-wave-rsx-110" } });
+    expect(await deleteModel(db, added.id)).toEqual({ ok: true });
+    expect(await db.bikeModel.findUnique({ where: { id: added.id } })).toBeNull();
+
+    const refused = await deleteModel(db, fleet.xr150.id);
+    expect(refused.ok).toBe(false);
   });
 });
 

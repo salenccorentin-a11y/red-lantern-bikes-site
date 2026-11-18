@@ -83,14 +83,6 @@ export function OneWayView({ lang }: { lang: Locale }) {
         </section>
 
         <section className={`${ui.section} ${ui.sectionMist}`}>
-          <div className={ui.container}>
-            <Suspense fallback={<div style={{ minHeight: 720 }} />}>
-              <Fees lang={lang} />
-            </Suspense>
-          </div>
-        </section>
-
-        <section className={ui.section}>
           <div className={`${ui.container} ${oneWay.planning}`}>
             <div className={styles.prose}>
               <h2 className={oneWay.h2}>{t.planningTitle}</h2>
@@ -105,11 +97,10 @@ export function OneWayView({ lang }: { lang: Locale }) {
                 >
                   {t.guideLink}
                 </Link>
-                {lang !== "en" && ` ${t.guideNote}`}
-                .
+                {lang !== "en" && ` ${t.guideNote}`}.
               </p>
             </div>
-            <aside className={`${styles.box} ${styles.boxMist}`}>
+            <aside className={styles.box}>
               <h2>{m.common.included}</h2>
               <ul className={oneWay.included}>
                 {includedFor(lang).map((item) => (
@@ -117,6 +108,15 @@ export function OneWayView({ lang }: { lang: Locale }) {
                 ))}
               </ul>
             </aside>
+          </div>
+        </section>
+
+        {/* The fee table last, for riders ready to compare (owner, 2026-11-18). */}
+        <section className={ui.section}>
+          <div className={ui.container}>
+            <Suspense fallback={<div style={{ minHeight: 720 }} />}>
+              <Fees lang={lang} />
+            </Suspense>
           </div>
         </section>
       </main>

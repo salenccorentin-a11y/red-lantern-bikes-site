@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Suspense } from "react";
 import { db } from "@/lib/db";
 import { getSettings } from "@/server/availability";
@@ -59,8 +60,11 @@ async function BusinessSettings() {
       <section className={styles.panel}>
         <h2>Prices per model</h2>
         <p className={styles.muted}>
-          Prices per day in VND. Weekly applies from 7 days, monthly from 30. Leave a one-way fee
-          empty to stop offering that model on that route. Changes apply to new bookings only.
+          Prices per day in VND. Weekly applies from 7 days, 3 weeks from 21, monthly from 30 and 45
+          days from 45, to every day of the rental. An empty 3-week or 45-day price means the weekly
+          or monthly price carries on. Leave a one-way fee empty to stop offering that model on that
+          route. Changes apply to new bookings only. New models:{" "}
+          <Link href="/staff/settings/models">Bike models</Link>.
         </p>
         <div className={styles.tableWrap}>
           <table className={styles.table}>
@@ -69,7 +73,9 @@ async function BusinessSettings() {
                 <th>Model</th>
                 <th>Daily</th>
                 <th>Weekly</th>
+                <th>3 weeks</th>
                 <th>Monthly</th>
+                <th>45 days</th>
                 {routes.map((r) => (
                   <th key={r.id}>One-way to {r.toCity === "HANOI" ? "Hanoi" : "Da Nang"}</th>
                 ))}
@@ -96,7 +102,23 @@ async function BusinessSettings() {
                       <CellNum form={formId} name="weeklyRate" value={m.weeklyRate} />
                     </td>
                     <td>
+                      <CellNum
+                        form={formId}
+                        name="threeWeekRate"
+                        value={m.threeWeekRate ?? undefined}
+                        optional
+                      />
+                    </td>
+                    <td>
                       <CellNum form={formId} name="monthlyRate" value={m.monthlyRate} />
+                    </td>
+                    <td>
+                      <CellNum
+                        form={formId}
+                        name="fortyFiveDayRate"
+                        value={m.fortyFiveDayRate ?? undefined}
+                        optional
+                      />
                     </td>
                     {routes.map((r) => (
                       <td key={r.id}>
@@ -147,7 +169,7 @@ function Num(props: { name: string; label: string; value: number; step?: number 
   );
 }
 
-function CellNum(props: { form: string; name: string; value?: number }) {
+function CellNum(props: { form: string; name: string; value?: number; optional?: boolean }) {
   return (
     <input
       form={props.form}
@@ -158,6 +180,7 @@ function CellNum(props: { form: string; name: string; value?: number }) {
       step={1000}
       className={styles.cellInput}
       aria-label={props.name}
+      placeholder={props.optional ? "not set" : undefined}
     />
   );
 }

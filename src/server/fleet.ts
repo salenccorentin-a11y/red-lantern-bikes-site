@@ -2,6 +2,7 @@
 // of each model are in the fleet.
 
 import type { PrismaClient } from "@/generated/prisma/client";
+import { studioPhoto } from "./bike-photo";
 
 export async function listModels(db: PrismaClient) {
   const models = await db.bikeModel.findMany({
@@ -18,7 +19,14 @@ export async function listModels(db: PrismaClient) {
     kind: m.kind,
     dailyRate: m.dailyRate,
     weeklyRate: m.weeklyRate,
+    threeWeekRate: m.threeWeekRate,
     monthlyRate: m.monthlyRate,
+    fortyFiveDayRate: m.fortyFiveDayRate,
+    // Text entered in staff settings, for models added there.
+    summary: m.summary,
+    description: m.description,
+    licence: m.licence,
+    image: studioPhoto(m.slug),
     units: m._count.bikes,
     oneWayFees: m.routeFees
       .filter((f) => f.route.fromCity === "SAIGON" && f.route.bookableOnline && f.route.active)

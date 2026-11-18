@@ -156,7 +156,7 @@ export const frContent: TranslatedContent = {
       id: "prices",
       question: "Comment sont calculées les longues locations ?",
       answer: [
-        "Chaque moto a un prix par jour à la journée, à la semaine et au mois. À partir de 7 jours, le prix à la semaine s'applique à chaque jour de la location, et à partir de 30 jours le prix au mois. Une location ne coûte jamais plus qu'une plus longue : si 30 jours coûtent moins cher que 26, vous payez le prix des 30 jours.",
+        "Chaque moto a un prix par jour qui baisse avec la durée : à la journée, à la semaine dès 7 jours, 3 semaines dès 21 jours, au mois dès 30 jours et 45 jours dès 45 jours. Le prix de votre durée s'applique à chaque jour de la location. Une location ne coûte jamais plus qu'une plus longue : si 30 jours coûtent moins cher que 26, vous payez le prix des 30 jours.",
         "Le jour du départ et le jour du retour comptent tous les deux comme jours de location.",
       ],
     },

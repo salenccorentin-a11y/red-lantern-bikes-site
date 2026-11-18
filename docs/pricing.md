@@ -6,7 +6,7 @@ Once the site is live, every value here is stored in the database and edited fro
 
 ## Fleet and rates
 
-The weekly and monthly columns are a price per day, not a total.
+The weekly and monthly columns are a price per day, not a total. Two more tiers were added on 18 November 2026, **3 weeks** (from 21 days) and **45 days** (from 45 days), also a price per day; their prices aren't set yet and are entered by the owner in the staff settings (Business and prices). Until a model has one, that tier is skipped and the weekly or monthly price carries on.
 
 | Model | Units | Daily rate | Weekly rate, per day | Monthly rate, per day | Online deposit (non-refundable) |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -54,8 +54,8 @@ A flat online deposit of 1,500,000 per booking, non-refundable. The rest is paid
 
 1. **One-way fee.** Set by bike model, the same on both routes. See "One-way fee by model" above.
 2. **Reverse directions and other cities.** Hanoi to Saigon and Da Nang to Saigon are offered, but as enquiries only: staff confirm by hand and create the booking. No other cities at launch.
-3. **Tier thresholds.** The weekly rate applies from 7 days and the monthly rate from 30 days, to every day of the rental. Example: a 10-day XR150 rental is 10 × 350,000.
-   **Price cap (decided 11 October 2026):** a rental never costs more than the next tier's minimum length. A 26-day XR150 would be 26 × 350,000 = 9,100,000, but 30 days at the monthly rate is 9,000,000, so it costs 9,000,000. A 6-day Wave Alpha costs the 7-day price, 1,435,000. A customer never pays more for fewer days.
+3. **Tier thresholds.** The weekly rate applies from 7 days, the 3-week rate from 21 days, the monthly rate from 30 days and the 45-day rate from 45 days, to every day of the rental (3-week and 45-day tiers added 18 Nov 2026, owner; skipped for a model without those prices). Example: a 10-day XR150 rental is 10 × 350,000.
+   **Price cap (decided 11 October 2026):** a rental never costs more than any longer tier's minimum length. A 26-day XR150 would be 26 × 350,000 = 9,100,000, but 30 days at the monthly rate is 9,000,000, so it costs 9,000,000. A 6-day Wave Alpha costs the 7-day price, 1,435,000. A customer never pays more for fewer days.
 4. **Deposit and the total.** The 1,500,000 deposit is part of the rental total. Balance at pickup = total − deposit.
 5. **Deposit on short rentals.** The deposit is capped at the rental total. A 1-day Wave Alpha (240,000) has a 240,000 deposit and nothing due at pickup.
 6. **Add-ons** (decided 17 Oct 2026). Editable in staff settings; the seed sets:

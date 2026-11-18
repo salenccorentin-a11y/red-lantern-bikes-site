@@ -31,7 +31,7 @@ export const FAQ: Faq[] = [
     id: "prices",
     question: "How are long rentals priced?",
     answer: [
-      "Every bike has a daily, weekly and monthly price per day. From 7 days the weekly price applies to every day of the rental, and from 30 days the monthly price. A rental never costs more than a longer one: if 30 days would be cheaper than 26, you pay the 30-day price.",
+      "Every bike has a price per day that gets lower the longer you ride: daily, weekly from 7 days, 3 weeks from 21 days, monthly from 30 days and 45 days from 45 days. The price for your rental's length applies to every day of it. A rental never costs more than a longer one: if 30 days would be cheaper than 26, you pay the 30-day price.",
       "Both your pick-up day and your drop-off day count as rental days.",
     ],
   },
