@@ -59,3 +59,30 @@ The local database keeps its data when you stop it. Tests use a separate `redlan
 ## Continuous integration
 
 Every push to GitHub runs lint, type checks, formatting, unit tests, the production build and the database tests ([.github/workflows/ci.yml](.github/workflows/ci.yml)). Nothing deploys from CI.
+
+## Hosting on Railway
+
+One Railway project, `red-lantern-bikes`, in Singapore:
+
+| Service | What it runs |
+| --- | --- |
+| `Postgres` | The database (private, no public address) |
+| `web` | The site, from the `main` branch. Before each deploy it runs `npx prisma migrate deploy`. The build doesn't need the database. |
+| `jobs` | `npm run jobs` every hour (booking reminders) |
+| `backup` | The nightly database backup below |
+
+A push to `main` redeploys the site.
+
+## Database backups
+
+Railway's Hobby plan can't create database backups, so the `backup` service does it every night at 02:00 Vietnam time (cron `0 19 * * *`, UTC). It runs [docker/backup/backup.sh](docker/backup/backup.sh):
+
+1. `pg_dump` of the whole database, uploaded to the `backups` bucket as `db/db-<UTC time>.dump`.
+2. A restore check: the dump is restored into a scratch database (`backup_check`), every table's row count goes to the log, then the scratch database is dropped.
+3. Dumps older than 14 days are deleted (only after 1 and 2 succeeded).
+
+A failed run shows as a failed cron run on the `backup` service in Railway.
+
+To restore a dump (ask Claude, or by hand): download it from the bucket, then from a service in the same Railway project run `pg_restore --clean --if-exists --no-owner --no-privileges --dbname="$DATABASE_URL" db-<time>.dump`. This replaces the current data, so take a fresh dump first.
+
+To test the job locally with Docker: `docker build -f docker/backup/Dockerfile -t rlb-backup .`, then run it with `DATABASE_URL` pointing at the local database (`host.docker.internal`), an S3 stand-in such as `adobe/s3mock`, and `S3_ADDRESSING_STYLE=path`.
