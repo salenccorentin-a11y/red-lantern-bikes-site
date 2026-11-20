@@ -5,6 +5,7 @@ import { sendEmail } from "@/server/email";
 import { enquiryReceivedEmail } from "@/server/emails/enquiry-received";
 import { createEnquiry } from "@/server/enquiries";
 import { reportError } from "@/server/report-error";
+import { allowForm, clientIp } from "@/server/rate-limit";
 
 export type EnquiryState = { sent?: boolean; error?: string; field?: string };
 
@@ -18,6 +19,7 @@ const KIND_LABEL: Record<string, string> = {
 /** The enquiry form on the contact page. */
 export async function sendEnquiry(_previous: EnquiryState, form: FormData): Promise<EnquiryState> {
   const raw = Object.fromEntries(form.entries());
+  if (!allowForm("enquiry", await clientIp())) return { error: "TOO_MANY", field: "tooMany" };
   const result = await createEnquiry(db, raw);
   if (!result.ok) return { error: result.error, field: result.field };
 

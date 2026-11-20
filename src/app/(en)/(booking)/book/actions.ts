@@ -6,6 +6,7 @@ import { bookingInput } from "@/lib/booking-input";
 import { bookingErrorMessage } from "@/lib/booking-messages";
 import { sendRequestEmails } from "@/server/booking-requests";
 import { reserveBike } from "@/server/bookings";
+import { allowForm, clientIp } from "@/server/rate-limit";
 import { reportError } from "@/server/report-error";
 import { getMessages } from "@/i18n";
 import { isLocale } from "@/i18n/config";
@@ -40,6 +41,12 @@ export async function createOnlineBooking(input: unknown): Promise<BookingFormSt
     return { error: t.book.checkFields, fieldErrors };
   }
   const form = parsed.data;
+
+  // A script sending request after request would hold every bike and send
+  // emails to any address; see src/server/rate-limit.ts.
+  if (!allowForm("booking", await clientIp())) {
+    return { error: getMessages(form.lang).bookingErrors.TOO_MANY_REQUESTS };
+  }
 
   const result = await reserveBike(db, {
     source: "ONLINE",

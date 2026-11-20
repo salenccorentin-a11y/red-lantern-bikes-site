@@ -272,6 +272,8 @@ export const fr: Messages = {
       email: "Merci de vérifier votre adresse e-mail.",
       message: "Merci d'écrire un message d'au moins 10 caractères.",
       preferredStart: "Merci de choisir une date valide.",
+      tooMany:
+        "Trop de messages depuis cette connexion. Réessayez dans une heure, ou écrivez-nous sur WhatsApp.",
       form: "Un problème est survenu. Merci de réessayer.",
     },
   },
@@ -393,6 +395,8 @@ export const fr: Messages = {
       "Une des options n'est plus disponible. Merci de vérifier vos options et de réessayer.",
     TOO_MANY_ADD_ON:
       "Vous avez choisi plus d'unités d'une option que nous ne pouvons en proposer. Merci de vérifier vos options et de réessayer.",
+    TOO_MANY_REQUESTS:
+      "Trop de demandes de réservation depuis cette connexion. Réessayez dans une heure, ou écrivez-nous sur WhatsApp.",
     GENERIC: "Un problème est survenu. Merci de réessayer.",
   },
   booking: {

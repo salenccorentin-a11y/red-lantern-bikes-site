@@ -8,6 +8,7 @@ import { sendEmail } from "@/server/email";
 import { staffLoginEmail } from "@/server/emails/staff-login";
 import { setSessionCookie } from "@/server/staff-session";
 import { reportError } from "@/server/report-error";
+import { allowForm, clientIp } from "@/server/rate-limit";
 
 export type LoginRequestState = { sent?: boolean; error?: string };
 
@@ -21,6 +22,9 @@ export async function requestLoginLink(
     .max(200)
     .safeParse(String(form.get("email") ?? "").trim());
   if (!email.success) return { error: "Please enter a valid email address." };
+  if (!allowForm("staffLogin", await clientIp())) {
+    return { error: "Too many sign-in requests. Please wait an hour and try again." };
+  }
 
   const link = await createLoginToken(db, email.data);
   if (link) {

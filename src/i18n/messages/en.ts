@@ -272,6 +272,8 @@ export const en = {
       email: "Please check your email address.",
       message: "Please write a message of at least 10 characters.",
       preferredStart: "Please choose a valid date.",
+      tooMany:
+        "Too many messages from this connection. Please try again in an hour, or message us on WhatsApp.",
       form: "Something went wrong. Please try again.",
     },
   },
@@ -391,6 +393,8 @@ export const en = {
       "One of the extras is no longer available. Please check your extras and try again.",
     TOO_MANY_ADD_ON:
       "You've chosen more of one extra than we can offer. Please check your extras and try again.",
+    TOO_MANY_REQUESTS:
+      "Too many booking requests from this connection. Please try again in an hour, or message us on WhatsApp.",
     GENERIC: "Something went wrong. Please try again.",
   },
   booking: {
