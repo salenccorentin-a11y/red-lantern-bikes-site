@@ -23,10 +23,14 @@ async function ModelSettings() {
     orderBy: { sortOrder: "asc" },
     include: {
       _count: { select: { bookings: true } },
-      bikes: { where: { status: "ACTIVE" }, select: { id: true } },
+      bikes: { where: { status: "ACTIVE", partner: false }, select: { id: true } },
     },
   });
-  const allBikes = await db.bike.groupBy({ by: ["modelId"], _count: true });
+  const allBikes = await db.bike.groupBy({
+    by: ["modelId"],
+    where: { partner: false },
+    _count: true,
+  });
   const bikeCount = (modelId: string) => allBikes.find((b) => b.modelId === modelId)?._count ?? 0;
 
   return (

@@ -29,7 +29,8 @@ export async function freeBikes(
       ...(where.bikeId && { id: where.bikeId }),
       occupancies: { none: overlapping(where.first, where.last) },
     },
-    orderBy: { plate: "asc" },
+    // The shop's own bikes first; a partner bike only when none is free.
+    orderBy: [{ partner: "asc" }, { plate: "asc" }],
     select: { id: true, plate: true, modelId: true },
   });
 }

@@ -69,6 +69,10 @@ model Bike {
   modelId     String
   model       BikeModel  @relation(fields: [modelId], references: [id])
   status      BikeStatus @default(ACTIVE)
+  // A bike the shop doesn't own: one per model, so the site still takes a
+  // booking when all the shop's own bikes are taken, and the owner finds one
+  // from a partner (owner, 2026-11-20). Always booked last; plate "PARTNER-…".
+  partner     Boolean    @default(false)
   notes       String?
   // For profit per bike.
   acquiredOn  DateTime?  @db.Date

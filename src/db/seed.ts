@@ -31,7 +31,7 @@ export async function seed(db: PrismaClient) {
     });
 
     // Top up to the number of units with placeholder plates.
-    const existing = await db.bike.count({ where: { modelId: saved.id } });
+    const existing = await db.bike.count({ where: { modelId: saved.id, partner: false } });
     for (let n = existing + 1; n <= units; n++) {
       await db.bike.create({ data: { plate: placeholderPlate(model.slug, n), modelId: saved.id } });
     }

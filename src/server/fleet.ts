@@ -10,7 +10,8 @@ export async function listModels(db: PrismaClient) {
     orderBy: { sortOrder: "asc" },
     include: {
       routeFees: { include: { route: true } },
-      _count: { select: { bikes: { where: { status: "ACTIVE" } } } },
+      // The fleet size customers see: own bikes only, not the partner bike.
+      _count: { select: { bikes: { where: { status: "ACTIVE", partner: false } } } },
     },
   });
   return models.map((m) => ({

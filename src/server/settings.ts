@@ -5,6 +5,7 @@
 import { z } from "zod";
 import type { PrismaClient } from "@/generated/prisma/client";
 import { parseIsoDate, todayInSaigon } from "@/lib/dates";
+import { PARTNER_NOTE, partnerPlate } from "@/lib/partner-bike";
 import { normaliseEmail } from "@/server/auth";
 import { isUniqueViolation } from "@/server/db-errors";
 
@@ -407,6 +408,8 @@ export async function createModel(
         slug,
         sortOrder: (last._max.sortOrder ?? 0) + 1,
         routeFees: { create: fees },
+        // Bookable when all own bikes are taken: see Bike.partner.
+        bikes: { create: { plate: partnerPlate(slug), partner: true, notes: PARTNER_NOTE } },
       },
     });
   } catch (error) {
@@ -424,7 +427,11 @@ export async function createModel(
 export async function deleteModel(db: PrismaClient, modelId: string): Promise<Result> {
   const model = await db.bikeModel.findUnique({
     where: { id: modelId },
-    select: { name: true, _count: { select: { bikes: true, bookings: true } } },
+    select: {
+      name: true,
+      // Its partner bike doesn't count: it goes with the model.
+      _count: { select: { bikes: { where: { partner: false } }, bookings: true } },
+    },
   });
   if (!model) return fail("This model no longer exists.");
   if (model._count.bikes + model._count.bookings > 0) {
@@ -433,6 +440,8 @@ export async function deleteModel(db: PrismaClient, modelId: string): Promise<Re
     );
   }
   await db.$transaction([
+    db.bikeOccupancy.deleteMany({ where: { bike: { modelId, partner: true } } }),
+    db.bike.deleteMany({ where: { modelId, partner: true } }),
     db.routeFee.deleteMany({ where: { bikeModelId: modelId } }),
     db.addOnModelPrice.deleteMany({ where: { bikeModelId: modelId } }),
     db.bikeModel.delete({ where: { id: modelId } }),

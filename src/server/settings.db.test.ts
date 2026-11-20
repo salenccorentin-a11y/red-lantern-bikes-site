@@ -340,6 +340,10 @@ describe("bike models", () => {
     });
     expect(model.routeFees.map((f) => [f.route.toCity, f.fee])).toEqual([["HANOI", 1_300_000]]);
 
+    // It comes with its partner bike, which isn't counted as one of ours.
+    const bikes = await db.bike.findMany({ where: { modelId: model.id } });
+    expect(bikes.map((b) => [b.plate, b.partner])).toEqual([["PARTNER-HONDA-WAVE-RSX-110", true]]);
+
     const listed = (await listModels(db)).find((m) => m.slug === "honda-wave-rsx-110");
     expect(listed).toMatchObject({ units: 0, summary: newModel.summary });
     // No studio photo yet: the lantern stands in.
@@ -361,6 +365,8 @@ describe("bike models", () => {
     const added = await db.bikeModel.findUniqueOrThrow({ where: { slug: "honda-wave-rsx-110" } });
     expect(await deleteModel(db, added.id)).toEqual({ ok: true });
     expect(await db.bikeModel.findUnique({ where: { id: added.id } })).toBeNull();
+    // Its partner bike went with it.
+    expect(await db.bike.count({ where: { modelId: added.id } })).toBe(0);
 
     const refused = await deleteModel(db, fleet.xr150.id);
     expect(refused.ok).toBe(false);

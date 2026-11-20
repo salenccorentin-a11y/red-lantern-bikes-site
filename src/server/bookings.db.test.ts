@@ -5,6 +5,7 @@ import { availabilityByModel } from "@/server/availability";
 import { cancelBooking, releaseExpiredHolds, reserveBike } from "@/server/bookings";
 import { createTestClient, resetDatabase } from "@/test/db";
 import { NOW, onlineBooking, seededFleet } from "@/test/fixtures";
+import { PARTNER_NOTE, partnerPlate } from "@/lib/partner-bike";
 
 const db = createTestClient();
 let fleet: Awaited<ReturnType<typeof seededFleet>>;
@@ -381,5 +382,49 @@ describe("availabilityByModel", () => {
       dropoffCity: "DA_NANG",
     });
     expect(counts.get(fleet.versys.id)).toBeUndefined();
+  });
+});
+
+describe("reserveBike: partner bike", () => {
+  // One Versys in the fleet, plus its partner bike.
+  const addPartner = () =>
+    db.bike.create({
+      data: {
+        plate: partnerPlate(fleet.versys.slug),
+        modelId: fleet.versys.id,
+        partner: true,
+        notes: PARTNER_NOTE,
+      },
+    });
+
+  it("books the shop's own bike first, then the partner bike, then nothing", async () => {
+    const partner = await addPartner();
+    const own = await db.bike.findFirstOrThrow({
+      where: { modelId: fleet.versys.id, partner: false },
+    });
+
+    const first = expectOk(await reserveBike(db, onlineBooking(fleet.versys.id)));
+    expect(first.booking.bikeId).toBe(own.id);
+
+    const second = expectOk(await reserveBike(db, onlineBooking(fleet.versys.id)));
+    expect(second.booking.bikeId).toBe(partner.id);
+
+    const third = await reserveBike(db, onlineBooking(fleet.versys.id));
+    expect(third.ok).toBe(false);
+  });
+
+  it("counts the partner bike as free on the booking page", async () => {
+    const dates = {
+      startDate: "2026-11-10",
+      endDate: "2026-11-17",
+      pickupCity: "SAIGON" as const,
+      dropoffCity: "SAIGON" as const,
+    };
+    const versysFree = async () => (await availabilityByModel(db, dates)).get(fleet.versys.id);
+    expectOk(await reserveBike(db, onlineBooking(fleet.versys.id)));
+    expect(await versysFree()).toBeUndefined();
+
+    await addPartner();
+    expect(await versysFree()).toBe(1);
   });
 });
