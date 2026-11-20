@@ -61,7 +61,9 @@ export function parseBikes(text: string): BikeCount[] | null {
   if (parts.length === 0) return null;
   const out: BikeCount[] = [];
   for (const part of parts) {
-    const counted = /^(\d+)\s*x?\s*(.*)$/.exec(part);
+    // "2x CB150X" counts 2; the x must be followed by a space, so "2 XR150"
+    // keeps its XR (it once read as 2 × "R150").
+    const counted = /^(\d+)\s*(?:x\s+)?(.*)$/.exec(part);
     const count = counted ? Number(counted[1]) : 1;
     const rest = counted ? counted[2] : part;
     // XR125 is not in the fleet: don't let "xr" alone match the XR150.

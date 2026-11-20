@@ -14,6 +14,8 @@ describe("parseBikes", () => {
     expect(parseBikes("2NVX")).toEqual([{ slug: "yamaha-nvx125", count: 2 }]);
     expect(parseBikes("2Winner X")).toEqual([{ slug: "honda-winner-x-150", count: 2 }]);
     expect(parseBikes("2x CB150X")).toEqual([{ slug: "honda-cb150x", count: 2 }]);
+    expect(parseBikes("2 XR150")).toEqual([{ slug: "honda-xr150", count: 2 }]);
+    expect(parseBikes("2XR150")).toEqual([{ slug: "honda-xr150", count: 2 }]);
   });
 
   it("treats an unspaced slash as one bike, a comma or spaced slash as several", () => {
