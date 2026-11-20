@@ -12,6 +12,7 @@ export const en = {
     bikes: "Bikes",
     oneWay: "One-way trips",
     faq: "FAQ",
+    blog: "Blog",
     contact: "Contact",
     book: "Book a bike",
     menu: "Menu",

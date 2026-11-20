@@ -13,8 +13,13 @@ export function SiteHeader({ lang = "en" }: { lang?: Locale }) {
     { href: "/bikes", label: t.bikes },
     { href: "/one-way", label: t.oneWay },
     { href: "/faq", label: t.faq },
+    { href: "/blog", label: t.blog },
     { href: "/contact", label: t.contact },
-  ].map((item) => ({ ...item, href: localize(lang, item.href) }));
+  ].map((item) => ({
+    ...item,
+    // The blog is in English only, so /fr and /ko link to the English one.
+    href: item.href === "/blog" ? item.href : localize(lang, item.href),
+  }));
   const book = localize(lang, "/book");
 
   return (

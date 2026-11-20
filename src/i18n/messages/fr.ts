@@ -9,6 +9,7 @@ export const fr: Messages = {
     bikes: "Motos",
     oneWay: "Allers simples",
     faq: "FAQ",
+    blog: "Blog",
     contact: "Contact",
     book: "Réserver une moto",
     menu: "Menu",

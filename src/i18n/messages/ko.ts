@@ -10,6 +10,7 @@ export const ko: Messages = {
     bikes: "오토바이",
     oneWay: "편도 여행",
     faq: "자주 묻는 질문",
+    blog: "블로그",
     contact: "문의",
     book: "오토바이 예약",
     menu: "메뉴",
