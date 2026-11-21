@@ -20,7 +20,7 @@
 }
 
 .prose a {
-  color: var(--lantern);
+  color: var(--egyptian);
   text-underline-offset: 3px;
 }
 
@@ -306,7 +306,7 @@
   margin-inline: calc(-1 * var(--gutter));
   padding: 36px var(--gutter) 40px;
   background: var(--night);
-  color: #dbe2ee;
+  color: #dce5ec;
 }
 
 .north h2,
@@ -446,7 +446,7 @@
   padding: 32px 24px;
   border-radius: var(--radius-photo);
   background: var(--night);
-  color: #dbe2ee;
+  color: #dce5ec;
 }
 
 .cta h2 {

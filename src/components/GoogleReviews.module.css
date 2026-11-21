@@ -101,7 +101,7 @@
 }
 
 .night .text {
-  color: #e3e8f1;
+  color: #e6edf2;
 }
 
 .night .when,
@@ -132,7 +132,7 @@
 
 .light .more,
 .light .attribution a {
-  color: var(--lantern-red);
+  color: var(--egyptian);
 }
 
 .light .starOff {

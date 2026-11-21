@@ -40,7 +40,7 @@
   background: var(--white);
   border: 1px solid var(--rule);
   border-radius: var(--radius-card);
-  box-shadow: 0 16px 40px -18px rgb(15 27 45 / 0.45);
+  box-shadow: 0 16px 40px -18px rgb(12 34 112 / 0.45);
 }
 
 .switcher a {
@@ -57,5 +57,5 @@
 }
 
 .switcher a[aria-current="true"] {
-  color: var(--lantern-red);
+  color: var(--egyptian);
 }

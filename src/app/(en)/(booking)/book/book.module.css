@@ -72,7 +72,7 @@
 .warn {
   margin: 10px 0 0;
   font-size: var(--text-sm);
-  color: var(--lantern);
+  color: var(--lantern-ink);
 }
 
 .ok {
@@ -170,7 +170,7 @@
 
 .fieldError {
   font-size: var(--text-sm);
-  color: var(--lantern);
+  color: var(--lantern-ink);
 }
 
 .details {
@@ -280,7 +280,7 @@
   margin-top: 6px;
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--lantern);
+  color: var(--lantern-ink);
 }
 
 .visuallyHidden {
@@ -476,7 +476,7 @@
   gap: 12px;
   font-size: 14px;
   padding: 6px 0;
-  color: #d5dceb;
+  color: #d8e2ea;
 }
 
 .line > span:last-child {
@@ -505,7 +505,7 @@
   align-items: flex-start;
   margin-top: 16px;
   font-size: var(--text-sm);
-  color: #d5dceb;
+  color: #d8e2ea;
   cursor: pointer;
 }
 
@@ -530,14 +530,14 @@
 
 .reserve:disabled {
   background: var(--night-line);
-  color: #8796b0;
+  color: #cfdaee;
   cursor: not-allowed;
 }
 
 .ticketWarn {
   margin: 10px 0 0;
   font-size: var(--text-sm);
-  color: #ff9a8f;
+  color: #ff9f8a;
 }
 
 .ticketSecurity {
@@ -547,7 +547,7 @@
   background: var(--night);
   font-size: var(--text-sm);
   line-height: 1.5;
-  color: #d5dceb;
+  color: #d8e2ea;
 }
 
 .ticketFine {
@@ -573,7 +573,7 @@
   background: var(--night);
   color: var(--white);
   font-size: 14px;
-  box-shadow: 0 -4px 16px rgb(15 27 45 / 0.18);
+  box-shadow: 0 -4px 16px rgb(12 34 112 / 0.18);
 }
 
 .mobileBarTrip {

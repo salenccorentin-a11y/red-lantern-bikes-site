@@ -68,20 +68,17 @@
 
 /* A text link that reads as a link on light backgrounds. */
 .link {
-  color: var(--lantern-red);
+  color: var(--egyptian);
   font-weight: 600;
   text-decoration: underline;
+  text-decoration-color: var(--lantern-red);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
 }
 
-/* On mist, lantern red is 4.4:1; the deep red keeps links readable (6:1+). */
-.sectionMist .link {
-  color: var(--lantern-red-deep);
-}
-
+/* Egyptian blue is 10:1 on white and 8:1 on mist; scarlet stays the underline. */
 .link:hover {
-  color: var(--lantern-red-deep);
+  color: var(--night);
 }
 
 /* Sections */

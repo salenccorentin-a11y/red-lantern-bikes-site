@@ -157,7 +157,7 @@ export function bookingRequestEmail(
   const button = (href: string, label: string, colour: string) =>
     `<a href="${escapeHtml(href)}" style="display:inline-block;background:${colour};color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:700;margin:0 8px 8px 0">${label}</a>`;
 
-  const html = `<div style="font-family:system-ui,sans-serif;color:#0f1b2d;max-width:560px;line-height:1.5">
+  const html = `<div style="font-family:system-ui,sans-serif;color:#0c2270;max-width:560px;line-height:1.5">
 <p><strong>${escapeHtml(heading)}</strong></p>
 ${rowsHtml(customerRows)}
 ${d.customerNote ? `<p style="white-space:pre-wrap;border-left:3px solid #d9dee8;padding-left:12px">${escapeHtml(d.customerNote)}</p>` : ""}
@@ -165,9 +165,9 @@ ${d.customerNote ? `<p style="white-space:pre-wrap;border-left:3px solid #d9dee8
 ${rowsHtml(trip)}
 <p style="margin-bottom:0"><strong>Price</strong></p>
 ${rowsHtml(priceRows(d))}
-<p style="margin-top:20px">${button(accept, "Accept", "#1a7f4b")}${button(decline, "Decline", "#4a5872")}</p>
+<p style="margin-top:20px">${button(accept, "Accept", "#1a7f4b")}${button(decline, "Decline", "#4a6073")}</p>
 ${deadline ? `<p>${escapeHtml(deadline)}</p>` : ""}
-<p style="color:#4a5872">${escapeHtml(after)} <a href="${escapeHtml(d.staffUrl)}">Open it in the staff area</a>.</p>
+<p style="color:#4a6073">${escapeHtml(after)} <a href="${escapeHtml(d.staffUrl)}">Open it in the staff area</a>.</p>
 </div>`;
 
   return {

@@ -42,7 +42,7 @@
   margin: 0;
   max-width: 46ch;
   font-size: var(--text-lg);
-  color: #d5dceb;
+  color: #d8e2ea;
 }
 
 .mapWrap {
@@ -125,14 +125,14 @@
 }
 
 .neighbours {
-  fill: #14243b;
+  fill: #081a57;
   stroke: var(--night-line);
   stroke-width: 0.75;
 }
 
 .vietnam {
   fill: var(--night-raised);
-  stroke: #3a5179;
+  stroke: #3d62cf;
   stroke-width: 1;
 }
 
@@ -146,7 +146,7 @@
 
 .roadGhost {
   fill: none;
-  stroke: rgb(214 42 30 / 0.3);
+  stroke: rgb(222 46 12 / 0.3);
   stroke-width: 1.5;
   stroke-dasharray: 2 4;
   stroke-linecap: round;
@@ -174,12 +174,12 @@
 
 /* Towns along the way: a dot that brightens once the road has passed. */
 .stop circle {
-  fill: #5b6f93;
+  fill: #7089a3;
   transition: fill 300ms ease;
 }
 
 .stop text {
-  fill: #7f91b1;
+  fill: #93a9bd;
   font-size: 12px;
   font-weight: 600;
   paint-order: stroke;
@@ -194,7 +194,7 @@
 }
 
 .stop.lit text {
-  fill: #d5dceb;
+  fill: #d8e2ea;
 }
 
 /* Lanterns (Saigon, Da Nang, Hanoi): dark until the road arrives, then lit
@@ -211,8 +211,8 @@
 }
 
 .lantern .body {
-  fill: #2a3d5c;
-  stroke: #6b7fa3;
+  fill: #2b4170;
+  stroke: #8299ae;
   stroke-width: 1;
   transition:
     fill 400ms ease,
@@ -221,25 +221,25 @@
 
 .lantern .ribs {
   fill: none;
-  stroke: rgb(15 27 45 / 0.35);
+  stroke: rgb(12 34 112 / 0.35);
   stroke-width: 0.8;
 }
 
 .lantern .cap {
-  fill: #6b7fa3;
+  fill: #8299ae;
   transition: fill 400ms ease;
 }
 
 .lantern .hanger,
 .lantern .tassel {
-  stroke: #6b7fa3;
+  stroke: #8299ae;
   stroke-width: 1.2;
   stroke-linecap: round;
   transition: stroke 400ms ease;
 }
 
 .lantern .cityLabel {
-  fill: #8796b0;
+  fill: #9fb3d9;
   font-size: 15px;
   font-weight: 800;
   paint-order: stroke;
@@ -314,7 +314,7 @@
 
 .cardDetail {
   margin: 8px 0 0;
-  color: #d5dceb;
+  color: #d8e2ea;
   font-size: var(--text-sm);
   line-height: 1.55;
 }

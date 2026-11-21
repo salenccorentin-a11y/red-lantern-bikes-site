@@ -1,22 +1,31 @@
-/* Design tokens: "Lantern Night" (docs/design.md). */
+/* Design tokens: "Lantern Night", Egyptian blue edition (docs/design.md).
+   Egyptian blue frames the page, stone blue carries the quiet greys,
+   scarlet is kept for the one thing to press. */
 :root {
   /* Palette */
-  --night: #0f1b2d;
-  --night-raised: #1a2c4a;
-  --night-line: #2c3f61;
-  --lantern-red: #d62a1e;
-  --lantern-red-deep: #ad1f15;
-  /* Lantern red as channels, for glows and tints: rgb(var(--lantern-red-rgb) / 0.5). */
-  --lantern-red-rgb: 214 42 30;
+  --night: #0c2270;
+  --night-raised: #1034a6;
+  --night-line: #2f52c2;
+  /* Egyptian blue pigment: links and raised panels. 10:1 on white. */
+  --egyptian: #1034a6;
+  /* Stone blue: a mid grey-blue for icons and quiet details. */
+  --stone: #8299ae;
+  --lantern-red: #de2e0c;
+  --lantern-red-deep: #b02207;
+  /* Scarlet for words (errors, warnings) on light: 6.9:1 on white, 5.4:1 on mist.
+     The bright scarlet (4.7:1 on white) is for buttons and marks. */
+  --lantern-ink: var(--lantern-red-deep);
+  /* Scarlet as channels, for glows and tints: rgb(var(--lantern-red-rgb) / 0.5). */
+  --lantern-red-rgb: 222 46 12;
   --star: #ffcc00;
   --white: #ffffff;
-  --mist: #eef2f7;
-  --slate: #4a5872;
-  --fog: #aab6cb;
-  --rule: #d8dfea;
+  --mist: #dfe7ee;
+  --slate: #4a6073;
+  --fog: #b4c4d3;
+  --rule: #cdd8e1;
   /* Borders of fields people fill in or pick: 3.4:1 on white, 3:1 on mist,
      so the box itself is visible (dividers and card edges keep --rule). */
-  --field-line: #7d8ba3;
+  --field-line: #71879b;
   --success: #2e7d4f;
 
   /* Older names still used by the booking and staff pages, mapped to the palette. */
@@ -117,6 +126,18 @@ img {
 :focus-visible {
   outline: 3px solid var(--focus-ring, var(--lantern-red));
   outline-offset: 2px;
+}
+
+/* The parts the browser draws: selected text, the typing caret, ticks and
+   radios, all from the palette. */
+::selection {
+  background: var(--egyptian);
+  color: var(--white);
+}
+
+html {
+  accent-color: var(--egyptian);
+  caret-color: var(--lantern-red);
 }
 
 button,

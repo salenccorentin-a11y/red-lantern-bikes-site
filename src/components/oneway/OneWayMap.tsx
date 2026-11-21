@@ -22,9 +22,9 @@ export function OneWayMap({ lang = "en" }: { lang?: Locale }) {
     >
       <defs>
         <radialGradient id="lantern-glow">
-          <stop offset="0" stopColor="rgb(255 120 60)" stopOpacity="0.85" />
-          <stop offset="0.45" stopColor="rgb(214 42 30)" stopOpacity="0.35" />
-          <stop offset="1" stopColor="rgb(214 42 30)" stopOpacity="0" />
+          <stop offset="0" stopColor="rgb(255 110 50)" stopOpacity="0.85" />
+          <stop offset="0.45" stopColor="rgb(222 46 12)" stopOpacity="0.35" />
+          <stop offset="1" stopColor="rgb(222 46 12)" stopOpacity="0" />
         </radialGradient>
       </defs>
       <path d={map.neighbours} className={styles.neighbours} />

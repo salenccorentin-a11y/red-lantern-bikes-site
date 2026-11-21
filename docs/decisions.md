@@ -90,3 +90,7 @@ Not in use yet: see "Booking requests" above.
 - **Adding and removing bikes** (owner): staff add several bikes of a model at once (one plate per line). A bike with no bookings, blocks or repairs can be deleted (added by mistake); any other bike is retired, which keeps its history.
 - **New models from the staff area** (owner): name, type, licence, prices, one-way fees and an English summary and description, stored on the model. Its page is `/bikes/<slug>`, with the lantern logo until a studio photo is added to `public/bikes/<slug>.webp`, and English text on the French and Korean pages until translated. It isn't in the sitemap until its text moves to `src/content/bikes.ts`. A model with no bikes and no bookings can be deleted; otherwise it's taken off sale.
 - **Booking page follows the link** (bug fix): the booking form kept the bike chosen on an earlier visit when reopened from another bike's "Book this bike" (pages stay alive in the background with `cacheComponents`). The bike and trip in the address now win, and the address follows the visitor's choices.
+
+## Colours (21 November 2026)
+
+- **Egyptian blue, stone blue and a little scarlet** (owner's request, approved after a local test). Dark bands are deep Egyptian blue, panels and text links the Egyptian blue pigment, the light greys are stone blue, and scarlet stays for Book buttons, the route line and errors. The lantern's yellow star is kept. The staff area keeps its own plain palette. Values and contrast ratios are in `docs/design.md`.

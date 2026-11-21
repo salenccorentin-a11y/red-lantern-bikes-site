@@ -31,9 +31,9 @@
   z-index: -1;
   background: linear-gradient(
     to top,
-    rgb(15 27 45 / 0.92) 0%,
-    rgb(15 27 45 / 0.55) 45%,
-    rgb(15 27 45 / 0.15) 100%
+    rgb(12 34 112 / 0.92) 0%,
+    rgb(12 34 112 / 0.55) 45%,
+    rgb(12 34 112 / 0.15) 100%
   );
 }
 
@@ -61,5 +61,5 @@
   margin: 14px 0 0;
   max-width: 58ch;
   font-size: var(--text-lg);
-  color: #d5dceb;
+  color: #d8e2ea;
 }

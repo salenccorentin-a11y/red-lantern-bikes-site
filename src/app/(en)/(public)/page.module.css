@@ -47,12 +47,12 @@
   background:
     radial-gradient(
       ellipse 75% 60% at 50% 52%,
-      rgb(15 27 45 / 0.45) 0%,
-      rgb(15 27 45 / 0.21) 60%,
-      rgb(15 27 45 / 0.12) 100%
+      rgb(12 34 112 / 0.45) 0%,
+      rgb(12 34 112 / 0.21) 60%,
+      rgb(12 34 112 / 0.12) 100%
     ),
-    linear-gradient(to top, var(--night) 0%, rgb(15 27 45 / 0) 30%),
-    linear-gradient(to bottom, rgb(15 27 45 / 0.5) 0%, rgb(15 27 45 / 0) 20%);
+    linear-gradient(to top, var(--night) 0%, rgb(12 34 112 / 0) 30%),
+    linear-gradient(to bottom, rgb(12 34 112 / 0.5) 0%, rgb(12 34 112 / 0) 20%);
 }
 
 .heroInner {
@@ -69,7 +69,7 @@
   line-height: 1.03;
   letter-spacing: -0.03em;
   text-wrap: balance;
-  text-shadow: 0 2px 28px rgb(15 27 45 / 0.55);
+  text-shadow: 0 2px 28px rgb(12 34 112 / 0.55);
   animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
 }
 
@@ -78,8 +78,8 @@
   max-width: 44ch;
   font-size: var(--text-base);
   line-height: 1.55;
-  color: #e4e9f2;
-  text-shadow: 0 1px 16px rgb(15 27 45 / 0.6);
+  color: #e6edf2;
+  text-shadow: 0 1px 16px rgb(12 34 112 / 0.6);
   animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
 }
 
@@ -94,7 +94,7 @@
   padding: 14px;
   border: 1px solid rgb(255 255 255 / 0.16);
   border-radius: 22px;
-  background: rgb(26 44 74 / 0.8);
+  background: rgb(16 52 166 / 0.8);
   backdrop-filter: blur(16px) saturate(1.2);
   box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.85);
   text-align: left;
@@ -121,7 +121,7 @@
   border: 0;
   border-radius: 6px;
   background: transparent
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23aab6cb' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b4c4d3' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")
     no-repeat right 2px center / 16px;
   color: var(--white);
   font: inherit;
@@ -160,10 +160,10 @@
   padding: 7px 14px 7px 10px;
   border: 1px solid rgb(255 255 255 / 0.16);
   border-radius: 999px;
-  background: rgb(15 27 45 / 0.6);
+  background: rgb(12 34 112 / 0.6);
   font-size: var(--text-sm);
   line-height: 1.35;
-  color: #dbe2ee;
+  color: #dce5ec;
 }
 
 .trustIcon {

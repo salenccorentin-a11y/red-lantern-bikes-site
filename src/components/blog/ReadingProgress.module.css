@@ -13,7 +13,7 @@
   z-index: 30;
   height: 30px;
   background: var(--night);
-  box-shadow: 0 6px 16px -10px rgb(15 27 45 / 0.5);
+  box-shadow: 0 6px 16px -10px rgb(12 34 112 / 0.5);
 }
 
 .container {
@@ -107,17 +107,17 @@
 }
 
 .body {
-  fill: #2a3d5c;
-  stroke: #6b7fa3;
+  fill: #2b4170;
+  stroke: #8299ae;
   stroke-width: 1;
 }
 
 .cap {
-  fill: #6b7fa3;
+  fill: #8299ae;
 }
 
 .string {
-  stroke: #6b7fa3;
+  stroke: #8299ae;
   stroke-width: 1.2;
   stroke-linecap: round;
 }
@@ -156,7 +156,7 @@
   font-size: var(--text-sm);
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 10px 24px -10px rgb(214 42 30 / 0.7);
+  box-shadow: 0 10px 24px -10px rgb(222 46 12 / 0.7);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-4px);

@@ -8,18 +8,24 @@ Tourists, backpackers and expats planning a ride, mostly on phones, often compar
 
 ## Palette
 
+Recoloured 21 November 2026 at the owner's request: **Egyptian blue** frames the page, **stone blue** carries the quiet greys, and a little **scarlet** is kept for the one thing to press.
+
 | Token | Hex | Use |
 | --- | --- | --- |
-| Night | `#0F1B2D` | Header, footer, hero and route bands; text on light |
-| Night raised | `#1A2C4A` | Panels on dark (booking ticket, route stops) |
-| Lantern | `#D62A1E` | The one action colour: Book buttons, active states |
+| Night (deep Egyptian blue) | `#0C2270` | Header, footer, hero and route bands; headings and body text on light |
+| Night raised / Egyptian | `#1034A6` | The pigment itself: panels on dark (booking ticket), Vietnam on the map, text links, selected text |
+| Night line | `#2F52C2` | Lines and disabled buttons on dark |
+| Lantern (scarlet) | `#DE2E0C` | The one action colour: Book buttons, route line, link underlines, focus ring |
+| Lantern deep / ink | `#B02207` | Button hover; error and warning text on light |
 | Star | `#FFCC00` | The lantern's star: route stops, rating, tiny highlights on dark only |
 | Paper | `#FFFFFF` | Main reading background, bike cards |
-| Mist | `#EEF2F7` | Alternate light sections (cool, not cream) |
-| Slate | `#4A5872` | Secondary text on light (7:1 on white) |
-| Fog | `#AAB6CB` | Secondary text on dark |
+| Mist (light stone blue) | `#DFE7EE` | Alternate light sections |
+| Slate (dark stone blue) | `#4A6073` | Secondary text on light (6.5:1 on white) |
+| Fog (pale stone blue) | `#B4C4D3` | Secondary text on dark |
+| Stone | `#8299AE` | Unlit lanterns and quiet details on the map |
+| Rule / field line | `#CDD8E1` / `#71879B` | Dividers / borders of form fields (3:1 on mist) |
 
-White on Lantern is 5:1; body text is Night on Paper.
+White on scarlet is 4.7:1, white on Night 14:1; body text is Night on Paper. Scarlet on Night is 3:1, so red buttons stay visible on the dark bands. Text links are Egyptian blue with a scarlet underline, so red text only ever means "book" or an error.
 
 ## Type
 
@@ -46,7 +52,7 @@ Content pages open with a night band (title, one line, sometimes a photo) and re
 
 1. **Photos do the talking.** Real roads, real riders, real bikes. No illustrations, no gradients for decoration.
 2. **One bold thing: the route.** The Saigon → Da Nang → Hanoi line with the lantern's gold stops is the memorable element; everything around it stays quiet.
-3. **Red means "book".** Lantern red is reserved for the main action, so it's always obvious what to press.
+3. **Red means "book".** Scarlet is reserved for the main action (and error text), so it's always obvious what to press.
 4. **Light to read, night to frame.** Dark bands frame the page; reading happens on white.
 
 ## Review against the brief
