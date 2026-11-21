@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { LOCALES, LOCALE_NAME, type Locale } from "@/i18n/config";
 import { isTranslatedPath, localize, splitLocale } from "@/i18n/paths";
 import styles from "./LanguageSwitcher.module.css";
+import { useDropdownClose } from "./useDropdownClose";
 
 // The same page in another language; the language's home page when a page
 // isn't translated (about, blog, terms…). A <details> menu, so it works
@@ -13,9 +14,10 @@ export function LanguageSwitcher({ lang, label }: { lang: Locale; label: string 
   const pathname = usePathname();
   const { path } = splitLocale(pathname);
   const target = (to: Locale) => (isTranslatedPath(path) ? localize(to, path) : localize(to, "/"));
+  const ref = useDropdownClose();
 
   return (
-    <details className={styles.switcher}>
+    <details ref={ref} className={styles.switcher}>
       <summary aria-label={label}>
         <GlobeIcon />
         <span className={styles.code}>{lang.toUpperCase()}</span>

@@ -1,7 +1,6 @@
 // The bikes list, in any language (/bikes, /fr/bikes, /ko/bikes).
 
 import type { Metadata } from "next";
-import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import styles from "@/app/(en)/(public)/content.module.css";
@@ -11,7 +10,7 @@ import { PageHeader } from "@/components/PageHeader";
 import ui from "@/components/ui.module.css";
 import { getMessages } from "@/i18n";
 import { OG_LOCALE, type Locale } from "@/i18n/config";
-import { languageAlternates, localize } from "@/i18n/paths";
+import { languageAlternates } from "@/i18n/paths";
 import { db } from "@/lib/db";
 import { getSettings } from "@/server/availability";
 import { listModels } from "@/server/fleet";
@@ -39,12 +38,8 @@ export function BikesView({ lang }: { lang: Locale }) {
       />
       <main className={ui.sectionMist}>
         <div className={styles.page}>
-          <p className={styles.prose}>
-            {t.pricesNote}{" "}
-            <Link href={localize(lang, "/faq#licence")} className={ui.link}>
-              {t.licenceLink}
-            </Link>
-          </p>
+          {/* No licence link here (owner, 2026-11-21): the FAQ and each bike page cover it. */}
+          <p className={styles.prose}>{t.pricesNote}</p>
           <Suspense fallback={<div style={{ minHeight: 900 }} />}>
             <AllBikes lang={lang} />
           </Suspense>

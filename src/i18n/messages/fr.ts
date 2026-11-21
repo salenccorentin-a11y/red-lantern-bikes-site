@@ -124,7 +124,6 @@ export const fr: Messages = {
     photoAlt: "Une moto chargée de bagages, prête pour un long voyage",
     pricesNote:
       "Les prix sont par jour. Plus vous roulez longtemps, plus le prix par jour baisse, et il s'applique à chaque jour de la location. La page de chaque moto donne ses prix.",
-    licenceLink: "Quel permis faut-il ?",
   },
   bike: {
     allBikes: "Toutes les motos",

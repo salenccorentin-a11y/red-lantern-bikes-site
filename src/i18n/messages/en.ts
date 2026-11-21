@@ -126,7 +126,6 @@ export const en = {
     photoAlt: "A bike loaded with luggage, ready for a long ride",
     pricesNote:
       "Prices are per day. The longer you ride, the lower the price per day, and it applies to every day of the rental. Each bike's page shows its prices.",
-    licenceLink: "Which licence do I need?",
   },
   bike: {
     allBikes: "All bikes",

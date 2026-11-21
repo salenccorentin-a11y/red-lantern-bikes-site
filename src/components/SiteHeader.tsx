@@ -5,6 +5,7 @@ import { getMessages } from "@/i18n";
 import { localize } from "@/i18n/paths";
 import { LanguageSwitcher, LanguageSwitcherFallback } from "./LanguageSwitcher";
 import { Logo } from "./Logo";
+import { MobileMenu } from "./MobileMenu";
 import styles from "./SiteHeader.module.css";
 
 export function SiteHeader({ lang = "en" }: { lang?: Locale }) {
@@ -47,23 +48,11 @@ export function SiteHeader({ lang = "en" }: { lang?: Locale }) {
             <LanguageSwitcher lang={lang} label={t.language} />
           </Suspense>
 
-          {/* Phones: a menu that opens without JavaScript. */}
-          <details className={styles.mobileNav}>
-            <summary>
-              <span className={styles.burger} aria-hidden="true" />
-              <span className={styles.menuLabel}>{t.menu}</span>
-            </summary>
-            <nav aria-label={t.main}>
-              {nav.map((item) => (
-                <Link key={item.href} href={item.href}>
-                  {item.label}
-                </Link>
-              ))}
-              <Link href={book} className={styles.book}>
-                {t.book}
-              </Link>
-            </nav>
-          </details>
+          <MobileMenu
+            nav={nav}
+            book={book}
+            labels={{ menu: t.menu, main: t.main, book: t.book }}
+          />
         </div>
       </div>
     </header>

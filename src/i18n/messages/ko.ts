@@ -122,7 +122,6 @@ export const ko: Messages = {
     photoAlt: "긴 여행을 위해 짐을 실은 오토바이",
     pricesNote:
       "가격은 1일 기준입니다. 오래 탈수록 1일 요금이 낮아지며, 그 요금이 대여 기간 모든 날에 적용됩니다. 각 오토바이 페이지에서 요금을 확인하세요.",
-    licenceLink: "어떤 면허가 필요한가요?",
   },
   bike: {
     allBikes: "모든 오토바이",
