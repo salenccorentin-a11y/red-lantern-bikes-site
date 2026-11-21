@@ -1,23 +1,20 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 // Closes a <details> dropdown (the phone menu, the language menu) when:
 // - a link inside it is tapped, straight away, so the menu folds up while
 //   the next page loads instead of hanging over it (and also when the link
 //   is the page you're already on, where nothing else would close it);
-// - the page address changes;
+// - the visitor goes back or forward in the browser;
 // - the visitor taps or clicks anywhere outside it;
 // - Escape is pressed (focus goes back to the button).
 // Without JavaScript the <details> still opens and closes on its own.
+//
+// It doesn't read the page address (usePathname): the header is built ahead
+// of time on every page, and reading the address there stops the build.
 export function useDropdownClose() {
   const ref = useRef<HTMLDetailsElement>(null);
-  const pathname = usePathname();
-
-  useEffect(() => {
-    if (ref.current) ref.current.open = false;
-  }, [pathname]);
 
   useEffect(() => {
     const details = ref.current;
@@ -42,10 +39,12 @@ export function useDropdownClose() {
     details.addEventListener("click", onClick);
     document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);
+    addEventListener("popstate", close);
     return () => {
       details.removeEventListener("click", onClick);
       document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("keydown", onKeyDown);
+      removeEventListener("popstate", close);
     };
   }, []);
 
