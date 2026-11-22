@@ -38,21 +38,23 @@
   object-position: 50% 62%;
 }
 
-/* A light night veil, darker in the middle under the words and at the
-   bottom, where the hero meets the route band. */
+/* The photo keeps its own colours (owner's pick, 2026-11-22: option A; the
+   Egyptian blue veil tinted it blue-purple). A neutral dark shade sits only
+   under the words, a light one under the header, and a short fade at the
+   bottom joins the route band's blue. */
 .heroMedia::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
     radial-gradient(
-      ellipse 75% 60% at 50% 52%,
-      rgb(12 34 112 / 0.45) 0%,
-      rgb(12 34 112 / 0.21) 60%,
-      rgb(12 34 112 / 0.12) 100%
+      ellipse 50% 46% at 50% 54%,
+      rgb(4 8 22 / 0.58) 0%,
+      rgb(4 8 22 / 0.3) 55%,
+      rgb(4 8 22 / 0) 100%
     ),
-    linear-gradient(to top, var(--night) 0%, rgb(12 34 112 / 0) 30%),
-    linear-gradient(to bottom, rgb(12 34 112 / 0.5) 0%, rgb(12 34 112 / 0) 20%);
+    linear-gradient(to bottom, rgb(4 8 22 / 0.4) 0%, rgb(4 8 22 / 0) 16%),
+    linear-gradient(to top, var(--night) 0%, rgb(12 34 112 / 0) 12%);
 }
 
 .heroInner {
@@ -69,7 +71,7 @@
   line-height: 1.03;
   letter-spacing: -0.03em;
   text-wrap: balance;
-  text-shadow: 0 2px 28px rgb(12 34 112 / 0.55);
+  text-shadow: 0 2px 28px rgb(4 8 22 / 0.55);
   animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
 }
 
@@ -79,7 +81,7 @@
   font-size: var(--text-base);
   line-height: 1.55;
   color: #e6edf2;
-  text-shadow: 0 1px 16px rgb(12 34 112 / 0.6);
+  text-shadow: 0 1px 16px rgb(4 8 22 / 0.6);
   animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
 }
 

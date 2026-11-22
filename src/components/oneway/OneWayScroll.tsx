@@ -7,8 +7,8 @@ import styles from "./OneWayTrips.module.css";
 // are downloaded only on pages with this section, and only once the visitor
 // starts scrolling, so every page first loads exactly as before.
 //
-// Two quick steps as the map comes up the screen: the first draws the road
-// from Saigon to Da Nang, the second from Da Nang to Hanoi. The page never
+// Two quick steps while the map is on screen: the first draws the road from
+// Saigon to Da Nang, the second from Da Nang to Hanoi. The page never
 // stops or snaps: the visitor scrolls on at their own speed (owner,
 // 2026-11-22: the slow line "slows down the customer when scrolling down").
 // - Reduced motion: this does nothing, and the finished map stays as it is.
@@ -112,17 +112,22 @@ function start(section: HTMLElement, gsap: Gsap, ScrollTrigger: ScrollTriggerTyp
     if (reduce) return;
 
     current = -1;
-    // Step one when the map's top passes 80% of the screen, step two when
-    // its middle passes 60%. Scrolling back undoes them.
+    // Both steps are timed on Saigon's lantern, near the bottom of the map
+    // (84% down), so the road is on screen while it draws (owner,
+    // 2026-11-22). Step one when Saigon comes into view (92% down the
+    // screen): Saigon and Da Nang are both visible. Step two one scroll later
+    // (78%): Hanoi, near the top of the map, is visible too. Scrolling back
+    // undoes them.
+    const saigon = section.querySelector<SVGGElement>('svg [data-place="Saigon"]') ?? mapWrap;
     const one = ScrollTrigger.create({
-      trigger: mapWrap,
-      start: "top 80%",
+      trigger: saigon,
+      start: "center 92%",
       onEnter: () => goTo(Math.max(current, 1)),
       onLeaveBack: () => goTo(0),
     });
     const two = ScrollTrigger.create({
-      trigger: mapWrap,
-      start: "center 60%",
+      trigger: saigon,
+      start: "center 78%",
       onEnter: () => goTo(2),
       onLeaveBack: () => goTo(1),
     });
