@@ -97,7 +97,7 @@ export const fr: Messages = {
       },
       {
         strong: "Récupérez la moto à la boutique",
-        rest: "dans le 1er arrondissement, avec votre permis moto ou votre permis international.",
+        rest: "dans le 1er arrondissement.",
       },
       { strong: "Roulez.", rest: "Ramenez-la nous, ou laissez-la à Hanoï ou Da Nang." },
     ],
@@ -333,9 +333,6 @@ export const fr: Messages = {
     notForTrip: "Non disponible pour ce voyage",
     bookedOut: "Réservée à ces dates",
     onlyLeft: "Plus que {n}",
-    groupLight: "Légères et faciles : 110 à 125 cc",
-    groupPower: "Plus de puissance : 150 cc et plus",
-    mostRentedOneWay: "La plus louée pour l'aller simple",
     extrasTitle: "4. Options",
     from: "dès {price}",
     perDayExtra: "par jour",

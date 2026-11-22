@@ -44,8 +44,6 @@ export function BookingForm(props: {
   /** Dates from the address (?start=&end=), already checked by the page. */
   initialStart?: string;
   initialEnd?: string;
-  /** The licence rule, shown in the summary. */
-  licence: { label: string; text: string };
   /** The FAQ answer on cancelling, in this language. */
   cancelHref: string;
   /** The page's language, and its wording (passed in so browsers get one language). */
@@ -374,96 +372,78 @@ export function BookingForm(props: {
             {availability.state === "loading" && t.checking}
             {availability.state === "error" && t.checkFailed}
           </div>
-          {/* Two groups by engine size: light 110–125 cc, then 150 cc and up. */}
-          {[
-            { title: t.groupLight, models: catalog.models.filter((m) => !isPowerful(m)) },
-            { title: t.groupPower, models: catalog.models.filter(isPowerful) },
-          ]
-            .filter((group) => group.models.length > 0)
-            .map((group) => (
-              <div key={group.title} className={styles.bikeGroup}>
-                <h3 className={styles.bikeGroupTitle}>{group.title}</h3>
-                <div className={styles.bikes}>
-                  {group.models.map((m) => {
-                      const free = freeCount(m);
-                      const price = priceFor(m);
-                      const noRoute =
-                        route !== null && route !== undefined && m.oneWayFees[route.toCity] === undefined;
-                      const soldOut = free === 0;
-                      const disabled = soldOut || noRoute;
-                      return (
-                        <label
-                          key={m.id}
-                          className={`${styles.bike} ${m.id === model?.id ? styles.bikeOn : ""} ${disabled ? styles.bikeOff : ""}`}
-                        >
-                          <input
-                            type="radio"
-                            name="bike"
-                            className={styles.visuallyHidden}
-                            checked={m.id === model?.id}
-                            disabled={disabled}
-                            onChange={() => chooseModel(m)}
-                          />
-                          <Image
-                            src={m.image}
-                            alt=""
-                            width={1200}
-                            height={800}
-                            sizes="(max-width: 859px) 72px, 200px"
-                            className={styles.bikeImage}
-                          />
-                          <span className={styles.bikeName}>{m.name}</span>
-                          {/* The type and, if any, the availability note: one line in the
-                              phone rows; on laptop cards the note stays at the bottom. */}
-                          <span className={styles.bikeMeta}>
-                            <span className={styles.small}>
-                              {m.kind}
-                              {m.engineCc ? ` · ${m.engineCc} cc` : ""}
-                            </span>
-                            {route && m.slug === LONG_RIDE_PICK && !disabled && (
-                              <span className={styles.pick}>{t.mostRentedOneWay}</span>
-                            )}
-                            {noRoute && <span className={styles.status}>{t.notForTrip}</span>}
-                            {!noRoute && soldOut && <span className={styles.status}>{t.bookedOut}</span>}
-                            {/* Only the last one is worth a note (owner, 2026-11-22). */}
-                            {!noRoute && free === 1 && (
-                              <span className={styles.statusLow}>{fill(t.onlyLeft, { n: free })}</span>
-                            )}
-                          </span>
-                          {price?.ok ? (
-                            <span className={styles.price}>
-                              {formatVnd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}
-                              <span>
-                                {" "}
-                                {usd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}{" "}
-                                {fill(t.forDays, { days: daysLabel(price.quote.days) })}
-                              </span>
-                            </span>
-                          ) : (
-                            <span className={styles.price}>
-                              {formatVnd(m.dailyRate)}
-                              <span>
-                                {" "}
-                                {usd(m.dailyRate)} {t.perDay}
-                              </span>
-                            </span>
-                          )}
-                          {route && m.oneWayFees[route.toCity] !== undefined && (
-                            <span className={`${styles.small} ${styles.bikeNote}`}>
-                              {fill(t.inclFee, { fee: formatVnd(m.oneWayFees[route.toCity]!) })}
-                            </span>
-                          )}
-                          {!price?.ok && !route && (
-                            <span className={`${styles.small} ${styles.bikeNote}`}>
-                              {fill(t.fromLongest, { price: formatVnd(lowestRate(m)) })}
-                            </span>
-                          )}
-                        </label>
-                      );
-                  })}
-                </div>
-              </div>
-            ))}
+          <div className={styles.bikes}>
+            {catalog.models.map((m) => {
+              const free = freeCount(m);
+              const price = priceFor(m);
+              const noRoute =
+                route !== null && route !== undefined && m.oneWayFees[route.toCity] === undefined;
+              const soldOut = free === 0;
+              const disabled = soldOut || noRoute;
+              return (
+                <label
+                  key={m.id}
+                  className={`${styles.bike} ${m.id === model?.id ? styles.bikeOn : ""} ${disabled ? styles.bikeOff : ""}`}
+                >
+                  <input
+                    type="radio"
+                    name="bike"
+                    className={styles.visuallyHidden}
+                    checked={m.id === model?.id}
+                    disabled={disabled}
+                    onChange={() => chooseModel(m)}
+                  />
+                  <Image
+                    src={m.image}
+                    alt=""
+                    width={1200}
+                    height={800}
+                    sizes="(max-width: 859px) 72px, 200px"
+                    className={styles.bikeImage}
+                  />
+                  <span className={styles.bikeName}>{m.name}</span>
+                  {/* The type and, if any, the availability note: one line in the
+                      phone rows; on laptop cards the note stays at the bottom. */}
+                  <span className={styles.bikeMeta}>
+                    <span className={styles.small}>{m.kind}</span>
+                    {noRoute && <span className={styles.status}>{t.notForTrip}</span>}
+                    {!noRoute && soldOut && <span className={styles.status}>{t.bookedOut}</span>}
+                    {!noRoute && free !== null && free > 0 && free <= 2 && (
+                      <span className={styles.statusLow}>{fill(t.onlyLeft, { n: free })}</span>
+                    )}
+                  </span>
+                  {price?.ok ? (
+                    <span className={styles.price}>
+                      {formatVnd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}
+                      <span>
+                        {" "}
+                        {usd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}{" "}
+                        {fill(t.forDays, { days: daysLabel(price.quote.days) })}
+                      </span>
+                    </span>
+                  ) : (
+                    <span className={styles.price}>
+                      {formatVnd(m.dailyRate)}
+                      <span>
+                        {" "}
+                        {usd(m.dailyRate)} {t.perDay}
+                      </span>
+                    </span>
+                  )}
+                  {route && m.oneWayFees[route.toCity] !== undefined && (
+                    <span className={`${styles.small} ${styles.bikeNote}`}>
+                      {fill(t.inclFee, { fee: formatVnd(m.oneWayFees[route.toCity]!) })}
+                    </span>
+                  )}
+                  {!price?.ok && !route && (
+                    <span className={`${styles.small} ${styles.bikeNote}`}>
+                      {fill(t.fromLongest, { price: formatVnd(lowestRate(m)) })}
+                    </span>
+                  )}
+                </label>
+              );
+            })}
+          </div>
           {fieldError("modelId") && <p className={styles.warn}>{fieldError("modelId")}</p>}
         </fieldset>
 
@@ -628,9 +608,6 @@ export function BookingForm(props: {
         )}
 
         <p className={styles.ticketSecurity}>{t.security}</p>
-        <p className={styles.ticketSecurity}>
-          <b>{props.licence.label}:</b> {props.licence.text}
-        </p>
 
         <label className={styles.accept}>
           <input
@@ -711,12 +688,6 @@ export function BookingForm(props: {
     </form>
   );
 }
-
-/** 150 cc and up; a model with no engine size on file goes with the light ones. */
-const isPowerful = (m: CatalogModel) => (m.engineCc ?? 0) >= 150;
-
-/** Our most-rented bike for the long ride (its page says so); suggested on one-way trips. */
-const LONG_RIDE_PICK = "honda-xr150";
 
 /** "1–8 Dec" or "28 Dec – 3 Jan", in the page's language. */
 function shortRange(start: string, end: string, lang: Locale): string {

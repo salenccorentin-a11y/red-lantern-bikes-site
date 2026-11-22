@@ -277,38 +277,11 @@
   color: var(--muted);
 }
 
-/* "Only 1 left": information, not pressure (owner, 2026-11-22). */
+/* "Only 2 left": information in slate, not scarlet pressure (2026-11-22). */
 .statusLow {
   margin-top: 6px;
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--slate);
-}
-
-/* The bike suggested for one-way trips. */
-.pick {
-  order: 1;
-  align-self: flex-start;
-  margin-top: 6px;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: var(--mist);
-  color: var(--egyptian);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-/* The two groups of bikes: no clutch, then clutch. */
-.bikeGroup + .bikeGroup {
-  margin-top: 22px;
-}
-
-.bikeGroupTitle {
-  margin: 14px 0 0;
-  font-size: var(--text-base);
-  font-weight: 700;
-  letter-spacing: 0;
   color: var(--slate);
 }
 
@@ -347,9 +320,8 @@
     margin: 0;
   }
 
-  /* The name gets the whole width, so it stays on one line. */
   .bikeName {
-    grid-column: 2 / 4;
+    grid-column: 2;
     grid-row: 1;
     align-self: end;
     font-size: 15px;
@@ -357,7 +329,7 @@
   }
 
   .bikeMeta {
-    grid-column: 2 / 4;
+    grid-column: 2;
     grid-row: 2;
     align-self: start;
     display: flex;
@@ -366,12 +338,16 @@
     column-gap: 8px;
   }
 
-  /* Name, then type and engine, then the price: each on its own line, so
-     nothing wraps into a narrow column. */
   .price {
-    grid-column: 2 / 4;
-    grid-row: 3;
-    margin: 2px 0 0;
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    margin: 0;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .price span {
+    display: block;
   }
 
   .bikeNote {
@@ -380,8 +356,7 @@
   }
 
   .status,
-  .statusLow,
-  .pick {
+  .statusLow {
     order: 0;
     margin-top: 0;
   }

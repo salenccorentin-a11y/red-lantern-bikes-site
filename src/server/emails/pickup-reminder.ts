@@ -32,7 +32,6 @@ export function pickupReminderEmail(d: PickupReminderData): Email {
     ["Balance to pay at pick-up", formatVnd(d.balanceVnd)],
   ];
   const bring = [
-    "Your motorbike licence, or an International Driving Permit (1968 Vienna Convention) that covers motorbikes.",
     "A security deposit, returned when you bring the bike back: your passport, or cash (US$300 for a scooter, US$500 for a motorcycle).",
     d.balanceVnd > 0
       ? `The balance of ${formatVnd(d.balanceVnd)}, in cash or by bank transfer.`

@@ -102,9 +102,10 @@ From the Impeccable audit (14/20) and critique (28/40); owner: booking page firs
 - **Booking calendar**: on a one-way trip, drop-off days too early for the route's minimum are greyed out; "Pick up" and "Drop off" are separate halves, and "Drop off" changes only the end date. The too-short warning gives the earliest drop-off date.
 - **Dates in the address** (`?start=&end=`), so a reload keeps the trip.
 - **Details checked before sending**: missing name, email, phone or deposit tick show next to the field at once; the cursor goes to the first one.
-- **Deposit moment**: "Free request: nothing to pay now…" right above the send button; "non-refundable" once (tick box); "Can I cancel?" links to the FAQ; the licence rule is in the summary.
+- **Deposit moment**: "Free request: nothing to pay now…" right above the send button; "non-refundable" once (tick box); "Can I cancel?" links to the FAQ.
 - **Trip length**: booking options say "At least 12 days, most riders take 21 to 30 days" (Da Nang 7 / 10 to 14).
-- **Bike list**: two groups by engine size (110–125 cc, 150 cc and up), engine size in each row, "Most rented for one-way trips" on the XR150 when a one-way trip is chosen, "Only 1 left" in slate (no note at 2).
+- **Bike list**: unchanged (owner: every bike can do the long ride and is easy); grouping and the XR150 badge were tried and dropped. Only colours changed: selected bike in Egyptian blue, "Only 2 left" in slate.
+- **Licence mentioned only in the FAQ, the terms and three bike pages** (Kawasaki Versys X300, Honda CB150X, Yamaha WR155R). Removed from the home steps, the booking page, the other bike pages, the route guides, the pick-up reminder email and the "everything you need to know" blog post (its search description kept, per the SEO rule). The shop asks about licences in private messages, so customers aren't scared off (owner, 2026-11-22).
 - **Scarlet only for booking**: ticks, selected bike, card hover glow and FAQ arrows in Egyptian blue or slate; lit route cards in the star's gold. On phones the bottom bar steps aside when the summary is on screen.
 - **Hero**: words and booking bar visible at once; only the photo fades in (1.6 s).
 - **WhatsApp button**: not on the booking page (the summary has WhatsApp); room under the footer on phones.

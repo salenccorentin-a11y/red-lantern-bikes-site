@@ -95,7 +95,7 @@ export const vi: Messages = {
       },
       {
         strong: "Nhận xe tại tiệm",
-        rest: "ở Quận 1, mang theo bằng lái xe máy hoặc giấy phép lái xe quốc tế.",
+        rest: "ở Quận 1.",
       },
       { strong: "Lên đường.", rest: "Trả xe lại cho chúng tôi, hoặc để xe ở Hà Nội hay Đà Nẵng." },
     ],
@@ -327,9 +327,6 @@ export const vi: Messages = {
     notForTrip: "Không có cho chuyến này",
     bookedOut: "Đã có người đặt vào những ngày này",
     onlyLeft: "Chỉ còn {n} chiếc",
-    groupLight: "Nhẹ và dễ đi: 110 đến 125 cc",
-    groupPower: "Mạnh hơn: từ 150 cc trở lên",
-    mostRentedOneWay: "Được thuê nhiều nhất cho chuyến một chiều",
     extrasTitle: "4. Thêm tùy chọn",
     from: "từ {price}",
     perDayExtra: "mỗi ngày",

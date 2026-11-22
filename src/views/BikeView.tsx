@@ -66,6 +66,10 @@ export async function bikeMetadata(lang: Locale, slug: string): Promise<Metadata
 
 // The model's name from the fleet list, for the photo description (a staff
 // rename in settings won't change it, which is fine for that).
+/** The only bike pages that mention the licence (owner, 2026-11-22: not to
+ *  scare customers off; the shop asks about licences in private messages). */
+const LICENCE_ON_PAGE = ["kawasaki-versys-x300", "honda-cb150x", "yamaha-wr155r"];
+
 const MODEL_NAME: Record<string, string> = Object.fromEntries(
   BIKE_MODELS.map((m) => [m.slug, m.name]),
 );
@@ -213,18 +217,10 @@ async function BikeMore({ lang, slug }: { lang: Locale; slug: string }) {
         )}
         {/* The shop's choice: the permit wording only on 150cc and bigger
             bikes, the same for all of them; nothing on the small ones. */}
-        {(facts.engineCc ?? 0) >= 150 && (
+        {LICENCE_ON_PAGE.includes(slug) && (
           <section>
             <h2>{t.licence}</h2>
             <p>{licenceText(lang, "IDP_OR_A1")}</p>
-          </section>
-        )}
-        {/* A model added from the staff area: no engine size on file, so the
-            licence wording only when it needs more than the usual permit. */}
-        {!BIKE_CONTENT[slug] && content?.licence === "A2" && (
-          <section>
-            <h2>{t.licence}</h2>
-            <p>{licenceText(lang, "A2")}</p>
           </section>
         )}
         <section>

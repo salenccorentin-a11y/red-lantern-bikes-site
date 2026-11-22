@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import styles from "@/app/(en)/(booking)/book/book.module.css";
 import { BookingForm } from "@/app/(en)/(booking)/book/BookingForm";
 import { PageHeader } from "@/components/PageHeader";
-import { addOnText, bikeFacts, getMessages, kindLabel, licenceText } from "@/i18n";
+import { addOnText, getMessages, kindLabel } from "@/i18n";
 import { OG_LOCALE, type Locale } from "@/i18n/config";
 import { languageAlternates, localize } from "@/i18n/paths";
 import { parseIsoDate, todayInSaigon } from "@/lib/dates";
@@ -48,11 +48,7 @@ async function BookingLoader({ lang, searchParams }: { lang: Locale; searchParam
   // Bike kinds and extras come from the database in English.
   const catalog = {
     ...loaded,
-    models: loaded.models.map((m) => ({
-      ...m,
-      kind: kindLabel(lang, m.kind),
-      engineCc: bikeFacts(m.slug).engineCc,
-    })),
+    models: loaded.models.map((m) => ({ ...m, kind: kindLabel(lang, m.kind) })),
     addOns: loaded.addOns.map((a) => ({ ...a, ...addOnText(lang, a.slug, a) })),
   };
   const model = catalog.models.find((m) => m.slug === query.model);
@@ -69,7 +65,6 @@ async function BookingLoader({ lang, searchParams }: { lang: Locale; searchParam
       today={today}
       initialStart={start}
       initialEnd={end}
-      licence={{ label: m.bike.licence, text: licenceText(lang, "IDP_OR_A1") }}
       cancelHref={localize(lang, "/faq#cancel")}
       initialModelId={model?.id ?? null}
       initialDropoff={dropoff}

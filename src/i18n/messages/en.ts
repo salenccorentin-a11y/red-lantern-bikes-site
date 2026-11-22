@@ -98,7 +98,7 @@ export const en = {
       },
       {
         strong: "Pick up at our shop",
-        rest: "in District 1 with your motorbike licence or International Driving Permit.",
+        rest: "in District 1.",
       },
       { strong: "Ride.", rest: "Bring the bike back to us, or leave it in Hanoi or Da Nang." },
     ],
@@ -331,9 +331,6 @@ export const en = {
     notForTrip: "Not available for this trip",
     bookedOut: "Booked for these dates",
     onlyLeft: "Only {n} left",
-    groupLight: "Light and easy: 110 to 125 cc",
-    groupPower: "More power: 150 cc and up",
-    mostRentedOneWay: "Most rented for one-way trips",
     extrasTitle: "4. Extras",
     from: "from {price}",
     perDayExtra: "per day",

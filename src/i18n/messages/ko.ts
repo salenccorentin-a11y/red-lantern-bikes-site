@@ -95,7 +95,7 @@ export const ko: Messages = {
       },
       {
         strong: "매장에서 픽업",
-        rest: "1군 매장에서 오토바이 면허증 또는 국제운전면허증을 지참하세요.",
+        rest: "1군 매장에서 받으세요.",
       },
       { strong: "출발!", rest: "저희에게 반납하시거나 하노이 또는 다낭에 두고 가세요." },
     ],
@@ -325,9 +325,6 @@ export const ko: Messages = {
     notForTrip: "이 여행에는 이용 불가",
     bookedOut: "이 날짜에 예약 마감",
     onlyLeft: "{n}대 남음",
-    groupLight: "가볍고 쉬운 오토바이: 110~125cc",
-    groupPower: "더 강력한 오토바이: 150cc 이상",
-    mostRentedOneWay: "편도 여행에 가장 많이 대여",
     extrasTitle: "4. 추가 옵션",
     from: "{price}부터",
     perDayExtra: "1일당",
