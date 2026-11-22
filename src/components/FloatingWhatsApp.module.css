@@ -43,13 +43,12 @@
     bottom: calc(84px + env(safe-area-inset-bottom));
   }
 
-  /* On the booking page the prices are on the right: keep them clear. */
-  :global(body:has([data-bottom-bar="booking"])) .float {
-    right: auto;
-    left: 12px;
-    width: 48px;
-    height: 48px;
-  }
+}
+
+/* The booking page has WhatsApp in its summary already: no floating button
+   there, so nothing covers the form (owner, 2026-11-22). */
+:global(body:has([data-bottom-bar="booking"])) .float {
+  display: none;
 }
 
 @media (min-width: 900px) {

@@ -6,10 +6,10 @@ import { Suspense } from "react";
 import styles from "@/app/(en)/(booking)/book/book.module.css";
 import { BookingForm } from "@/app/(en)/(booking)/book/BookingForm";
 import { PageHeader } from "@/components/PageHeader";
-import { addOnText, getMessages, kindLabel } from "@/i18n";
+import { addOnText, bikeFacts, getMessages, kindLabel, licenceText } from "@/i18n";
 import { OG_LOCALE, type Locale } from "@/i18n/config";
-import { languageAlternates } from "@/i18n/paths";
-import { todayInSaigon } from "@/lib/dates";
+import { languageAlternates, localize } from "@/i18n/paths";
+import { parseIsoDate, todayInSaigon } from "@/lib/dates";
 import { db } from "@/lib/db";
 import { loadCatalog } from "@/server/catalog";
 
@@ -48,16 +48,29 @@ async function BookingLoader({ lang, searchParams }: { lang: Locale; searchParam
   // Bike kinds and extras come from the database in English.
   const catalog = {
     ...loaded,
-    models: loaded.models.map((m) => ({ ...m, kind: kindLabel(lang, m.kind) })),
+    models: loaded.models.map((m) => ({
+      ...m,
+      kind: kindLabel(lang, m.kind),
+      engineCc: bikeFacts(m.slug).engineCc,
+    })),
     addOns: loaded.addOns.map((a) => ({ ...a, ...addOnText(lang, a.slug, a) })),
   };
   const model = catalog.models.find((m) => m.slug === query.model);
   const dropoff = catalog.routes.find((r) => r.toCity === query.dropoff)?.toCity ?? "SAIGON";
   const m = getMessages(lang);
+  // Dates kept in the address (?start=&end=), so a reload keeps the trip.
+  const today = todayInSaigon();
+  const isDay = (v: unknown): v is string => typeof v === "string" && parseIsoDate(v) !== null;
+  const start = isDay(query.start) && query.start >= today ? query.start : "";
+  const end = start && isDay(query.end) && query.end >= start ? query.end : "";
   return (
     <BookingForm
       catalog={catalog}
-      today={todayInSaigon()}
+      today={today}
+      initialStart={start}
+      initialEnd={end}
+      licence={{ label: m.bike.licence, text: licenceText(lang, "IDP_OR_A1") }}
+      cancelHref={localize(lang, "/faq#cancel")}
       initialModelId={model?.id ?? null}
       initialDropoff={dropoff}
       lang={lang}

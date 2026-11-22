@@ -288,8 +288,9 @@
 }
 
 .card.lit {
-  border-color: rgb(var(--lantern-red-rgb) / 0.6);
-  box-shadow: 0 14px 36px -20px rgb(var(--lantern-red-rgb) / 0.75);
+  /* The star's gold, like the stops on the map: scarlet is for "book". */
+  border-color: rgb(255 204 0 / 0.55);
+  box-shadow: 0 14px 36px -20px rgb(255 204 0 / 0.45);
 }
 
 .cardCity {

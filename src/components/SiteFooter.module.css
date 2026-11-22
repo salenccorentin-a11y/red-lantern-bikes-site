@@ -22,6 +22,18 @@
   gap: 36px;
 }
 
+/* Phones: room under the last links for the WhatsApp button, and for the
+   price bar on bike and booking pages, so nothing covers "Privacy". */
+@media (max-width: 899px) {
+  .inner {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  }
+
+  :global(body:has([data-bottom-bar])) .inner {
+    padding-bottom: calc(176px + env(safe-area-inset-bottom));
+  }
+}
+
 @media (min-width: 800px) {
   .inner {
     grid-template-columns: 1.4fr 1fr 1fr;

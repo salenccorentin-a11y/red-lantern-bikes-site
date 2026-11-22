@@ -7,10 +7,10 @@
 
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { DATE_LOCALE, fill, type Locale } from "@/i18n/config";
 import type { Messages } from "@/i18n/messages/en";
-import { tripDays } from "@/lib/date-range";
+import { shiftDay, tripDays } from "@/lib/date-range";
 import { formatDisplayDate, parseIsoDate } from "@/lib/dates";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
@@ -41,6 +41,13 @@ export function BookingForm(props: {
   today: string;
   initialModelId?: string | null;
   initialDropoff?: Dropoff;
+  /** Dates from the address (?start=&end=), already checked by the page. */
+  initialStart?: string;
+  initialEnd?: string;
+  /** The licence rule, shown in the summary. */
+  licence: { label: string; text: string };
+  /** The FAQ answer on cancelling, in this language. */
+  cancelHref: string;
   /** The page's language, and its wording (passed in so browsers get one language). */
   lang: Locale;
   t: Messages["book"];
@@ -56,8 +63,8 @@ export function BookingForm(props: {
   const date = (iso: string) => formatDisplayDate(iso, lang);
   const contactHref = lang === "en" ? "/contact?about=reverse" : `/${lang}/contact?about=reverse`;
   const [dropoff, setDropoff] = useState<Dropoff>(props.initialDropoff ?? "SAIGON");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState(props.initialStart ?? "");
+  const [endDate, setEndDate] = useState(props.initialEnd ?? "");
   const [modelId, setModelId] = useState<string | null>(props.initialModelId ?? null);
   // How many of each extra, by id. Extras not chosen are left out.
   const [quantities, setQuantities] = useState<Record<string, number>>({});
@@ -213,14 +220,49 @@ export function BookingForm(props: {
   const depositLabel = `${formatVnd(depositVnd)} (${usd(depositVnd)})`;
   // Known from the dates alone, before a bike is chosen.
   const tooShortForRoute = Boolean(route && tripLength && tripLength < route.minDays);
+  // The first drop-off day that makes the trip long enough.
+  const earliestDropoff =
+    route && startDate ? shiftDay(startDate, route.minDays - 1, startDate) : null;
 
   const canReserve =
     datesReady && model !== null && priced?.ok === true && availability.state !== "loading";
+
+  // The details are checked here before sending, so a missing field shows at
+  // once, next to the field, instead of after a trip to the server.
+  function missingDetails(): Record<string, string> {
+    const errors: Record<string, string> = {};
+    if (!name.trim()) errors.name = t.fieldErrors.name;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errors.email = t.fieldErrors.email;
+    if (phone.replace(/\D/g, "").length < 6) errors.phone = t.fieldErrors.phone;
+    if (!acceptDeposit) errors.acceptDeposit = t.fieldErrors.acceptDeposit;
+    return errors;
+  }
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Phones: the bar at the bottom steps aside once the summary (with its own
+  // send button) is on screen, so only one scarlet button shows at a time.
+  const [summaryInView, setSummaryInView] = useState(false);
+  useEffect(() => {
+    const summary = document.getElementById("summary");
+    if (!summary) return;
+    const observer = new IntersectionObserver(([entry]) => setSummaryInView(entry.isIntersecting));
+    observer.observe(summary);
+    return () => observer.disconnect();
+  }, []);
 
   // ── Submit ───────────────────────────────────────────────────────────────
   function reserve(event: React.FormEvent) {
     event.preventDefault();
     if (!canReserve || !model) return;
+    const missing = missingDetails();
+    if (Object.keys(missing).length > 0) {
+      setResult({ fieldErrors: missing, error: t.checkFields });
+      // Take the visitor to the first field to fix.
+      requestAnimationFrame(() =>
+        formRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus(),
+      );
+      return;
+    }
     startSubmit(async () => {
       // On success the server sends the customer to their booking page.
       const state = await createOnlineBooking({
@@ -249,7 +291,7 @@ export function BookingForm(props: {
     result.fieldErrors?.[field] ? (fieldErrors[field] ?? result.fieldErrors[field]) : undefined;
 
   return (
-    <form className={styles.layout} onSubmit={reserve} noValidate>
+    <form ref={formRef} className={styles.layout} onSubmit={reserve} noValidate>
       <div>
         {/* 1. Where */}
         <fieldset className={styles.section}>
@@ -269,7 +311,7 @@ export function BookingForm(props: {
                 onChange={() => chooseDropoff(r.toCity)}
                 name="dropoff"
                 label={fill(t.oneWayLabel, { city: cityLabel(r.toCity) })}
-                note={fill(t.oneWayNote, { days: r.minDays })}
+                note={fill(t.oneWayNote, { days: r.minDays, usual: t.usualDays[r.toCity] })}
               />
             ))}
           </div>
@@ -286,8 +328,11 @@ export function BookingForm(props: {
             onChange={(range) => {
               setStartDate(range.start);
               setEndDate(range.end);
+              updateAddress({ start: range.start || null, end: range.end || null });
             }}
             today={today}
+            minDays={route?.minDays}
+            hintEndMin={route ? fill(t.datesHintEndMin, { days: route.minDays }) : undefined}
             lang={lang}
             daysLabel={daysLabel}
             lengthNote={tripLength ? fill(t.daysIncluded, { days: daysLabel(tripLength) }) : null}
@@ -308,7 +353,12 @@ export function BookingForm(props: {
           <div aria-live="polite">
             {dateProblem && <p className={styles.warn}>{dateProblem}</p>}
             {tooShortForRoute && route && (
-              <p className={styles.warn}>{fill(t.tooShort, { days: route.minDays })}</p>
+              <p className={styles.warn}>
+                {fill(t.tooShort, {
+                  days: route.minDays,
+                  date: earliestDropoff ? date(earliestDropoff) : "",
+                })}
+              </p>
             )}
             {tripLength && !tooShortForRoute && (
               <p className={styles.ok}>{fill(t.daysIncluded, { days: daysLabel(tripLength) })}</p>
@@ -324,78 +374,96 @@ export function BookingForm(props: {
             {availability.state === "loading" && t.checking}
             {availability.state === "error" && t.checkFailed}
           </div>
-          <div className={styles.bikes}>
-            {catalog.models.map((m) => {
-              const free = freeCount(m);
-              const price = priceFor(m);
-              const noRoute =
-                route !== null && route !== undefined && m.oneWayFees[route.toCity] === undefined;
-              const soldOut = free === 0;
-              const disabled = soldOut || noRoute;
-              return (
-                <label
-                  key={m.id}
-                  className={`${styles.bike} ${m.id === model?.id ? styles.bikeOn : ""} ${disabled ? styles.bikeOff : ""}`}
-                >
-                  <input
-                    type="radio"
-                    name="bike"
-                    className={styles.visuallyHidden}
-                    checked={m.id === model?.id}
-                    disabled={disabled}
-                    onChange={() => chooseModel(m)}
-                  />
-                  <Image
-                    src={m.image}
-                    alt=""
-                    width={1200}
-                    height={800}
-                    sizes="(max-width: 859px) 72px, 200px"
-                    className={styles.bikeImage}
-                  />
-                  <span className={styles.bikeName}>{m.name}</span>
-                  {/* The type and, if any, the availability note: one line in the
-                      phone rows; on laptop cards the note stays at the bottom. */}
-                  <span className={styles.bikeMeta}>
-                    <span className={styles.small}>{m.kind}</span>
-                    {noRoute && <span className={styles.status}>{t.notForTrip}</span>}
-                    {!noRoute && soldOut && <span className={styles.status}>{t.bookedOut}</span>}
-                    {!noRoute && free !== null && free > 0 && free <= 2 && (
-                      <span className={styles.statusLow}>{fill(t.onlyLeft, { n: free })}</span>
-                    )}
-                  </span>
-                  {price?.ok ? (
-                    <span className={styles.price}>
-                      {formatVnd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}
-                      <span>
-                        {" "}
-                        {usd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}{" "}
-                        {fill(t.forDays, { days: daysLabel(price.quote.days) })}
-                      </span>
-                    </span>
-                  ) : (
-                    <span className={styles.price}>
-                      {formatVnd(m.dailyRate)}
-                      <span>
-                        {" "}
-                        {usd(m.dailyRate)} {t.perDay}
-                      </span>
-                    </span>
-                  )}
-                  {route && m.oneWayFees[route.toCity] !== undefined && (
-                    <span className={`${styles.small} ${styles.bikeNote}`}>
-                      {fill(t.inclFee, { fee: formatVnd(m.oneWayFees[route.toCity]!) })}
-                    </span>
-                  )}
-                  {!price?.ok && !route && (
-                    <span className={`${styles.small} ${styles.bikeNote}`}>
-                      {fill(t.fromLongest, { price: formatVnd(lowestRate(m)) })}
-                    </span>
-                  )}
-                </label>
-              );
-            })}
-          </div>
+          {/* Two groups by engine size: light 110–125 cc, then 150 cc and up. */}
+          {[
+            { title: t.groupLight, models: catalog.models.filter((m) => !isPowerful(m)) },
+            { title: t.groupPower, models: catalog.models.filter(isPowerful) },
+          ]
+            .filter((group) => group.models.length > 0)
+            .map((group) => (
+              <div key={group.title} className={styles.bikeGroup}>
+                <h3 className={styles.bikeGroupTitle}>{group.title}</h3>
+                <div className={styles.bikes}>
+                  {group.models.map((m) => {
+                      const free = freeCount(m);
+                      const price = priceFor(m);
+                      const noRoute =
+                        route !== null && route !== undefined && m.oneWayFees[route.toCity] === undefined;
+                      const soldOut = free === 0;
+                      const disabled = soldOut || noRoute;
+                      return (
+                        <label
+                          key={m.id}
+                          className={`${styles.bike} ${m.id === model?.id ? styles.bikeOn : ""} ${disabled ? styles.bikeOff : ""}`}
+                        >
+                          <input
+                            type="radio"
+                            name="bike"
+                            className={styles.visuallyHidden}
+                            checked={m.id === model?.id}
+                            disabled={disabled}
+                            onChange={() => chooseModel(m)}
+                          />
+                          <Image
+                            src={m.image}
+                            alt=""
+                            width={1200}
+                            height={800}
+                            sizes="(max-width: 859px) 72px, 200px"
+                            className={styles.bikeImage}
+                          />
+                          <span className={styles.bikeName}>{m.name}</span>
+                          {/* The type and, if any, the availability note: one line in the
+                              phone rows; on laptop cards the note stays at the bottom. */}
+                          <span className={styles.bikeMeta}>
+                            <span className={styles.small}>
+                              {m.kind}
+                              {m.engineCc ? ` · ${m.engineCc} cc` : ""}
+                            </span>
+                            {route && m.slug === LONG_RIDE_PICK && !disabled && (
+                              <span className={styles.pick}>{t.mostRentedOneWay}</span>
+                            )}
+                            {noRoute && <span className={styles.status}>{t.notForTrip}</span>}
+                            {!noRoute && soldOut && <span className={styles.status}>{t.bookedOut}</span>}
+                            {/* Only the last one is worth a note (owner, 2026-11-22). */}
+                            {!noRoute && free === 1 && (
+                              <span className={styles.statusLow}>{fill(t.onlyLeft, { n: free })}</span>
+                            )}
+                          </span>
+                          {price?.ok ? (
+                            <span className={styles.price}>
+                              {formatVnd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}
+                              <span>
+                                {" "}
+                                {usd(price.quote.rentalVnd + price.quote.oneWayFeeVnd)}{" "}
+                                {fill(t.forDays, { days: daysLabel(price.quote.days) })}
+                              </span>
+                            </span>
+                          ) : (
+                            <span className={styles.price}>
+                              {formatVnd(m.dailyRate)}
+                              <span>
+                                {" "}
+                                {usd(m.dailyRate)} {t.perDay}
+                              </span>
+                            </span>
+                          )}
+                          {route && m.oneWayFees[route.toCity] !== undefined && (
+                            <span className={`${styles.small} ${styles.bikeNote}`}>
+                              {fill(t.inclFee, { fee: formatVnd(m.oneWayFees[route.toCity]!) })}
+                            </span>
+                          )}
+                          {!price?.ok && !route && (
+                            <span className={`${styles.small} ${styles.bikeNote}`}>
+                              {fill(t.fromLongest, { price: formatVnd(lowestRate(m)) })}
+                            </span>
+                          )}
+                        </label>
+                      );
+                  })}
+                </div>
+              </div>
+            ))}
           {fieldError("modelId") && <p className={styles.warn}>{fieldError("modelId")}</p>}
         </fieldset>
 
@@ -560,6 +628,9 @@ export function BookingForm(props: {
         )}
 
         <p className={styles.ticketSecurity}>{t.security}</p>
+        <p className={styles.ticketSecurity}>
+          <b>{props.licence.label}:</b> {props.licence.text}
+        </p>
 
         <label className={styles.accept}>
           <input
@@ -569,9 +640,14 @@ export function BookingForm(props: {
           />
           <span>{fill(t.accept, { deposit: depositLabel })}</span>
         </label>
+        <a href={props.cancelHref} className={styles.ticketLink}>
+          {t.cancelLink}
+        </a>
         {fieldError("acceptDeposit") && (
           <p className={styles.ticketWarn}>{fieldError("acceptDeposit")}</p>
         )}
+        {/* The reassurance sits right above the button (owner, 2026-11-22). */}
+        <p className={styles.ticketFree}>{t.fine}</p>
 
         <button
           className={styles.reserve}
@@ -584,7 +660,6 @@ export function BookingForm(props: {
         <div aria-live="assertive">
           {result.error && <p className={styles.ticketWarn}>{result.error}</p>}
         </div>
-        <p className={styles.ticketFine}>{t.fine}</p>
         <div className={styles.ticketHelp}>
           <WhatsAppLink
             variant="link"
@@ -604,7 +679,10 @@ export function BookingForm(props: {
 
       {/* Phones: the ticket is at the end of the page, so the bike, the dates
           and the total stay in view in a bar at the bottom of the screen. */}
-      <div className={styles.mobileBar} data-bottom-bar="booking">
+      <div
+        className={`${styles.mobileBar} ${summaryInView ? styles.mobileBarAway : ""}`}
+        data-bottom-bar="booking"
+      >
         {model && priced?.ok ? (
           <>
             <div className={styles.mobileBarTrip}>
@@ -633,6 +711,12 @@ export function BookingForm(props: {
     </form>
   );
 }
+
+/** 150 cc and up; a model with no engine size on file goes with the light ones. */
+const isPowerful = (m: CatalogModel) => (m.engineCc ?? 0) >= 150;
+
+/** Our most-rented bike for the long ride (its page says so); suggested on one-way trips. */
+const LONG_RIDE_PICK = "honda-xr150";
 
 /** "1–8 Dec" or "28 Dec – 3 Jan", in the page's language. */
 function shortRange(start: string, end: string, lang: Locale): string {

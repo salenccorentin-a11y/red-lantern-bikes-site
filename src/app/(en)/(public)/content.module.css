@@ -301,8 +301,8 @@
   flex: none;
   width: 12px;
   height: 12px;
-  border-right: 2.5px solid var(--lantern-red);
-  border-bottom: 2.5px solid var(--lantern-red);
+  border-right: 2.5px solid var(--slate);
+  border-bottom: 2.5px solid var(--slate);
   transform: rotate(45deg) translate(-3px, -3px);
   transition: transform 150ms ease;
 }

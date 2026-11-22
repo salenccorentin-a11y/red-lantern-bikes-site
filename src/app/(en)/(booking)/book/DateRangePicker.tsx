@@ -1,9 +1,12 @@
 "use client";
 
-// One control for the trip's dates: a button showing the pick-up day, the
-// drop-off day and the trip length, which opens a calendar under it. The
-// first tap on a day is the pick-up day, the second the drop-off day; days
-// before today can't be chosen. It opens and closes without any animation,
+// One control for the trip's dates: two halves showing the pick-up day and
+// the drop-off day, with the trip length between them, which open a calendar
+// under it. Opened from "Pick up", the first tap is the pick-up day and the
+// second the drop-off day. Opened from "Drop off" once a pick-up day is set,
+// a tap changes only the drop-off day. Days before today can't be chosen, and
+// on a one-way trip neither can a drop-off day too early for the route's
+// minimum length (owner, 2026-11-22: catch it before, not after). It opens and closes without any animation,
 // like everything else in the booking steps.
 //
 // Keyboard: arrow keys move day by day and week by week, Page Up / Page Down
@@ -55,9 +58,15 @@ export function DateRangePicker(props: {
   daysLabel: (days: number) => string;
   /** Shown under the calendar once both days are chosen. */
   lengthNote?: string | null;
+  /** A one-way trip's minimum length in days, both ends counted. */
+  minDays?: number;
+  /** "Now choose your drop-off day: at least {days} days." for a one-way trip. */
+  hintEndMin?: string;
 }) {
   const { range, today, lang, labels } = props;
   const [open, setOpen] = useState(false);
+  // Which half opened the calendar: "end" changes only the drop-off day.
+  const [editing, setEditing] = useState<"start" | "end">("start");
   // The first month shown, and the day the arrow keys start from.
   const [view, setView] = useState(monthOf(today));
   const [focusDay, setFocusDay] = useState(today);
@@ -104,15 +113,29 @@ export function DateRangePicker(props: {
   const days = tripDays(range);
   const lastMonth = addMonths(monthOf(today), MONTHS_AHEAD);
   const months = [view, addMonths(view, 1)];
-  const previewEnd = range.start && !range.end && hover && hover >= range.start ? hover : null;
+  // While the drop-off day is being chosen: the earliest one the route allows.
+  const choosingEnd = Boolean(range.start && (!range.end || editing === "end"));
+  const minDays = props.minDays ?? 1;
+  const earliestEnd = range.start && minDays > 1 ? shiftDay(range.start, minDays - 1, range.start) : null;
+  const tooEarly = (day: string) =>
+    choosingEnd && earliestEnd !== null && day > range.start && day < earliestEnd;
+  const previewEnd =
+    range.start && choosingEnd && hover && hover >= range.start && !tooEarly(hover) ? hover : null;
   const rangeEnd = range.end || previewEnd;
 
-  function toggle() {
-    if (open) {
+  function toggle(half: "start" | "end") {
+    if (open && editing === half) {
       setOpen(false);
       return;
     }
-    const startAt = range.start && range.start >= today ? range.start : today;
+    const end = half === "end" && range.start ? "end" : "start";
+    setEditing(end);
+    const startAt =
+      end === "end"
+        ? range.end || earliestEnd || range.start
+        : range.start && range.start >= today
+          ? range.start
+          : today;
     setView(monthOf(startAt));
     setFocusDay(startAt);
     setHover(null);
@@ -135,7 +158,12 @@ export function DateRangePicker(props: {
   }
 
   function choose(day: string) {
-    const next = pickDay(range, day, today);
+    if (tooEarly(day)) return;
+    const next =
+      editing === "end" && range.start && day >= range.start
+        ? { start: range.start, end: day }
+        : pickDay(range, day, today);
+    if (!next.end) setEditing("start");
     props.onChange(next);
     setFocusDay(day);
     if (next.end) close();
@@ -171,34 +199,46 @@ export function DateRangePicker(props: {
     moveFocus.current = true;
   }
 
-  const hint = !range.start ? labels.hintStart : !range.end ? labels.hintEnd : props.lengthNote;
+  const hint = !range.start
+    ? labels.hintStart
+    : choosingEnd
+      ? minDays > 1 && props.hintEndMin
+        ? props.hintEndMin
+        : labels.hintEnd
+      : props.lengthNote;
 
   return (
     <div className={styles.picker}>
-      <button
-        ref={triggerRef}
-        type="button"
-        className={`${styles.trigger} ${open ? styles.triggerOpen : ""}`}
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={toggle}
-      >
-        <span className={styles.end}>
+      <div className={`${styles.trigger} ${open ? styles.triggerOpen : ""}`}>
+        <button
+          ref={triggerRef}
+          type="button"
+          className={`${styles.end} ${open && editing === "start" ? styles.endActive : ""}`}
+          aria-expanded={open && editing === "start"}
+          aria-controls={panelId}
+          onClick={() => toggle("start")}
+        >
           <span className={styles.endLabel}>{labels.pickUp}</span>
           <span className={range.start ? styles.endValue : styles.endEmpty}>
             {range.start ? format.short(range.start) : labels.placeholder}
           </span>
-        </span>
+        </button>
         <span className={styles.length}>
           {days !== null && <span className={styles.pill}>{props.daysLabel(days)}</span>}
         </span>
-        <span className={styles.end}>
+        <button
+          type="button"
+          className={`${styles.end} ${open && editing === "end" ? styles.endActive : ""}`}
+          aria-expanded={open && editing === "end"}
+          aria-controls={panelId}
+          onClick={() => toggle("end")}
+        >
           <span className={styles.endLabel}>{labels.dropOff}</span>
           <span className={range.end ? styles.endValue : styles.endEmpty}>
             {range.end ? format.short(range.end) : labels.placeholder}
           </span>
-        </span>
-      </button>
+        </button>
+      </div>
 
       {open && (
         <div
@@ -276,7 +316,7 @@ export function DateRangePicker(props: {
                                 type="button"
                                 data-day={day}
                                 className={state}
-                                disabled={day < today}
+                                disabled={day < today || tooEarly(day)}
                                 tabIndex={day === focusDay ? 0 : -1}
                                 aria-label={format.full(day) + role}
                                 aria-pressed={isStart || day === range.end}

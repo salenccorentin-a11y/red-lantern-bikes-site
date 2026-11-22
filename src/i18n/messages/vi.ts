@@ -249,7 +249,8 @@ export const vi: Messages = {
     whatsappMessage: "Chào Red Lantern Bikes!",
     reverseIntro:
       "Muốn bắt đầu từ Hà Nội hoặc Đà Nẵng rồi chạy về Sài Gòn? Cho chúng tôi biết nơi bạn muốn bắt đầu, ngày đi và chiếc xe bạn muốn, chúng tôi sẽ xem có thể làm gì.",
-    reversePlaceholder: "Ví dụ: Hà Nội đến Sài Gòn, bắt đầu ngày 3 tháng 12, khoảng 3 tuần, Honda XR150.",
+    reversePlaceholder:
+      "Ví dụ: Hà Nội đến Sài Gòn, bắt đầu ngày 3 tháng 12, khoảng 3 tuần, Honda XR150.",
   },
   enquiry: {
     name: "Tên của bạn",
@@ -290,7 +291,8 @@ export const vi: Messages = {
     returnLabel: "Đi vòng quanh rồi trả xe ở Sài Gòn",
     returnNote: "Không có phí một chiều",
     oneWayLabel: "Một chiều đến {city}",
-    oneWayNote: "Từ {days} ngày, phí một chiều tùy xe",
+    oneWayNote: "Ít nhất {days} ngày, phần lớn mọi người đi {usual}. Phí một chiều tùy theo xe",
+    usualDays: { HANOI: "21 đến 30 ngày", DA_NANG: "10 đến 14 ngày" },
     startNorth: "Bắt đầu từ Hà Nội hoặc Đà Nẵng?",
     contactUs: "Liên hệ với chúng tôi",
     startNorthEnd: "và chúng tôi sẽ sắp xếp.",
@@ -300,12 +302,13 @@ export const vi: Messages = {
     dropOffIn: "Trả xe ở {city}",
     pastDate: "Ngày nhận xe không thể ở quá khứ.",
     endBeforeStart: "Ngày trả xe phải từ ngày nhận xe trở đi.",
-    tooShort: "Chuyến này cần ít nhất {days} ngày.",
+    tooShort: "Chuyến này cần ít nhất {days} ngày: trả xe từ {date} trở đi.",
     daysIncluded: "{days}, tính cả ngày nhận và ngày trả xe",
     datePlaceholder: "Chọn ngày",
     calendarLabel: "Lịch: chọn ngày cho chuyến đi",
     datesHintStart: "Chọn ngày nhận xe.",
     datesHintEnd: "Giờ chọn ngày trả xe.",
+    datesHintEndMin: "Giờ chọn ngày trả xe: ít nhất {days} ngày, tính cả hai ngày.",
     prevMonth: "Tháng trước",
     nextMonth: "Tháng sau",
     closeCalendar: "Đóng",
@@ -324,6 +327,9 @@ export const vi: Messages = {
     notForTrip: "Không có cho chuyến này",
     bookedOut: "Đã có người đặt vào những ngày này",
     onlyLeft: "Chỉ còn {n} chiếc",
+    groupLight: "Nhẹ và dễ đi: 110 đến 125 cc",
+    groupPower: "Mạnh hơn: từ 150 cc trở lên",
+    mostRentedOneWay: "Được thuê nhiều nhất cho chuyến một chiều",
     extrasTitle: "4. Thêm tùy chọn",
     from: "từ {price}",
     perDayExtra: "mỗi ngày",
@@ -346,14 +352,15 @@ export const vi: Messages = {
     savingHint: "Thuê từ {days} ngày trở lên để trả {weekly} một ngày thay vì {daily}.",
     oneWayFee: "Phí một chiều",
     total: "Tổng cộng",
-    depositNow: "Tiền đặt cọc, khi chúng tôi xác nhận (không hoàn lại)",
+    depositNow: "Tiền đặt cọc, sau khi chúng tôi xác nhận",
     balance: "Còn lại trả khi nhận xe",
     choosePrompt: "Chọn chuyến đi, ngày và xe để xem giá.",
     accept:
       "Tôi hiểu rằng tiền đặt cọc {deposit} không được hoàn lại sau khi đã trả. Phần còn lại trả khi nhận xe.",
+    cancelLink: "Tôi có thể hủy không?",
     reserve: "Gửi yêu cầu đặt xe",
     reserving: "Đang gửi…",
-    fine: "Bạn chưa phải trả gì. Chúng tôi giữ xe trong lúc xem yêu cầu và trả lời qua email, thường trong vài giờ. Khi đã xác nhận, chúng tôi sẽ liên hệ để thống nhất khoản tiền đặt cọc.",
+    fine: "Gửi yêu cầu miễn phí: bạn chưa phải trả gì. Chúng tôi giữ xe và trả lời qua email, thường trong vài giờ. Khi đã xác nhận, chúng tôi sẽ thống nhất khoản tiền đặt cọc với bạn.",
     security:
       "Khi nhận xe, bạn cũng để lại tiền thế chân: hộ chiếu, hoặc tiền mặt (300 US$ cho xe tay ga, 500 US$ cho xe côn tay). Bạn nhận lại khi trả xe.",
     help: "Có câu hỏi? Hỏi chúng tôi qua WhatsApp",
@@ -383,7 +390,8 @@ export const vi: Messages = {
     ROUTE_UNAVAILABLE:
       "Chuyến này hiện không đặt được trực tuyến. Gửi tin nhắn cho chúng tôi và chúng tôi sẽ sắp xếp.",
     MODEL_NOT_FOUND: "Xe này không còn nữa. Vui lòng chọn xe khác.",
-    ADD_ON_UNAVAILABLE: "Một tùy chọn không còn nữa. Vui lòng kiểm tra lại các tùy chọn và thử lại.",
+    ADD_ON_UNAVAILABLE:
+      "Một tùy chọn không còn nữa. Vui lòng kiểm tra lại các tùy chọn và thử lại.",
     TOO_MANY_ADD_ON:
       "Bạn đã chọn một tùy chọn nhiều hơn số chúng tôi có. Vui lòng kiểm tra lại và thử lại.",
     TOO_MANY_REQUESTS:
@@ -415,6 +423,7 @@ export const vi: Messages = {
     expiredText:
       "Thời gian giữ xe đã hết, và bạn chưa trả khoản nào. Nhắn tin cho chúng tôi để giải quyết, hoặc gửi yêu cầu mới.",
     cancelledTitle: "Đơn đặt xe này đã bị hủy",
-    cancelledText: "Nếu bạn không mong đợi điều này, hãy kiểm tra email hoặc nhắn tin cho chúng tôi.",
+    cancelledText:
+      "Nếu bạn không mong đợi điều này, hãy kiểm tra email hoặc nhắn tin cho chúng tôi.",
   },
 };

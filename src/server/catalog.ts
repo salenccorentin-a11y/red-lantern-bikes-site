@@ -22,6 +22,8 @@ export type CatalogModel = {
   image: string;
   /** One-way fee per destination; missing if none is set for this model. */
   oneWayFees: Partial<Record<OneWayCity, number>>;
+  /** Engine size, when known (added by the booking page). */
+  engineCc?: number;
 };
 
 export type CatalogAddOn = {

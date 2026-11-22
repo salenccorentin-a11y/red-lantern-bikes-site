@@ -174,7 +174,9 @@ async function BikeInfo({ lang, slug }: { lang: Locale; slug: string }) {
           {barBefore}
           {/* The price and "a day" stay together on one line. */}
           <span className={bike.nowrap}>
-            <b>{formatVnd(model.dailyRate)}</b>
+            {/* "From" the lowest price per day, on the longest rental (owner,
+                2026-11-22: it showed the 1–6 day price, the highest). */}
+            <b>{formatVnd(Math.min(...pricedTiers(model).map((tier) => tier.rate)))}</b>
             {barAfter}
           </span>
         </p>

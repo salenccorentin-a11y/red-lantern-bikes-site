@@ -10,9 +10,11 @@ const nextConfig: NextConfig = {
     qualities: [60, 75],
   },
   experimental: {
-    // Puts the (small) CSS in the page instead of a separate file, so phones on
-    // slow connections can paint sooner. Most visitors are first-time tourists.
-    inlineCss: true,
+    // CSS as separate files, cached across pages (was inlined until
+    // 2026-11-22). Inlining put every style, the booking page's included,
+    // into each page twice: home HTML 101 KB → 65 KB gzipped, /book 52 → 21 KB,
+    // for about 13 KB of CSS fetched once.
+    inlineCss: false,
     // Two root layouts (English, and /fr + /ko, each with its own <html lang>),
     // so the 404 for unknown addresses is its own page: app/global-not-found.tsx.
     globalNotFound: true,

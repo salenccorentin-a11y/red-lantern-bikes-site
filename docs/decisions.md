@@ -94,3 +94,19 @@ Not in use yet: see "Booking requests" above.
 ## Colours (21 November 2026)
 
 - **Egyptian blue, stone blue and a little scarlet** (owner's request, approved after a local test). Dark bands are deep Egyptian blue, panels and text links the Egyptian blue pigment, the light greys are stone blue, and scarlet stays for Book buttons, the route line and errors. The lantern's yellow star is kept. The staff area keeps its own plain palette. Values and contrast ratios are in `docs/design.md`.
+
+## Audit and critique fixes (22 November 2026)
+
+From the Impeccable audit (14/20) and critique (28/40); owner: booking page first, everything listed.
+
+- **Booking calendar**: on a one-way trip, drop-off days too early for the route's minimum are greyed out; "Pick up" and "Drop off" are separate halves, and "Drop off" changes only the end date. The too-short warning gives the earliest drop-off date.
+- **Dates in the address** (`?start=&end=`), so a reload keeps the trip.
+- **Details checked before sending**: missing name, email, phone or deposit tick show next to the field at once; the cursor goes to the first one.
+- **Deposit moment**: "Free request: nothing to pay now…" right above the send button; "non-refundable" once (tick box); "Can I cancel?" links to the FAQ; the licence rule is in the summary.
+- **Trip length**: booking options say "At least 12 days, most riders take 21 to 30 days" (Da Nang 7 / 10 to 14).
+- **Bike list**: two groups by engine size (110–125 cc, 150 cc and up), engine size in each row, "Most rented for one-way trips" on the XR150 when a one-way trip is chosen, "Only 1 left" in slate (no note at 2).
+- **Scarlet only for booking**: ticks, selected bike, card hover glow and FAQ arrows in Egyptian blue or slate; lit route cards in the star's gold. On phones the bottom bar steps aside when the summary is on screen.
+- **Hero**: words and booking bar visible at once; only the photo fades in (1.6 s).
+- **WhatsApp button**: not on the booking page (the summary has WhatsApp); room under the footer on phones.
+- **Bike pages**: "from" shows the lowest daily price (the longest tier), not the 1–6 day price.
+- **CSS as files, not inlined**: home 101 → 65 KB gzipped, /book 52 → 21 KB.
