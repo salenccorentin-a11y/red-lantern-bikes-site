@@ -15,9 +15,11 @@ import styles from "@/app/(en)/(public)/content.module.css";
 import { BikePhotos } from "@/components/BikePhotos";
 import photoStyles from "@/components/BikePhotos.module.css";
 import { SharedElement } from "@/components/motion/SharedElement";
+import { BreadcrumbData } from "@/components/StructuredData";
 import ui from "@/components/ui.module.css";
 import { WhatsAppLink } from "@/components/WhatsAppLink";
 import galleries from "@/content/bike-gallery.json";
+import { BUSINESS } from "@/content/business";
 import { BIKE_CONTENT, type BikeFacts } from "@/content/bikes";
 import { BIKE_MODELS } from "@/db/seed-data";
 import {
@@ -30,7 +32,7 @@ import {
   kindLabel,
   licenceText,
 } from "@/i18n";
-import { fill, OG_LOCALE, type Locale } from "@/i18n/config";
+import { fill, type Locale } from "@/i18n/config";
 import { languageAlternates, localize } from "@/i18n/paths";
 import { db } from "@/lib/db";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
@@ -39,6 +41,7 @@ import { getSettings } from "@/server/availability";
 import { PHOTO_PLACEHOLDER, studioPhoto } from "@/server/bike-photo";
 import { listModels, type PublicModel } from "@/server/fleet";
 import { modelOnSale } from "@/server/model-on-sale";
+import { shareMetadata } from "@/seo/share";
 
 export function bikeSlugs() {
   return Object.keys(BIKE_CONTENT).map((slug) => ({ slug }));
@@ -57,10 +60,11 @@ export async function bikeMetadata(lang: Locale, slug: string): Promise<Metadata
     title: { absolute: content.seoTitle },
     description: content.seoDescription,
     alternates: languageAlternates(lang, `/bikes/${slug}`),
-    openGraph: {
-      locale: OG_LOCALE[lang],
+    ...shareMetadata({
+      lang,
+      path: `/bikes/${slug}`,
       images: [{ url: studioPhoto(slug), width: 1200, height: 800 }],
-    },
+    }),
   };
 }
 
@@ -83,6 +87,13 @@ export async function BikeView({ lang, slug }: { lang: Locale; slug: string }) {
   const t = getMessages(lang).bike;
   return (
     <main className={bike.main}>
+      <BreadcrumbData
+        items={[
+          { name: BUSINESS.name, path: localize(lang, "/") },
+          { name: getMessages(lang).nav.bikes, path: localize(lang, "/bikes") },
+          { name, path: localize(lang, `/bikes/${slug}`) },
+        ]}
+      />
       <div className={styles.page}>
         <Link href={localize(lang, "/bikes")} className={styles.back}>
           {t.allBikes}

@@ -13,16 +13,18 @@ import { LocalBusinessData } from "@/components/LocalBusinessData";
 import { OneWayTrips } from "@/components/oneway/OneWayTrips";
 import { RiderWall } from "@/components/RiderWall";
 import { ShopMap } from "@/components/ShopMap";
+import { WebSiteData } from "@/components/StructuredData";
 import ui from "@/components/ui.module.css";
 import { ADDRESS_LINE, BUSINESS } from "@/content/business";
 import { getMessages, includedFor } from "@/i18n";
-import { fill, OG_LOCALE, type Locale } from "@/i18n/config";
+import { fill, type Locale } from "@/i18n/config";
 import { languageAlternates, localize } from "@/i18n/paths";
 import { db } from "@/lib/db";
 import { getSettings } from "@/server/availability";
 import { listModels } from "@/server/fleet";
 import karstRoad from "../../public/photos/karst-road.webp";
 import karstRoadPhone from "../../public/photos/karst-road-phone.webp";
+import { shareMetadata } from "@/seo/share";
 
 const styles = pageStyles;
 
@@ -33,7 +35,7 @@ export function homeMetadata(lang: Locale): Metadata {
     title: t.metaTitle,
     description: t.metaDescription,
     alternates: languageAlternates(lang, "/"),
-    openGraph: { locale: OG_LOCALE[lang] },
+    ...shareMetadata({ lang, path: "/" }),
   };
 }
 
@@ -47,6 +49,7 @@ export function HomeView({ lang }: { lang: Locale }) {
   return (
     <main>
       <LocalBusinessData />
+      <WebSiteData lang={lang} />
 
       {/* The whole road photo behind the words, and a booking bar in the
           middle: pick where you leave the bike and go straight to booking. */}

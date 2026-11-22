@@ -3,10 +3,12 @@ import { BlogList } from "@/components/BlogList";
 import { POSTS } from "@/content/blog";
 import { PageHeader } from "@/components/PageHeader";
 import styles from "../content.module.css";
+import { shareMetadata } from "@/seo/share";
 
 // Title kept from the old site.
 export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
+  ...shareMetadata({ path: "/blog" }),
   title: "Vietnam Motorbike Travel Guides & Tips | Red Lantern Bikes Blog",
   description:
     "Route guides, bike advice and practical tips for riding a motorbike in Vietnam, from the Red Lantern Bikes team in Saigon.",

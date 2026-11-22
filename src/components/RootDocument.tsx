@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
+import { DEFAULT_SHARE_IMAGE } from "@/seo/share";
 import { siteUrl } from "@/seo/site";
 import "@/app/globals.css";
 
@@ -29,8 +30,9 @@ export const rootMetadata: Metadata = {
     siteName: "Red Lantern Bikes",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/photos/karst-road.webp", width: 2000, height: 1500 }],
+    images: [DEFAULT_SHARE_IMAGE],
   },
+  twitter: { card: "summary_large_image", images: [DEFAULT_SHARE_IMAGE.url] },
 };
 
 export const rootViewport: Viewport = {

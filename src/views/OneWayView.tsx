@@ -11,7 +11,7 @@ import { OneWayTrips } from "@/components/oneway/OneWayTrips";
 import { PageHeader } from "@/components/PageHeader";
 import ui from "@/components/ui.module.css";
 import { cityName, getMessages, includedFor } from "@/i18n";
-import { fill, OG_LOCALE, type Locale } from "@/i18n/config";
+import { fill, type Locale } from "@/i18n/config";
 import { languageAlternates, localize } from "@/i18n/paths";
 import { db } from "@/lib/db";
 import { formatUsdApprox, formatVnd } from "@/lib/money";
@@ -19,6 +19,7 @@ import { getSettings } from "@/server/availability";
 import { listModels } from "@/server/fleet";
 import riverCrossing from "../../public/photos/river-crossing.webp";
 import versysDirtRoad from "../../public/photos/versys-dirt-road.webp";
+import { shareMetadata } from "@/seo/share";
 
 export function oneWayMetadata(lang: Locale): Metadata {
   const t = getMessages(lang).oneWayPage;
@@ -26,7 +27,7 @@ export function oneWayMetadata(lang: Locale): Metadata {
     title: t.metaTitle,
     description: t.metaDescription,
     alternates: languageAlternates(lang, "/one-way"),
-    openGraph: { locale: OG_LOCALE[lang] },
+    ...shareMetadata({ lang, path: "/one-way" }),
   };
 }
 

@@ -3,9 +3,11 @@ import Link from "next/link";
 import { ADDRESS_LINE, BUSINESS } from "@/content/business";
 import { PageHeader } from "@/components/PageHeader";
 import styles from "../content.module.css";
+import { shareMetadata } from "@/seo/share";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/terms" },
+  ...shareMetadata({ path: "/terms" }),
   // Title kept from the old /terms page.
   title: "Terms & Conditions | Red Lantern Bikes",
   description: "The terms for renting a motorbike from Red Lantern Bikes in Saigon.",
@@ -88,18 +90,18 @@ export default function TermsPage() {
             <li>
               Optional full coverage insurance, added when you book, is charged per day by bike
               size. It covers accidents on the road, flat tyres, and mechanical problems that come
-              from the bike, unless the rider caused them. It does not cover theft, police matters, floods,
-              damage to third parties, or health problems.
+              from the bike, unless the rider caused them. It does not cover theft, police matters,
+              floods, damage to third parties, or health problems.
             </li>
             <li>
-              The insurance only applies if every oil change during the rental is done properly
-              and, each time, you send us a photo of the mechanic doing it and a photo of the full
+              The insurance only applies if every oil change during the rental is done properly and,
+              each time, you send us a photo of the mechanic doing it and a photo of the full
               odometer.
             </li>
             <li>
               It also only applies if you contact us before any repair. We do not pay for a repair
-              if you contact us once a mechanic has already started on the bike, or after the
-              repair is done.
+              if you contact us once a mechanic has already started on the bike, or after the repair
+              is done.
             </li>
             <li>
               Without insurance, we cover engine failures only. Theft, accidents and all other

@@ -9,12 +9,13 @@ import cardStyles from "@/components/BikeCard.module.css";
 import { PageHeader } from "@/components/PageHeader";
 import ui from "@/components/ui.module.css";
 import { getMessages } from "@/i18n";
-import { OG_LOCALE, type Locale } from "@/i18n/config";
+import { type Locale } from "@/i18n/config";
 import { languageAlternates } from "@/i18n/paths";
 import { db } from "@/lib/db";
 import { getSettings } from "@/server/availability";
 import { listModels } from "@/server/fleet";
 import luggageReady from "../../public/photos/luggage-ready.webp";
+import { shareMetadata } from "@/seo/share";
 
 export function bikesMetadata(lang: Locale): Metadata {
   const t = getMessages(lang).bikes;
@@ -23,7 +24,7 @@ export function bikesMetadata(lang: Locale): Metadata {
     title: t.metaTitle,
     description: t.metaDescription,
     alternates: languageAlternates(lang, "/bikes"),
-    openGraph: { locale: OG_LOCALE[lang] },
+    ...shareMetadata({ lang, path: "/bikes" }),
   };
 }
 

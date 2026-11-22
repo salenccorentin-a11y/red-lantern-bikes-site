@@ -7,11 +7,12 @@ import styles from "@/app/(en)/(booking)/book/book.module.css";
 import { BookingForm } from "@/app/(en)/(booking)/book/BookingForm";
 import { PageHeader } from "@/components/PageHeader";
 import { addOnText, getMessages, kindLabel } from "@/i18n";
-import { OG_LOCALE, type Locale } from "@/i18n/config";
+import { type Locale } from "@/i18n/config";
 import { languageAlternates, localize } from "@/i18n/paths";
 import { parseIsoDate, todayInSaigon } from "@/lib/dates";
 import { db } from "@/lib/db";
 import { loadCatalog } from "@/server/catalog";
+import { shareMetadata } from "@/seo/share";
 
 type Query = Promise<Record<string, string | string[] | undefined>>;
 
@@ -21,7 +22,7 @@ export function bookMetadata(lang: Locale): Metadata {
     title: t.metaTitle,
     description: t.metaDescription,
     alternates: languageAlternates(lang, "/book"),
-    openGraph: { locale: OG_LOCALE[lang] },
+    ...shareMetadata({ lang, path: "/book" }),
   };
 }
 

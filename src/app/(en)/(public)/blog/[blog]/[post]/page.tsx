@@ -4,8 +4,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
 import { ROUTE_GUIDE_POSTS, RouteGuide } from "@/components/blog/RouteGuide";
+import { BlogPostingData, BreadcrumbData } from "@/components/StructuredData";
+import { BUSINESS } from "@/content/business";
 import { POSTS, findPost, fullTitle, type BlogPost } from "@/content/blog";
 import { formatDisplayDate } from "@/lib/dates";
+import { shareMetadata } from "@/seo/share";
 import styles from "../../../content.module.css";
 import blogStyles from "./post.module.css";
 
@@ -26,7 +29,11 @@ export async function generateMetadata(props: PageProps<"/blog/[blog]/[post]">):
     title: { absolute: fullTitle(found.metaTitle) },
     description: found.metaDescription ?? undefined,
     alternates: { canonical: found.path },
-    openGraph: found.cover ? { images: [found.cover] } : undefined,
+    ...shareMetadata({
+      path: found.path,
+      ...(found.cover && { images: [{ url: found.cover }] }),
+      article: { publishedTime: found.date ?? undefined },
+    }),
   };
 }
 
@@ -40,6 +47,21 @@ export default async function BlogPostPage(props: PageProps<"/blog/[blog]/[post]
   return (
     <ReadingProgress trip={tripFor(found)}>
       <main className={styles.page}>
+        <BlogPostingData
+          title={found.title}
+          description={found.metaDescription ?? null}
+          path={found.path}
+          image={found.cover ?? null}
+          date={found.date ?? null}
+        />
+        <BreadcrumbData
+          items={[
+            { name: BUSINESS.name, path: "/" },
+            { name: "Blog", path: "/blog" },
+            ...(found.category ? [{ name: found.category, path: `/blog/${found.blogSlug}` }] : []),
+            { name: found.title, path: found.path },
+          ]}
+        />
         <article className={blogStyles.article}>
           <p>
             <Link href="/blog" className={styles.back}>

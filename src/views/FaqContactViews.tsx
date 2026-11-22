@@ -10,8 +10,9 @@ import { PageHeader } from "@/components/PageHeader";
 import ui from "@/components/ui.module.css";
 import { ADDRESS_LINE, BUSINESS, mapsLink, whatsappLink } from "@/content/business";
 import { faqFor, getMessages, hoursFor } from "@/i18n";
-import { fill, OG_LOCALE, type Locale } from "@/i18n/config";
+import { fill, type Locale } from "@/i18n/config";
 import { languageAlternates, localize } from "@/i18n/paths";
+import { shareMetadata } from "@/seo/share";
 
 export function faqMetadata(lang: Locale): Metadata {
   const t = getMessages(lang).faq;
@@ -19,7 +20,7 @@ export function faqMetadata(lang: Locale): Metadata {
     title: t.metaTitle,
     description: t.metaDescription,
     alternates: languageAlternates(lang, "/faq"),
-    openGraph: { locale: OG_LOCALE[lang] },
+    ...shareMetadata({ lang, path: "/faq" }),
   };
 }
 
@@ -74,7 +75,7 @@ export function contactMetadata(lang: Locale): Metadata {
     title: t.metaTitle,
     description: fill(t.metaDescription, { address: ADDRESS_LINE }),
     alternates: languageAlternates(lang, "/contact"),
-    openGraph: { locale: OG_LOCALE[lang] },
+    ...shareMetadata({ lang, path: "/contact" }),
   };
 }
 

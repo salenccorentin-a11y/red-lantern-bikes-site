@@ -3,9 +3,11 @@ import Link from "next/link";
 import { ADDRESS_LINE, BUSINESS } from "@/content/business";
 import { PageHeader } from "@/components/PageHeader";
 import styles from "../content.module.css";
+import { shareMetadata } from "@/seo/share";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
+  ...shareMetadata({ path: "/privacy" }),
   title: "Privacy | Red Lantern Bikes",
   description:
     "What personal data Red Lantern Bikes collects, why, and how to contact us about it.",
