@@ -24,7 +24,7 @@ import { parseIsoDate } from "@/lib/dates";
 import styles from "./DateRangePicker.module.css";
 
 /** The first day of the week on each language's calendars: 0 Sunday, 1 Monday. */
-const WEEK_STARTS_ON: Record<Locale, 0 | 1> = { en: 1, fr: 1, ko: 0 };
+const WEEK_STARTS_ON: Record<Locale, 0 | 1> = { en: 1, fr: 1, ko: 0, vi: 1 };
 /** How far ahead the calendar goes. */
 const MONTHS_AHEAD = 24;
 

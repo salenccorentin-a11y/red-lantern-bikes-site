@@ -14,7 +14,7 @@ import "@/app/globals.css";
 // downloaded up front; the Vietnamese letters still load when a page uses them.
 const beVietnam = Be_Vietnam_Pro({
   variable: "--font-sans",
-  subsets: ["latin"],
+  subsets: ["latin", "vietnamese"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });

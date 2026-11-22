@@ -1,5 +1,5 @@
 // Picks wording and content for a language. English content lives in
-// src/content (the reference); French and Korean in src/i18n/content.
+// src/content (the reference); French, Korean and Vietnamese in src/i18n/content.
 //
 // Server code only: interactive (client) components receive the wording they
 // need as props, so browsers never download the other languages.
@@ -19,14 +19,20 @@ import { formatDisplayDate, formatSaigonDateTime } from "@/lib/dates";
 import { fill, type Locale } from "./config";
 import { frContent } from "./content/fr";
 import { koContent } from "./content/ko";
+import { viContent } from "./content/vi";
 import type { TranslatedContent } from "./content/types";
 import { en, type Messages } from "./messages/en";
 import { fr } from "./messages/fr";
 import { ko } from "./messages/ko";
+import { vi } from "./messages/vi";
 import { localize } from "./paths";
 
-const MESSAGES: Record<Locale, Messages> = { en, fr, ko };
-const CONTENT: Record<Exclude<Locale, "en">, TranslatedContent> = { fr: frContent, ko: koContent };
+const MESSAGES: Record<Locale, Messages> = { en, fr, ko, vi };
+const CONTENT: Record<Exclude<Locale, "en">, TranslatedContent> = {
+  fr: frContent,
+  ko: koContent,
+  vi: viContent,
+};
 
 export function getMessages(lang: Locale): Messages {
   return MESSAGES[lang];

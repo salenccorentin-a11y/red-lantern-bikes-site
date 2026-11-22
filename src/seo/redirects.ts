@@ -4,7 +4,8 @@
 //
 // Addresses that stay the same (/, /terms, /blog and its posts) need no rule.
 // Every rule is repeated under the old language prefixes. Old French (/fr) and
-// Korean (/ko_KR) addresses go to the new French (/fr) and Korean (/ko) page
+// Korean (/ko_KR) and Vietnamese (/vi) addresses go to the new French (/fr),
+// Korean (/ko) and Vietnamese (/vi) page
 // where one exists; the other languages go to the English page. Always one hop.
 
 import { BUSINESS } from "../content/business";
@@ -14,11 +15,12 @@ import { localize } from "../i18n/paths";
 type Redirect = { source: string; destination: string; statusCode: 301 };
 
 /** Old languages with no version on the new site: everything goes to English. */
-const LANGS = "vi|nl|ja|zh_CN";
+const LANGS = "nl|ja|zh_CN";
 /** Old language prefix → the new site's language. */
 const KEPT_LANGS: [string, Locale][] = [
   ["fr", "fr"],
   ["ko_KR", "ko"],
+  ["vi", "vi"],
 ];
 const OLD_PREFIXES = `${LANGS}|${KEPT_LANGS.map(([prefix]) => prefix).join("|")}`;
 
@@ -108,7 +110,7 @@ export function oldSiteRedirects(): Redirect[] {
 
   // The tour pages were removed on 16 Nov 2026 (no guided tours, only
   // self-guided trips). Links to them land on the one-way page instead.
-  const removedTours: [string, string][] = (["en", "fr", "ko"] as Locale[]).flatMap(
+  const removedTours: [string, string][] = (["en", "fr", "ko", "vi"] as Locale[]).flatMap(
     (lang): [string, string][] => {
       const prefix = lang === "en" ? "" : `/${lang}`;
       return [

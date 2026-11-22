@@ -31,7 +31,7 @@ export const bookingInput = z.object({
     error: "Please confirm you understand the booking deposit is non-refundable.",
   }),
   // The page's language, for messages and where to go next.
-  lang: z.enum(["en", "fr", "ko"]).default("en"),
+  lang: z.enum(["en", "fr", "ko", "vi"]).default("en"),
   // Left empty by people; filled in by spam bots that complete every field.
   website: z.string().max(0).optional(),
 });

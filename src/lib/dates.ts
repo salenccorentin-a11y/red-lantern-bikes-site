@@ -38,7 +38,7 @@ export function todayInSaigon(now: Date = new Date()): string {
 }
 
 /** Date formats for the site's languages (see src/i18n/config.ts). */
-const DATE_LOCALES = { en: "en-GB", fr: "fr-FR", ko: "ko-KR" } as const;
+const DATE_LOCALES = { en: "en-GB", fr: "fr-FR", ko: "ko-KR", vi: "vi-VN" } as const;
 type DateLanguage = keyof typeof DATE_LOCALES;
 
 /** "2026-11-01" → "Sun 1 Nov 2026" (or the same in French or Korean), for customers. */

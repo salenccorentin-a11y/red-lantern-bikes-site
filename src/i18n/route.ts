@@ -3,7 +3,7 @@
 import { notFound } from "next/navigation";
 import { isLocale, PREFIXED_LOCALES, type Locale } from "./config";
 
-/** /fr/… and /ko/… only: English pages live at their original addresses. */
+/** /fr/…, /ko/… and /vi/… only: English pages live at their original addresses. */
 export async function langFrom(params: Promise<{ lang: string }>): Promise<Locale> {
   const { lang } = await params;
   if (!isLocale(lang) || lang === "en") notFound();
@@ -12,7 +12,7 @@ export async function langFrom(params: Promise<{ lang: string }>): Promise<Local
 
 /**
  * For the [lang] root layout, which must always draw a page: the language
- * from the address, or English when it is not /fr or /ko. The pages below
+ * from the address, or English when it is not /fr, /ko or /vi. The pages below
  * still call langFrom, so an unknown address (/nope, /xx/book) becomes a 404
  * drawn inside the site's header and footer (app/[lang]/not-found.tsx).
  */

@@ -7,20 +7,14 @@ import styles from "./OneWayTrips.module.css";
 // are downloaded only on pages with this section, and only once the visitor
 // starts scrolling, so every page first loads exactly as before.
 //
-// Two steps, one scroll each (owner, 2026-11-21: "just 2 scrolls"): the first
-// draws the road from Saigon to Da Nang, the second from Da Nang to Hanoi.
-// Each step plays as a short animation, not tied to how far the finger moves.
-// - Wide screens: the section is pinned by CSS (position: sticky in a tall
-//   track, so nothing jumps when this script arrives) and the page settles
-//   on each step (snap), so one scroll moves exactly one step.
-// - Phones: no pinning; step one plays as the map comes up the screen, step
-//   two once it reaches the middle.
+// Two quick steps as the map comes up the screen: the first draws the road
+// from Saigon to Da Nang, the second from Da Nang to Hanoi. The page never
+// stops or snaps: the visitor scrolls on at their own speed (owner,
+// 2026-11-22: the slow line "slows down the customer when scrolling down").
 // - Reduced motion: this does nothing, and the finished map stays as it is.
 
-const WIDE = "(min-width: 900px) and (min-height: 600px)";
-// The opposite of WIDE. GSAP only runs the setup when one condition is true,
-// so phones need a condition of their own.
-const SMALL = "(max-width: 899px), (max-height: 599px)";
+// GSAP only runs the setup when one condition is true.
+const MOTION = "(prefers-reduced-motion: no-preference)";
 const REDUCE = "(prefers-reduced-motion: reduce)";
 
 export function OneWayScroll() {
@@ -80,10 +74,9 @@ function start(section: HTMLElement, gsap: Gsap, ScrollTrigger: ScrollTriggerTyp
 
   const roads = section.querySelectorAll<SVGPathElement>("[data-road]");
   const ghost = section.querySelector<SVGPathElement>("[data-road-ghost]");
-  const track = section.querySelector<HTMLElement>("[data-track]");
   const mapWrap = section.querySelector<HTMLElement>("[data-map]");
   const lit = section.querySelectorAll<Element>("[data-place]");
-  if (!ghost || !track || !mapWrap) return;
+  if (!ghost || !mapWrap) return;
 
   // How far along the road each place is (0 = Saigon, 1 = Hanoi).
   const at = placesAlong(ghost, section);
@@ -106,7 +99,7 @@ function start(section: HTMLElement, gsap: Gsap, ScrollTrigger: ScrollTriggerTyp
     current = step;
     gsap.killTweensOf(road);
     if (animate) {
-      gsap.to(road, { drawn: steps[step], duration: 1.1, ease: "power2.inOut", onUpdate: render });
+      gsap.to(road, { drawn: steps[step], duration: 0.55, ease: "power2.out", onUpdate: render });
     } else {
       road.drawn = steps[step];
       render();
@@ -114,50 +107,27 @@ function start(section: HTMLElement, gsap: Gsap, ScrollTrigger: ScrollTriggerTyp
   };
 
   const mm = gsap.matchMedia();
-  mm.add({ wide: WIDE, small: SMALL, reduce: REDUCE }, (context) => {
-    const { wide, reduce } = context.conditions as { wide: boolean; reduce: boolean };
+  mm.add({ motion: MOTION, reduce: REDUCE }, (context) => {
+    const { reduce } = context.conditions as { reduce: boolean };
     if (reduce) return;
 
     current = -1;
-    const triggers: ScrollTrigger[] = [];
-    if (wide) {
-      // Through the tall track, while the section is pinned: the first half
-      // is step one, the second half step two, and the page settles on 0,
-      // ½ or 1, always on the next one in the scroll's direction.
-      const stepAt = (progress: number) => (progress < 0.25 ? 0 : progress < 0.75 ? 1 : 2);
-      const trigger = ScrollTrigger.create({
-        trigger: track,
-        start: "top top",
-        end: "bottom bottom",
-        snap: {
-          snapTo: [0, 0.5, 1],
-          directional: true,
-          duration: { min: 0.25, max: 0.6 },
-          delay: 0.05,
-          ease: "power2.out",
-        },
-        onUpdate: (self) => goTo(stepAt(self.progress)),
-      });
-      triggers.push(trigger);
-      goTo(stepAt(trigger.progress), false);
-    } else {
-      // Phones: step one when the map's top passes 75% of the screen, step
-      // two when its middle reaches the middle. Scrolling back undoes them.
-      const one = ScrollTrigger.create({
-        trigger: mapWrap,
-        start: "top 75%",
-        onEnter: () => goTo(Math.max(current, 1)),
-        onLeaveBack: () => goTo(0),
-      });
-      const two = ScrollTrigger.create({
-        trigger: mapWrap,
-        start: "center 55%",
-        onEnter: () => goTo(2),
-        onLeaveBack: () => goTo(1),
-      });
-      triggers.push(one, two);
-      goTo(two.progress > 0 || two.isActive ? 2 : one.progress > 0 || one.isActive ? 1 : 0, false);
-    }
+    // Step one when the map's top passes 80% of the screen, step two when
+    // its middle passes 60%. Scrolling back undoes them.
+    const one = ScrollTrigger.create({
+      trigger: mapWrap,
+      start: "top 80%",
+      onEnter: () => goTo(Math.max(current, 1)),
+      onLeaveBack: () => goTo(0),
+    });
+    const two = ScrollTrigger.create({
+      trigger: mapWrap,
+      start: "center 60%",
+      onEnter: () => goTo(2),
+      onLeaveBack: () => goTo(1),
+    });
+    const triggers = [one, two];
+    goTo(two.progress > 0 || two.isActive ? 2 : one.progress > 0 || one.isActive ? 1 : 0, false);
 
     // If reduced motion is switched on, or the page changes: show it all.
     return () => {
