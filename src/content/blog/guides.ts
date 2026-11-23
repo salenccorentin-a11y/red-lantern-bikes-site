@@ -38,7 +38,7 @@ export const GUIDES: Guide[] = [
     metaTitle: "Best Time to Ride Vietnam by Motorbike | Red Lantern Bikes",
     metaDescription:
       "When to ride the South, the central coast and the North of Vietnam by motorbike, with a month-by-month season calendar, and when to set off on a Saigon to Hanoi trip.",
-    cover: "/photos/beach.webp",
+    cover: "/photos/versys-dirt-road.webp",
     trip: { href: "/one-way", label: "See one-way trips" },
     html: `<p class="lead">In January you can be sweating in Saigon while riders in Ha Giang pull on every layer they packed. Vietnam is long and thin, and its three regions keep their own seasons. There's no best month for the whole country, but there's a best month for where you're going.</p>
 <div class="answer">
@@ -166,7 +166,7 @@ export const GUIDES: Guide[] = [
     metaTitle: "The Ha Giang Loop by Motorbike – Guide | Red Lantern Bikes",
     metaDescription:
       "The Ha Giang loop in Vietnam's far north: Heaven's Gate, the Dong Van karst plateau and the Ma Pi Leng pass. Route, best season, safety and how to fit it into a Saigon to Hanoi ride.",
-    cover: "/photos/karst-road.webp",
+    cover: "/photos/river-crossing.webp",
     trip: { href: "/contact", label: "Ask us about this trip" },
     html: `<p>The Ha Giang loop is the most spectacular ride in Vietnam: a few days of switchbacks, limestone peaks and deep river canyons right up against the Chinese border. It's a loop of roughly 350 kilometres from Ha Giang town, and most riders take three or four days.</p>
 <p>Ha Giang is about 300 km north of Hanoi, past the end of our usual Saigon to Hanoi route. If you'd like to add it to a long ride north, message us and we'll help you plan the dates, the route and the drop-off.</p>
