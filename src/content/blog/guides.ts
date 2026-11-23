@@ -31,6 +31,64 @@ const guide = (g: Omit<Guide, "blogSlug" | "path" | "category">): Guide => ({
 
 export const GUIDES: Guide[] = [
   guide({
+    postSlug: "best-time-to-ride-vietnam-by-motorbike",
+    title: "The Best Time to Ride Vietnam by Motorbike",
+    subtitle: null,
+    date: "2026-11-23",
+    metaTitle: "Best Time to Ride Vietnam by Motorbike | Red Lantern Bikes",
+    metaDescription:
+      "When to ride the South, the central coast and the North of Vietnam by motorbike, with a month-by-month season calendar, and when to set off on a Saigon to Hanoi trip.",
+    cover: "/photos/beach.webp",
+    trip: { href: "/one-way", label: "See one-way trips" },
+    html: `<p class="lead">In January you can be sweating in Saigon while riders in Ha Giang pull on every layer they packed. Vietnam is long and thin, and its three regions keep their own seasons. There's no best month for the whole country, but there's a best month for where you're going.</p>
+<div class="answer">
+<p><strong>The short answer</strong></p>
+<ul>
+<li>The South: December to April</li>
+<li>The central coast: February to August</li>
+<li>The North: October, November, March and April</li>
+<li>Saigon to Hanoi in one trip: leave Saigon between late December and February</li>
+</ul>
+</div>
+<h2>Vietnam's seasons at a glance</h2>
+<div class="seasons">
+<table>
+<thead><tr><th></th><th>J</th><th>F</th><th>M</th><th>A</th><th>M</th><th>J</th><th>J</th><th>A</th><th>S</th><th>O</th><th>N</th><th>D</th></tr></thead>
+<tbody>
+<tr><th>South</th><td class="b">Best</td><td class="b">Best</td><td class="b">Best</td><td class="b">Best</td><td class="o">Mixed</td><td class="r">Rainy</td><td class="r">Rainy</td><td class="r">Rainy</td><td class="r">Rainy</td><td class="r">Rainy</td><td class="o">Mixed</td><td class="b">Best</td></tr>
+<tr><th>Centre</th><td class="o">Mixed</td><td class="b">Best</td><td class="b">Best</td><td class="b">Best</td><td class="b">Best</td><td class="o">Very hot</td><td class="o">Very hot</td><td class="o">Very hot</td><td class="o">Mixed</td><td class="r">Rainy</td><td class="r">Rainy</td><td class="r">Rainy</td></tr>
+<tr><th>North</th><td class="c">Cold</td><td class="c">Cold</td><td class="b">Best</td><td class="b">Best</td><td class="o">Mixed</td><td class="r">Rainy</td><td class="r">Rainy</td><td class="r">Rainy</td><td class="o">Mixed</td><td class="b">Best</td><td class="b">Best</td><td class="c">Cold</td></tr>
+</tbody>
+</table>
+</div>
+<ul class="legend"><li class="b">Best</li><li class="o">Mixed or very hot</li><li class="r">Rainy</li><li class="c">Cold</li></ul>
+<p class="small">A rough guide: the weather changes from year to year.</p>
+<h2>The South: Saigon, the Mekong Delta, Da Lat</h2>
+<p>December to April is the dry season, sunny every day and hottest in March and April. From May to November it's the rainy season: most days bring a short, heavy shower in the afternoon, and then it clears. Da Lat is up in the highlands, so it's cool all year and cold at night. Bring a warm layer even in the dry season.</p>
+<h2>The central coast: Nha Trang, Hoi An, Hue</h2>
+<p>The centre gets its rain later than the rest of the country, from about September to December, heaviest in October and November. That's also when storms and floods hit the coast, so check the forecast before you ride a mountain pass. From February to August it's mostly dry, and very hot in the summer months. The Hai Van Pass between Da Nang and Hue is often in the clouds in winter.</p>
+<figure>
+<img src="/photos/mountain-sunset.webp" alt="A rider on a loaded adventure motorbike above a valley at sunset" width="1500" height="2000" loading="lazy" decoding="async">
+<figcaption>Dry season evenings in the hills.</figcaption>
+</figure>
+<h2>The North: Hanoi, Ninh Binh, Ha Giang</h2>
+<p>October and November are the favourite months, with clear skies and the harvest in the mountains. From December to February it's cold and drizzly in Hanoi and colder in the mountains, with fog on the passes. March and April bring spring, the best time to arrive from the south. From May to September it's hot and wet, and heavy rain in the mountains brings landslides.</p>
+<p>More on the far north in our <a href="/blog/news-2/ha-giang-loop-by-motorbike">Ha Giang loop guide</a>.</p>
+<figure>
+<img src="/photos/river-crossing.webp" alt="A rider loading a dirt bike onto a small river ferry on a misty morning" width="1200" height="1600" loading="lazy" decoding="async">
+<figcaption>Cool, misty mornings in the mountains.</figcaption>
+</figure>
+<h2>When to leave Saigon for Hanoi</h2>
+<p>Most riders take 21 to 30 days from Saigon to Hanoi. Leaving Saigon between late December and February usually gets you to the central coast after the rains and to the North as spring starts.</p>
+<p>Leave in November and you'll probably meet rain on the central coast, and the North will be getting cold when you arrive. Pack a warm jacket and give yourself a few spare days.</p>
+<blockquote><p>"In total, I covered 3,100 km along incredible coastal roads and through the mountains inland."</p><cite>Антон Старовойтов, Google review</cite></blockquote>
+<div class="tip"><p>Watch out for Tết, the Lunar New Year, in late January or February. Many shops and guesthouses close for a few days, buses and trains are full, and prices go up. Plan to stay put somewhere nice for those days.</p></div>
+<p>Our <a href="/one-way">one-way trips</a> page has the route and the drop-offs in Da Nang and Hanoi. For the ride itself, see our <a href="/blog/news-2/ho-chi-minh-city-to-hanoi-by-motorbike-the-complete-route-guide-2026-3">Saigon to Hanoi route guide</a>.</p>
+<h2>Pack for every month</h2>
+<ul class="chips"><li>A rain poncho that fits over your backpack</li><li>A warm layer for Da Lat, the passes and the North</li><li>Sunscreen</li><li>A buff for the dust</li></ul>
+<p>Every rental comes with a helmet, a phone holder, a luggage rack and straps, and our online map of the best roads to ride in Vietnam. Message us on WhatsApp with your dates and we'll help you pick a bike.</p>`,
+  }),
+  guide({
     postSlug: "saigon-to-da-nang-by-motorbike-route-guide",
     title: "Saigon to Da Nang by Motorbike: Route Guide",
     subtitle: null,
