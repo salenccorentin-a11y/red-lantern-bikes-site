@@ -15,6 +15,7 @@ import {
 } from "@/lib/dates";
 import { db } from "@/lib/db";
 import { releaseExpiredHolds } from "@/server/bookings";
+import { oilDueToday } from "@/server/oil";
 import {
   loadCalendar,
   todaysMovements,
@@ -47,10 +48,11 @@ async function Calendar({
 
   // Requests that ran out unanswered shouldn't clutter the calendar.
   await releaseExpiredHolds(db);
-  const [bikes, movements, requests] = await Promise.all([
+  const [bikes, movements, requests, oilDue] = await Promise.all([
     loadCalendar(db, from, DAYS),
     todaysMovements(db, today),
     waitingRequests(db),
+    oilDueToday(db),
   ]);
   const days = windowDays(from, DAYS);
   const weekBack = toIsoDate(addDays(from, -7));
@@ -79,6 +81,25 @@ async function Calendar({
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {oilDue.length > 0 && (
+        <section className={staffStyles.panel}>
+          <h2>Oil reminders due today ({oilDue.length})</h2>
+          <ul className={styles.movements}>
+            {oilDue.map((r) => (
+              <li key={r.id}>
+                <Link href={`/staff/bookings/${r.id}`}>
+                  <b>{r.customerName}</b> · {r.bikeModel.name} {r.bike?.plate ?? ""} · {r.daysSince}{" "}
+                  days since {r.oilChangedOn ? "oil change" : "pick-up"}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p>
+            <Link href="/staff/oil">Send them from the Oil page →</Link>
+          </p>
         </section>
       )}
 

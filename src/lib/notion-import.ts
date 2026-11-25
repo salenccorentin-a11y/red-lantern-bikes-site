@@ -25,6 +25,13 @@ export type NotionRental = {
   insurance?: string | null;
   helmet?: string | null;
   transfer?: string | null;
+  /** Notion's "Notes" and "Problems on the way". */
+  notes?: string | null;
+  problems?: string | null;
+  /** Oil columns: "YYYY-MM-DD" dates and a km figure. */
+  oilChangedOn?: string | null;
+  kmSinceChange?: number | null;
+  lastReminder?: string | null;
 };
 
 // Words in Notion's "Bike" column → the site's model slugs. Order matters:
@@ -89,23 +96,29 @@ export function dropoffFor(destination: string | null): { city: City; other?: st
   return { city: "SAIGON", other: destination!.trim() };
 }
 
-/** The first line of every imported booking's staff note: how a re-run finds it. */
-export function importMark(url: string, unit: number, units: number): string {
-  return `Imported from Notion ${url}${units > 1 ? ` (bike ${unit} of ${units})` : ""}`;
+/** A Notion text cell, tidied: empty or "-" means nothing. */
+export function cell(value: string | null | undefined): string | null {
+  const v = value?.trim();
+  return v && v !== "-" ? v : null;
 }
 
-/** The staff note: the mark, then Notion's own words for the money and extras. */
-export function staffNote(row: NotionRental, unit: number, units: number, otherPlace?: string) {
-  const fields: [string, string | null | undefined][] = [
-    ["Drop-off", otherPlace],
-    ["Paid", row.paid],
-    ["Deposit", row.deposit],
-    ["Insurance", row.insurance],
-    ["Helmet", row.helmet],
-    ["Transfer", row.transfer],
-  ];
-  const lines = fields
-    .filter(([, v]) => v && v.trim() !== "" && v.trim() !== "-")
-    .map(([k, v]) => `${k}: ${v!.trim()}`);
-  return [importMark(row.url, unit, units), `Notion bike: ${row.bike}`, ...lines].join("\n");
+/** The rental record columns, word for word from Notion. */
+export function recordFields(row: NotionRental) {
+  return {
+    paidNote: cell(row.paid),
+    transferNote: cell(row.transfer),
+    depositNote: cell(row.deposit),
+    insuranceNote: cell(row.insurance),
+    helmetNote: cell(row.helmet),
+    problemsNote: cell(row.problems),
+  };
+}
+
+/**
+ * The staff note of a booking from Notion: the real drop-off place when the
+ * site can't book it (Nha Trang…), then Notion's own notes.
+ */
+export function notionNote(row: NotionRental, otherPlace?: string): string | null {
+  const lines = [otherPlace ? `Drop-off: ${otherPlace}` : null, cell(row.notes)].filter(Boolean);
+  return lines.length > 0 ? lines.join("\n") : null;
 }

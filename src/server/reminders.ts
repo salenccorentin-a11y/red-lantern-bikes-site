@@ -2,7 +2,9 @@
 // - remind the shop about booking requests it hasn't answered, a few hours
 //   before their hold runs out,
 // - release requests whose hold has run out, and tell those customers,
-// - remind customers the day before pick-up of what to bring.
+// - remind customers the day before pick-up of what to bring,
+// - link new bookings to customer records (src/server/customers.ts),
+// - send the shop its 08:00 list (src/server/morning.ts).
 //
 // Each reminder is claimed in the database before it's sent (its "sent at"
 // is set only if still empty), so two runs at once can't send it twice. If
@@ -23,6 +25,8 @@ import { releaseExpiredHolds } from "@/server/bookings";
 import { sendEmail, type Email } from "@/server/email";
 import { reportError } from "@/server/report-error";
 import { pickupReminderEmail } from "@/server/emails/pickup-reminder";
+import { linkBookingsToCustomers } from "@/server/customers";
+import { sendMorningList } from "@/server/morning";
 
 /** Remind the shop when this many hours (or fewer) of a request's hold are left. */
 export const HOLD_REMINDER_HOURS = 3;
@@ -200,5 +204,14 @@ export async function runScheduledJobs(db: PrismaClient, now: Date = new Date())
   const released = await releaseExpiredHolds(db, now);
   const expiryNotices = await sendExpiryNotices(db, now);
   const pickupReminders = await sendPickupReminders(db, now);
-  return { answerReminders, released, expiryNotices, pickupReminders };
+  const customersLinked = await linkBookingsToCustomers(db);
+  const morningList = await sendMorningList(db, now, saigonHour(now));
+  return {
+    answerReminders,
+    released,
+    expiryNotices,
+    pickupReminders,
+    customersLinked,
+    morningList,
+  };
 }

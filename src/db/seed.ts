@@ -26,7 +26,7 @@ export async function seed(db: PrismaClient) {
   for (const [i, { units, oneWayFee, ...model }] of BIKE_MODELS.entries()) {
     const saved = await db.bikeModel.upsert({
       where: { slug: model.slug },
-      create: { ...model, sortOrder: i },
+      create: { ...model, sortOrder: i, oilIntervalKm: oilIntervalKm(model.slug) },
       update: {},
     });
 
@@ -63,4 +63,9 @@ export async function seed(db: PrismaClient) {
     }
   }
   await db.addOn.updateMany({ where: { slug: { in: RETIRED_ADD_ONS } }, data: { active: false } });
+}
+
+/** Shop oil rule (owner, 2026-11-24): Motul every 2,500 km on these two, else 800 km. */
+function oilIntervalKm(slug: string) {
+  return slug === "honda-cb150x" || slug === "kawasaki-versys-x300" ? 2500 : 800;
 }

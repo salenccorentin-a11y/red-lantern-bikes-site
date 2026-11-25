@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { dropoffFor, parseBikes, staffNote } from "@/lib/notion-import";
+import { dropoffFor, notionNote, parseBikes, recordFields } from "@/lib/notion-import";
 
 describe("parseBikes", () => {
   it("reads one bike", () => {
@@ -45,34 +45,36 @@ describe("dropoffFor", () => {
   });
 });
 
-describe("staffNote", () => {
-  it("keeps Notion's money columns word for word and skips empty ones", () => {
-    const note = staffNote(
-      {
-        url: "https://app.notion.com/abc",
-        name: "Anita",
-        status: "Upcoming",
-        bike: "2 Wave",
-        start: "2027-05-03",
-        end: "2027-05-27",
-        destination: "Ha Noi",
-        paid: "225$x2",
-        deposit: "120e Coco",
-        insurance: "Yes 75$x2",
-        helmet: null,
-        transfer: "-",
-      },
-      2,
-      2,
-    );
-    expect(note).toBe(
-      [
-        "Imported from Notion https://app.notion.com/abc (bike 2 of 2)",
-        "Notion bike: 2 Wave",
-        "Paid: 225$x2",
-        "Deposit: 120e Coco",
-        "Insurance: Yes 75$x2",
-      ].join("\n"),
-    );
+describe("recordFields and notionNote", () => {
+  const anita = {
+    url: "https://app.notion.com/abc",
+    name: "Anita",
+    status: "Upcoming" as const,
+    bike: "2 Wave",
+    start: "2027-05-03",
+    end: "2027-05-27",
+    destination: "Ha Noi",
+    paid: "225$x2",
+    deposit: "120e Coco",
+    insurance: "Yes 75$x2",
+    helmet: null,
+    transfer: "-",
+    notes: " Side and top box ",
+  };
+
+  it("keeps Notion's columns word for word, empty or '-' as nothing", () => {
+    expect(recordFields(anita)).toEqual({
+      paidNote: "225$x2",
+      transferNote: null,
+      depositNote: "120e Coco",
+      insuranceNote: "Yes 75$x2",
+      helmetNote: null,
+      problemsNote: null,
+    });
+  });
+
+  it("puts the real drop-off place before Notion's notes", () => {
+    expect(notionNote(anita, "Nha Trang")).toBe("Drop-off: Nha Trang\nSide and top box");
+    expect(notionNote({ ...anita, notes: null })).toBeNull();
   });
 });

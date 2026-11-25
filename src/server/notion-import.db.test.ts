@@ -33,7 +33,7 @@ describe("Notion import", () => {
 
     const booking = await db.booking.findFirstOrThrow({ where: { source: "IMPORT" } });
     expect(booking).toMatchObject({ status: "CONFIRMED", customerName: "Anita", totalVnd: 0 });
-    expect(booking.staffNote).toContain("Paid: 380$");
+    expect(booking).toMatchObject({ paidNote: "380$", notionUrl: "https://app.notion.com/row-1" });
 
     // The Versys fleet has one bike: now taken.
     const online = await reserveBike(db, onlineBooking(fleet.versys.id));

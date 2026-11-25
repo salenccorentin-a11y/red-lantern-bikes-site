@@ -43,6 +43,13 @@
   padding: 6px 0;
 }
 
+/* On phones the menu gets its own row under the logo. */
+@media (max-width: 639px) {
+  .nav {
+    flex-basis: 100%;
+  }
+}
+
 .nav a:hover {
   text-decoration: underline;
 }
@@ -219,6 +226,54 @@
   font-size: 12px;
   font-weight: 600;
   background: var(--paper);
+}
+
+/* Needs doing today (oil reminder due, over the km rule). */
+.badgeAlert {
+  composes: badge;
+  background: var(--lantern);
+  color: #fff;
+}
+
+/* A plain list of links, one per line. */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  font-size: 14px;
+}
+
+/* A short form whose fields sit side by side on wider screens. */
+.inlineForm {
+  display: grid;
+  gap: 10px;
+  align-items: end;
+}
+
+@media (min-width: 640px) {
+  .inlineForm {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+.search {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1.5px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  font: inherit;
+  font-size: 16px;
 }
 
 /* ─── Settings ──────────────────────────────────────────────────────────── */

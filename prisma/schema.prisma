@@ -19,11 +19,11 @@ datasource db {
 // ─── Fleet ──────────────────────────────────────────────────────────────────
 
 model BikeModel {
-  id          String  @id @default(cuid())
-  slug        String  @unique
-  name        String
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String
   // Short description shown to customers, e.g. "Manual dual-sport".
-  kind        String
+  kind             String
   // Price per day for each tier: weekly from 7 days, 3 weeks from 21,
   // monthly from 30, 45 days from 45 (src/lib/pricing.ts). An empty 3-week or
   // 45-day price means that tier isn't priced yet, and the weekly or monthly
@@ -35,11 +35,14 @@ model BikeModel {
   fortyFiveDayRate Int?
   // Customer text for models added from the staff area. The original twelve
   // keep theirs, with French and Korean, in src/content/bikes.ts.
-  summary     String?
-  description String?
-  licence     Licence?
-  active      Boolean @default(true)
-  sortOrder   Int     @default(0)
+  summary          String?
+  description      String?
+  licence          Licence?
+  active           Boolean  @default(true)
+  sortOrder        Int      @default(0)
+  // Shop rule for oil changes (owner, 2026-11-24): every 800 km, the CB150X
+  // and Versys-X 300 every 2,500 km (they get Motul).
+  oilIntervalKm    Int      @default(800)
 
   bikes       Bike[]
   routeFees   RouteFee[]
@@ -285,6 +288,29 @@ model Booking {
   customerPhone String?
   customerNote  String?
   staffNote     String?
+  // The customer record (src/server/customers.ts). The name, email and phone
+  // above stay as they were given for this booking.
+  customerId    String?
+  customer      Customer? @relation(fields: [customerId], references: [id])
+
+  // The rental record, like the owner's Notion Rentals columns: free text as
+  // the shop writes it ("225$ x2", "450e Coco", "FF 20$"). Never prices.
+  paidNote      String?
+  transferNote  String?
+  depositNote   String?
+  insuranceNote String?
+  helmetNote    String?
+  problemsNote  String?
+  // The Notion row this booking came from, for the Notion sync.
+  notionUrl     String?
+  // Put in the archive by staff once the bike is back (Customers page).
+  archivedAt    DateTime?
+
+  // Oil changes on the road (src/lib/oil.ts). The customer gets a WhatsApp
+  // reminder 5 days after the last oil change (or pick-up), then every 2 days.
+  oilChangedOn      DateTime? @db.Date
+  kmSinceOilChange  Int?
+  oilReminderSentOn DateTime? @db.Date
 
   holdExpiresAt        DateTime?
   // Emails from the hourly job (src/server/reminders.ts): when each was sent,
@@ -312,6 +338,41 @@ model Booking {
   @@index([status, holdExpiresAt])
   @@index([startDate])
   @@index([bikeId])
+  @@index([customerId])
+  @@index([notionUrl])
+}
+
+// ─── Customers ──────────────────────────────────────────────────────────────
+
+// One person across all their rentals. Bookings are matched to a customer by
+// email, then by phone (emailKey and phoneKey are the tidied versions used
+// for matching). A booking with neither gets a customer of its own.
+model Customer {
+  id       String  @id @default(cuid())
+  name     String
+  email    String?
+  phone    String?
+  emailKey String? @unique
+  phoneKey String? @unique
+  country  String?
+  notes    String?
+
+  bookings Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+}
+
+// Emails sent at most once per day by the hourly job, e.g. the morning list.
+// The row is the claim: if it exists, today's email is sent (or being sent).
+model DailyEmail {
+  kind   String
+  day    DateTime @db.Date
+  sentAt DateTime @default(now())
+
+  @@id([kind, day])
 }
 
 // A different price for one bike model, e.g. insurance costs more on bigger

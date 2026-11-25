@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-import { checkIn, checkOut, saveStaffNote } from "@/server/booking-admin";
+import { checkIn, checkOut } from "@/server/booking-admin";
 import {
   ANSWER_ERROR_TEXT,
   acceptRequest,
@@ -10,6 +10,7 @@ import {
   sendAnswerEmail,
 } from "@/server/booking-requests";
 import { cancelBooking } from "@/server/bookings";
+import { archiveRental, saveRentalRecord, unarchiveRental } from "@/server/rentals";
 import { requireStaff } from "@/server/staff-session";
 
 function back(id: string, message: { done?: string; error?: string }): never {
@@ -75,9 +76,42 @@ export async function cancelAction(form: FormData) {
   );
 }
 
-export async function saveNoteAction(form: FormData) {
+/** The rental record: the Notion-like columns and the notes. */
+export async function saveRecordAction(form: FormData) {
   await requireStaff();
   const id = String(form.get("id"));
-  await saveStaffNote(db, id, String(form.get("note") ?? "").slice(0, 2000));
-  back(id, { done: "Note saved." });
+  const field = (name: string) => String(form.get(name) ?? "");
+  await saveRentalRecord(db, id, {
+    paid: field("paid"),
+    transfer: field("transfer"),
+    deposit: field("deposit"),
+    insurance: field("insurance"),
+    helmet: field("helmet"),
+    notes: field("notes"),
+    problems: field("problems"),
+  });
+  back(id, { done: "Rental record saved." });
+}
+
+/** Archives this booking (and the other bikes of the same rental, if any). */
+export async function archiveBookingAction(form: FormData) {
+  await requireStaff();
+  const id = String(form.get("id"));
+  const ids = String(form.get("ids") ?? id)
+    .split(",")
+    .filter(Boolean)
+    .slice(0, 20);
+  const result = await archiveRental(db, ids);
+  back(id, result.ok ? { done: "Rental moved to the archive." } : { error: result.error });
+}
+
+export async function unarchiveBookingAction(form: FormData) {
+  await requireStaff();
+  const id = String(form.get("id"));
+  const ids = String(form.get("ids") ?? id)
+    .split(",")
+    .filter(Boolean)
+    .slice(0, 20);
+  await unarchiveRental(db, ids);
+  back(id, { done: "Rental taken out of the archive." });
 }

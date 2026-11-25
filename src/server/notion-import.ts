@@ -7,11 +7,19 @@
 // blocked days as any other booking. Prices are not invented: the money
 // columns go into the staff note word for word, and the price fields are 0.
 // A row already imported (found by the Notion link in the staff note) is
-// skipped, so the import can be run again just before launch.
+// skipped, so the import can be run again just before launch. The money and
+// extras columns go into the booking's rental record (paidNote…), word for
+// word. Rows already on the site are kept up to date by src/server/notion-sync.ts.
 
 import type { PrismaClient } from "@/generated/prisma/client";
 import { parseIsoDate } from "@/lib/dates";
-import { dropoffFor, parseBikes, staffNote, type NotionRental } from "@/lib/notion-import";
+import {
+  dropoffFor,
+  notionNote,
+  parseBikes,
+  recordFields,
+  type NotionRental,
+} from "@/lib/notion-import";
 import { lastBlockedDay, rentalBlocks } from "@/lib/occupancy";
 import { generateReference } from "@/lib/reference";
 import { freeBikes, getSettings, transitDaysFor } from "@/server/availability";
@@ -60,7 +68,12 @@ export async function importNotionRentals(
       continue;
     }
     const already = await db.booking.count({
-      where: { source: "IMPORT", staffNote: { startsWith: `Imported from Notion ${row.url}` } },
+      where: {
+        OR: [
+          { notionUrl: row.url },
+          { source: "IMPORT", staffNote: { startsWith: `Imported from Notion ${row.url}` } },
+        ],
+      },
     });
     if (already > 0) {
       report.push(line({ kind: "already-imported" }));
@@ -137,7 +150,18 @@ export async function importNotionRentals(
             depositVnd: 0,
             balanceVnd: 0,
             customerName: row.name,
-            staffNote: staffNote(row, i + 1, units, dropoff.other),
+            notionUrl: row.url,
+            staffNote:
+              [
+                units > 1 ? `Bike ${i + 1} of ${units} (Notion: ${row.bike})` : null,
+                notionNote(row, dropoff.other),
+              ]
+                .filter(Boolean)
+                .join("\n") || null,
+            ...recordFields(row),
+            oilChangedOn: row.oilChangedOn ? parseIsoDate(row.oilChangedOn) : null,
+            kmSinceOilChange: row.kmSinceChange ?? null,
+            oilReminderSentOn: row.lastReminder ? parseIsoDate(row.lastReminder) : null,
             checkedOutAt: row.status === "On the road" ? start : null,
             occupancies: {
               create: blocks.map((block) => ({

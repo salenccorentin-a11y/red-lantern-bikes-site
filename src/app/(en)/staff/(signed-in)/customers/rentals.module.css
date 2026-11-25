@@ -1,0 +1,287 @@
+/* The rental list: a wide table like the Notion page on a computer, one card
+   per rental on a phone. */
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: -4px 0 16px;
+}
+
+.tab {
+  padding: 8px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.tabOn {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.group {
+  font-size: 18px;
+  margin: 20px 0 10px;
+}
+
+.group span {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* On a computer the table scrolls inside a box no taller than the screen, so
+   the sideways scrollbar is always in view; the header row and the customer
+   column stay put while sliding. The box can also be dragged (drag-scroll.tsx). */
+.wrap {
+  overflow: auto;
+  max-height: calc(100dvh - 160px);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: grab;
+  overscroll-behavior-x: contain;
+}
+
+.wrap::-webkit-scrollbar {
+  height: 14px;
+  width: 10px;
+}
+
+.wrap::-webkit-scrollbar-thumb {
+  background: #c9bfb2;
+  border-radius: 7px;
+  border: 3px solid #fff;
+}
+
+.wrap::-webkit-scrollbar-track {
+  background: #f3eee7;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.stickyCol {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #fff;
+  box-shadow: 1px 0 0 var(--line);
+}
+
+.table thead th.stickyCol {
+  z-index: 3;
+  background: #faf7f2;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+  background: #faf7f2;
+}
+
+.table tbody tr:hover,
+.table tbody tr:hover .stickyCol {
+  background: #fdfbf8;
+}
+
+.name {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.dates {
+  white-space: nowrap;
+}
+
+.dates span {
+  display: block;
+}
+
+.days {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.bike {
+  display: block;
+  white-space: nowrap;
+}
+
+.bike {
+  margin-bottom: 4px;
+}
+
+.bike small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.wide {
+  min-width: 180px;
+  white-space: pre-line;
+}
+
+.empty {
+  color: var(--line);
+}
+
+.status {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Same colours as the Notion page: green on the road, yellow upcoming. */
+.road {
+  background: #dcefdc;
+  color: #1f5c2a;
+}
+
+.upcoming {
+  background: #fbefc4;
+  color: #6b5208;
+}
+
+.request {
+  background: #fde2dc;
+  color: #8a2410;
+}
+
+.returned {
+  background: #ebe8e4;
+  color: #5a5550;
+}
+
+.actions {
+  white-space: nowrap;
+}
+
+.actions form,
+.edit {
+  display: inline-block;
+  margin: 0 6px 6px 0;
+  vertical-align: middle;
+}
+
+/* Phones: each rental becomes a card with labelled lines. */
+@media (max-width: 899px) {
+  .wrap {
+    background: none;
+    border: none;
+    overflow: visible;
+    max-height: none;
+    cursor: auto;
+  }
+
+  .stickyCol {
+    position: static;
+    box-shadow: none;
+    background: none;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table,
+  .table tbody,
+  .table tr {
+    display: block;
+  }
+
+  .table tr {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+
+  .table td {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 8px;
+    padding: 4px 0;
+    border: none;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .table td.name {
+    display: block;
+    font-size: 17px;
+    padding-bottom: 6px;
+  }
+
+  .table td.name::before,
+  .table td.actions::before {
+    content: none;
+  }
+
+  .table td.actions {
+    display: block;
+    padding-top: 10px;
+  }
+
+  .table td > div {
+    min-width: 0;
+  }
+
+  .bike {
+    white-space: normal;
+  }
+
+  .bike small {
+    display: block;
+  }
+
+  .dates {
+    white-space: normal;
+  }
+
+  .wide {
+    min-width: 0;
+  }
+}

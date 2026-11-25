@@ -2,17 +2,28 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { dropoffLabel } from "@/lib/cities";
-import { formatDisplayDate, formatSaigonDateTime, toIsoDate } from "@/lib/dates";
+import {
+  formatDisplayDate,
+  formatSaigonDateTime,
+  parseIsoDate,
+  toIsoDate,
+  todayInSaigon,
+} from "@/lib/dates";
 import { db } from "@/lib/db";
 import { formatVnd } from "@/lib/money";
+import { daysSinceOilChange, nextOilReminder, oilReminderDue, whatsappDigits } from "@/lib/oil";
+import { linkBookingsToCustomers } from "@/server/customers";
 import { requireStaff } from "@/server/staff-session";
+import { RecordOilForm, SendReminderButton } from "../../oil/oil-forms";
 import {
   acceptRequestAction,
   cancelAction,
   checkInAction,
   checkOutAction,
+  archiveBookingAction,
   declineRequestAction,
-  saveNoteAction,
+  saveRecordAction,
+  unarchiveBookingAction,
 } from "./actions";
 import styles from "../../../staff.module.css";
 
@@ -39,11 +50,41 @@ async function BookingAdmin(props: {
 }) {
   await requireStaff();
   const [{ id }, query] = await Promise.all([props.params, props.searchParams]);
+  await linkBookingsToCustomers(db);
   const booking = await db.booking.findUnique({
     where: { id },
-    include: { bike: true, bikeModel: true, addOns: true, createdBy: { select: { name: true } } },
+    include: {
+      bike: true,
+      bikeModel: true,
+      addOns: true,
+      createdBy: { select: { name: true } },
+      customer: { select: { id: true, phone: true } },
+    },
   });
   if (!booking) notFound();
+  const today = parseIsoDate(todayInSaigon())!;
+  const onTheRoad = booking.status === "CHECKED_OUT";
+  const oilDue = onTheRoad && oilReminderDue(booking, today);
+  const hasWhatsapp = whatsappDigits(booking.customer?.phone ?? booking.customerPhone) != null;
+  const from = `/staff/bookings/${booking.id}`;
+  // The other bikes of the same rental (same Notion row, or same customer and dates).
+  const siblings = await db.booking.findMany({
+    where: {
+      id: { not: booking.id },
+      status: { in: ["CONFIRMED", "CHECKED_OUT", "COMPLETED"] },
+      ...(booking.notionUrl
+        ? { notionUrl: booking.notionUrl }
+        : booking.customerId
+          ? {
+              customerId: booking.customerId,
+              startDate: booking.startDate,
+              endDate: booking.endDate,
+            }
+          : { id: "none" }),
+    },
+    select: { id: true, status: true, bike: { select: { plate: true } } },
+  });
+  const rentalIds = [booking.id, ...siblings.map((b) => b.id)].join(",");
 
   const canCheckOut = booking.status === "CONFIRMED" || booking.status === "PENDING_PAYMENT";
   const canCheckIn = booking.status === "CHECKED_OUT";
@@ -146,6 +187,13 @@ async function BookingAdmin(props: {
               </>
             )}
           </dl>
+          {booking.customer && (
+            <p>
+              <Link href={`/staff/customers/${booking.customer.id}`}>
+                Customer record and past rentals
+              </Link>
+            </p>
+          )}
         </section>
 
         <section className={styles.panel}>
@@ -258,24 +306,128 @@ async function BookingAdmin(props: {
         )}
       </section>
 
+      {(onTheRoad || booking.oilChangedOn || booking.kmSinceOilChange != null) && (
+        <section className={styles.panel}>
+          <h2>Oil change</h2>
+          <p className={styles.muted}>
+            {daysSinceOilChange(booking, today)}{" "}
+            {daysSinceOilChange(booking, today) === 1 ? "day" : "days"} since{" "}
+            {booking.oilChangedOn ? "the last oil change" : "pick-up"}
+            {booking.oilReminderSentOn
+              ? ` · last reminder ${formatDisplayDate(toIsoDate(booking.oilReminderSentOn))}`
+              : ""}
+            {onTheRoad && !oilDue
+              ? ` · next reminder ${formatDisplayDate(toIsoDate(nextOilReminder(booking)))}`
+              : ""}
+          </p>
+          {oilDue && (
+            <p>
+              <span className={styles.badgeAlert}>Reminder due</span>
+            </p>
+          )}
+          <div className={styles.row}>
+            {oilDue && <SendReminderButton id={booking.id} from={from} hasPhone={hasWhatsapp} />}
+            <RecordOilForm
+              id={booking.id}
+              from={from}
+              oilChangedOn={booking.oilChangedOn}
+              kmSinceOilChange={booking.kmSinceOilChange}
+              intervalKm={booking.bikeModel.oilIntervalKm}
+            />
+          </div>
+        </section>
+      )}
+
       <section className={styles.panel}>
-        <h2>Staff note</h2>
-        <form action={saveNoteAction} className={styles.form}>
+        <h2>Rental record</h2>
+        {siblings.length > 0 && (
+          <p className={styles.muted}>
+            Rented with {siblings.length === 1 ? "another bike" : `${siblings.length} other bikes`}:{" "}
+            {siblings.map((b, i) => (
+              <span key={b.id}>
+                {i > 0 ? ", " : ""}
+                <Link href={`/staff/bookings/${b.id}`}>{b.bike?.plate ?? "bike"}</Link>
+              </span>
+            ))}
+            . Each bike keeps its own record.
+          </p>
+        )}
+        <form action={saveRecordAction} className={styles.form}>
           <input type="hidden" name="id" value={booking.id} />
+          <div className={styles.inlineForm}>
+            {(
+              [
+                ["paid", "Paid", booking.paidNote, "e.g. 350$ or 1.8ml VND"],
+                ["transfer", "Transfer", booking.transferNote, "e.g. 60$"],
+                ["deposit", "Deposit", booking.depositNote, "e.g. 450e Coco, Passport"],
+                ["insurance", "Insurance", booking.insuranceNote, "e.g. No, Yes 5$/day"],
+                ["helmet", "Helmet", booking.helmetNote, "e.g. FF 20$"],
+              ] as const
+            ).map(([name, label, value, placeholder]) => (
+              <label key={name} className={styles.field}>
+                <span>{label}</span>
+                <input
+                  name={name}
+                  defaultValue={value ?? ""}
+                  placeholder={placeholder}
+                  maxLength={500}
+                />
+              </label>
+            ))}
+          </div>
           <label className={styles.field}>
-            <span>Only staff see this</span>
+            <span>Notes (only staff see these)</span>
             <textarea
-              name="note"
+              name="notes"
               rows={3}
               defaultValue={booking.staffNote ?? ""}
               maxLength={2000}
             />
           </label>
+          <label className={styles.field}>
+            <span>Problems on the way</span>
+            <textarea
+              name="problems"
+              rows={2}
+              defaultValue={booking.problemsNote ?? ""}
+              maxLength={2000}
+              placeholder="e.g. 80k spark plug"
+            />
+          </label>
           <div>
-            <button className={styles.secondary}>Save note</button>
+            <button className={styles.secondary}>Save rental record</button>
           </div>
         </form>
       </section>
+
+      {booking.status === "COMPLETED" && (
+        <section className={styles.panel}>
+          <h2>Archive</h2>
+          {booking.archivedAt ? (
+            <form action={unarchiveBookingAction} className={styles.form}>
+              <input type="hidden" name="id" value={booking.id} />
+              <input type="hidden" name="ids" value={rentalIds} />
+              <p className={styles.muted}>
+                In the archive since {formatSaigonDateTime(booking.archivedAt)}.
+              </p>
+              <div>
+                <button className={styles.secondary}>Take out of the archive</button>
+              </div>
+            </form>
+          ) : (
+            <form action={archiveBookingAction} className={styles.form}>
+              <input type="hidden" name="id" value={booking.id} />
+              <input type="hidden" name="ids" value={rentalIds} />
+              <p className={styles.muted}>
+                The bike is back. Once everything is settled, move the rental to the archive.
+              </p>
+              <div>
+                <button className={styles.primary}>Archive this rental</button>
+              </div>
+            </form>
+          )}
+        </section>
+      )}
     </>
   );
 }

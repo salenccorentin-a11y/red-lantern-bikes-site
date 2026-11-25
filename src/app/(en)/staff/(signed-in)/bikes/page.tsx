@@ -39,9 +39,9 @@ async function BikeList() {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Plate</th>
             <th>Model</th>
             <th>Today</th>
+            <th>Plate</th>
           </tr>
         </thead>
         <tbody>
@@ -50,9 +50,10 @@ async function BikeList() {
             return (
               <tr key={bike.id}>
                 <td>
-                  <Link href={`/staff/bikes/${bike.id}`}>{bike.plate}</Link>
+                  <Link href={`/staff/bikes/${bike.id}`}>
+                    <b>{bike.model.name}</b>
+                  </Link>
                 </td>
-                <td>{bike.model.name}</td>
                 <td>
                   {bike.status === "RETIRED" ? (
                     <span className={styles.badge}>Retired</span>
@@ -67,6 +68,7 @@ async function BikeList() {
                     <span className={styles.success}>In the shop</span>
                   )}
                 </td>
+                <td className={styles.muted}>{bike.plate}</td>
               </tr>
             );
           })}
