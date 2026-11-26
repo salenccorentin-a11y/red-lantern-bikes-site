@@ -224,19 +224,36 @@
   ],
   "yamaha-wr155r": [
     {
-      "src": "/bikes/gallery/yamaha-wr155r-1-a6df36d5.webp",
-      "alt": "A WR155R outside the shop",
-      "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADQAQCdASoQAAwAA4BaJYwAAn7FJGpcAAD+3JPu7Vq/+wAma3D98AA1ugXvgiSajIhRXOkohs6ZcXL2D+g/EeoCFP5EQFHPZ/uoyDZ5P4XRIcA9gT7PeAN3mf9gAA=="
+      "src": "/bikes/gallery/yamaha-wr155r-1-e8b0179a.webp",
+      "alt": "A WR155R on a red dirt track in a pine forest",
+      "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoQAAwAA4BaJbACdADciZG2AAD+5DRiHJzJs676WczKUwhklKLzBTRa81b0mnljAQX82A4r+YVJB01GnWgYY0Dsvho7juOO3epWWwAA"
     },
     {
-      "src": "/bikes/gallery/yamaha-wr155r-2-78ba3499.webp",
-      "alt": "A WR155R, side view",
-      "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAwAA4BaJQBOgBa0PzF4FTAA+5gx6m5lM6XlPIAe9+IZsby/OOWDx0rnkrh1suQSJ8mo4cOdXsDJMLfXx2/58cB5drS4EBAAAA=="
+      "src": "/bikes/gallery/yamaha-wr155r-2-1df5fd8f.webp",
+      "alt": "A WR155R loaded with bags outside a café",
+      "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwAgCdASoQAAwAA4BaJZwCw7YvDnfpcSi9QAD+iYlth+PD0L3l59hBS4QOkHA9ScHiEl3YpA927bxMuPC6vuUc/y4QqegznNhFoQm7CTQPRXbQMoNAHsAA"
     },
     {
-      "src": "/bikes/gallery/yamaha-wr155r-3-320d7058.webp",
-      "alt": "A WR155R with a rear rack",
-      "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoQAAwAA4BaJYwC7AEfAdGbDSASAAD+71uI58vybfXaVUBfZO4TnuNbAespCotEsA+KZd2NSAEpLrg8Xe1bB807y2TvZPInQYjx3MC4y5RxDC3AAAA="
+      "src": "/bikes/gallery/yamaha-wr155r-3-5f8438b8.webp",
+      "alt": "A rider on a WR155R outside the shop",
+      "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAQCdASoQAAwAA4BaJQBdgCK+YBesAAD+CN/Y99/jsx/i4SRKqKNM7dUGnbAd3OpjOz/LG7vcP3KrEVyNW5AaKSuAmjSTSUhG9GZ6yhk9zxOa3Qf52AAA"
+    }
+  ],
+  "honda-cb125": [
+    {
+      "src": "/bikes/gallery/honda-cb125-1-c79b7a43.webp",
+      "alt": "A black CB125, front three-quarter view",
+      "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoQAAwAA4BaJYwC7AYubnQqHI5AAPwy+/KtMNryuKI7cTgu7PjFLv3SsWveU2sKm657GKN8dy0OED9jRA7hvqSf+z9X/J173Hd51qrRDjO4AAAA"
+    },
+    {
+      "src": "/bikes/gallery/honda-cb125-2-3f9b7f03.webp",
+      "alt": "A black CB125 with a rear rack, side view",
+      "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAwAA4BaJYwCsADpGfvpcZAA/h8s1LNxSHZt3m3KKfYMSoYsD7HGqgqS0I47fyh+EHJlDGdrn+O4FsGuiYm4VWexf64JSlPRaFFtRPK7AAAA"
+    },
+    {
+      "src": "/bikes/gallery/honda-cb125-3-9e306e97.webp",
+      "alt": "The CB125's handlebars and dashboard",
+      "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAwAgCdASoQAAwAA4BaJZQC06fwBXrrOhrSgAD+Pj1MdC02TUHzE/q07aLmFKqcmwyryjNHYpAWDg0aWnC3K83ceCX8PU2ddChRqHfJWu1koJABrnX+wF/QZcFrIOAA"
     }
   ],
   "kawasaki-versys-x300": [

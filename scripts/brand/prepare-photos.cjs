@@ -34,8 +34,9 @@ const BIKES = {
   "kawasaki-versys-x300": "Without background/Kawasaki Versys_X300.jpg",
 };
 
-// Your own photos of each model, at the top of its page. Only from the
-// "Website image" folder (owner, 2026-11-17); the first is what the page opens
+// Your own photos of each model, at the top of its page. From the "Website
+// image" folder (owner, 2026-11-17), or a model's own folder when the owner
+// put a set there (CB125, WR155, 2026-11-26); the first is what the page opens
 // on. box = [left, top, right, bottom], the part of the photo to keep, chosen
 // so the whole bike sits in the middle. Every photo comes out 4:3; a photo
 // that isn't 4:3 after the box (most upright phone photos) is shown whole over
@@ -140,18 +141,30 @@ const GALLERY = {
       [0, 0.44, 1, 1],
     ],
   ],
+  // The owner's new set in the model's own folder (2026-11-26), replacing the
+  // three "Website image" photos used before.
   "yamaha-wr155r": [
     [
-      W + "WhatsApp Image 2026-08-15 at 2.19.32 PM.jpeg",
-      "A WR155R outside the shop",
-      [0, 0.15, 1, 0.92],
+      "Yamaha WR155/WhatsApp Image 2026-11-24 at 2.42.59 PM (1).jpeg",
+      "A WR155R on a red dirt track in a pine forest",
+      [0, 0.42, 1, 0.9825],
     ],
-    [W + "WhatsApp Image 2026-08-15 at 2.19.29 PM.jpeg", "A WR155R, side view", [0, 0.15, 1, 1]],
     [
-      W + "WhatsApp Image 2026-08-15 at 2.19.31 PM.jpeg",
-      "A WR155R with a rear rack",
-      [0, 0.25, 1, 1],
+      "Yamaha WR155/WhatsApp Image 2026-11-24 at 2.41.46 PM.jpeg",
+      "A WR155R loaded with bags outside a café",
+      [0.17, 0, 0.786, 1],
     ],
+    [
+      "Yamaha WR155/WhatsApp Image 2026-11-24 at 2.41.46 PM (2).jpeg",
+      "A rider on a WR155R outside the shop",
+      [0, 0.2, 1, 1],
+    ],
+  ],
+  // From the model's own folder (owner, 2026-11-26); the files have no extension.
+  "honda-cb125": [
+    ["Honda CB125/Front", "A black CB125, front three-quarter view"],
+    ["Honda CB125/back", "A black CB125 with a rear rack, side view"],
+    ["Honda CB125/Up", "The CB125's handlebars and dashboard", [0, 0.05, 1, 0.85]],
   ],
   "kawasaki-versys-x300": [
     [
