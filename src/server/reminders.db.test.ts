@@ -138,7 +138,8 @@ describe("pick-up reminders", () => {
     const email = box.sent[0];
     expect(email.subject).toContain(booking.reference);
     expect(email.text).toContain("passport");
-    expect(email.text).toContain("International Driving Permit");
+    // The licence rules live in the FAQ and terms, not this email (owner, 2026-11-22).
+    expect(email.text).not.toContain("International Driving Permit");
     expect(email.text).toContain("US$300");
   });
 

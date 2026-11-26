@@ -54,15 +54,16 @@ const MODELS: [RegExp, string][] = [
 export type BikeCount = { slug: string; count: number };
 
 /**
- * "2 Wave" → [{wave-alpha-110, 2}]. Several bikes are separated by commas or
- * a spaced slash ("CB150X / Versys"); "NVX125/155" (no spaces) is one bike.
+ * "2 Wave" → [{wave-alpha-110, 2}]. Several bikes are separated by commas, a
+ * spaced slash ("CB150X / Versys") or a spaced dash ("2 x EN - 1 x GD");
+ * "NVX125/155" (no spaces) is one bike.
  * Null when any part names no model of the fleet (Vision, Mio, XR125…):
  * those rows are left for the owner to enter by hand.
  */
 export function parseBikes(text: string): BikeCount[] | null {
   const parts = text
     .toLowerCase()
-    .split(/,|\s\/\s/)
+    .split(/,|\s\/\s|\s-\s/)
     .map((p) => p.trim())
     .filter(Boolean);
   if (parts.length === 0) return null;
@@ -73,7 +74,9 @@ export function parseBikes(text: string): BikeCount[] | null {
     const counted = /^(\d+)\s*(?:x\s+)?(.*)$/.exec(part);
     const count = counted ? Number(counted[1]) : 1;
     const rest = counted ? counted[2] : part;
-    // XR125 is not in the fleet: don't let "xr" alone match the XR150.
+    // XR125 is not in the fleet: don't let "xr" alone match the XR150, and
+    // don't let "GSXS XR125" (two bikes in one part) pass as one GSX.
+    if (/xr\s*125/.test(rest)) return null;
     const slug = MODELS.find(([re]) => re.test(rest))?.[1];
     if (!slug || count < 1) return null;
     const same = out.find((b) => b.slug === slug);

@@ -8,7 +8,7 @@
 //   remaining days). Different dates are reported, never changed: moving a
 //   booking's blocked days is done by hand in the staff area.
 // - not on the site yet: imported like step 11 (src/server/notion-import.ts),
-//   unless it's Returned (old rentals stay in Notion for now).
+//   unless it's Returned (past rentals: src/server/notion-history.ts).
 // Site bookings from Notion whose row is gone from Notion are only reported.
 
 import type { Prisma, PrismaClient } from "@/generated/prisma/client";
@@ -41,7 +41,7 @@ export async function syncNotionRentals(
     });
 
     if (bookings.length === 0) {
-      if (row.status === "Returned") continue; // History: stays in Notion for now.
+      if (row.status === "Returned") continue; // History: npm run import:notion -- --history.
       const [line] = await importNotionRentals(db, [row], { dryRun });
       changes.push(
         line.result.kind === "imported"

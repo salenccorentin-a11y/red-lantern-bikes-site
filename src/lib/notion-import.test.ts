@@ -25,11 +25,16 @@ describe("parseBikes", () => {
       { slug: "kawasaki-versys-x300", count: 1 },
     ]);
     expect(parseBikes("Wave, Nvx, Winner blue")).toHaveLength(3);
+    expect(parseBikes("2 x EN - 1 x GD")).toEqual([
+      { slug: "suzuki-en125", count: 2 },
+      { slug: "suzuki-gd110", count: 1 },
+    ]);
   });
 
   it("refuses bikes that aren't in the fleet", () => {
     expect(parseBikes("Honda Vision")).toBeNull();
     expect(parseBikes("XR125 red")).toBeNull();
+    expect(parseBikes("GSXS XR125, GD")).toBeNull();
     expect(parseBikes("Wave, Mio")).toBeNull();
     expect(parseBikes("")).toBeNull();
   });
