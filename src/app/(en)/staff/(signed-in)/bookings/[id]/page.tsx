@@ -18,6 +18,7 @@ import { RecordOilForm, SendReminderButton } from "../../oil/oil-forms";
 import {
   acceptRequestAction,
   cancelAction,
+  changeDatesAction,
   checkInAction,
   checkOutAction,
   archiveBookingAction,
@@ -82,9 +83,24 @@ async function BookingAdmin(props: {
             }
           : { id: "none" }),
     },
-    select: { id: true, status: true, bike: { select: { plate: true } } },
+    select: {
+      id: true,
+      status: true,
+      startDate: true,
+      endDate: true,
+      bike: { select: { plate: true } },
+    },
   });
   const rentalIds = [booking.id, ...siblings.map((b) => b.id)].join(",");
+  // Dates change while the booking isn't returned; the other bikes on the
+  // same dates can change with it.
+  const canChangeDates = ["PENDING_PAYMENT", "CONFIRMED", "CHECKED_OUT"].includes(booking.status);
+  const sameDates = siblings.filter(
+    (b) =>
+      b.status !== "COMPLETED" &&
+      b.startDate.getTime() === booking.startDate.getTime() &&
+      b.endDate.getTime() === booking.endDate.getTime(),
+  );
 
   const canCheckOut = booking.status === "CONFIRMED" || booking.status === "PENDING_PAYMENT";
   const canCheckIn = booking.status === "CHECKED_OUT";
@@ -135,6 +151,12 @@ async function BookingAdmin(props: {
             <dd>
               {formatDisplayDate(toIsoDate(booking.startDate))} to{" "}
               {formatDisplayDate(toIsoDate(booking.endDate))} ({booking.days} days)
+              {canChangeDates && (
+                <>
+                  {" · "}
+                  <a href="#dates">Change or extend</a>
+                </>
+              )}
             </dd>
             <dt className={styles.muted}>Drop-off</dt>
             <dd>{dropoffLabel(booking.dropoffCity)}</dd>
@@ -305,6 +327,65 @@ async function BookingAdmin(props: {
           </form>
         )}
       </section>
+
+      {canChangeDates && (
+        <section className={styles.panel} id="dates">
+          <h2>Change dates or extend</h2>
+          <form action={changeDatesAction} className={styles.form}>
+            <input type="hidden" name="id" value={booking.id} />
+            <input type="hidden" name="ids" value={sameDates.map((b) => b.id).join(",")} />
+            <p className={styles.muted}>
+              The bike&apos;s days move with the dates, after checking nobody else has it booked.
+              {booking.source === "IMPORT"
+                ? " The money stays in the rental record below."
+                : " The price is worked out again for the new number of days."}
+              {onTheRoad ? " The bike is out, so only the return date can change." : ""}
+            </p>
+            <div className={styles.inlineForm}>
+              <label className={styles.field}>
+                <span>Pick-up</span>
+                <input
+                  type="date"
+                  name="start"
+                  required
+                  defaultValue={toIsoDate(booking.startDate)}
+                  readOnly={onTheRoad}
+                />
+              </label>
+              <label className={styles.field}>
+                <span>Return</span>
+                <input type="date" name="end" required defaultValue={toIsoDate(booking.endDate)} />
+              </label>
+              <div>
+                <button className={styles.secondary}>Save new dates</button>
+              </div>
+            </div>
+            <div>
+              <p className={styles.muted}>Or extend the return date:</p>
+              <div className={styles.row}>
+                {[1, 2, 3, 7].map((n) => (
+                  <button
+                    key={n}
+                    name="extend"
+                    value={n}
+                    formNoValidate
+                    className={styles.secondary}
+                  >
+                    {n === 7 ? "+1 week" : `+${n} ${n === 1 ? "day" : "days"}`}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {sameDates.length > 0 && (
+              <label>
+                <input type="checkbox" name="group" value="yes" defaultChecked /> Also the{" "}
+                {sameDates.length === 1 ? "other bike" : `${sameDates.length} other bikes`} of this
+                rental ({sameDates.map((b) => b.bike?.plate ?? "bike").join(", ")})
+              </label>
+            )}
+          </form>
+        </section>
+      )}
 
       {(onTheRoad || booking.oilChangedOn || booking.kmSinceOilChange != null) && (
         <section className={styles.panel}>

@@ -2,7 +2,9 @@
 
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-import { checkIn, checkOut } from "@/server/booking-admin";
+import { addDays, formatDisplayDate, toIsoDate } from "@/lib/dates";
+import { formatVnd } from "@/lib/money";
+import { changeDates, checkIn, checkOut } from "@/server/booking-admin";
 import {
   ANSWER_ERROR_TEXT,
   acceptRequest,
@@ -114,4 +116,43 @@ export async function unarchiveBookingAction(form: FormData) {
     .slice(0, 20);
   await unarchiveRental(db, ids);
   back(id, { done: "Rental taken out of the archive." });
+}
+
+/**
+ * New dates, or "+N days" on the return date. With "group" ticked, the other
+ * bikes of the same rental change too (all or none).
+ */
+export async function changeDatesAction(form: FormData) {
+  await requireStaff();
+  const id = String(form.get("id"));
+  const ids =
+    form.get("group") === "yes"
+      ? [
+          id,
+          ...String(form.get("ids") ?? "")
+            .split(",")
+            .filter(Boolean),
+        ].slice(0, 20)
+      : [id];
+  let startDate = String(form.get("start") ?? "");
+  let endDate = String(form.get("end") ?? "");
+  const extend = Number(form.get("extend") ?? 0);
+  if (Number.isInteger(extend) && extend > 0 && extend <= 60) {
+    const booking = await db.booking.findUnique({ where: { id } });
+    if (!booking) back(id, { error: "Booking not found." });
+    startDate = toIsoDate(booking.startDate);
+    endDate = toIsoDate(addDays(booking.endDate, extend));
+  }
+  const result = await changeDates(db, ids, { startDate, endDate });
+  if (!result.ok) back(id, { error: result.error });
+
+  const bikes = ids.length > 1 ? ` for the ${ids.length} bikes` : "";
+  let done = `New dates${bikes}: ${formatDisplayDate(startDate)} to ${formatDisplayDate(endDate)} (${result.days} days).`;
+  if (result.totalAfter !== result.totalBefore) {
+    const more = result.balanceAfter - result.balanceBefore;
+    done += ` Total ${formatVnd(result.totalAfter)} (was ${formatVnd(result.totalBefore)}): ${
+      more >= 0 ? `${formatVnd(more)} more to collect` : `${formatVnd(-more)} less to collect`
+    }.`;
+  }
+  back(id, { done });
 }
