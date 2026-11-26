@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { oldSiteRedirects } from "./src/seo/redirects";
+import { securityHeaders } from "./src/seo/security-headers";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
@@ -24,6 +25,10 @@ const nextConfig: NextConfig = {
   // Old Odoo addresses → new pages, as permanent 301s (src/seo/redirects.ts).
   async redirects() {
     return oldSiteRedirects();
+  },
+  // HSTS, nosniff, referrer, frame and permissions rules (src/seo/security-headers.ts).
+  async headers() {
+    return securityHeaders();
   },
 };
 
