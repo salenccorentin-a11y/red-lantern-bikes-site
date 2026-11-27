@@ -33,7 +33,7 @@ export function RiderWall({
             placeholder="blur"
             sizes={
               strip
-                ? "(max-width: 760px) 42vw, 200px"
+                ? "(max-width: 760px) 32vw, 200px"
                 : i === 0
                   ? "(max-width: 760px) 100vw, 50vw"
                   : "(max-width: 760px) 50vw, 25vw"

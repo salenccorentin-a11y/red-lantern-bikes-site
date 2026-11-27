@@ -6,13 +6,17 @@ import styles from "./GoogleReviews.module.css";
 // Real customer reviews (src/server/google-reviews.ts), shown as written with
 // the reviewer's name and Google's attribution. Hidden when there are none.
 
+// Longest review text shown before it is cut with "…" and a link to Google.
 const MAX_CHARS = 280;
+// Compact cards (home page) keep about four lines on a phone.
+const COMPACT_CHARS = 120;
 
 export async function GoogleReviews({
   lang = "en",
   title,
   limit = 3,
   tone = "light",
+  compact = false,
 }: {
   lang?: Locale;
   /** A heading above the reviews, if the page needs one. */
@@ -20,16 +24,22 @@ export async function GoogleReviews({
   limit?: number;
   /** "night" on dark sections, "light" on white or mist. */
   tone?: "light" | "night";
+  /** Short cards, without the rating line (home page: the intro above
+   * already gives the rating). */
+  compact?: boolean;
 }) {
   const t = getMessages(lang).reviews;
   const data = await loadReviews(lang);
   if (!data || data.reviews.length === 0) return null;
   const reviews = data.reviews.slice(0, limit);
+  const max = compact ? COMPACT_CHARS : MAX_CHARS;
 
   return (
-    <div className={`${styles.wrap} ${tone === "night" ? styles.night : styles.light}`}>
+    <div
+      className={`${styles.wrap} ${tone === "night" ? styles.night : styles.light} ${compact ? styles.compact : ""}`}
+    >
       {title && <h2 className={styles.title}>{title}</h2>}
-      {data.rating !== null && (
+      {!compact && data.rating !== null && (
         <p className={styles.summary}>
           <Stars rating={data.rating} label={fill(t.stars, { rating: data.rating })} />
           <b>{data.rating.toFixed(1)}</b>
@@ -40,7 +50,18 @@ export async function GoogleReviews({
         {reviews.map((r, i) => (
           <li key={i} className={styles.card}>
             <Stars rating={r.rating} label={fill(t.stars, { rating: r.rating })} />
-            <p className={styles.text}>{trim(r.text)}</p>
+            <p className={styles.text}>
+              {trim(r.text, max)}
+              {/* Compact cards: the link ends the text, saving a line. */}
+              {compact && r.text.length > max && data.url && (
+                <>
+                  {" "}
+                  <a href={data.url} target="_blank" rel="noopener" className={styles.more}>
+                    {t.readOn}
+                  </a>
+                </>
+              )}
+            </p>
             <p className={styles.author}>
               {r.authorUrl ? (
                 <a href={r.authorUrl} target="_blank" rel="noopener nofollow">
@@ -51,7 +72,7 @@ export async function GoogleReviews({
               )}
               {r.when && <span className={styles.when}>, {r.when}</span>}
             </p>
-            {r.text.length > MAX_CHARS && data.url && (
+            {!compact && r.text.length > max && data.url && (
               <a href={data.url} target="_blank" rel="noopener" className={styles.more}>
                 {t.readOn}
               </a>
@@ -75,9 +96,9 @@ export async function GoogleReviews({
 }
 
 /** Long reviews are cut at a word, with "…". */
-function trim(text: string): string {
-  if (text.length <= MAX_CHARS) return text;
-  return `${text.slice(0, MAX_CHARS).replace(/\s+\S*$/, "")}…`;
+function trim(text: string, max: number): string {
+  if (text.length <= max) return text;
+  return `${text.slice(0, max).replace(/\s+\S*$/, "")}…`;
 }
 
 function Stars({ rating, label }: { rating: Review["rating"]; label: string }) {

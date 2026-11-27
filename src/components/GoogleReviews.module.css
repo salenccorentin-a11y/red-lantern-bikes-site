@@ -138,3 +138,39 @@
 .light .starOff {
   fill: var(--rule);
 }
+
+/* ─── Compact (home page) ────────────────────────────────────────────── */
+
+.compact {
+  margin-top: 24px;
+}
+
+.compact .list {
+  gap: 12px;
+}
+
+.compact .card {
+  gap: 8px;
+  padding: 16px 18px;
+}
+
+.compact .text {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.compact .author,
+.compact .more {
+  font-size: var(--text-sm);
+}
+
+.compact .attribution {
+  margin-top: 10px;
+}
+
+/* Phones: a narrower card, so the next one peeks in and says "swipe". */
+@media (max-width: 759px) {
+  .compact .list > li {
+    flex-basis: 78%;
+  }
+}

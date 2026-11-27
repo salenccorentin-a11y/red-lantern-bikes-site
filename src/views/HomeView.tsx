@@ -119,32 +119,11 @@ export function HomeView({ lang }: { lang: Locale }) {
             {fill(t.ridersIntro, { rating: BUSINESS.googleRating })}
           </p>
           <RiderWall alt={t.ridersAlt} strip />
-          <GoogleReviews lang={lang} />
+          <GoogleReviews lang={lang} compact />
         </div>
       </section>
 
-      {/* For backpackers weighing up buying a bike in Saigon and selling it in Hanoi. */}
       <section className={`${ui.section} ${ui.sectionMist}`}>
-        <div className={ui.container}>
-          <h2 className={ui.sectionTitle}>{t.whyRentTitle}</h2>
-          <p className={ui.sectionIntro}>{t.whyRentIntro}</p>
-          <ul className={styles.whyRent}>
-            {t.whyRent.map((point) => (
-              <li key={point.title}>
-                <h3>{point.title}</h3>
-                <p>{point.text}</p>
-              </li>
-            ))}
-          </ul>
-          <p className={styles.after}>
-            <Link href={to("/one-way")} className={ui.ghostLight}>
-              {t.seeOneWay}
-            </Link>
-          </p>
-        </div>
-      </section>
-
-      <section className={ui.section}>
         <div className={`${ui.container} ${styles.split}`}>
           <div>
             <h2 className={styles.splitTitle}>{m.common.included}</h2>
@@ -164,6 +143,28 @@ export function HomeView({ lang }: { lang: Locale }) {
               ))}
             </ol>
           </div>
+        </div>
+      </section>
+
+      {/* For backpackers weighing up buying a bike in Saigon and selling it in
+          Hanoi. It comes after what is included and how booking works. */}
+      <section className={ui.section}>
+        <div className={ui.container}>
+          <h2 className={ui.sectionTitle}>{t.whyRentTitle}</h2>
+          <p className={ui.sectionIntro}>{t.whyRentIntro}</p>
+          <ul className={styles.whyRent}>
+            {t.whyRent.map((point) => (
+              <li key={point.title}>
+                <h3>{point.title}</h3>
+                <p>{point.text}</p>
+              </li>
+            ))}
+          </ul>
+          <p className={styles.after}>
+            <Link href={to("/one-way")} className={ui.ghostLight}>
+              {t.seeOneWay}
+            </Link>
+          </p>
         </div>
       </section>
 

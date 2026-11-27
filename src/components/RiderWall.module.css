@@ -52,7 +52,7 @@
 }
 
 .strip .tile {
-  flex: 0 0 42%;
+  flex: 0 0 32%;
   scroll-snap-align: start;
 }
 
