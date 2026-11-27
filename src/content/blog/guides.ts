@@ -31,6 +31,73 @@ const guide = (g: Omit<Guide, "blogSlug" | "path" | "category">): Guide => ({
 
 export const GUIDES: Guide[] = [
   guide({
+    postSlug: "mekong-delta-by-motorbike",
+    title: "The Mekong Delta by Motorbike: A Loop from Saigon",
+    subtitle: null,
+    date: "2026-11-27",
+    metaTitle: "Mekong Delta by Motorbike from Saigon | Red Lantern Bikes",
+    metaDescription:
+      "A 3 to 5 day motorbike loop from Saigon through the Mekong Delta: Ben Tre's coconut roads, Can Tho's floating market and Chau Doc. Flat roads, fine on any bike.",
+    cover: "/photos/mekong-canal.webp",
+    trip: { href: "/book", label: "Rent a bike for this trip" },
+    html: `<p class="lead">Coconut palms over the road, wooden boats on brown water and a floating market at sunrise. The Mekong Delta is the easiest big ride you can do from Saigon, and it starts at our shop door.</p>
+<ul class="chips">
+<li><strong>3 days</strong> · about 350 km</li>
+<li><strong>5 days</strong> · about 600 km</li>
+<li>Flat roads, fine on any bike</li>
+<li>Best from December to April</li>
+<li>Back in Saigon, no one-way fee</li>
+</ul>
+<p>Distances here are approximate. Google Maps has no motorbike mode, so turn on "avoid highways" and "avoid tolls" before you follow it.</p>
+<figure>
+<img src="/photos/saigon-city.webp" alt="A rider on a Honda scooter at a junction in front of Ben Thanh Market, Saigon" width="1080" height="1440" loading="lazy" decoding="async">
+<figcaption>Leave Saigon early, before the traffic builds.</figcaption>
+</figure>
+<h2>The loop, day by day</h2>
+<ol class="stops">
+<li>
+<h3>Saigon to Ben Tre</h3>
+<ul class="chips"><li>Day 1</li><li>about 85 km</li></ul>
+<p>Ride south-west through My Tho and cross the Mekong into Ben Tre, the coconut province. The small roads between the canals are the best part of the day, with palms, little bridges and hardly any cars. Sleep in a homestay out on the islands rather than in town.</p>
+</li>
+<li>
+<h3>Ben Tre to Can Tho</h3>
+<ul class="chips"><li>Day 2</li><li>about 100 km</li></ul>
+<p>Ride to Vinh Long and cross to An Binh island for its orchards and a long lunch, then carry on to Can Tho, the biggest city in the Delta.</p>
+</li>
+<li>
+<h3>Cai Rang floating market</h3>
+<ul class="chips"><li>Day 3</li><li>about 170 km back to Saigon</li></ul>
+<p>The market is busiest early in the morning, so book a boat for around sunrise. On a three-day trip, ride back to Saigon after breakfast. It's a long day, but an easy one.</p>
+</li>
+<li>
+<h3>Can Tho to Chau Doc</h3>
+<ul class="chips"><li>Day 4</li><li>about 120 km</li></ul>
+<p>Keep heading west towards the Cambodian border. Take a boat through the Tra Su flooded forest, about 30 km out of Chau Doc, which is at its wettest in the flood season, roughly September to November. Finish the day on Sam Mountain for the sunset.</p>
+</li>
+<li>
+<h3>Chau Doc back to Saigon</h3>
+<ul class="chips"><li>Day 5</li><li>about 250 km</li></ul>
+<p>A big day on a small bike. You can split it with a night in Sa Dec or Can Tho.</p>
+</li>
+</ol>
+<h2>When to go</h2>
+<p>December to April is the dry season in the South and the best time for this loop. From May to November it rains most afternoons, usually hard and short. Pack a rain poncho whatever the month.</p>
+<h2>Which bike?</h2>
+<div class="compare">
+<div class="card">
+<h3>Riding alone</h3>
+<p>A <a href="/bikes/wave-alpha-110">Honda Wave Alpha 110cc</a> is plenty on these flat roads, and it's our cheapest bike at 240,000₫ a day.</p>
+</div>
+<div class="card">
+<h3>Two people with bags</h3>
+<p>A 150cc such as the <a href="/bikes/honda-winner-x-150">Honda Winner X</a> is more comfortable two-up.</p>
+</div>
+</div>
+<p>Any bike in our fleet can ride the Delta, and our weekly price applies from 7 days if you'd like to take it slow.</p>
+<div class="tip"><p>Ride in daylight: canal roads are narrow and dark at night. Slow down in the villages, where kids, dogs and chickens share the road with you. And if the bike has a problem, message us on WhatsApp before anyone works on it.</p></div>`,
+  }),
+  guide({
     postSlug: "best-time-to-ride-vietnam-by-motorbike",
     title: "The Best Time to Ride Vietnam by Motorbike",
     subtitle: null,
@@ -65,6 +132,7 @@ export const GUIDES: Guide[] = [
 <p class="small">A rough guide: the weather changes from year to year.</p>
 <h2>The South: Saigon, the Mekong Delta, Da Lat</h2>
 <p>December to April is the dry season, sunny every day and hottest in March and April. From May to November it's the rainy season: most days bring a short, heavy shower in the afternoon, and then it clears. Da Lat is up in the highlands, so it's cool all year and cold at night. Bring a warm layer even in the dry season.</p>
+<p>For a short ride from Saigon, see our <a href="/blog/news-2/mekong-delta-by-motorbike">Mekong Delta loop</a>.</p>
 <h2>The central coast: Nha Trang, Hoi An, Hue</h2>
 <p>The centre gets its rain later than the rest of the country, from about September to December, heaviest in October and November. That's also when storms and floods hit the coast, so check the forecast before you ride a mountain pass. From February to August it's mostly dry, and very hot in the summer months. The Hai Van Pass between Da Nang and Hue is often in the clouds in winter.</p>
 <figure>
