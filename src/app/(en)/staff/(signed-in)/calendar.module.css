@@ -9,6 +9,16 @@
   }
 }
 
+.todayQuiet {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .movements {
   list-style: none;
   margin: 0;
@@ -45,8 +55,22 @@
 
 .toolbarLinks {
   display: flex;
-  gap: 14px;
+  gap: 6px;
   font-size: 14px;
+}
+
+.toolbarLinks a {
+  padding: 7px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.toolbarLinks a[aria-current] {
+  border-color: var(--ink);
+  font-weight: 600;
 }
 
 .legend {
@@ -84,6 +108,7 @@
 .grid {
   display: grid;
   grid-template-columns: 150px repeat(var(--days), minmax(38px, 1fr));
+  grid-template-rows: 50px;
   grid-auto-rows: 40px;
   min-width: calc(150px + var(--days) * 38px);
   font-size: 12px;
@@ -120,6 +145,15 @@
 .dayHead b {
   color: var(--ink);
   font-size: 13px;
+}
+
+/* Month name over the first day and over each 1st. */
+.month {
+  min-height: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--lantern);
 }
 
 .bikeCell {
@@ -187,7 +221,7 @@
   border-bottom-right-radius: 0;
 }
 
-/* Bar colours, also used by the legend swatches. */
+/* Bar colours, also used by the legend swatches and the day list's tags. */
 .pending {
   background: repeating-linear-gradient(135deg, #f6d48f, #f6d48f 6px, #f2c46a 6px, #f2c46a 12px);
   color: #5a3d00;
@@ -216,4 +250,188 @@
 .maintenance {
   background: repeating-linear-gradient(135deg, #ddd6cc, #ddd6cc 6px, #cbc3b8 6px, #cbc3b8 12px);
   color: #3b302a;
+}
+
+/* ─── Phones: the grid ──────────────────────────────────────────────────── */
+
+@media (max-width: 639px) {
+  .toolbar {
+    gap: 10px;
+  }
+
+  .toolbar h1 {
+    flex: 1;
+  }
+
+  .toolbarLinks {
+    flex-basis: 100%;
+  }
+
+  .toolbarLinks a {
+    flex: 1;
+    text-align: center;
+    padding: 9px 6px;
+  }
+
+  /* A box no taller than the screen, so the row of days stays in view
+     while scrolling down the bikes. */
+  .scroller {
+    max-height: calc(100dvh - 24px);
+    overflow: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .grid {
+    grid-template-columns: 84px repeat(var(--days), 40px);
+    min-width: calc(84px + var(--days) * 40px);
+  }
+
+  .corner {
+    padding: 0 8px;
+  }
+
+  .bikeCell {
+    padding: 0 8px;
+  }
+
+  .bikeCell b {
+    font-size: 11px;
+  }
+
+  .bikeCell span {
+    font-size: 10px;
+  }
+
+  .bar {
+    padding: 0 4px;
+    font-size: 11px;
+  }
+}
+
+/* ─── The day list ──────────────────────────────────────────────────────── */
+
+.dayList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.day {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.dayIsToday {
+  border-color: var(--amber);
+  box-shadow: inset 4px 0 0 var(--amber);
+}
+
+.dayPast {
+  opacity: 0.7;
+}
+
+.dayTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.freeChip,
+.fullChip {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.freeChip {
+  background: #dcefdc;
+  color: #1f5c2a;
+}
+
+.fullChip {
+  background: #fde2dc;
+  color: #8a2410;
+}
+
+.quiet {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.dayItems {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dayItems li + li {
+  border-top: 1px solid #efe8dd;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 6px 0;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.tag {
+  flex: none;
+  min-width: 52px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.itemText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.itemText span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.itemDone {
+  flex: none;
+  color: var(--ok);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.freeList {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.freeList summary {
+  padding: 6px 0;
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.freeList[open] summary {
+  margin-bottom: 4px;
 }

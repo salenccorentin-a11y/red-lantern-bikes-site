@@ -1,0 +1,478 @@
+/* The Oil page and the oil forms (also on each booking page). Due reminders
+   are big cards with one green WhatsApp button; the rest are short rows
+   that open to record km or an oil change. */
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+}
+
+.head h1 {
+  margin-bottom: 8px !important;
+}
+
+.rule {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.rule summary {
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.rule p {
+  max-width: 620px;
+  margin: 8px 0 0;
+}
+
+/* ─── Summary chips ─────────────────────────────────────────────────────── */
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 6px 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.stats li {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.stats b {
+  font-size: 20px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.stats .statDue {
+  border-color: var(--lantern);
+  background: #fff4f1;
+}
+
+.stats .statDue b {
+  color: var(--lantern);
+}
+
+.groupTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin: 24px 0 10px !important;
+  font-size: 18px !important;
+}
+
+.groupTitle span {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.allClear {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px dashed #9fcfa6;
+  border-radius: 8px;
+  background: #f1f8f1;
+  color: #1f5c2a;
+  font-weight: 600;
+}
+
+/* ─── Due cards ─────────────────────────────────────────────────────────── */
+
+.dueGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+  gap: 14px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--lantern);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.cardHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.bike {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.pill {
+  flex: none;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pillDue {
+  background: var(--lantern);
+  color: #fff;
+}
+
+.pillLater {
+  background: #f1ede7;
+  color: var(--ink);
+}
+
+.pillSoon {
+  background: #ebe8e4;
+  color: #5a5550;
+}
+
+/* Days, km, last reminder, back on: small labelled facts. */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px 14px;
+  margin: 0;
+}
+
+.facts div {
+  min-width: 0;
+}
+
+.facts dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.facts dd {
+  margin: 2px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Km reported against the model's rule. */
+.meter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.meterBar {
+  height: 6px;
+  border-radius: 3px;
+  background: #efe8dd;
+  overflow: hidden;
+}
+
+.meterBar span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: #4c9a5a;
+}
+
+.meterWarn span {
+  background: #e0a526;
+}
+
+.meterOver span {
+  background: var(--lantern);
+}
+
+.meterOver + .meterText {
+  color: var(--lantern);
+}
+
+.meterText {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.none {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ─── The WhatsApp button ───────────────────────────────────────────────── */
+
+.whatsapp {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: #1c8a4a;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.whatsapp:hover {
+  background: #167a40;
+}
+
+.noPhone {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: #fbefc4;
+  color: #6b5208;
+  font-size: 14px;
+}
+
+/* ─── Km and oil-change forms ───────────────────────────────────────────── */
+
+.forms {
+  container-type: inline-size;
+}
+
+.formsInner {
+  display: grid;
+  gap: 12px;
+}
+
+@container (min-width: 560px) {
+  .formsInner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.miniForm {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 6px;
+  background: #faf7f2;
+}
+
+.miniLabel {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.miniRow {
+  display: flex;
+  gap: 8px;
+}
+
+.miniRow input {
+  flex: 1;
+  min-width: 0;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1.5px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.miniRow button {
+  flex: none;
+  min-height: 42px;
+}
+
+.hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ─── Rows (not due, coming back soon) ──────────────────────────────────── */
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.rows > li + li {
+  border-top: 1px solid var(--line);
+}
+
+.rowSummary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.8fr) minmax(0, 1.2fr) minmax(0, 1.1fr) auto;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 12px 16px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.rowSummary::-webkit-details-marker {
+  display: none;
+}
+
+.rowSummary:hover {
+  background: #fdfbf8;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 14px;
+}
+
+.cell small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.cellName b {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cellName small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.open {
+  padding: 6px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 4px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.open::after {
+  content: " ▾";
+}
+
+details[open] > .rowSummary .open::after {
+  content: " ▴";
+}
+
+/* The forms on a due card, folded until the customer answers. */
+.replied summary {
+  padding: 4px 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.replied[open] summary {
+  margin-bottom: 10px;
+}
+
+.rowBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 16px 16px;
+}
+
+.rowLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 13px;
+}
+
+.soon {
+  opacity: 0.75;
+}
+
+/* Phones: rows become two lines, name and next reminder on top. */
+@media (max-width: 639px) {
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats li {
+    padding: 8px 12px;
+  }
+
+  .stats b {
+    font-size: 18px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .rowSummary {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name next"
+      "days km";
+    gap: 8px 12px;
+    padding: 12px 14px;
+  }
+
+  .cellName {
+    grid-area: name;
+  }
+
+  .cellNext {
+    grid-area: next;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .cellDays {
+    grid-area: days;
+  }
+
+  .cellKm {
+    grid-area: km;
+    min-width: 120px;
+  }
+
+  .open {
+    display: none;
+  }
+
+  .rowBody {
+    padding: 0 14px 14px;
+  }
+}

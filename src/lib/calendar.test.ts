@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { placeInWindow, windowDays } from "@/lib/calendar";
+import { countByModel, freeOn, placeInWindow, windowDays } from "@/lib/calendar";
 import { parseIsoDate, toIsoDate } from "@/lib/dates";
 
 const d = (s: string) => parseIsoDate(s)!;
@@ -61,5 +61,28 @@ describe("windowDays", () => {
       "2026-11-01",
       "2026-11-02",
     ]);
+  });
+});
+
+describe("freeOn and countByModel", () => {
+  const bike = (id: string, model: string, ...blocks: [string, string][]) => ({
+    id,
+    model: { name: model },
+    occupancies: blocks.map(([s, e]) => ({ startDate: d(s), endDate: d(e) })),
+  });
+  const bikes = [
+    bike("a", "XR150", ["2026-11-03", "2026-11-05"]),
+    bike("b", "XR150"),
+    bike("c", "Wave", ["2026-11-05", "2026-11-09"]),
+  ];
+
+  it("counts the start and end days as taken", () => {
+    expect(freeOn(bikes, d("2026-11-03")).map((b) => b.id)).toEqual(["b", "c"]);
+    expect(freeOn(bikes, d("2026-11-05")).map((b) => b.id)).toEqual(["b"]);
+    expect(freeOn(bikes, d("2026-11-06")).map((b) => b.id)).toEqual(["a", "b"]);
+  });
+
+  it("groups free bikes by model", () => {
+    expect(countByModel(freeOn(bikes, d("2026-11-10")))).toBe("XR150 ×2, Wave");
   });
 });

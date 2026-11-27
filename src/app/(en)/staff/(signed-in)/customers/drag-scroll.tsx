@@ -3,7 +3,8 @@
 // A box you can slide sideways by dragging with the mouse, for the wide
 // rental table on a computer. Links, buttons and fields still work: a drag
 // only starts on the rest of the table, and a drag that moved doesn't count
-// as a click. Touch screens keep their normal swipe.
+// as a click. Touch screens keep their normal swipe. Tapping a long note
+// ([data-clamp]) opens it in full.
 
 import { useRef } from "react";
 
@@ -55,6 +56,13 @@ export function DragScroll({
           e.preventDefault();
           e.stopPropagation();
         }
+      }}
+      onClick={(e) => {
+        // Tapping a long note that's cut short on a phone opens it, and closes it again.
+        const target = e.target as HTMLElement;
+        if (target.closest("a, button, input, textarea, select")) return;
+        const cell = target.closest<HTMLElement>("[data-clamp]");
+        if (cell) cell.toggleAttribute("data-open");
       }}
     >
       {children}

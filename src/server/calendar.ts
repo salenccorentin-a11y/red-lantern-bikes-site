@@ -67,3 +67,29 @@ export async function todaysMovements(db: PrismaClient, today: Date) {
   ]);
   return { pickups, returns };
 }
+
+/**
+ * Every pick-up and return from `first` to `last` (inclusive), for the
+ * calendar's day list on a phone. Cancelled and declined bookings are left out.
+ */
+export async function movementsBetween(db: PrismaClient, first: Date, last: Date) {
+  const inWindow = { gte: first, lte: last };
+  return db.booking.findMany({
+    where: {
+      status: { in: ["PENDING_PAYMENT", "CONFIRMED", "CHECKED_OUT", "COMPLETED"] },
+      OR: [{ startDate: inWindow }, { endDate: inWindow }],
+    },
+    select: {
+      id: true,
+      status: true,
+      customerName: true,
+      startDate: true,
+      endDate: true,
+      days: true,
+      dropoffCity: true,
+      bike: { select: { plate: true } },
+      bikeModel: { select: { name: true } },
+    },
+    orderBy: [{ startDate: "asc" }, { createdAt: "asc" }],
+  });
+}

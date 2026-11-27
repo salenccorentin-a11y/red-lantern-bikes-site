@@ -14,7 +14,7 @@ import { formatVnd } from "@/lib/money";
 import { daysSinceOilChange, nextOilReminder, oilReminderDue, whatsappDigits } from "@/lib/oil";
 import { linkBookingsToCustomers } from "@/server/customers";
 import { requireStaff } from "@/server/staff-session";
-import { RecordOilForm, SendReminderButton } from "../../oil/oil-forms";
+import { KmMeter, RecordOilForm, SendReminderButton } from "../../oil/oil-forms";
 import {
   acceptRequestAction,
   cancelAction,
@@ -401,21 +401,27 @@ async function BookingAdmin(props: {
               ? ` · next reminder ${formatDisplayDate(toIsoDate(nextOilReminder(booking)))}`
               : ""}
           </p>
+          <p>
+            {oilDue && <span className={styles.badgeAlert}>Reminder due</span>}{" "}
+            <KmMeter km={booking.kmSinceOilChange} intervalKm={booking.bikeModel.oilIntervalKm} />
+          </p>
           {oilDue && (
-            <p>
-              <span className={styles.badgeAlert}>Reminder due</span>
-            </p>
+            <div style={{ marginBottom: 12 }}>
+              <SendReminderButton
+                id={booking.id}
+                from={from}
+                hasPhone={hasWhatsapp}
+                customerId={booking.customerId}
+              />
+            </div>
           )}
-          <div className={styles.row}>
-            {oilDue && <SendReminderButton id={booking.id} from={from} hasPhone={hasWhatsapp} />}
-            <RecordOilForm
-              id={booking.id}
-              from={from}
-              oilChangedOn={booking.oilChangedOn}
-              kmSinceOilChange={booking.kmSinceOilChange}
-              intervalKm={booking.bikeModel.oilIntervalKm}
-            />
-          </div>
+          <RecordOilForm
+            id={booking.id}
+            from={from}
+            oilChangedOn={booking.oilChangedOn}
+            kmSinceOilChange={booking.kmSinceOilChange}
+            intervalKm={booking.bikeModel.oilIntervalKm}
+          />
         </section>
       )}
 

@@ -1,9 +1,12 @@
 // Staff home: today's pick-ups and returns, then every bike's bookings and
-// blocks on a calendar. ?from=YYYY-MM-DD moves the window.
+// blocks on a calendar. ?from=YYYY-MM-DD moves the window. Two views (the
+// choice is remembered): Grid, bikes down the side and days across, and List,
+// one block per day with who goes out, who comes back and which bikes are
+// free; the list reads best on a phone.
 
 import Link from "next/link";
 import { Suspense } from "react";
-import { placeInWindow, windowDays } from "@/lib/calendar";
+import { countByModel, freeOn, placeInWindow, windowDays } from "@/lib/calendar";
 import { CITY_NAME } from "@/lib/cities";
 import {
   addDays,
@@ -18,15 +21,21 @@ import { releaseExpiredHolds } from "@/server/bookings";
 import { oilDueToday } from "@/server/oil";
 import {
   loadCalendar,
+  movementsBetween,
   todaysMovements,
   waitingRequests,
   type CalendarBike,
 } from "@/server/calendar";
 import { requireStaff } from "@/server/staff-session";
+import { viewPreference } from "./view-pref";
+import { ViewSwitch } from "./view-switch";
 import styles from "./calendar.module.css";
 import staffStyles from "../staff.module.css";
 
 const DAYS = 21;
+const LIST_DAYS = 14;
+type View = "grid" | "list";
+const VIEW_COOKIE = "staff_calendar_view";
 
 export default function StaffHome(props: PageProps<"/staff">) {
   return (
@@ -43,20 +52,30 @@ async function Calendar({
 }) {
   await requireStaff();
   const params = await searchParams;
+  const view = await viewPreference<View>(VIEW_COOKIE, params.view, ["grid", "list"], "grid");
+  const list = view === "list";
+  const length = list ? LIST_DAYS : DAYS;
   const today = parseIsoDate(todayInSaigon())!;
-  const from = (typeof params.from === "string" && parseIsoDate(params.from)) || addDays(today, -2);
+  const from =
+    (typeof params.from === "string" && parseIsoDate(params.from)) ||
+    (list ? today : addDays(today, -2));
 
   // Requests that ran out unanswered shouldn't clutter the calendar.
   await releaseExpiredHolds(db);
-  const [bikes, movements, requests, oilDue] = await Promise.all([
-    loadCalendar(db, from, DAYS),
+  const [bikes, movements, requests, oilDue, window] = await Promise.all([
+    loadCalendar(db, from, length),
     todaysMovements(db, today),
     waitingRequests(db),
     oilDueToday(db),
+    list ? movementsBetween(db, from, addDays(from, length - 1)) : Promise.resolve([]),
   ]);
-  const days = windowDays(from, DAYS);
-  const weekBack = toIsoDate(addDays(from, -7));
-  const weekOn = toIsoDate(addDays(from, 7));
+  const days = windowDays(from, length);
+  const href = (v: View, start?: Date) =>
+    `/staff?view=${v}${start ? `&from=${toIsoDate(start)}` : ""}`;
+  const showsToday = days.some((d) => d.getTime() === today.getTime());
+  // The day list starts with today's movements, so they aren't repeated.
+  const listStartsToday = list && days[0].getTime() === today.getTime();
+  const quietToday = movements.pickups.length + movements.returns.length === 0;
 
   return (
     <>
@@ -103,29 +122,71 @@ async function Calendar({
         </section>
       )}
 
-      <div className={styles.today}>
-        <Movements title="Going out today" list={movements.pickups} empty="No pick-ups today." />
-        <Movements title="Coming back today" list={movements.returns} empty="No returns today." />
-      </div>
+      {listStartsToday ? null : quietToday ? (
+        <p className={styles.todayQuiet}>Today: nothing going out or coming back.</p>
+      ) : (
+        <div className={styles.today}>
+          <Movements title="Going out today" list={movements.pickups} empty="No pick-ups today." />
+          <Movements title="Coming back today" list={movements.returns} empty="No returns today." />
+        </div>
+      )}
 
       <div className={styles.toolbar}>
         <h1>Calendar</h1>
+        <ViewSwitch
+          cookie={VIEW_COOKIE}
+          current={view}
+          label="Show the calendar as"
+          options={[
+            { value: "grid", label: "Grid", href: href("grid") },
+            { value: "list", label: "List", href: href("list") },
+          ]}
+        />
         <div className={styles.toolbarLinks}>
-          <Link href={`/staff?from=${weekBack}`}>← Week</Link>
-          <Link href="/staff">Today</Link>
-          <Link href={`/staff?from=${weekOn}`}>Week →</Link>
+          <Link href={href(view, addDays(from, -7))}>← Week</Link>
+          <Link href={href(view)} aria-current={showsToday ? "true" : undefined}>
+            Today
+          </Link>
+          <Link href={href(view, addDays(from, 7))}>Week →</Link>
         </div>
-        <Legend />
+        {!list && <Legend />}
       </div>
 
+      {list ? (
+        <DayList days={days} today={today} bikes={bikes} moves={window} />
+      ) : (
+        <Grid days={days} today={today} from={from} bikes={bikes} />
+      )}
+    </>
+  );
+}
+
+function Grid({
+  days,
+  today,
+  from,
+  bikes,
+}: {
+  days: Date[];
+  today: Date;
+  from: Date;
+  bikes: CalendarBike[];
+}) {
+  return (
+    <>
       <div className={styles.scroller}>
         <div className={styles.grid} style={{ "--days": DAYS } as React.CSSProperties}>
           <div className={`${styles.corner} ${styles.head}`}>Bike</div>
-          {days.map((day) => (
+          {days.map((day, i) => (
             <div
               key={day.getTime()}
               className={`${styles.head} ${styles.dayHead} ${day.getTime() === today.getTime() ? styles.todayCol : ""} ${isWeekend(day) ? styles.weekend : ""}`}
             >
+              <small className={styles.month}>
+                {i === 0 || day.getUTCDate() === 1
+                  ? day.toLocaleDateString("en-GB", { month: "short", timeZone: "UTC" })
+                  : ""}
+              </small>
               <span>{day.toLocaleDateString("en-GB", { weekday: "short", timeZone: "UTC" })}</span>
               <b>{day.getUTCDate()}</b>
             </div>
@@ -209,6 +270,134 @@ function BikeRow(props: {
         );
       })}
     </>
+  );
+}
+
+type WindowMove = Awaited<ReturnType<typeof movementsBetween>>[number];
+
+function dayName(day: Date, today: Date) {
+  const diff = Math.round((day.getTime() - today.getTime()) / 86_400_000);
+  const date = day.toLocaleDateString("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    timeZone: "UTC",
+  });
+  if (diff === 0) return { lead: "Today", date };
+  if (diff === 1) return { lead: "Tomorrow", date };
+  if (diff === -1) return { lead: "Yesterday", date };
+  return { lead: null, date };
+}
+
+/** One block per day: who goes out, who comes back, which bikes are free. */
+function DayList({
+  days,
+  today,
+  bikes,
+  moves,
+}: {
+  days: Date[];
+  today: Date;
+  bikes: CalendarBike[];
+  moves: WindowMove[];
+}) {
+  return (
+    <ol className={styles.dayList}>
+      {days.map((day) => {
+        const t = day.getTime();
+        const out = moves.filter((m) => m.startDate.getTime() === t);
+        const back = moves.filter((m) => m.endDate.getTime() === t);
+        const blocks = bikes.flatMap((b) =>
+          b.occupancies
+            .filter((o) => o.kind === "MAINTENANCE" && o.startDate.getTime() === t)
+            .map((o) => ({ bike: b, note: o.note })),
+        );
+        const free = freeOn(bikes, day);
+        const name = dayName(day, today);
+        const quiet = out.length === 0 && back.length === 0 && blocks.length === 0;
+        return (
+          <li
+            key={t}
+            className={`${styles.day} ${t === today.getTime() ? styles.dayIsToday : ""} ${t < today.getTime() ? styles.dayPast : ""}`}
+          >
+            <h2 className={styles.dayTitle}>
+              <span>
+                {name.lead && <b>{name.lead} · </b>}
+                {name.date}
+              </span>
+              <span className={free.length === 0 ? styles.fullChip : styles.freeChip}>
+                {free.length === 0 ? "No bike free" : `${free.length} of ${bikes.length} free`}
+              </span>
+            </h2>
+
+            {quiet ? (
+              <p className={styles.quiet}>Nothing going out or coming back.</p>
+            ) : (
+              <ul className={styles.dayItems}>
+                {out.map((m) => (
+                  <DayItem key={`o${m.id}`} m={m} kind="out" />
+                ))}
+                {back.map((m) => (
+                  <DayItem key={`b${m.id}`} m={m} kind="back" />
+                ))}
+                {blocks.map(({ bike, note }) => (
+                  <li key={`m${bike.id}`}>
+                    <Link href={`/staff/bikes/${bike.id}`} className={styles.item}>
+                      <span className={`${styles.tag} ${styles.maintenance}`}>Workshop</span>
+                      <span className={styles.itemText}>
+                        <b>
+                          {bike.model.name} {bike.plate}
+                        </b>
+                        {note && <span>{note}</span>}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {free.length > 0 && (
+              <details className={styles.freeList}>
+                <summary>Which bikes are free</summary>
+                {countByModel(free)}
+              </details>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+function DayItem({ m, kind }: { m: WindowMove; kind: "out" | "back" }) {
+  const away = m.dropoffCity !== "SAIGON" ? CITY_NAME[m.dropoffCity] : null;
+  const tag =
+    kind === "out"
+      ? { label: "Out", cls: m.status === "PENDING_PAYMENT" ? styles.pending : styles.confirmed }
+      : { label: "Back", cls: m.status === "COMPLETED" ? styles.done : styles.out };
+  return (
+    <li>
+      <Link href={`/staff/bookings/${m.id}`} className={styles.item}>
+        <span className={`${styles.tag} ${tag.cls}`}>{tag.label}</span>
+        <span className={styles.itemText}>
+          <b>{m.customerName}</b>
+          <span>
+            {m.bikeModel.name} {m.bike?.plate ?? ""}
+            {kind === "out" && ` · ${m.days} days`}
+            {away && (kind === "out" ? ` · to ${away}` : ` · in ${away}`)}
+          </span>
+        </span>
+        {kind === "out" && m.status === "PENDING_PAYMENT" && (
+          <span className={staffStyles.badge}>request</span>
+        )}
+        {kind === "out" && m.status === "CHECKED_OUT" && (
+          <span className={styles.itemDone}>gone ✓</span>
+        )}
+        {kind === "back" && m.status === "COMPLETED" && (
+          <span className={styles.itemDone}>back ✓</span>
+        )}
+      </Link>
+    </li>
   );
 }
 

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { requireStaff } from "@/server/staff-session";
 import { signOut } from "./actions";
+import { NavLinks } from "./nav-links";
 import styles from "../staff.module.css";
 
 export default function SignedInLayout({ children }: { children: React.ReactNode }) {
@@ -29,14 +30,24 @@ async function StaffNav() {
   const owner = staff.role === "OWNER";
   return (
     <nav className={styles.nav} aria-label="Staff">
-      <Link href="/staff">Calendar</Link>
-      <Link href="/staff/walk-in">Walk-in</Link>
-      <Link href="/staff/customers">Customers</Link>
-      <Link href="/staff/oil">Oil</Link>
-      <Link href="/staff/enquiries">Enquiries</Link>
-      <Link href="/staff/bikes">Bikes</Link>
-      {owner && <Link href="/staff/profit">Profit</Link>}
-      {owner && <Link href="/staff/settings">Settings</Link>}
+      <div className={styles.navLinks}>
+        <NavLinks
+          links={[
+            { href: "/staff", label: "Calendar" },
+            { href: "/staff/walk-in", label: "Walk-in" },
+            { href: "/staff/customers", label: "Customers" },
+            { href: "/staff/oil", label: "Oil" },
+            { href: "/staff/enquiries", label: "Enquiries" },
+            { href: "/staff/bikes", label: "Bikes" },
+            ...(owner
+              ? [
+                  { href: "/staff/profit", label: "Profit" },
+                  { href: "/staff/settings", label: "Settings" },
+                ]
+              : []),
+          ]}
+        />
+      </div>
       <form action={signOut} className={styles.signOut}>
         <span className={styles.who}>{staff.name}</span>
         <button className={styles.linkButton}>Sign out</button>

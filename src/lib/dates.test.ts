@@ -3,6 +3,7 @@ import {
   addDays,
   daysInclusive,
   formatDisplayDate,
+  formatShortDate,
   formatSaigonDateTime,
   parseIsoDate,
   toIsoDate,
@@ -64,6 +65,11 @@ describe("todayInSaigon", () => {
 describe("display formats", () => {
   it("shows a calendar day with its weekday", () => {
     expect(formatDisplayDate("2026-11-01")).toBe("Sun 1 Nov 2026");
+  });
+
+  it("shows a short day for phone columns, with the year only when it differs", () => {
+    expect(formatShortDate("2026-11-01", 2026)).toBe("1 Nov");
+    expect(formatShortDate("2025-12-24", 2026)).toBe("24 Dec 25");
   });
 
   it("shows a moment in Saigon time", () => {

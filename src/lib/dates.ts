@@ -56,6 +56,22 @@ export function formatDisplayDate(isoDate: string, lang: DateLanguage = "en"): s
     .replace(",", "");
 }
 
+/**
+ * "2026-11-01" → "1 Nov" for the staff area's narrow phone columns; the year
+ * is added ("1 Nov 25") when it isn't `currentYear`.
+ */
+export function formatShortDate(isoDate: string, currentYear: number): string {
+  const date = parseIsoDate(isoDate);
+  if (!date) return isoDate;
+  const dayMonth = new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "short",
+    timeZone: "UTC",
+  }).format(date);
+  const year = date.getUTCFullYear();
+  return year === currentYear ? dayMonth : `${dayMonth} ${String(year).slice(2)}`;
+}
+
 /** A moment in Saigon time, e.g. "16 Oct 2026, 10:00". */
 export function formatSaigonDateTime(moment: Date, lang: DateLanguage = "en"): string {
   return new Intl.DateTimeFormat(DATE_LOCALES[lang], {

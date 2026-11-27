@@ -40,3 +40,24 @@ export function placeInWindow(
 export function windowDays(windowStart: Date, days: number): Date[] {
   return Array.from({ length: days }, (_, i) => addDays(windowStart, i));
 }
+
+type Blocked = { startDate: Date; endDate: Date };
+
+/**
+ * The bikes with nothing booked or blocked on `day` (start and end days
+ * included), for the calendar's day list. Occupancies are already limited to
+ * live ones (not released) by the query.
+ */
+export function freeOn<B extends { occupancies: Blocked[] }>(bikes: B[], day: Date): B[] {
+  const t = day.getTime();
+  return bikes.filter((b) =>
+    b.occupancies.every((o) => o.endDate.getTime() < t || o.startDate.getTime() > t),
+  );
+}
+
+/** "XR150 ×2, CB150X, Wave": free bikes counted by model, in the bikes' order. */
+export function countByModel(bikes: { model: { name: string } }[]): string {
+  const counts = new Map<string, number>();
+  for (const b of bikes) counts.set(b.model.name, (counts.get(b.model.name) ?? 0) + 1);
+  return [...counts].map(([name, n]) => (n > 1 ? `${name} ×${n}` : name)).join(", ");
+}
